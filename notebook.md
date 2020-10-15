@@ -19,13 +19,14 @@
     2. Using the birth-hybridization model (extension of birth-death to generate trees) in [BEAST2](https://academic.oup.com/mbe/article/35/2/504/4705834)
     3. New upcoming R package [NetSim](https://github.com/jjustison/NetSim) (still unpublished, please don't share)
 
+# Existing scripts
 - Useful [scripts](https://github.com/crsl4/InconsistencySpeciesTreeGeneFlow) to simulate gene trees under a network and then estimate the network back with PhyloNet
     - Downsides: scripts are in perl and they use ms which needs a very ugly format for the network. Ideally, we want to write the network in parenthetical format and ms does not accept this format
 - [Pipeline](https://github.com/crsl4/PhyloNetworks.jl/wiki) to estimate a network with PhyloNetworks. Good to get started with Julia. Ideally, I would like to do the simulations in Julia to take advantage of all the network functions we already have in PhyloNetworks
 
 # Project plan
 
-At some point, we need to agree on a [project plan](https://github.com/solislemuslab/lab-dynamics/blob/master/project-plan.md).
+At some point, we need to agree on a [project plan](https://github.com/solislemuslab/lab-dynamics/blob/master/project-plan.md). No need to worry about this now.
 
 For now, we focus only on:
 - Overall objective: Test the limitations of SNaQ (and other network methods) under a variety of biological scenarios
@@ -34,3 +35,10 @@ For now, we focus only on:
     - different complexities of hybridizations (level-1 vs not level-1)
     - under short branch lengths
     - ...
+
+# Next steps
+(not necessarily in order)
+
+- Read other papers that have done simulations to test networks
+- Check existing scripts to see if we can start creating our own simulating scripts for this project
+- Think which comparisons we want to make
