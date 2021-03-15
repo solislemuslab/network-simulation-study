@@ -144,3 +144,6 @@ Backup[ ]of[ ]*.numbers/
 
 ### Mathematica
 *.nb
+
+### initial tasks by GAB nor to be pushed to the project repo
+initial_tasks_gab/**
