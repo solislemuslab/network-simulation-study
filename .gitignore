@@ -1,3 +1,5 @@
+test_netsim/test_netsim_cache/*
+
 # Compiled source #
 ###################
 *.com

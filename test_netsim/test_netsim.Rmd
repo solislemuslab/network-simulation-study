@@ -28,7 +28,7 @@ knitr::opts_chunk$set(tidy = TRUE, small.mar = TRUE, comment = "")
 ```
 
 ```{r}
-library(NetSim) # simulate bd time-tree networks
+library(NetSim) # simulate bd time-tree networks: https://github.com/jjustison/NetSim
 library(TreeSim) # simulate bd time-trees
 library(ape) # tools for handling phylo objects
 library(diversitree) # tools for estimating lambda and mu
@@ -39,19 +39,19 @@ numbsim <- 100
 
 # The NetSim package
 
-The package builds on the approach of Stadler for `TreeSim`, but with modifications by Zhang et al. (2018) for including hybridization as part of the BD stochastic process. The functions are named similar to those of `TreeSim` but with `bdh` insted of just `bd`. 
+The package builds on the approach of Stadler for `TreeSim`, but with modifications by Zhang et al. (2018) for including hybridization as part of the birth-death (BD) stochastic process. The functions are named similarly to those in `TreeSim` but with `bdh` insted of just `bd`. 
 
 The package allows trees conditional to time or number of species, as well as the typical sampling and extinction patterns allowed by `TreeSim`. However, it allows to model hybridization in three important ways:
 
 - Effect of the hybridization on generation of lineages (positive, negative, neutral)
-- Hybridization probability as a function of genetic distance (the more distant two lineages the easier for them to coalesce?)
-- Hybridization probability covariating with a trait along the phylogeny (phylo-comparative-methods-like?)
+- Hybridization probability as a function of genetic distance (the closer two lineages the easier for them to hybridize)
+- Hybridization probability covariating with a trait along the phylogeny (for example, if hybridization is dependent on the two parents having a similar trait)
 
 Simulations are controlled via two main parameters: Origin time, and number of species. For the former, a given time interval is specified for the simulation to run, leaving $n$ as a free quantity. On the other hand, the SSE and GSE approaches fix the final number of species $n$ and allow the simulation to run an unconstrained amount of time until such quantity is attained.
 
 # General network simulation features
 
-Comparing the manual entry for the functions `sim.bdh.age`, `sim.bdh.taxa.ssa`, and `sim.bdh.taxa.gsa`, we find that they differ in the very first arguments (Table \ref{tab:sim_args}). These first arguments (`age`, `m`, and `n`) control the endpoint of the simulation. All of te remaining arguments specify the model oh birth-death hybridization. All functions return an object of either class `phylo` or `multiphylo` depending on how may trees were requested in the argument `numbsim`. 
+Comparing the manual entry for the functions `sim.bdh.age`, `sim.bdh.taxa.ssa`, and `sim.bdh.taxa.gsa`, we find that they differ in the very first arguments (Table \ref{tab:sim_args}). These first arguments (`age`, `m`, and `n`) control the endpoint of the simulation. All of the remaining arguments specify the model oh birth-death hybridization. All functions return an object of either class `phylo` or `multiphylo` depending on how many trees were requested in the argument `numbsim`. 
 
 Below we will explore each of these functions and their appropriate context.
 
@@ -61,7 +61,7 @@ Let's see if the functions produce reliable trees under Yule and BD without hybr
 
 ## Yule trees
 
-First let's simulate the same tree samples using `TreeSim` as a control for comparing the resuts by `NetSim`:
+First let's simulate the same tree samples using `TreeSim` as a control for comparing the results by `NetSim`:
 
 ```{r, cache = TRUE}
 yuleTS <- sim.bd.age(age = 4,
@@ -186,7 +186,7 @@ bdTSMLEcoefs <- lapply(X = bdTSFits,
                                                                 x.init = c(0.5, 0.5))))
 ```
 
-Now we will simulate a Bd tree sample using `NetSim`:
+Now we will simulate a BD tree sample using `NetSim`:
 
 ```{r, cache = TRUE}
 # age = 9 should generate moderate-sized trees
@@ -285,7 +285,7 @@ Once sorted this out we can consider to use NetSim for networks in the specific 
 
 # Simulation spanning a fixed time interval: `sim.bdh.age`
 
-The plot engine `NetSim::plottable.net` is said to reorient the tree ofr improved plotting with respect to hybrid edges. However, this also creates extinct tips for hybridization events (see the plot on the right below, sister to `t11` and compare with the same node in the plot to the left). 
+The plot engine `NetSim::plottable.net` is said to reorient the tree for improved plotting with respect to hybrid edges. However, this also creates extinct tips for hybridization events (see the plot on the right below, sister to `t11` and compare with the same node in the plot to the left). 
 
 This does not happen all the time, and this is the best combination of parameters that allows to reconstruct a reproducible example of such behavior. Why do this happen? Does it represent a difference in the nature of the hybridization event? Note that some other hybrid edges do not induce an "extinct" node sister to the hybrid edge.
 
