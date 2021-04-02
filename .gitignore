@@ -1,4 +1,5 @@
 test_netsim/test_netsim_cache/*
+test_netsim/test_netsim_files/*
 
 # Compiled source #
 ###################
