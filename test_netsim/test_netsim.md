@@ -18,21 +18,32 @@ header-includes:
 - \usepackage{longtable}
 ---
 
-```{r setup, echo = FALSE}
-#library(kableExtra)
-library(knitr)
-knit_hooks$set(small.mar = function(before, options, envir) {
-    if (before)    par(mar=c(5,4,1,1)+.1)  # smaller margin on top and right
-})
-knitr::opts_chunk$set(tidy = TRUE, small.mar = TRUE, comment = "")
+
+
+
+```r
+library(NetSim)  # simulate bd time-tree networks: https://github.com/jjustison/NetSim
+library(TreeSim)  # simulate bd time-trees
 ```
 
-```{r}
-library(NetSim) # simulate bd time-tree networks: https://github.com/jjustison/NetSim
-library(TreeSim) # simulate bd time-trees
-library(ape) # tools for handling phylo objects
-library(diversitree) # tools for estimating lambda and mu
-library(lattice) # stacked plots
+```
+Loading required package: ape
+```
+
+```
+Loading required package: geiger
+```
+
+```
+Registered S3 method overwritten by 'geiger':
+  method            from
+  unique.multiPhylo ape 
+```
+
+```r
+library(ape)  # tools for handling phylo objects
+library(diversitree)  # tools for estimating lambda and mu
+library(lattice)  # stacked plots
 set.seed(1000)
 numbsim <- 100
 ```
@@ -63,89 +74,65 @@ Let's see if the functions produce reliable trees under Yule and BD without hybr
 
 First let's simulate the same tree samples using `TreeSim` as a control for comparing the results by `NetSim`:
 
-```{r, cache = TRUE}
-yuleTS <- sim.bd.age(age = 4,
-                     numbsim = numbsim,
-                     lambda = 1,
-                     mu = 0,
-                     frac = 1,
-                     mrca = FALSE,
-                     complete = TRUE,
-                     K = 0)
+
+```r
+yuleTS <- sim.bd.age(age = 4, numbsim = numbsim, lambda = 1, mu = 0, frac = 1, mrca = FALSE, 
+    complete = TRUE, K = 0)
 
 ## remove any trees with no taxa
 yuleTS <- yuleTS[!sapply(X = yuleTS, FUN = is.null)]
 ## remove non-phylo elements
-yuleTS <- yuleTS[sapply(X = yuleTS, FUN = is.phylo)] 
+yuleTS <- yuleTS[sapply(X = yuleTS, FUN = is.phylo)]
 ## remove any trees with <10 taxa
 yuleTS <- yuleTS[sapply(X = yuleTS, FUN = function(x) length(x$tip.label) >= 10)]
 # fit a Yule model with diversitree
-yuleTSFits <- lapply(X = yuleTS,
-                FUN = function(x) diversitree::make.yule(tree = x,
-                                                         sampling.f = 1.0))
+yuleTSFits <- lapply(X = yuleTS, FUN = function(x) diversitree::make.yule(tree = x, 
+    sampling.f = 1))
 # fetch the coefficients estimates on the previous lik funs
-yuleTSMLEcoefs <- lapply(X = yuleTSFits,
-                   FUN = function(x) coef(diversitree::find.mle(func = x,
-                                                                x.init = 0.5)))
+yuleTSMLEcoefs <- lapply(X = yuleTSFits, FUN = function(x) coef(diversitree::find.mle(func = x, 
+    x.init = 0.5)))
 ```
 
 Now we will simulate a Yule tree sample using `NetSim`:
 
-```{r, cache = TRUE}
-# age = 4 should generate moderate-sized trees
-# mu = 0 no extinction
-# nu = 0 no hybridization
-# hybprobs = c(0.5, 0.5, 0.5) no prior difference among types of effects of hyb on descendant lineages
-# hyb.inher.fxn beta(1,1) -> uniform(0,1), no pattern of inheritance,
-# frac = 1 we'll simulate complete genealogies
-# complete = TRUE we don't have extinction, this plays no role
-# hyb.rate.fxn = NULL we don't want hybridization to be a function of genetic distance
+
+```r
+# age = 4 should generate moderate-sized trees mu = 0 no extinction nu = 0 no
+# hybridization hybprobs = c(0.5, 0.5, 0.5) no prior difference among types of
+# effects of hyb on descendant lineages hyb.inher.fxn beta(1,1) -> uniform(0,1),
+# no pattern of inheritance, frac = 1 we'll simulate complete genealogies
+# complete = TRUE we don't have extinction, this plays no role hyb.rate.fxn =
+# NULL we don't want hybridization to be a function of genetic distance
 # trait.model = NULL we don't need a covariate to include in this simple model
-yuleNS <- NetSim::sim.bdh.age(age = 4,
-                         numbsim = numbsim,
-                         lambda = 1,
-                         mu = 0,
-                         nu = 0,
-                         hybprops = c(0.5, 0.5, 0.5),
-                         hyb.inher.fxn = NetSim::make.beta.draw(1,1),
-                         frac = 1, 
-                         mrca = TRUE,
-                         complete = TRUE, 
-                         stochsampling = FALSE,
-                         hyb.rate.fxn = NULL, 
-                         trait.model = NULL 
-                         )
+yuleNS <- NetSim::sim.bdh.age(age = 4, numbsim = numbsim, lambda = 1, mu = 0, nu = 0, 
+    hybprops = c(0.5, 0.5, 0.5), hyb.inher.fxn = NetSim::make.beta.draw(1, 1), frac = 1, 
+    mrca = TRUE, complete = TRUE, stochsampling = FALSE, hyb.rate.fxn = NULL, trait.model = NULL)
 
 ## remove any trees with no taxa
-yuleNS <- yuleNS[!sapply(X = yuleNS, FUN = is.null)] 
+yuleNS <- yuleNS[!sapply(X = yuleNS, FUN = is.null)]
 ## remove non-phylo elements
-yuleNS <- yuleNS[sapply(X = yuleNS, FUN = is.phylo)] 
+yuleNS <- yuleNS[sapply(X = yuleNS, FUN = is.phylo)]
 ## remove any trees with <10 taxa
 yuleNS <- yuleNS[sapply(X = yuleNS, FUN = function(x) length(x$tip.label) >= 10)]
 # fit a Yule model with diversitree
-yuleNSFits <- lapply(X = yuleNS,
-                FUN = function(x) diversitree::make.yule(tree = x,
-                                                         sampling.f = 1.0))
+yuleNSFits <- lapply(X = yuleNS, FUN = function(x) diversitree::make.yule(tree = x, 
+    sampling.f = 1))
 # fetch the coefficients estimates on the previous lik funs
-yuleNSMLEcoefs <- lapply(X = yuleNSFits,
-                   FUN = function(x) coef(diversitree::find.mle(func = x,
-                                                                x.init = 0.5)))
+yuleNSMLEcoefs <- lapply(X = yuleNSFits, FUN = function(x) coef(diversitree::find.mle(func = x, 
+    x.init = 0.5)))
 ```
 
 Plot both distributions for visual comparison. Please note that the original value of $\lambda$ used in the simulations is represented by the vertical black line:
 
-```{r}
-yuleLambda <- data.frame(lambda = c(unlist(yuleTSMLEcoefs), unlist(yuleNSMLEcoefs)),
-                         method = c(rep("TreeSim", times = length(yuleTSMLEcoefs)),
-                                    rep("NetSim", times = length(yuleNSMLEcoefs))))
-yuleLambdaHist <- lattice::densityplot(~ lambda | method,
-                                     data = yuleLambda,
-                                     layout = c(1, 2),
-                                     plot.points = FALSE,
-                                     panel = function(x, y, ...) {
-                                       panel.densityplot(x, ...)
-                                       panel.abline(v=1.0)
-                                     })
+
+```r
+yuleLambda <- data.frame(lambda = c(unlist(yuleTSMLEcoefs), unlist(yuleNSMLEcoefs)), 
+    method = c(rep("TreeSim", times = length(yuleTSMLEcoefs)), rep("NetSim", times = length(yuleNSMLEcoefs))))
+yuleLambdaHist <- lattice::densityplot(~lambda | method, data = yuleLambda, layout = c(1, 
+    2), plot.points = FALSE, panel = function(x, y, ...) {
+    panel.densityplot(x, ...)
+    panel.abline(v = 1)
+})
 my_theme <- trellis.par.get()
 my_theme$strip.background$col <- "grey80"
 my_theme$plot.symbol$col <- "grey60"
@@ -153,103 +140,85 @@ my_theme$plot.polygon$col <- "grey90"
 
 yuleLHplot <- update(yuleLambdaHist, par.settings = my_theme)
 print(yuleLHplot)
-
 ```
+
+![](test_netsim_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 ## Birth-death trees
 
-```{r, cache = TRUE}
-# mrca = FALSE because the tree needs to be binary. This param behaves the opposite in NetSim!
-# complete = FALSE drops extinct tips b/c diversitree needs an ultrametric tree
-bdTS <- sim.bd.age(age = 9.3,
-                     numbsim = numbsim,
-                     lambda = 0.9,
-                     mu = 0.5,
-                     frac = 0.9,
-                     mrca = FALSE,
-                     complete = FALSE,
-                     K = 0)
+
+```r
+# mrca = FALSE because the tree needs to be binary. This param behaves the
+# opposite in NetSim!  complete = FALSE drops extinct tips b/c diversitree needs
+# an ultrametric tree
+bdTS <- sim.bd.age(age = 9.3, numbsim = numbsim, lambda = 0.9, mu = 0.5, frac = 0.9, 
+    mrca = FALSE, complete = FALSE, K = 0)
 
 ## remove any trees with no taxa
 bdTS <- bdTS[!sapply(X = bdTS, FUN = is.null)]
 ## remove non-phylo elements
-bdTS <- bdTS[sapply(X = bdTS, FUN = is.phylo)] 
+bdTS <- bdTS[sapply(X = bdTS, FUN = is.phylo)]
 ## remove any trees with <10 taxa
 bdTS <- bdTS[sapply(X = bdTS, FUN = function(x) length(x$tip.label) >= 10)]
 # fit a Bd model with diversitree
-bdTSFits <- lapply(X = bdTS,
-                FUN = function(x) diversitree::make.bd(tree = x,
-                                                         sampling.f = 0.6))
+bdTSFits <- lapply(X = bdTS, FUN = function(x) diversitree::make.bd(tree = x, sampling.f = 0.6))
 # fetch the coefficients estimates on the previous lik funs
-bdTSMLEcoefs <- lapply(X = bdTSFits,
-                   FUN = function(x) coef(diversitree::find.mle(func = x,
-                                                                x.init = c(0.5, 0.5))))
+bdTSMLEcoefs <- lapply(X = bdTSFits, FUN = function(x) coef(diversitree::find.mle(func = x, 
+    x.init = c(0.5, 0.5))))
+```
+
+```
+Warning in mle.search(func2, x.init, control, lower, upper): Convergence
+problems in find.mle: code = 3 (see ?nlm for details)
 ```
 
 Now we will simulate a BD tree sample using `NetSim`:
 
-```{r, cache = TRUE}
-# age = 9 should generate moderate-sized trees
-# nu = 0 no hybridization
-# hybprobs = c(0.5, 0.5, 0.5) no prior difference among types of effects of hyb on descendant lineages
-# hyb.inher.fxn beta(1,1) -> uniform(0,1), no pattern of inheritance,
-# frac = 1 we'll simulate complete genealogies
-# mrca = TRUE because the tree needs to be binary
-# complete = FALSE drop extinct tips b/c diversitree needs an ultrametric tree
-# hyb.rate.fxn = NULL we don't want hybridization to be a function of genetic distance
-# trait.model = NULL we don't need a covariate to include in this simple model
-bdNS <- NetSim::sim.bdh.age(age = 9.3,
-                         numbsim = numbsim,
-                         lambda = 0.9,
-                         mu = 0.5,
-                         nu = 0,
-                         hybprops = c(0.5, 0.5, 0.5),
-                         hyb.inher.fxn = NetSim::make.beta.draw(1,1),
-                         frac = 0.9, 
-                         mrca = TRUE,
-                         complete = FALSE, 
-                         stochsampling = FALSE,
-                         hyb.rate.fxn = NULL, 
-                         trait.model = NULL 
-                         )
+
+```r
+# age = 9 should generate moderate-sized trees nu = 0 no hybridization hybprobs =
+# c(0.5, 0.5, 0.5) no prior difference among types of effects of hyb on
+# descendant lineages hyb.inher.fxn beta(1,1) -> uniform(0,1), no pattern of
+# inheritance, frac = 1 we'll simulate complete genealogies mrca = TRUE because
+# the tree needs to be binary complete = FALSE drop extinct tips b/c diversitree
+# needs an ultrametric tree hyb.rate.fxn = NULL we don't want hybridization to be
+# a function of genetic distance trait.model = NULL we don't need a covariate to
+# include in this simple model
+bdNS <- NetSim::sim.bdh.age(age = 9.3, numbsim = numbsim, lambda = 0.9, mu = 0.5, 
+    nu = 0, hybprops = c(0.5, 0.5, 0.5), hyb.inher.fxn = NetSim::make.beta.draw(1, 
+        1), frac = 0.9, mrca = TRUE, complete = FALSE, stochsampling = FALSE, hyb.rate.fxn = NULL, 
+    trait.model = NULL)
 
 ## remove any trees with no taxa
-bdNS <- bdNS[!sapply(X = bdNS, FUN = is.null)] 
+bdNS <- bdNS[!sapply(X = bdNS, FUN = is.null)]
 ## remove non-phylo elements
-bdNS <- bdNS[sapply(X = bdNS, FUN = is.phylo)] 
+bdNS <- bdNS[sapply(X = bdNS, FUN = is.phylo)]
 ## remove any trees with <10 taxa
 bdNS <- bdNS[sapply(X = bdNS, FUN = function(x) length(x$tip.label) >= 10)]
 # remove non-binary
-bdNS <- bdNS[sapply(X = bdNS, FUN = is.binary)] 
+bdNS <- bdNS[sapply(X = bdNS, FUN = is.binary)]
 # fit a Bd model with diversitree
-bdNSFits <- lapply(X = bdNS,
-                FUN = function(x) diversitree::make.bd(tree = x,
-                                                         sampling.f = 0.6))
+bdNSFits <- lapply(X = bdNS, FUN = function(x) diversitree::make.bd(tree = x, sampling.f = 0.6))
 # fetch the coefficients estimates on the previous lik funs
-bdNSMLEcoefs <- lapply(X = bdNSFits,
-                   FUN = function(x) coef(diversitree::find.mle(func = x,
-                                                                x.init = c(0.5, 0.5))))
+bdNSMLEcoefs <- lapply(X = bdNSFits, FUN = function(x) coef(diversitree::find.mle(func = x, 
+    x.init = c(0.5, 0.5))))
 ```
 
 Plot both distributions for visual comparisonPlease note that the original value of $\lambda$ and $\mu$ used in the simulations is represented by the vertical black line:
 
-```{r}
-bdParams <- data.frame(lambda = c(sapply(bdTSMLEcoefs, function(x) unlist(x)["lambda"]),
-                                  sapply(bdNSMLEcoefs, function(x) unlist(x)["lambda"])),
-                       mu = c(sapply(bdTSMLEcoefs, function(x) unlist(x)["mu"]),
-                                  sapply(bdNSMLEcoefs, function(x) unlist(x)["mu"])), 
-                         method = c(rep("TreeSim", times = length(bdTSMLEcoefs)),
-                                    rep("NetSim", times = length(bdNSMLEcoefs))))
+
+```r
+bdParams <- data.frame(lambda = c(sapply(bdTSMLEcoefs, function(x) unlist(x)["lambda"]), 
+    sapply(bdNSMLEcoefs, function(x) unlist(x)["lambda"])), mu = c(sapply(bdTSMLEcoefs, 
+    function(x) unlist(x)["mu"]), sapply(bdNSMLEcoefs, function(x) unlist(x)["mu"])), 
+    method = c(rep("TreeSim", times = length(bdTSMLEcoefs)), rep("NetSim", times = length(bdNSMLEcoefs))))
 
 # build plot
-bdLambdaHist <- lattice::densityplot(~ lambda | method,
-                                     data = bdParams,
-                                     layout = c(1, 2),
-                                     plot.points = FALSE, 
-                                     panel = function(x, y, ...) {
-                                       panel.densityplot(x, ...)
-                                       panel.abline(v=0.9)
-                                     })
+bdLambdaHist <- lattice::densityplot(~lambda | method, data = bdParams, layout = c(1, 
+    2), plot.points = FALSE, panel = function(x, y, ...) {
+    panel.densityplot(x, ...)
+    panel.abline(v = 0.9)
+})
 my_theme <- trellis.par.get()
 my_theme$strip.background$col <- "grey80"
 my_theme$plot.symbol$col <- "grey60"
@@ -257,15 +226,16 @@ my_theme$plot.polygon$col <- "grey90"
 
 bdLHplot <- update(bdLambdaHist, par.settings = my_theme)
 print(bdLHplot)
+```
 
-bdMuHist <- lattice::densityplot(~ mu | method,
-                                     data = bdParams,
-                                     layout = c(1, 2),
-                                     plot.points = FALSE, 
-                                     panel = function(x, y, ...) {
-                                       panel.densityplot(x, ...)
-                                       panel.abline(v=0.5)
-                                     })
+![](test_netsim_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
+
+```r
+bdMuHist <- lattice::densityplot(~mu | method, data = bdParams, layout = c(1, 2), 
+    plot.points = FALSE, panel = function(x, y, ...) {
+        panel.densityplot(x, ...)
+        panel.abline(v = 0.5)
+    })
 my_theme <- trellis.par.get()
 my_theme$strip.background$col <- "grey80"
 my_theme$plot.symbol$col <- "grey60"
@@ -274,6 +244,8 @@ my_theme$plot.polygon$col <- "grey90"
 bdMHplot <- update(bdMuHist, par.settings = my_theme)
 print(bdMHplot)
 ```
+
+![](test_netsim_files/figure-latex/unnamed-chunk-7-2.pdf)<!-- --> 
 
 ## Remarks
 
@@ -285,31 +257,59 @@ Once sorted this out we can consider to use NetSim for networks in the specific 
 
 # Simulation spanning a fixed time interval: `sim.bdh.age`
 
-The plot engine `NetSim::plottable.net` is said to reorient the tree for improved plotting with respect to hybrid edges. However, this also creates extinct tips for hybridization events (see the plot on the right below, sister to `t1` and compare with the same node in the plot to the left). 
+The plot engine `NetSim::plottable.net` is said to reorient the tree for improved plotting with respect to hybrid edges. However, this also creates extinct tips for hybridization events (see the plot on the right below, sister to `t11` and compare with the same node in the plot to the left). 
 
 This does not happen all the time, and this is the best combination of parameters that allows to reconstruct a reproducible example of such behavior. Why do this happen? Does it represent a difference in the nature of the hybridization event? Note that some other hybrid edges do not induce an "extinct" node sister to the hybrid edge.
 
-```{r}
-age_fixed <- sim.bdh.age(age = 2.3,
-                         numbsim = 1,
-                         lambda = 0.45,
-                         mu = 0,
-                         nu = 0.15,
-                         hybprops = c(0.5, 0.5, 0.5),
-                         hyb.inher.fxn = make.beta.draw(1,1),
-                         frac = 1,
-                         mrca = TRUE,
-                         complete = TRUE,
-                         stochsampling = FALSE,
-                         hyb.rate.fxn = NULL,
-                         trait.model = NULL
-                         )
+
+```r
+age_fixed <- sim.bdh.age(age = 2.3, numbsim = 1, lambda = 0.45, mu = 0, nu = 0.15, 
+    hybprops = c(0.5, 0.5, 0.5), hyb.inher.fxn = make.beta.draw(1, 1), frac = 1, 
+    mrca = TRUE, complete = TRUE, stochsampling = FALSE, hyb.rate.fxn = NULL, trait.model = NULL)
 str(age_fixed)
-par(mfrow = c(1, 2))
-plot(age_fixed[[1]])
-plot(plottable.net(age_fixed[[1]]))
+```
 
 ```
+List of 1
+ $ :List of 6
+  ..$ edge        : num [1:38, 1:2] 13 13 15 15 16 16 17 17 20 20 ...
+  ..$ tip.label   : chr [1:12] "t1" "t16" "t2" "t7" ...
+  ..$ edge.length : num [1:38] 1.1498 0.0905 0.4748 0.4955 0.7861 ...
+  ..$ Nnode       : num 27
+  ..$ reticulation: num [1:8, 1:2] 21 23 18 23 29 33 25 33 26 27 ...
+  .. ..- attr(*, "dimnames")=List of 2
+  .. .. ..$ : NULL
+  .. .. ..$ : chr [1:2] "from" "to"
+  ..$ inheritance : num [1:8] 0.183 0.127 0.876 0.782 0.472 ...
+  ..- attr(*, "class")= chr [1:2] "evonet" "phylo"
+```
+
+```r
+par(mfrow = c(1, 2))
+plot(age_fixed[[1]])
+```
+
+```
+Warning in min(x): no non-missing arguments to min; returning Inf
+```
+
+```
+Warning in max(x): no non-missing arguments to max; returning -Inf
+```
+
+```
+Warning in min(x): no non-missing arguments to min; returning Inf
+```
+
+```
+Warning in max(x): no non-missing arguments to max; returning -Inf
+```
+
+```r
+plot(plottable.net(age_fixed[[1]]))
+```
+
+![](test_netsim_files/figure-latex/unnamed-chunk-8-1.pdf)<!-- --> 
 
 \begin{small}
 \begin{landscape}

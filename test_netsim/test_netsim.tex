@@ -1,0 +1,530 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\hypersetup{
+            pdftitle={Overview of the NetSim package},
+            pdfauthor={Gustavo A. Ballen},
+            colorlinks=true,
+            linkcolor=Maroon,
+            citecolor=Blue,
+            urlcolor=blue,
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{lscape}
+\usepackage{longtable}
+
+\title{Overview of the \texttt{NetSim} package}
+\author{Gustavo A. Ballen\footnote{Museu de Zoologia da Universidade de São
+  Paulo}}
+\date{}
+
+\begin{document}
+\maketitle
+
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(NetSim)  }\CommentTok{# simulate bd time-tree networks: https://github.com/jjustison/NetSim}
+\KeywordTok{library}\NormalTok{(TreeSim)  }\CommentTok{# simulate bd time-trees}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Loading required package: ape
+\end{verbatim}
+
+\begin{verbatim}
+Loading required package: geiger
+\end{verbatim}
+
+\begin{verbatim}
+Registered S3 method overwritten by 'geiger':
+  method            from
+  unique.multiPhylo ape 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ape)  }\CommentTok{# tools for handling phylo objects}
+\KeywordTok{library}\NormalTok{(diversitree)  }\CommentTok{# tools for estimating lambda and mu}
+\KeywordTok{library}\NormalTok{(lattice)  }\CommentTok{# stacked plots}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1000}\NormalTok{)}
+\NormalTok{numbsim <-}\StringTok{ }\DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+\section{The NetSim package}\label{the-netsim-package}
+
+The package builds on the approach of Stadler for \texttt{TreeSim}, but
+with modifications by Zhang et al. (2018) for including hybridization as
+part of the birth-death (BD) stochastic process. The functions are named
+similarly to those in \texttt{TreeSim} but with \texttt{bdh} insted of
+just \texttt{bd}.
+
+The package allows trees conditional to time or number of species, as
+well as the typical sampling and extinction patterns allowed by
+\texttt{TreeSim}. However, it allows to model hybridization in three
+important ways:
+
+\begin{itemize}
+\tightlist
+\item
+  Effect of the hybridization on generation of lineages (positive,
+  negative, neutral)
+\item
+  Hybridization probability as a function of genetic distance (the
+  closer two lineages the easier for them to hybridize)
+\item
+  Hybridization probability covariating with a trait along the phylogeny
+  (for example, if hybridization is dependent on the two parents having
+  a similar trait)
+\end{itemize}
+
+Simulations are controlled via two main parameters: Origin time, and
+number of species. For the former, a given time interval is specified
+for the simulation to run, leaving \(n\) as a free quantity. On the
+other hand, the SSE and GSE approaches fix the final number of species
+\(n\) and allow the simulation to run an unconstrained amount of time
+until such quantity is attained.
+
+\section{General network simulation
+features}\label{general-network-simulation-features}
+
+Comparing the manual entry for the functions \texttt{sim.bdh.age},
+\texttt{sim.bdh.taxa.ssa}, and \texttt{sim.bdh.taxa.gsa}, we find that
+they differ in the very first arguments (Table \ref{tab:sim_args}).
+These first arguments (\texttt{age}, \texttt{m}, and \texttt{n}) control
+the endpoint of the simulation. All of the remaining arguments specify
+the model oh birth-death hybridization. All functions return an object
+of either class \texttt{phylo} or \texttt{multiphylo} depending on how
+many trees were requested in the argument \texttt{numbsim}.
+
+Below we will explore each of these functions and their appropriate
+context.
+
+\section{Preliminary conditions: Yule and BD
+trees}\label{preliminary-conditions-yule-and-bd-trees}
+
+Let's see if the functions produce reliable trees under Yule and BD
+without hybridization. Parameter estimation on the tree samples is
+inspired in this blog post by
+\href{http://www.phytools.org/Cordoba2017/ex/12/BD-models.html}{Revell
+and Harmon}
+
+\subsection{Yule trees}\label{yule-trees}
+
+First let's simulate the same tree samples using \texttt{TreeSim} as a
+control for comparing the results by \texttt{NetSim}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{yuleTS <-}\StringTok{ }\KeywordTok{sim.bd.age}\NormalTok{(}\DataTypeTok{age =} \DecValTok{4}\NormalTok{, }\DataTypeTok{numbsim =}\NormalTok{ numbsim, }\DataTypeTok{lambda =} \DecValTok{1}\NormalTok{, }\DataTypeTok{mu =} \DecValTok{0}\NormalTok{, }\DataTypeTok{frac =} \DecValTok{1}\NormalTok{, }\DataTypeTok{mrca =} \OtherTok{FALSE}\NormalTok{, }
+    \DataTypeTok{complete =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{K =} \DecValTok{0}\NormalTok{)}
+
+\NormalTok{## remove any trees with no taxa}
+\NormalTok{yuleTS <-}\StringTok{ }\NormalTok{yuleTS[}\OperatorTok{!}\KeywordTok{sapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ yuleTS, }\DataTypeTok{FUN =}\NormalTok{ is.null)]}
+\NormalTok{## remove non-phylo elements}
+\NormalTok{yuleTS <-}\StringTok{ }\NormalTok{yuleTS[}\KeywordTok{sapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ yuleTS, }\DataTypeTok{FUN =}\NormalTok{ is.phylo)]}
+\NormalTok{## remove any trees with <10 taxa}
+\NormalTok{yuleTS <-}\StringTok{ }\NormalTok{yuleTS[}\KeywordTok{sapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ yuleTS, }\DataTypeTok{FUN =} \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{tip.label) }\OperatorTok{>=}\StringTok{ }\DecValTok{10}\NormalTok{)]}
+\CommentTok{# fit a Yule model with diversitree}
+\NormalTok{yuleTSFits <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ yuleTS, }\DataTypeTok{FUN =} \ControlFlowTok{function}\NormalTok{(x) diversitree}\OperatorTok{::}\KeywordTok{make.yule}\NormalTok{(}\DataTypeTok{tree =}\NormalTok{ x, }
+    \DataTypeTok{sampling.f =} \DecValTok{1}\NormalTok{))}
+\CommentTok{# fetch the coefficients estimates on the previous lik funs}
+\NormalTok{yuleTSMLEcoefs <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ yuleTSFits, }\DataTypeTok{FUN =} \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{coef}\NormalTok{(diversitree}\OperatorTok{::}\KeywordTok{find.mle}\NormalTok{(}\DataTypeTok{func =}\NormalTok{ x, }
+    \DataTypeTok{x.init =} \FloatTok{0.5}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+Now we will simulate a Yule tree sample using \texttt{NetSim}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# age = 4 should generate moderate-sized trees mu = 0 no extinction nu = 0 no}
+\CommentTok{# hybridization hybprobs = c(0.5, 0.5, 0.5) no prior difference among types of}
+\CommentTok{# effects of hyb on descendant lineages hyb.inher.fxn beta(1,1) -> uniform(0,1),}
+\CommentTok{# no pattern of inheritance, frac = 1 we'll simulate complete genealogies}
+\CommentTok{# complete = TRUE we don't have extinction, this plays no role hyb.rate.fxn =}
+\CommentTok{# NULL we don't want hybridization to be a function of genetic distance}
+\CommentTok{# trait.model = NULL we don't need a covariate to include in this simple model}
+\NormalTok{yuleNS <-}\StringTok{ }\NormalTok{NetSim}\OperatorTok{::}\KeywordTok{sim.bdh.age}\NormalTok{(}\DataTypeTok{age =} \DecValTok{4}\NormalTok{, }\DataTypeTok{numbsim =}\NormalTok{ numbsim, }\DataTypeTok{lambda =} \DecValTok{1}\NormalTok{, }\DataTypeTok{mu =} \DecValTok{0}\NormalTok{, }\DataTypeTok{nu =} \DecValTok{0}\NormalTok{, }
+    \DataTypeTok{hybprops =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{), }\DataTypeTok{hyb.inher.fxn =}\NormalTok{ NetSim}\OperatorTok{::}\KeywordTok{make.beta.draw}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{frac =} \DecValTok{1}\NormalTok{, }
+    \DataTypeTok{mrca =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{complete =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{stochsampling =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{hyb.rate.fxn =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{trait.model =} \OtherTok{NULL}\NormalTok{)}
+
+\NormalTok{## remove any trees with no taxa}
+\NormalTok{yuleNS <-}\StringTok{ }\NormalTok{yuleNS[}\OperatorTok{!}\KeywordTok{sapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ yuleNS, }\DataTypeTok{FUN =}\NormalTok{ is.null)]}
+\NormalTok{## remove non-phylo elements}
+\NormalTok{yuleNS <-}\StringTok{ }\NormalTok{yuleNS[}\KeywordTok{sapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ yuleNS, }\DataTypeTok{FUN =}\NormalTok{ is.phylo)]}
+\NormalTok{## remove any trees with <10 taxa}
+\NormalTok{yuleNS <-}\StringTok{ }\NormalTok{yuleNS[}\KeywordTok{sapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ yuleNS, }\DataTypeTok{FUN =} \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{tip.label) }\OperatorTok{>=}\StringTok{ }\DecValTok{10}\NormalTok{)]}
+\CommentTok{# fit a Yule model with diversitree}
+\NormalTok{yuleNSFits <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ yuleNS, }\DataTypeTok{FUN =} \ControlFlowTok{function}\NormalTok{(x) diversitree}\OperatorTok{::}\KeywordTok{make.yule}\NormalTok{(}\DataTypeTok{tree =}\NormalTok{ x, }
+    \DataTypeTok{sampling.f =} \DecValTok{1}\NormalTok{))}
+\CommentTok{# fetch the coefficients estimates on the previous lik funs}
+\NormalTok{yuleNSMLEcoefs <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ yuleNSFits, }\DataTypeTok{FUN =} \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{coef}\NormalTok{(diversitree}\OperatorTok{::}\KeywordTok{find.mle}\NormalTok{(}\DataTypeTok{func =}\NormalTok{ x, }
+    \DataTypeTok{x.init =} \FloatTok{0.5}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+Plot both distributions for visual comparison. Please note that the
+original value of \(\lambda\) used in the simulations is represented by
+the vertical black line:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{yuleLambda <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{lambda =} \KeywordTok{c}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(yuleTSMLEcoefs), }\KeywordTok{unlist}\NormalTok{(yuleNSMLEcoefs)), }
+    \DataTypeTok{method =} \KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"TreeSim"}\NormalTok{, }\DataTypeTok{times =} \KeywordTok{length}\NormalTok{(yuleTSMLEcoefs)), }\KeywordTok{rep}\NormalTok{(}\StringTok{"NetSim"}\NormalTok{, }\DataTypeTok{times =} \KeywordTok{length}\NormalTok{(yuleNSMLEcoefs))))}
+\NormalTok{yuleLambdaHist <-}\StringTok{ }\NormalTok{lattice}\OperatorTok{::}\KeywordTok{densityplot}\NormalTok{(}\OperatorTok{~}\NormalTok{lambda }\OperatorTok{|}\StringTok{ }\NormalTok{method, }\DataTypeTok{data =}\NormalTok{ yuleLambda, }\DataTypeTok{layout =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }
+    \DecValTok{2}\NormalTok{), }\DataTypeTok{plot.points =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{panel =} \ControlFlowTok{function}\NormalTok{(x, y, ...) \{}
+    \KeywordTok{panel.densityplot}\NormalTok{(x, ...)}
+    \KeywordTok{panel.abline}\NormalTok{(}\DataTypeTok{v =} \DecValTok{1}\NormalTok{)}
+\NormalTok{\})}
+\NormalTok{my_theme <-}\StringTok{ }\KeywordTok{trellis.par.get}\NormalTok{()}
+\NormalTok{my_theme}\OperatorTok{$}\NormalTok{strip.background}\OperatorTok{$}\NormalTok{col <-}\StringTok{ "grey80"}
+\NormalTok{my_theme}\OperatorTok{$}\NormalTok{plot.symbol}\OperatorTok{$}\NormalTok{col <-}\StringTok{ "grey60"}
+\NormalTok{my_theme}\OperatorTok{$}\NormalTok{plot.polygon}\OperatorTok{$}\NormalTok{col <-}\StringTok{ "grey90"}
+
+\NormalTok{yuleLHplot <-}\StringTok{ }\KeywordTok{update}\NormalTok{(yuleLambdaHist, }\DataTypeTok{par.settings =}\NormalTok{ my_theme)}
+\KeywordTok{print}\NormalTok{(yuleLHplot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{test_netsim_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\subsection{Birth-death trees}\label{birth-death-trees}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# mrca = FALSE because the tree needs to be binary. This param behaves the}
+\CommentTok{# opposite in NetSim!  complete = FALSE drops extinct tips b/c diversitree needs}
+\CommentTok{# an ultrametric tree}
+\NormalTok{bdTS <-}\StringTok{ }\KeywordTok{sim.bd.age}\NormalTok{(}\DataTypeTok{age =} \FloatTok{9.3}\NormalTok{, }\DataTypeTok{numbsim =}\NormalTok{ numbsim, }\DataTypeTok{lambda =} \FloatTok{0.9}\NormalTok{, }\DataTypeTok{mu =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{frac =} \FloatTok{0.9}\NormalTok{, }
+    \DataTypeTok{mrca =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{complete =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{K =} \DecValTok{0}\NormalTok{)}
+
+\NormalTok{## remove any trees with no taxa}
+\NormalTok{bdTS <-}\StringTok{ }\NormalTok{bdTS[}\OperatorTok{!}\KeywordTok{sapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ bdTS, }\DataTypeTok{FUN =}\NormalTok{ is.null)]}
+\NormalTok{## remove non-phylo elements}
+\NormalTok{bdTS <-}\StringTok{ }\NormalTok{bdTS[}\KeywordTok{sapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ bdTS, }\DataTypeTok{FUN =}\NormalTok{ is.phylo)]}
+\NormalTok{## remove any trees with <10 taxa}
+\NormalTok{bdTS <-}\StringTok{ }\NormalTok{bdTS[}\KeywordTok{sapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ bdTS, }\DataTypeTok{FUN =} \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{tip.label) }\OperatorTok{>=}\StringTok{ }\DecValTok{10}\NormalTok{)]}
+\CommentTok{# fit a Bd model with diversitree}
+\NormalTok{bdTSFits <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ bdTS, }\DataTypeTok{FUN =} \ControlFlowTok{function}\NormalTok{(x) diversitree}\OperatorTok{::}\KeywordTok{make.bd}\NormalTok{(}\DataTypeTok{tree =}\NormalTok{ x, }\DataTypeTok{sampling.f =} \FloatTok{0.6}\NormalTok{))}
+\CommentTok{# fetch the coefficients estimates on the previous lik funs}
+\NormalTok{bdTSMLEcoefs <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ bdTSFits, }\DataTypeTok{FUN =} \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{coef}\NormalTok{(diversitree}\OperatorTok{::}\KeywordTok{find.mle}\NormalTok{(}\DataTypeTok{func =}\NormalTok{ x, }
+    \DataTypeTok{x.init =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Warning in mle.search(func2, x.init, control, lower, upper): Convergence
+problems in find.mle: code = 3 (see ?nlm for details)
+\end{verbatim}
+
+Now we will simulate a BD tree sample using \texttt{NetSim}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# age = 9 should generate moderate-sized trees nu = 0 no hybridization hybprobs =}
+\CommentTok{# c(0.5, 0.5, 0.5) no prior difference among types of effects of hyb on}
+\CommentTok{# descendant lineages hyb.inher.fxn beta(1,1) -> uniform(0,1), no pattern of}
+\CommentTok{# inheritance, frac = 1 we'll simulate complete genealogies mrca = TRUE because}
+\CommentTok{# the tree needs to be binary complete = FALSE drop extinct tips b/c diversitree}
+\CommentTok{# needs an ultrametric tree hyb.rate.fxn = NULL we don't want hybridization to be}
+\CommentTok{# a function of genetic distance trait.model = NULL we don't need a covariate to}
+\CommentTok{# include in this simple model}
+\NormalTok{bdNS <-}\StringTok{ }\NormalTok{NetSim}\OperatorTok{::}\KeywordTok{sim.bdh.age}\NormalTok{(}\DataTypeTok{age =} \FloatTok{9.3}\NormalTok{, }\DataTypeTok{numbsim =}\NormalTok{ numbsim, }\DataTypeTok{lambda =} \FloatTok{0.9}\NormalTok{, }\DataTypeTok{mu =} \FloatTok{0.5}\NormalTok{, }
+    \DataTypeTok{nu =} \DecValTok{0}\NormalTok{, }\DataTypeTok{hybprops =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{), }\DataTypeTok{hyb.inher.fxn =}\NormalTok{ NetSim}\OperatorTok{::}\KeywordTok{make.beta.draw}\NormalTok{(}\DecValTok{1}\NormalTok{, }
+        \DecValTok{1}\NormalTok{), }\DataTypeTok{frac =} \FloatTok{0.9}\NormalTok{, }\DataTypeTok{mrca =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{complete =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{stochsampling =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{hyb.rate.fxn =} \OtherTok{NULL}\NormalTok{, }
+    \DataTypeTok{trait.model =} \OtherTok{NULL}\NormalTok{)}
+
+\NormalTok{## remove any trees with no taxa}
+\NormalTok{bdNS <-}\StringTok{ }\NormalTok{bdNS[}\OperatorTok{!}\KeywordTok{sapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ bdNS, }\DataTypeTok{FUN =}\NormalTok{ is.null)]}
+\NormalTok{## remove non-phylo elements}
+\NormalTok{bdNS <-}\StringTok{ }\NormalTok{bdNS[}\KeywordTok{sapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ bdNS, }\DataTypeTok{FUN =}\NormalTok{ is.phylo)]}
+\NormalTok{## remove any trees with <10 taxa}
+\NormalTok{bdNS <-}\StringTok{ }\NormalTok{bdNS[}\KeywordTok{sapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ bdNS, }\DataTypeTok{FUN =} \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{length}\NormalTok{(x}\OperatorTok{$}\NormalTok{tip.label) }\OperatorTok{>=}\StringTok{ }\DecValTok{10}\NormalTok{)]}
+\CommentTok{# remove non-binary}
+\NormalTok{bdNS <-}\StringTok{ }\NormalTok{bdNS[}\KeywordTok{sapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ bdNS, }\DataTypeTok{FUN =}\NormalTok{ is.binary)]}
+\CommentTok{# fit a Bd model with diversitree}
+\NormalTok{bdNSFits <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ bdNS, }\DataTypeTok{FUN =} \ControlFlowTok{function}\NormalTok{(x) diversitree}\OperatorTok{::}\KeywordTok{make.bd}\NormalTok{(}\DataTypeTok{tree =}\NormalTok{ x, }\DataTypeTok{sampling.f =} \FloatTok{0.6}\NormalTok{))}
+\CommentTok{# fetch the coefficients estimates on the previous lik funs}
+\NormalTok{bdNSMLEcoefs <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\DataTypeTok{X =}\NormalTok{ bdNSFits, }\DataTypeTok{FUN =} \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{coef}\NormalTok{(diversitree}\OperatorTok{::}\KeywordTok{find.mle}\NormalTok{(}\DataTypeTok{func =}\NormalTok{ x, }
+    \DataTypeTok{x.init =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{))))}
+\end{Highlighting}
+\end{Shaded}
+
+Plot both distributions for visual comparisonPlease note that the
+original value of \(\lambda\) and \(\mu\) used in the simulations is
+represented by the vertical black line:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bdParams <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{lambda =} \KeywordTok{c}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(bdTSMLEcoefs, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{unlist}\NormalTok{(x)[}\StringTok{"lambda"}\NormalTok{]), }
+    \KeywordTok{sapply}\NormalTok{(bdNSMLEcoefs, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{unlist}\NormalTok{(x)[}\StringTok{"lambda"}\NormalTok{])), }\DataTypeTok{mu =} \KeywordTok{c}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(bdTSMLEcoefs, }
+    \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{unlist}\NormalTok{(x)[}\StringTok{"mu"}\NormalTok{]), }\KeywordTok{sapply}\NormalTok{(bdNSMLEcoefs, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{unlist}\NormalTok{(x)[}\StringTok{"mu"}\NormalTok{])), }
+    \DataTypeTok{method =} \KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"TreeSim"}\NormalTok{, }\DataTypeTok{times =} \KeywordTok{length}\NormalTok{(bdTSMLEcoefs)), }\KeywordTok{rep}\NormalTok{(}\StringTok{"NetSim"}\NormalTok{, }\DataTypeTok{times =} \KeywordTok{length}\NormalTok{(bdNSMLEcoefs))))}
+
+\CommentTok{# build plot}
+\NormalTok{bdLambdaHist <-}\StringTok{ }\NormalTok{lattice}\OperatorTok{::}\KeywordTok{densityplot}\NormalTok{(}\OperatorTok{~}\NormalTok{lambda }\OperatorTok{|}\StringTok{ }\NormalTok{method, }\DataTypeTok{data =}\NormalTok{ bdParams, }\DataTypeTok{layout =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }
+    \DecValTok{2}\NormalTok{), }\DataTypeTok{plot.points =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{panel =} \ControlFlowTok{function}\NormalTok{(x, y, ...) \{}
+    \KeywordTok{panel.densityplot}\NormalTok{(x, ...)}
+    \KeywordTok{panel.abline}\NormalTok{(}\DataTypeTok{v =} \FloatTok{0.9}\NormalTok{)}
+\NormalTok{\})}
+\NormalTok{my_theme <-}\StringTok{ }\KeywordTok{trellis.par.get}\NormalTok{()}
+\NormalTok{my_theme}\OperatorTok{$}\NormalTok{strip.background}\OperatorTok{$}\NormalTok{col <-}\StringTok{ "grey80"}
+\NormalTok{my_theme}\OperatorTok{$}\NormalTok{plot.symbol}\OperatorTok{$}\NormalTok{col <-}\StringTok{ "grey60"}
+\NormalTok{my_theme}\OperatorTok{$}\NormalTok{plot.polygon}\OperatorTok{$}\NormalTok{col <-}\StringTok{ "grey90"}
+
+\NormalTok{bdLHplot <-}\StringTok{ }\KeywordTok{update}\NormalTok{(bdLambdaHist, }\DataTypeTok{par.settings =}\NormalTok{ my_theme)}
+\KeywordTok{print}\NormalTok{(bdLHplot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{test_netsim_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bdMuHist <-}\StringTok{ }\NormalTok{lattice}\OperatorTok{::}\KeywordTok{densityplot}\NormalTok{(}\OperatorTok{~}\NormalTok{mu }\OperatorTok{|}\StringTok{ }\NormalTok{method, }\DataTypeTok{data =}\NormalTok{ bdParams, }\DataTypeTok{layout =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{), }
+    \DataTypeTok{plot.points =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{panel =} \ControlFlowTok{function}\NormalTok{(x, y, ...) \{}
+        \KeywordTok{panel.densityplot}\NormalTok{(x, ...)}
+        \KeywordTok{panel.abline}\NormalTok{(}\DataTypeTok{v =} \FloatTok{0.5}\NormalTok{)}
+\NormalTok{    \})}
+\NormalTok{my_theme <-}\StringTok{ }\KeywordTok{trellis.par.get}\NormalTok{()}
+\NormalTok{my_theme}\OperatorTok{$}\NormalTok{strip.background}\OperatorTok{$}\NormalTok{col <-}\StringTok{ "grey80"}
+\NormalTok{my_theme}\OperatorTok{$}\NormalTok{plot.symbol}\OperatorTok{$}\NormalTok{col <-}\StringTok{ "grey60"}
+\NormalTok{my_theme}\OperatorTok{$}\NormalTok{plot.polygon}\OperatorTok{$}\NormalTok{col <-}\StringTok{ "grey90"}
+
+\NormalTok{bdMHplot <-}\StringTok{ }\KeywordTok{update}\NormalTok{(bdMuHist, }\DataTypeTok{par.settings =}\NormalTok{ my_theme)}
+\KeywordTok{print}\NormalTok{(bdMHplot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{test_netsim_files/figure-latex/unnamed-chunk-7-2.pdf}
+
+\subsection{Remarks}\label{remarks}
+
+The results for Yule trees are equivalent for both methods. However,
+estimation of \(\lambda\) and \(\mu\) are 1) not completely equivalent
+as judged from the plots, and 2) more seriously, do not match the
+starting values in the simulations, that is, \texttt{lambda\ =\ 0.9} and
+\texttt{mu\ =\ 0.5}.
+
+This might be a limitation of the method used by \texttt{diversitree}
+for fitting birth-death models (said to be Nee et al., 1994), but if so
+we need a better way to assess with back-comparison how good are these
+two estimators and whether they are in fact equivalent.
+
+Once sorted this out we can consider to use NetSim for networks in the
+specific case of time-trees, or more specifically, birth-death
+time-trees.
+
+\section{\texorpdfstring{Simulation spanning a fixed time interval:
+\texttt{sim.bdh.age}}{Simulation spanning a fixed time interval: sim.bdh.age}}\label{simulation-spanning-a-fixed-time-interval-sim.bdh.age}
+
+The plot engine \texttt{NetSim::plottable.net} is said to reorient the
+tree for improved plotting with respect to hybrid edges. However, this
+also creates extinct tips for hybridization events (see the plot on the
+right below, sister to \texttt{t11} and compare with the same node in
+the plot to the left).
+
+This does not happen all the time, and this is the best combination of
+parameters that allows to reconstruct a reproducible example of such
+behavior. Why do this happen? Does it represent a difference in the
+nature of the hybridization event? Note that some other hybrid edges do
+not induce an ``extinct'' node sister to the hybrid edge.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{age_fixed <-}\StringTok{ }\KeywordTok{sim.bdh.age}\NormalTok{(}\DataTypeTok{age =} \FloatTok{2.3}\NormalTok{, }\DataTypeTok{numbsim =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lambda =} \FloatTok{0.45}\NormalTok{, }\DataTypeTok{mu =} \DecValTok{0}\NormalTok{, }\DataTypeTok{nu =} \FloatTok{0.15}\NormalTok{, }
+    \DataTypeTok{hybprops =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{), }\DataTypeTok{hyb.inher.fxn =} \KeywordTok{make.beta.draw}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{frac =} \DecValTok{1}\NormalTok{, }
+    \DataTypeTok{mrca =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{complete =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{stochsampling =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{hyb.rate.fxn =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{trait.model =} \OtherTok{NULL}\NormalTok{)}
+\KeywordTok{str}\NormalTok{(age_fixed)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+List of 1
+ $ :List of 6
+  ..$ edge        : num [1:38, 1:2] 13 13 15 15 16 16 17 17 20 20 ...
+  ..$ tip.label   : chr [1:12] "t1" "t16" "t2" "t7" ...
+  ..$ edge.length : num [1:38] 1.1498 0.0905 0.4748 0.4955 0.7861 ...
+  ..$ Nnode       : num 27
+  ..$ reticulation: num [1:8, 1:2] 21 23 18 23 29 33 25 33 26 27 ...
+  .. ..- attr(*, "dimnames")=List of 2
+  .. .. ..$ : NULL
+  .. .. ..$ : chr [1:2] "from" "to"
+  ..$ inheritance : num [1:8] 0.183 0.127 0.876 0.782 0.472 ...
+  ..- attr(*, "class")= chr [1:2] "evonet" "phylo"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(age_fixed[[}\DecValTok{1}\NormalTok{]])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Warning in min(x): no non-missing arguments to min; returning Inf
+\end{verbatim}
+
+\begin{verbatim}
+Warning in max(x): no non-missing arguments to max; returning -Inf
+\end{verbatim}
+
+\begin{verbatim}
+Warning in min(x): no non-missing arguments to min; returning Inf
+\end{verbatim}
+
+\begin{verbatim}
+Warning in max(x): no non-missing arguments to max; returning -Inf
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{plottable.net}\NormalTok{(age_fixed[[}\DecValTok{1}\NormalTok{]]))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{test_netsim_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{small}
+\begin{landscape}
+\begin{longtable}[c]{p{2cm}p{1.2cm}p{1.2cm}p{1cm}p{2.6cm}p{2.6cm}p{2.6cm}p{5cm}}
+\caption{Summary of arguments for simulation functions in \texttt{NetSim}. X Represents arguments present but without a default value. Filled cells otherwise represent the default values in each function, and empty cells represent arguments absent from a given function.}
+\label{tab:sim_args}\\
+\multicolumn{1}{c}{\textbf{argument}} & \textbf{arg.type} & \textbf{arg.str} & \textbf{arg.len} & \textbf{sim.bdh.age} & \textbf{sim.bdh.taxa.ssa} & \textbf{sim.bdh.taxa.gsa} & \multicolumn{1}{c}{\textbf{notes}} \\
+\endfirsthead
+%
+\multicolumn{8}{c}%
+{{\bfseries Table \thetable\ continued from previous page}} \\
+\multicolumn{1}{c}{\textbf{argument}} & \textbf{arg.type} & \textbf{arg.str} & \textbf{arg.len} & \textbf{sim.bdh.age} & \textbf{sim.bdh.taxa.ssa} & \textbf{sim.bdh.taxa.gsa} & \multicolumn{1}{c}{\textbf{notes}} \\
+\endhead
+%
+\hline
+\texttt{age} & double & vector & 1 & X &  &  & Total simulation time length \\
+\texttt{m} & integer & vector & 1 &  &  & X & Number of taxa to simulate under SSA \\
+\texttt{n} & integer & vector & 1 &  & X & X & Number of final taxa \\
+\texttt{numbsim} & double & vector & 1 & X & X & X & Number of networks to simulate \\
+\texttt{lambda} & double & vector & 1 & X & X & X & Speciation rate \\
+\texttt{mu} & double & vector & 1 & X & X & X & Extinction rate \\
+\texttt{nu} & double & vector & 1 & X & X & X & Hybridization rate \\
+\texttt{hybprops} & double & vector & 3 & X & X & X & Proportion of hybridizations that are lineage generative, lineage degenerative, and lineage neutral respectively \\
+\texttt{hyb.inher.fxn} & closure & function & 1 & X & X & X & Function for drawing hybrid inheritance probabilities . Uses a function that draws from \texttt{rDIST}-type functions, e.g., \texttt{make.beta.draw} \\
+\texttt{frac} & double & vector & 1 & \texttt{1} & \texttt{1} & \texttt{1} & Proportion of species sampled included in the phylogeny \\
+\texttt{mrca} & boolean & vector & 1 & \texttt{FALSE} & \texttt{FALSE} & \texttt{FALSE} & Either origin time counts from the initial point (one lineage, \texttt{FALSE}) or from the first split (two lineages, \texttt{TRUE}) \\
+\texttt{complete} & boolean & vector & 1 & \texttt{TRUE} & \texttt{TRUE} & \texttt{TRUE} & Either a tree preserving extinct lineages (if \texttt{TRUE}) or droping such extinct lineages (if \texttt{FALSE}) \\
+\texttt{stochsampling} & boolean & vector & 1 & \texttt{FALSE} & \texttt{FALSE} & \texttt{FALSE} & If \texttt{TRUE}, each tip is included into the final tree with probability defined by the argument \texttt{frac}. Otherwise every lineage is guaranteed to reach the present because the phylogeny is defined as complete if \texttt{frac = 1.0} \\
+\texttt{hyb.rate.fxn} & closure & function & 1 & \texttt{NULL} & \texttt{NULL} & \texttt{NULL} & Uses a function that draws from density-type functions, e.g., \texttt{make.exp.decay} \\
+\texttt{trait.model} & multiple & list & 5 & \texttt{NULL} & \texttt{NULL} & \texttt{NULL} & The same structure as \texttt{make.polyploid.model}
+\end{longtable}
+\end{landscape}
+\end{small}
+
+\bibliography{/home/balleng/Dropbox/Gustavo/Bibtex/PhDThesis.bib}
+
+\end{document}
