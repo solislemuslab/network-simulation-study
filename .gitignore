@@ -1,5 +1,7 @@
 test_netsim/test_netsim_cache/*
 test_netsim/test_netsim_files/*
+binary_property/binary-property_cache/*
+binary_property/binary-property_files/*
 
 # Compiled source #
 ###################
