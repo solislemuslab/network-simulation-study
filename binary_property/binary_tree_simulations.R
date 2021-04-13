@@ -39,7 +39,7 @@ for (i in mrca) {
                                        lambda = 1,
                                        mu = 0,
                                        frac = 1,
-                                       mrca = FALSE,
+                                       mrca = i,
                                        complete = TRUE,
                                        K = 0)))
         simNames[nIter] <- paste("TS", i, j, sep = "_")
