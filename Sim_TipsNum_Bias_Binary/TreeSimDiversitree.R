@@ -24,23 +24,3 @@ for(i in 1:100){
 
 #Ploting
 hist(BiasYuleNumTaxa)
-
-
-
-
-yuleTS <- trees(c(1), "yule", max.taxa = 25,n=100)
-ltt(yuleTS[[1]],show.tree=TRUE)
-
-
-
-
-yuleTS1 <- sim.bd.age(age = 4, numbsim=20, lambda = 1, mu = 0, frac = 1, mrca = TRUE,complete = TRUE, K = 0)
-
-ltt(yuleTS1[[5]],show.tree=TRUE)
-
-
-
-
-
-
-
