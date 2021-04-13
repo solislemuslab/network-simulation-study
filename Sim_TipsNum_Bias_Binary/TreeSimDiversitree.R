@@ -23,4 +23,8 @@ for(i in 1:100){
 }
 
 #Ploting
-hist(BiasYuleNumTaxa)
+hist(BiasYuleNumTaxa,
+     xlab=expression(paste(lambda, " bias")),
+     main="Yule_TreeSim (100 numbsim repeated 100 times)\n( numTaxa=25, lambda=1)")
+abline(v=0,col="white",lwd=2)
+abline(v=0,lty=3,col="red")
