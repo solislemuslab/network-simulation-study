@@ -3,6 +3,7 @@ test_netsim/test_netsim_files/*
 binary_property/binary-property_cache/*
 binary_property/binary-property_files/*
 Sim_TipsNum_Bias_Binary/bias_initval_estimator_magnitude_cache/*
+
 # Compiled source #
 ###################
 *.com
@@ -83,6 +84,7 @@ Backup[ ]of[ ]*.numbers/
 *.Rhistory
 *.err
 *.RData
+*.Rdata
 *.Rda
 *.rds
 *.jld
