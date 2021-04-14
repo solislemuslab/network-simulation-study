@@ -30,9 +30,9 @@ for(i in 1:100){
     # fit a Yule model with diversitree
     yuleTSFits <- lapply(X = yuleTS, FUN = function(x) diversitree::make.yule(tree = x,sampling.f = 1))
     # fetch the coefficients estimates on the previous lik funs
-    yuleTSMLEcoefs <- lapply(X = yuleTSFits, FUN = function(x) coef(diversitree::find.mle(func = x,x.init = 0.5)))
+    yuleTSMLEcoefs <- lapply(X = yuleTSFits, FUN = function(x) coef(diversitree::find.mle(func = x,x.init = 0.1)))
     #Lambda Bias
-    biasYule<-1-mean(unlist(yuleTSMLEcoefs))#Bias
+    biasYule<-1-median(unlist(yuleTSMLEcoefs))#Bias
     BiasLamTree4<-c(BiasLamTree4,biasYule)
 }
 
