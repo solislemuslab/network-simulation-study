@@ -42,3 +42,15 @@ For now, we focus only on:
 - Read other papers that have done simulations to test networks
 - Check existing scripts to see if we can start creating our own simulating scripts for this project
 - Think which comparisons we want to make
+
+# Simulation checks of TreeSim and NetSim
+
+- `binary_tree_visualizations.R` and later `binary-property.Rmd` (by Gustavo):
+    - all the experiments in TreeSim seem to be throwing out binary trees; both mrca = T or F produce binary trees in TreeSim::sim.bd.age
+    - simulations in NetSim seem to be producing binary trees whenever the argument mrca = TRUE, otherwise the trees are non-binary
+- `bias_initval_estimator_magnitude.Rmd`
+    - init value does not matter, mean vs. media differs a bit in a predictable way (dist of mean appears to be a bit asymmetric), the magnitude of bias is always at most 0.07, and whether bias is calculated as 1 - mean(lambdas) or mean(1 - lambdas) is equivalent as expected by algebraic manipulation and also verified with code
+    - how large is a bias of -0.01 to 0.06? that's about 10% of the true value (1.0), so is bias a real concern in this case?
+- `bias_fixedtaxa_initval_estimator_magnitude.Rmd`
+    - bias might be a function of the tree size as determined by the age parameter, the smaller the age, more variance in Ntips but also the smaller the trees when compared with simulations with larger age
+    - bias does not affect simulations with fixed taxa = 50
