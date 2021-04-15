@@ -1,8 +1,6 @@
-test_netsim/test_netsim_cache/*
-test_netsim/test_netsim_files/*
-binary_property/binary-property_cache/*
-binary_property/binary-property_files/*
-Sim_TipsNum_Bias_Binary/bias_initval_estimator_magnitude_cache/*
+# don't track cache nor intermediate directories from Rmd compilation
+*_cache/
+*_files/
 
 # Compiled source #
 ###################
