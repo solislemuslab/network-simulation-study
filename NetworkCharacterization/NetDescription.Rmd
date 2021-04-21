@@ -1,1 +1,279 @@
+---
+title: "Networks characterization from Birth Dead method with NetSim"
+author: 
+    - Carlos
+output: 
+  bookdown::pdf_document2:
+  fig_caption: yes
+  number_sections: true
+urlcolor: blue
+toc: true
+fig_caption: yes
 
+header-includes:
+- \usepackage{float}
+---
+
+```{r setup, echo = FALSE}
+#library(kableExtra)
+#library("bookdown")
+library(knitr)
+knit_hooks$set(small.mar = function(before, options, envir) {
+    if (before)    par(mar=c(5,4,1,1)+.1)  # smaller margin on top and right
+})
+knitr::opts_chunk$set(tidy = TRUE, small.mar = TRUE, comment = "")
+```
+
+# Packages
+
+```{r,echo=TRUE,results='hide',message=FALSE}
+library(NetSim) # simulate bd time-tree networks: https://github.com/jjustison/NetSim
+library(TreeSim) # simulate bd time-trees
+library(ape) # tools for handling phylo objects
+library(diversitree) # tools for estimating lambda and mu
+library(phytools)
+library("dplyr")    # Data manipulation
+library(ggplot2)
+library(corrplot)
+library(cluster)
+```
+
+# Using NetSim:
+
+Simulation of 300 Trees with the following parameters using NetSim:
+
+* lambda = 0.9
+* mu = 0.5
+* nu = 0.03
+* hybprops = c(0.5, 0.5, 0.5)
+
+```{r chunk, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10)}
+set.seed(500)
+numbsim=300
+bdNS <- NetSim::sim.bdh.taxa.ssa(n=10, 
+                                 numbsim = numbsim, 
+                                 lambda = 0.9, 
+                                 mu = 0.5, 
+                                 nu = 0.03,
+                                 hybprops = c(0.5, 0.5, 0.5), 
+                                 hyb.inher.fxn = NetSim::make.beta.draw(1, 1), 
+                                 frac = 1,
+                                 mrca = FALSE, 
+                                 complete = TRUE, 
+                                 stochsampling = FALSE, 
+                                 hyb.rate.fxn = NULL, 
+                                 trait.model = NULL)
+```
+
+As we can see in  figure \@ref(fig:chunk1), 59% of the trees are extinct, 19.67% are not reticulation and only 21.33% are reticulated tree.
+
+```{r chunk1, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10),fig.cap = "\\label{fig:chunk1} Percentage of tree types using NetSim with parameters lambda = 0.9, mu = 0.5 and nu = 0.03,",echo=FALSE}
+#Code to plot 
+Summ<-summary(bdNS)[,1]
+datSum<-data.frame(Var=Summ,Freq=1)
+datSum2<-aggregate(Freq~Var,FUN="sum",data=datSum)
+datSum2[,1]<-as.character(datSum2[,1])
+datSum2[datSum2[,1]==1,1]<-"Extint Tree"
+datSum2[datSum2[,1]==6,1]<-"Not Reticulation Tree"
+datSum2[datSum2[,1]==7,1]<-"Reticulation Tree"
+datSum2$Prop<-datSum2[,2]/sum(datSum2[,2])
+
+#codes to make a nice pie with ggplot2
+colnames(datSum2)<-c("class","n","prop")
+count.data<-datSum2
+
+# Add label position
+count.data <- count.data %>%
+    arrange(desc(class)) %>%
+    mutate(lab.ypos = cumsum(prop) - 0.5*prop)
+count.data$Por<-round(count.data$prop*100,2)
+
+ggplot(data = count.data, 
+       aes(x = 2, y = prop, fill = class))+
+  geom_bar(stat = "identity")+
+  coord_polar("y", start = 200) +
+  geom_text(aes(y = lab.ypos, label = paste(Por,"%", sep = "")), col = "white") +
+  theme_void() +
+  scale_fill_brewer(palette = "Dark2")+
+  xlim(.2,2.5)
+
+```
+
+## Extraction of information from tree
+We use the tree 35 (see fig. \@ref(fig:chunk4)) with three reticulations to extract the tree information, and then extend of all the Trees. We extract and analice the following information:
+
+* Mean of edge length (meEdgeL)
+* cv of edge length (cvEdgeL)
+* Number of tips (TipNum)
+* Proportions of extintct taxa (PorExtin)
+* Number of internal nodes (NodeNum)
+* Time to reach 10 taxa (TimeTree)
+* Reticulation Number (RetNum)
+* Average time of birth of hybrids (TSHmean)
+* Minimum time of birth of hybrids (TSHmin)
+* Maximun time of birth of hybrids (TSHmax)
+
+If reticulation number is one, TSHmean, TSHmin and TSHmax are the same, if there are not reticulation the value is cero.
+
+```{r chunk3, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10),fig.cap = "\\label{fig:chunk4} Tree 35 which have three reticulations"}
+## remove any trees with no taxa
+bdNS <- bdNS[!sapply(X = bdNS, FUN = is.null)]
+
+#Information about tree goes extinct=0 and no extinct tips are sampled=1
+bdNS <- bdNS[sapply(X = bdNS, FUN = is.phylo)]#birth dead tree with NetSim with value 0 or 1
+Tree2<-bdNS[[35]]#15#10#96
+plot(Tree2)
+#Tree2
+```
+
+```{r chunk4.1, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10)}
+###Extracting general Information
+meEdgeL<-mean(Tree2$"edge.length")#mean of edge length
+sdEdgeL<-var(Tree2$"edge.length")
+cvEdgeL<-sdEdgeL/meEdgeL#cv of edge length
+TipNum<-length(Tree2$"tip.label")# Number of tips
+PorExtin<-(TipNum-10)/TipNum#Proportions of extintct taxa 
+NodeNum<-Tree2$Nnode#Number of internal Nodes# Maybe we can also divide it for TipNum
+
+LT2<-ltt(Tree2,plot=FALSE)
+Tim<-LT2$times
+TimeTree<-max(Tim)#Time to reach 10 taxa
+
+#extracting information about the Reticulations
+
+Ret<-Tree2$"reticulation"
+Ret1<-Ret
+RetNum<-nrow(Ret)# Reticulation Number
+
+if(RetNum>=1){
+for(i in 1:nrow(Ret1)){
+for(j in 1:ncol(Ret1)){
+Ret1[i,j]<-Tim[names(Tim)%in%Ret1[i,j]]
+}
+}
+
+TimeStartHibr<-apply(Ret1,1,max)/TimeTree#Time when birth the hibirds, we can divide it for the time to reach 10 taxa (TimeTree)
+TSHmean<-mean(TimeStartHibr)# Average time of birth of hybrids 
+TSHmin<-min(TimeStartHibr)# minimum time of birth of hybrids 
+TSHmax<-max(TimeStartHibr)# maximun time of birth of hybrids 
+}else{
+TSHmean<-0
+TSHmin<-0
+TSHmax<-0
+}
+
+#If reticulation number is one, TSHmean, TSHmin and TSHmax are the same, if there are not reticulation the value is cero.
+dat<-data.frame(TipNum,NodeNum,PorExtin,meEdgeL,cvEdgeL,TimeTree,RetNum,TSHmean,TSHmin,TSHmax)
+
+dat
+```
+
+
+## Extention of the analisys in all the trees
+We extended the analisys performed in section 2.1 on all trees
+
+```{r chunk4, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10)}
+out1<-c()
+for(k in 1:length(bdNS)){
+Tree2<-bdNS[[k]]
+###Extracting general Information
+meEdgeL<-mean(Tree2$"edge.length")#mean of edge length
+sdEdgeL<-var(Tree2$"edge.length")
+cvEdgeL<-sdEdgeL/meEdgeL#cv of edge length
+TipNum<-length(Tree2$"tip.label")# Number of tips
+PorExtin<-(TipNum-10)/TipNum#Proportions of extintct taxa 
+NodeNum<-Tree2$Nnode#Number of internal Nodes# Maybe we can also divide it for TipNum
+
+LT2<-ltt(Tree2,plot=FALSE)
+Tim<-LT2$times
+TimeTree<-max(Tim)#Time to reach 10 taxa
+
+#extracting information about the Reticulations
+
+Ret<-Tree2$"reticulation"
+Ret1<-Ret
+RetNum<-nrow(Ret)# Reticulation Number
+
+if(RetNum>=1){
+for(i in 1:nrow(Ret1)){
+for(j in 1:ncol(Ret1)){
+Ret1[i,j]<-Tim[names(Tim)%in%Ret1[i,j]]
+}
+}
+
+TimeStartHibr<-apply(Ret1,1,max)/TimeTree#Time when birth the hibirds, we can divide it for the time to reach 10 taxa (TimeTree)
+TSHmean<-mean(TimeStartHibr)# Average time of birth of hybrids 
+TSHmin<-min(TimeStartHibr)# minimum time of birth of hybrids 
+TSHmax<-max(TimeStartHibr)# maximun time of birth of hybrids 
+}else{
+TSHmean<-0
+TSHmin<-0
+TSHmax<-0
+}
+
+#If reticulation number is one, TSHmean, TSHmin and TSHmax are the same, if there are not reticulation the value is cero.
+dat<-data.frame(TipNum,NodeNum,PorExtin,meEdgeL,cvEdgeL,TimeTree,RetNum,TSHmean,TSHmin,TSHmax)
+
+out1<-rbind(out1,dat)
+}
+
+head(out1)
+```
+
+## Analisys per variable
+In this section we analice the Trees varaible per variable (see fig \@ref(fig:chunk5)), as you can see, only PorExtin, meEdgeL, cvEdgeL, and TimeTree have a distribution similar to the normal; NodeNum has aHalf-normal distribution.
+
+```{r chunk63, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10),fig.cap = "\\label{fig:chunk5} Univariate plot for all the information extracted"}
+par(mfrow=c(3,3))
+nam<-colnames(out1)
+for(i in c(2:6,8:10)){
+  hist(out1[,i],main=nam[i])
+}
+barplot(table(sort(out1$RetNum)),main="Reticulation Number")
+```
+
+## Multivariate Analisys
+In this part we perform a cor plot (see fig\@ref(fig:chunk64)), in which we can see that Reticulation number is positively correlated with NodeNum. Besides we make a cluster analisys whit euclidean distance and UPGMA grouped method(see fig \@ref(fig:chunk7)), which sugest two cluster numbers, so we can choose one to analyze with shaq. 
+
+```{r chunk73, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10),fig.cap = "\\label{fig:chunk64} Corelation plot",echo=FALSE}
+
+cor.mtest <- function(mat, ...) {
+mat <- as.matrix(mat)
+n <- ncol(mat)
+p.mat<- matrix(NA, n, n)
+diag(p.mat) <- 0
+for (i in 1:(n - 1)) {
+for (j in (i + 1):n) {
+tmp <- cor.test(mat[, i], mat[, j], ...)
+p.mat[i, j] <- p.mat[j, i] <- tmp$p.value
+}
+}
+colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
+p.mat
+}
+
+
+M<-cor(out1)
+p.mat <- cor.mtest(out1)
+col <- colorRampPalette(c("#BB4444", "#EE9988", "#FFFFFF", "#77AADD", "#4477AA"))
+corrplot(M, method="color", col=col(200),
+type="upper", order="hclust",
+addCoef.col = "black", # Add coefficient of correlation
+tl.col="black", tl.srt=45, #Text label color and rotation
+# Combine with significance
+p.mat = p.mat, sig.level = 0.01, insig = "blank",
+# hide correlation coefficient on the principal diagonal
+diag=FALSE
+)
+
+```
+
+
+
+
+```{r chunktr73, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10),fig.cap = "\\label{fig:chunk7} Cluster Analisys"}
+clust<-agnes(out1, metric = "euclidean",stand = TRUE,method="average")
+
+par(mfrow=c(1,2))
+plot(clust)
+```
