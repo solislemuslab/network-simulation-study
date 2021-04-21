@@ -1,0 +1,421 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+  \usepackage{amssymb}
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+title: ``Networks characterization from Birth Dead method with NetSim''
+author: - Carlos Acosta output: bookdown::pdf\_document2: fig\_caption:
+yes number\_sections: true urlcolor: blue toc: true fig\_caption: yes
+
+header-includes: -
+
+\usepackage{float}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{packages}{%
+\section{Packages}\label{packages}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(NetSim)  }\CommentTok{\# simulate bd time{-}tree networks: https://github.com/jjustison/NetSim}
+\FunctionTok{library}\NormalTok{(TreeSim)  }\CommentTok{\# simulate bd time{-}trees}
+\FunctionTok{library}\NormalTok{(ape)  }\CommentTok{\# tools for handling phylo objects}
+\FunctionTok{library}\NormalTok{(diversitree)  }\CommentTok{\# tools for estimating lambda and mu}
+\FunctionTok{library}\NormalTok{(phytools)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{)  }\CommentTok{\# Data manipulation}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(corrplot)}
+\FunctionTok{library}\NormalTok{(cluster)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{using-netsim}{%
+\section{Using NetSim:}\label{using-netsim}}
+
+Simulation of 300 Trees with the following parameters using NetSim:
+
+\begin{itemize}
+\tightlist
+\item
+  lambda = 0.9
+\item
+  mu = 0.5
+\item
+  nu = 0.03
+\item
+  hybprops = c(0.5, 0.5, 0.5)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{500}\NormalTok{)}
+\NormalTok{numbsim }\OtherTok{=} \DecValTok{300}
+\NormalTok{bdNS }\OtherTok{\textless{}{-}}\NormalTok{ NetSim}\SpecialCharTok{::}\FunctionTok{sim.bdh.taxa.ssa}\NormalTok{(}\AttributeTok{n =} \DecValTok{10}\NormalTok{, }\AttributeTok{numbsim =}\NormalTok{ numbsim, }\AttributeTok{lambda =} \FloatTok{0.9}\NormalTok{, }\AttributeTok{mu =} \FloatTok{0.5}\NormalTok{, }
+    \AttributeTok{nu =} \FloatTok{0.03}\NormalTok{, }\AttributeTok{hybprops =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{), }\AttributeTok{hyb.inher.fxn =}\NormalTok{ NetSim}\SpecialCharTok{::}\FunctionTok{make.beta.draw}\NormalTok{(}\DecValTok{1}\NormalTok{, }
+        \DecValTok{1}\NormalTok{), }\AttributeTok{frac =} \DecValTok{1}\NormalTok{, }\AttributeTok{mrca =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{complete =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{stochsampling =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{hyb.rate.fxn =} \ConstantTok{NULL}\NormalTok{, }
+    \AttributeTok{trait.model =} \ConstantTok{NULL}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+As we can see in figure @ref(fig:chunk1), 59\% of the trees are extinct,
+19.67\% are not reticulation and only 21.33\% are reticulated tree.
+
+\begin{figure}
+\centering
+\includegraphics{NetDescription_files/figure-latex/chunk1-1.pdf}
+\caption{(\#fig:chunk1)\label{fig:chunk1} Percentage of tree types using
+NetSim with parameters lambda = 0.9, mu = 0.5 and nu = 0.03,}
+\end{figure}
+
+\hypertarget{extraction-of-information-from-tree}{%
+\subsection{Extraction of information from
+tree}\label{extraction-of-information-from-tree}}
+
+We use the tree 35 (see fig.~@ref(fig:chunk4)) with three reticulations
+to extract the tree information, and then extend of all the Trees. We
+extract and analice the following information:
+
+\begin{itemize}
+\tightlist
+\item
+  Mean of edge length (meEdgeL)
+\item
+  cv of edge length (cvEdgeL)
+\item
+  Number of tips (TipNum)
+\item
+  Proportions of extintct taxa (PorExtin)
+\item
+  Number of internal nodes (NodeNum)
+\item
+  Time to reach 10 taxa (TimeTree)
+\item
+  Reticulation Number (RetNum)
+\item
+  Average time of birth of hybrids (TSHmean)
+\item
+  Minimum time of birth of hybrids (TSHmin)
+\item
+  Maximun time of birth of hybrids (TSHmax)
+\end{itemize}
+
+If reticulation number is one, TSHmean, TSHmin and TSHmax are the same,
+if there are not reticulation the value is cero.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# remove any trees with no taxa}
+\NormalTok{bdNS }\OtherTok{\textless{}{-}}\NormalTok{ bdNS[}\SpecialCharTok{!}\FunctionTok{sapply}\NormalTok{(}\AttributeTok{X =}\NormalTok{ bdNS, }\AttributeTok{FUN =}\NormalTok{ is.null)]}
+
+\CommentTok{\# Information about tree goes extinct=0 and no extinct tips are sampled=1}
+\NormalTok{bdNS }\OtherTok{\textless{}{-}}\NormalTok{ bdNS[}\FunctionTok{sapply}\NormalTok{(}\AttributeTok{X =}\NormalTok{ bdNS, }\AttributeTok{FUN =}\NormalTok{ is.phylo)]  }\CommentTok{\#birth dead tree with NetSim with value 0 or 1}
+\NormalTok{Tree2 }\OtherTok{\textless{}{-}}\NormalTok{ bdNS[[}\DecValTok{35}\NormalTok{]]  }\CommentTok{\#15\#10\#96}
+\FunctionTok{plot}\NormalTok{(Tree2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{NetDescription_files/figure-latex/chunk3-1.pdf}
+\caption{(\#fig:chunk3)\label{fig:chunk4} Tree 35 which have three
+reticulations}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Tree2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Extracting general Information}
+\NormalTok{meEdgeL }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Tree2}\SpecialCharTok{$}\NormalTok{edge.length)  }\CommentTok{\#mean of edge length}
+\NormalTok{sdEdgeL }\OtherTok{\textless{}{-}} \FunctionTok{var}\NormalTok{(Tree2}\SpecialCharTok{$}\NormalTok{edge.length)}
+\NormalTok{cvEdgeL }\OtherTok{\textless{}{-}}\NormalTok{ sdEdgeL}\SpecialCharTok{/}\NormalTok{meEdgeL  }\CommentTok{\#cv of edge length}
+\NormalTok{TipNum }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(Tree2}\SpecialCharTok{$}\NormalTok{tip.label)  }\CommentTok{\# Number of tips}
+\NormalTok{PorExtin }\OtherTok{\textless{}{-}}\NormalTok{ (TipNum }\SpecialCharTok{{-}} \DecValTok{10}\NormalTok{)}\SpecialCharTok{/}\NormalTok{TipNum  }\CommentTok{\#Proportions of extintct taxa }
+\NormalTok{NodeNum }\OtherTok{\textless{}{-}}\NormalTok{ Tree2}\SpecialCharTok{$}\NormalTok{Nnode  }\CommentTok{\#Number of internal Nodes\# Maybe we can also divide it for TipNum}
+
+\NormalTok{LT2 }\OtherTok{\textless{}{-}} \FunctionTok{ltt}\NormalTok{(Tree2, }\AttributeTok{plot =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{Tim }\OtherTok{\textless{}{-}}\NormalTok{ LT2}\SpecialCharTok{$}\NormalTok{times}
+\NormalTok{TimeTree }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(Tim)  }\CommentTok{\#Time to reach 10 taxa}
+
+\CommentTok{\# extracting information about the Reticulations}
+
+\NormalTok{Ret }\OtherTok{\textless{}{-}}\NormalTok{ Tree2}\SpecialCharTok{$}\NormalTok{reticulation}
+\NormalTok{Ret1 }\OtherTok{\textless{}{-}}\NormalTok{ Ret}
+\NormalTok{RetNum }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(Ret)  }\CommentTok{\# Reticulation Number}
+
+\ControlFlowTok{if}\NormalTok{ (RetNum }\SpecialCharTok{\textgreater{}=} \DecValTok{1}\NormalTok{) \{}
+    \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(Ret1)) \{}
+        \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(Ret1)) \{}
+\NormalTok{            Ret1[i, j] }\OtherTok{\textless{}{-}}\NormalTok{ Tim[}\FunctionTok{names}\NormalTok{(Tim) }\SpecialCharTok{\%in\%}\NormalTok{ Ret1[i, j]]}
+\NormalTok{        \}}
+\NormalTok{    \}}
+
+\NormalTok{    TimeStartHibr }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(Ret1, }\DecValTok{1}\NormalTok{, max)}\SpecialCharTok{/}\NormalTok{TimeTree  }\CommentTok{\#Time when birth the hibirds, we can divide it for the time to reach 10 taxa (TimeTree)}
+\NormalTok{    TSHmean }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(TimeStartHibr)  }\CommentTok{\# Average time of birth of hybrids }
+\NormalTok{    TSHmin }\OtherTok{\textless{}{-}} \FunctionTok{min}\NormalTok{(TimeStartHibr)  }\CommentTok{\# minimum time of birth of hybrids }
+\NormalTok{    TSHmax }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(TimeStartHibr)  }\CommentTok{\# maximun time of birth of hybrids }
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{    TSHmean }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{    TSHmin }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{    TSHmax }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{\}}
+
+\CommentTok{\# If reticulation number is one, TSHmean, TSHmin and TSHmax are the same, if}
+\CommentTok{\# there are not reticulation the value is cero.}
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(TipNum, NodeNum, PorExtin, meEdgeL, cvEdgeL, TimeTree, RetNum, }
+\NormalTok{    TSHmean, TSHmin, TSHmax)}
+
+\NormalTok{dat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  TipNum NodeNum  PorExtin   meEdgeL   cvEdgeL TimeTree RetNum   TSHmean
+1     14      20 0.2857143 0.3200865 0.4256297 1.995445      3 0.4342773
+     TSHmin    TSHmax
+1 0.2041249 0.6942674
+\end{verbatim}
+
+\hypertarget{extention-of-the-analisys-in-all-the-trees}{%
+\subsection{Extention of the analisys in all the
+trees}\label{extention-of-the-analisys-in-all-the-trees}}
+
+We extended the analisys performed in section 2.1 on all trees
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{out1 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(bdNS)) \{}
+\NormalTok{    Tree2 }\OtherTok{\textless{}{-}}\NormalTok{ bdNS[[k]]}
+    \DocumentationTok{\#\#\# Extracting general Information}
+\NormalTok{    meEdgeL }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Tree2}\SpecialCharTok{$}\NormalTok{edge.length)  }\CommentTok{\#mean of edge length}
+\NormalTok{    sdEdgeL }\OtherTok{\textless{}{-}} \FunctionTok{var}\NormalTok{(Tree2}\SpecialCharTok{$}\NormalTok{edge.length)}
+\NormalTok{    cvEdgeL }\OtherTok{\textless{}{-}}\NormalTok{ sdEdgeL}\SpecialCharTok{/}\NormalTok{meEdgeL  }\CommentTok{\#cv of edge length}
+\NormalTok{    TipNum }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(Tree2}\SpecialCharTok{$}\NormalTok{tip.label)  }\CommentTok{\# Number of tips}
+\NormalTok{    PorExtin }\OtherTok{\textless{}{-}}\NormalTok{ (TipNum }\SpecialCharTok{{-}} \DecValTok{10}\NormalTok{)}\SpecialCharTok{/}\NormalTok{TipNum  }\CommentTok{\#Proportions of extintct taxa }
+\NormalTok{    NodeNum }\OtherTok{\textless{}{-}}\NormalTok{ Tree2}\SpecialCharTok{$}\NormalTok{Nnode  }\CommentTok{\#Number of internal Nodes\# Maybe we can also divide it for TipNum}
+
+\NormalTok{    LT2 }\OtherTok{\textless{}{-}} \FunctionTok{ltt}\NormalTok{(Tree2, }\AttributeTok{plot =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{    Tim }\OtherTok{\textless{}{-}}\NormalTok{ LT2}\SpecialCharTok{$}\NormalTok{times}
+\NormalTok{    TimeTree }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(Tim)  }\CommentTok{\#Time to reach 10 taxa}
+
+    \CommentTok{\# extracting information about the Reticulations}
+
+\NormalTok{    Ret }\OtherTok{\textless{}{-}}\NormalTok{ Tree2}\SpecialCharTok{$}\NormalTok{reticulation}
+\NormalTok{    Ret1 }\OtherTok{\textless{}{-}}\NormalTok{ Ret}
+\NormalTok{    RetNum }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(Ret)  }\CommentTok{\# Reticulation Number}
+
+    \ControlFlowTok{if}\NormalTok{ (RetNum }\SpecialCharTok{\textgreater{}=} \DecValTok{1}\NormalTok{) \{}
+        \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(Ret1)) \{}
+            \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(Ret1)) \{}
+\NormalTok{                Ret1[i, j] }\OtherTok{\textless{}{-}}\NormalTok{ Tim[}\FunctionTok{names}\NormalTok{(Tim) }\SpecialCharTok{\%in\%}\NormalTok{ Ret1[i, j]]}
+\NormalTok{            \}}
+\NormalTok{        \}}
+
+\NormalTok{        TimeStartHibr }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(Ret1, }\DecValTok{1}\NormalTok{, max)}\SpecialCharTok{/}\NormalTok{TimeTree  }\CommentTok{\#Time when birth the hibirds, we can divide it for the time to reach 10 taxa (TimeTree)}
+\NormalTok{        TSHmean }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(TimeStartHibr)  }\CommentTok{\# Average time of birth of hybrids }
+\NormalTok{        TSHmin }\OtherTok{\textless{}{-}} \FunctionTok{min}\NormalTok{(TimeStartHibr)  }\CommentTok{\# minimum time of birth of hybrids }
+\NormalTok{        TSHmax }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(TimeStartHibr)  }\CommentTok{\# maximun time of birth of hybrids }
+\NormalTok{    \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{        TSHmean }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{        TSHmin }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{        TSHmax }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{    \}}
+
+    \CommentTok{\# If reticulation number is one, TSHmean, TSHmin and TSHmax are the same, if}
+    \CommentTok{\# there are not reticulation the value is cero.}
+\NormalTok{    dat }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(TipNum, NodeNum, PorExtin, meEdgeL, cvEdgeL, TimeTree, RetNum, }
+\NormalTok{        TSHmean, TSHmin, TSHmax)}
+
+\NormalTok{    out1 }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(out1, dat)}
+\NormalTok{\}}
+
+\FunctionTok{head}\NormalTok{(out1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  TipNum NodeNum  PorExtin   meEdgeL   cvEdgeL TimeTree RetNum   TSHmean
+1     15      15 0.3333333 0.5721684 0.9075774 3.317560      0 0.0000000
+2     15      15 0.3333333 0.4118879 0.4096011 4.512402      0 0.0000000
+3     14      14 0.2857143 0.8089697 0.8653747 6.793700      0 0.0000000
+4     17      19 0.4117647 0.5390303 0.3657181 4.535813      1 0.8948177
+5     19      25 0.4736842 0.4003979 0.2832645 4.542941      3 0.6990505
+6     19      21 0.4736842 0.4611741 0.4221071 4.373698      1 0.6676135
+     TSHmin    TSHmax
+1 0.0000000 0.0000000
+2 0.0000000 0.0000000
+3 0.0000000 0.0000000
+4 0.8948177 0.8948177
+5 0.4606192 0.8503653
+6 0.6676135 0.6676135
+\end{verbatim}
+
+\hypertarget{analisys-per-variable}{%
+\subsection{Analisys per variable}\label{analisys-per-variable}}
+
+In this section we analice the Trees varaible per variable (see fig
+@ref(fig:chunk5)), as you can see, only PorExtin, meEdgeL, cvEdgeL, and
+TimeTree have a distribution similar to the normal; NodeNum has
+aHalf-normal distribution.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{))}
+\NormalTok{nam }\OtherTok{\textless{}{-}} \FunctionTok{colnames}\NormalTok{(out1)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\SpecialCharTok{:}\DecValTok{6}\NormalTok{, }\DecValTok{8}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)) \{}
+    \FunctionTok{hist}\NormalTok{(out1[, i], }\AttributeTok{main =}\NormalTok{ nam[i])}
+\NormalTok{\}}
+\FunctionTok{barplot}\NormalTok{(}\FunctionTok{table}\NormalTok{(}\FunctionTok{sort}\NormalTok{(out1}\SpecialCharTok{$}\NormalTok{RetNum)), }\AttributeTok{main =} \StringTok{"Reticulation Number"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{NetDescription_files/figure-latex/chunk63-1.pdf}
+\caption{(\#fig:chunk63)\label{fig:chunk5} Univariate plot for all the
+information extracted}
+\end{figure}
+
+\hypertarget{multivariate-analisys}{%
+\subsection{Multivariate Analisys}\label{multivariate-analisys}}
+
+In this part we perform a cor plot (see fig@ref(fig:chunk64)), in which
+we can see that Reticulation number is positively correlated with
+NodeNum. Besides we make a cluster analisys whit euclidean distance and
+UPGMA grouped method(see fig @ref(fig:chunk7)), which sugest two cluster
+numbers, so we can choose one to analyze with shaq.
+
+\begin{figure}
+\centering
+\includegraphics{NetDescription_files/figure-latex/chunk73-1.pdf}
+\caption{(\#fig:chunk73)\label{fig:chunk64} Corelation plot}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clust }\OtherTok{\textless{}{-}} \FunctionTok{agnes}\NormalTok{(out1, }\AttributeTok{metric =} \StringTok{"euclidean"}\NormalTok{, }\AttributeTok{stand =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{method =} \StringTok{"average"}\NormalTok{)}
+
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(clust)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{NetDescription_files/figure-latex/chunktr73-1.pdf}
+\caption{(\#fig:chunktr73)\label{fig:chunk7} Cluster Analisys}
+\end{figure}
+
+\end{document}

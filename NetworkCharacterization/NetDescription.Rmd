@@ -1,7 +1,12 @@
 ---
+output:
+  pdf_document: default
+  html_document: default
+---
+  ---
 title: "Networks characterization from Birth Dead method with NetSim"
 author: 
-    - Carlos
+    - Carlos Acosta
 output: 
   bookdown::pdf_document2:
   fig_caption: yes
