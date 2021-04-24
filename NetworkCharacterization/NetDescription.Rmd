@@ -273,7 +273,6 @@ diag=FALSE
 
 ```{r chunktr73, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10),fig.cap = "\\label{fig:chunk7} Cluster Analisys"}
 clust<-agnes(out1, metric = "euclidean",stand = TRUE,method="average")
-
 par(mfrow=c(1,2))
 plot(clust)
 ```
