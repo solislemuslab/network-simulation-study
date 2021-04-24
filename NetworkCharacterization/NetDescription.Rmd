@@ -26,7 +26,7 @@ knitr::opts_chunk$set(tidy = TRUE, small.mar = TRUE, comment = "")
 
 # Packages
 
-```{r,echo=TRUE,results='hide',message=FALSE}
+```{r,echo=TRUE}
 library(NetSim) # simulate bd time-tree networks: https://github.com/jjustison/NetSim
 library(TreeSim) # simulate bd time-trees
 library(ape) # tools for handling phylo objects
@@ -67,7 +67,7 @@ bdNS <- NetSim::sim.bdh.taxa.ssa(n=10,
 
 As we can see in  figure \@ref(fig:chunk1), 59% of the trees are extinct, 19.67% are not reticulation and only 21.33% are reticulated tree.
 
-```{r chunk1, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10),fig.cap = "\\label{fig:chunk1} Percentage of tree types using NetSim with parameters lambda = 0.9, mu = 0.5 and nu = 0.03,",echo=FALSE}
+```{r chunk1, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10),fig.cap = "\\label{fig:chunk1} Percentage of tree types using NetSim with parameters lambda = 0.9, mu = 0.5 and nu = 0.03,"}
 #Code to plot 
 Summ<-summary(bdNS)[,1]
 datSum<-data.frame(Var=Summ,Freq=1)
@@ -235,7 +235,7 @@ barplot(table(sort(out1$RetNum)),main="Reticulation Number")
 ## Multivariate Analisys
 In this part we perform a cor plot (see fig\@ref(fig:chunk64)), in which we can see that Reticulation number is positively correlated with NodeNum. Besides we make a cluster analisys whit euclidean distance and UPGMA grouped method(see fig \@ref(fig:chunk7)), which sugest two cluster numbers, so we can choose one to analyze with shaq. 
 
-```{r chunk73, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10),fig.cap = "\\label{fig:chunk64} Corelation plot",echo=FALSE}
+```{r chunk73, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10),fig.cap = "\\label{fig:chunk64} Corelation plot",echo=TRUE}
 
 cor.mtest <- function(mat, ...) {
 mat <- as.matrix(mat)
