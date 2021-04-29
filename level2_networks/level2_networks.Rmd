@@ -1,0 +1,84 @@
+---
+title: "Constructing level-2 networks and using hybrid-Lambda"
+author: 
+    - Gustavo A. Ballen^[Museu de Zoologia da Universidade de São Paulo]
+output: 
+    pdf_document:
+        fig_caption: yes
+        number_sections: true
+urlcolor: blue
+toc: true
+---
+
+```{r setup, echo = FALSE}
+#library(kableExtra)
+library(knitr)
+knit_hooks$set(small.mar = function(before, options, envir) {
+    if (before)    par(mar=c(5,4,1,1)+.1)  # smaller margin on top and right
+})
+knitr::opts_chunk$set(tidy = TRUE, small.mar = TRUE, comment = "")
+```
+
+```{r}
+library(ape)
+```
+
+The goal of this document is to describe how to construct arbitrary level-2 networks, how to input them to hybrid-Lambda, and how to interpret the results of the latter.
+
+# Networks and the extended newick format
+
+Networks can be depicted in parenthetical format (a.k.a. Newick format) by the use of some notation for hybrid edges as described by [Cardona et al., 2008](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-9-532).
+
+Please note that the way we write the attachment for the hybrid edge matters: `...),#H1` creates a node for #H1 to attach, on the other hand, `...)#H1` attaches to the note before it:
+
+```{}
+(A,B)#H1 /* attaches #H1 to the node comprising A and B (with degree = 4)
+(A,B),#H1 /* creates a node below A+B and attaches #H1 to it (with degree = 3)
+```
+
+[icytree](https://icytree.org/) treats the latter as if the induced node was a tip just for visualization purposes (failing in the representation of this node, though). In the first case where no new node is induced it faithfully plots the hybrid edge onto the appropriate node. It is not a great tool for visualizing networks but allows to input text newick trees and thus can be seen as an alterlnative to programs such as figtree that require the user to input a file.
+
+# An arbitrary level-2 network
+
+A network of level 2 was prototyped in paper and then translated to extended newick using inspiration from `hybrid-Lambda`'s manual and Cardona et al. (2008). Hybrid edges between sister taxa were avoided due to the problem of identifiability (see [Solís-Lemus & Ané, 2016](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1005896)). A network can be said to be of level 2 if a given edge is shared between two hybrid-induced cycles.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{level2_net.pdf}
+\end{figure}
+
+```{}
+((("A":0.0,("B":0.0,#H2:0.0):0.0):0.0,((("C":0.0,"D":0.0):0.0,#H1:0.0):0.0,#H2:0.0):0.0):0.0,(("E":0.0,"F":0.0):0.0,#H1:0.0):0.0):0.0; // first input to hybridLambda, as exported by icytree
+
+(((A,(B,#H2)),(((C,D),#H1),#H2)),((E,F),#H1)) // second input to hybridLambda
+```
+
+# Using hybrid-Lambda
+
+The following command was used as a first try with a level-2 network:
+
+```{bash, eval = FALSE}
+$ hybrid-Lambda -spcu '(((A,(B,#H2)),(((C,D),#H1),#H2)),((E,F),#H1));' -num 3 -seed 2 -o level2_2
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+```
+
+The gene trees generated were the following:
+
+```{}
+// output of hybrid-Lambda in the file level2_coal_unit
+(((#H2_1:0.344585,E_1:0.344585):0.011670,(C_1:0.092661,A_1:0.092661):0.263594):0.220177,((#H1_1:0.181961,(B_1:0.104770,D_1:0.104770):0.077191):0.321229,F_1:0.503190):0.073242);
+(#H1_1:1.602540,((((#H2_1:0.031741,E_1:0.031741):0.353131,(B_1:0.022545,D_1:0.022545):0.362327):0.256100,A_1:0.640972):0.463427,(F_1:0.296289,C_1:0.296289):0.808110):0.498141);
+(((#H1_1:0.008364,A_1:0.008364):0.070623,(B_1:0.000777,F_1:0.000777):0.078209):0.475430,((D_1:0.004912,C_1:0.004912):0.425726,(E_1:0.288854,#H2_1:0.288854):0.141784):0.123778);
+
+```
+
+Plotting with icytree kind of failed when allowing the `_1` suffixes to terminals, once removed the tree is plotted but creating two weird unlabeled branches:
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{hybrid-Lambda_to_icytree.png}
+\end{figure}
