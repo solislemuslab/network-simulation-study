@@ -2,6 +2,9 @@
 *_cache/
 *_files/
 
+# other folder to ignore
+resources/*
+
 # Compiled source #
 ###################
 *.com
