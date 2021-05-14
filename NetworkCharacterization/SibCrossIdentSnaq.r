@@ -34,13 +34,37 @@ bdNS <- NetSim::sim.bdh.taxa.ssa(n=n1,
 bdNS <- bdNS[!sapply(X = bdNS, FUN = is.null)]
 #Information about tree goes extinct=0 and no extinct tips are sampled=1
 bdNS <- bdNS[sapply(X = bdNS, FUN = is.phylo)]#birth dead tree with NetSim with value 0 or 1
+ 
+
+#Squeme of a sibling Reticulation
+ 
+#			
+#				 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _[Tip or Node 4]     
+#				|
+#				|
+#				|
+#  Root_ _ _ _[Node#]    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _[Tip or Node 3]
+#				|		|
+#				|		|
+#				|_ _ _ _RootRet			   
+#						|        _ _ _ RetNode1_ _ _ _[Tip or Node 2]
+#						|       |         |
+#						|_ _ _father      |
+#								|_ _ _ RetNode2_ _ _ _[Tip or Node 1]
+#			
+
+#I evaluate if a RootRet produce a Tip or Node			
+## I considered that RootRet produce a "Node" if [Tip or Node 3] is a node, or [Node#] is a node.
+## On the other hands if [Node#] is a root and [Tip or Node 3] is a tip, I considered that RootRet produce a "Tip"
+
+#Then I evaluate if a RetNode1 and RetNode2 produce a Tip or Node
+
+#Finaly if number of tips >=2 the reticulation is not Recognosible otherwise is Recognosible.
 
 
 
-
-
-
-
+#We want to know if the reticulation node produce or no a tip
+#This function goes in the direction of the tips omiting reticulations nodes until it finds one no reticulation node
 DesJupRet<-function(ED,reff,father,allret){
 ti12<-reff
 Log=TRUE
@@ -51,7 +75,7 @@ Log<-ti12%in%allret
 return(ti12)
 }
 
-
+#This function 
 Tip<-function(ED,reff,father,allret){
 Log=TRUE
 i=0
