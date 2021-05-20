@@ -40,19 +40,19 @@ bdNS <- bdNS[sapply(X = bdNS, FUN = is.phylo)]#birth dead tree with NetSim with 
 #Squeme of evaluation if a sibling Reticulation is Recognosible
  
 #			
-#				 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _[Tip or Node 4]     
-#				|
-#				|
-#				|
-#  Root_ _ _ _[Node#]    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _[Tip or Node 3]
-#				|		|
-#               |       |
-#				|		|
-#				|_ _ _ _RootRet			   
-#						|        _ _ _ RetNode1_ _ _ _[Tip or Node 2]
-#						|       |         |
-#						|_ _ _father      |
-#								|_ _ _ RetNode2_ _ _ _[Tip or Node 1]
+#				           _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _[Tip or Node 4]     
+#				         |
+#				         |
+#				         |
+#  Root_ _ _ _[Node#]      _ _ _ _ _ _ _ _ _ _ _ _ _ _ _[Tip or Node 3]
+#			          	|		    |
+#                 |       |
+#				          |		    |
+#				          |_ _ _ _RootRet			   
+#						              |        _ _ _ RetNode1_ _ _ _[Tip or Node 2]
+#						              |       |         |
+#						              |_ _ _father      |
+#								                   |_ _ _ RetNode2_ _ _ _[Tip or Node 1]
 #			
 
 #I evaluate if a RootRet produce a Tip or Node			
