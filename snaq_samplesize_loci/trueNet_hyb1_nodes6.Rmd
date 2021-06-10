@@ -1,0 +1,113 @@
+---
+title: "Loci sample size limits for snaq"
+author: 
+    - Gustavo A. Ballen^[Museu de Zoologia da Universidade de São Paulo]
+output: 
+    pdf_document:
+        fig_caption: yes
+        number_sections: true
+        citation_package: natbib
+        latex_engine: xelatex
+urlcolor: blue
+toc: true
+biblio-style: apalike
+bibliography: /home/balleng/Dropbox/Gustavo/Bibtex/PhyloNetworks.bib
+header-includes: 
+- \usepackage{lscape}
+- \usepackage{longtable}
+---
+
+```{r setup, echo = FALSE}
+library(knitr)
+knit_hooks$set(small.mar = function(before, options, envir) {
+    if (before)    par(mar=c(5,4,1,1)+.1)  # smaller margin on top and right
+})
+knitr::opts_chunk$set(tidy = TRUE, small.mar = TRUE, comment = "")
+```
+
+```{r}
+# load R packages
+library(ape)
+```
+
+# Goal
+
+We want to understand the limits of snaq with respect to sample size in terms of loci. \citet{Solis-Lemus2017} used simulations for exploring how data-hungry is SNaQ and found that for moderate-sized networks (say 15 leaves) there were necessary hundreds (and maybe thousands) of loci from phylogenomic datasets. However, these sample size limits are not well understood and probably will depend on factors such as hybridization morphology (e.g., how many nodes are involved in the cycle, the more, the easier to detect), the nature of the inheritance probabilities (e.g., whether lambda on each hybrid vertex is equal 0.5, 0.5, or heterogeneous, and whether strongly heterogeneous settings affect sample size needed for detection), and network size as measured in terms of number of leaves.
+
+We are going to consider here level-1 networks with three levels of cycle complexity: 3, 4, and 6 nodes. Finally, we will consider three settings of lambda values: homogeneous hybridization (0.5, 0.5), moderately heterogeneous (0.75, 0.25), and drastically heterogeneous (0.05, 0.95).
+
+# Simulating loci on a network
+
+First create output directories for each of the analyses
+
+```{bash, eval = FALSE}
+mkdir net_h1_n6_ho
+mkdir hybridLambda_output
+mkdir bucky_output
+mkdir snaq_output
+```
+
+Use this arbitrary tree:
+
+```
+((((A,B),(C,D)),(E,(F,G))),H);
+```
+
+Construct a hybrid edge of six nodes. Pick two edges that will form a cycle with six nodes, and manually input the hybryd nodes. That generates the network below:
+
+```
+(((((A,B))#H,(C,D)),(E,(F,(G,#H)))),H);
+```
+
+or in hybridLambda format (including a $\gamma = 0.5$):
+
+```
+(((((A,B))H#0.5,(C,D)),(E,(F,(G,H#0.5)))),H);
+```
+
+Now use hybridLambda for simulating 3000 loci on a given tree, this time with one hybridization, six nodes in the cycle, and homogeneous gamma:
+
+```{bash}
+hybrid-Lambda -spcu '(((((A,B))H#0.5,(C,D)),(E,(F,(G,H#0.5)))),H);' -num 3000 -seed 1985 -o 'hybridLambda_output/net_h1_n6_ho'
+```
+
+Check results:
+
+```{bash}
+tree .
+```
+
+Now use the 3000 gene trees as input for SNaQ and use the theoretical tree as starting tree:
+
+```{julia, eval = FALSE}
+using PhyloNetworks
+using PhyloPlots
+
+trees = readMultiTopology("hybridLambda_output/net_h1_n6_ho_unic_coal")
+```
+
+The code above results in the following error:
+
+```{julia, eval = FALSE}
+...
+skipped phylogeny on line 2999 of file hybridLambda_output/net_h1_n6_ho_coal_unit:
+    Expected name after # but received 0 in left parenthesis 4. remaining:
+    .5_1:0.005955,B_1:0.005955):0.165189,(H_1:0.046404,F_1:0.046404):0.124739):0.227337,G_1:0.398480):1.289878,(E_1:0.713166,((C_1:0.018259,D_1:0.018259):0.024777,A_1:0.043036):0.670130):0.975192);.
+skipped phylogeny on line 3000 of file hybridLambda_output/net_h1_n6_ho_coal_unit:
+    Expected name after # but received 0 in left parenthesis 8. remaining:
+    .5_1:0.019839,B_1:0.019839):1.059972);.
+HybridNetwork[]
+
+julia> trees
+HybridNetwork[]
+
+julia> trees[1]
+ERROR: BoundsError: attempt to access 0-element Vector{HybridNetwork} at index [1]
+Stacktrace:
+ [1] getindex(A::Vector{HybridNetwork}, i1::Int64)
+   @ Base ./array.jl:801
+ [2] top-level scope
+   @ REPL[6]:1
+```
+
+Apparently the function `readMultiTopology` from PhyloNetworks did not like the gene tree format from hybridLambda.
