@@ -47,28 +47,28 @@ mkdir bucky_output
 mkdir snaq_output
 ```
 
-Use this arbitrary tree:
+Use the network provided by Claudia:
 
 ```
-((((A,B),(C,D)),(E,(F,G))),H);
+(15,(1,((14,(#H1,(((12,13),(11,#H3)),(7,((10)#H3,(8,9)))))),((((2,3))#H2,(#H2,(6,(5,4)))))#H1)));
 ```
 
-Construct a hybrid edge of six nodes. Pick two edges that will form a cycle with six nodes, and manually input the hybryd nodes. That generates the network below:
+Construct a hybrid edge of six nodes. Pick two edges that will form a cycle with six nodes, and manually remove the remaining hybrid nodes. That generates the network below:
 
 ```
-(((((A,B))#H,(C,D)),(E,(F,(G,#H)))),H);
+(15,(1,((14,(((12,13),(11,#H3)),(7,((10)#H3,(8,9))))),(((2,3),(6,(5,4)))))));
 ```
 
 or in hybridLambda format (including a $\gamma = 0.5$):
 
 ```
-(((((A,B))H#0.5,(C,D)),(E,(F,(G,H#0.5)))),H);
+(15,(1,((14,(((12,13),(11,H3#0.5)),(7,((10)H3#0.5,(8,9))))),(((2,3),(6,(5,4)))))));
 ```
 
 Now use hybridLambda for simulating 3000 loci on a given tree, this time with one hybridization, six nodes in the cycle, and homogeneous gamma:
 
 ```{bash}
-hybrid-Lambda -spcu '(((((A,B))H#0.5,(C,D)),(E,(F,(G,H#0.5)))),H);' -num 3000 -seed 1985 -o 'hybridLambda_output/net_h1_n6_ho'
+hybrid-Lambda -spcu '(15,(1,((14,(((12,13),(11,H3#0.5)),(7,((10)H3#0.5,(8,9))))),(((2,3),(6,(5,4)))))));' -num 3000 -seed 1985 -o 'hybridLambda_output/net_h1_n6_ho'
 ```
 
 Check results:
@@ -102,7 +102,7 @@ using CSV
 trees = readMultiTopology("hybridLambda_output/net_h1_n6_ho_coal_unit")
 # terminals must be renamed in order to match gene-tree names from hybridLambda
 # also, an arbitrary position for the hybrid-induced terminal was chosen to be sister to G
-start_tree = readTopology("((((A_1,B_1),(C_1,D_1)),(E_1,(F_1,(G_1,Hhyb0.5_1)))),H_1);")
+start_tree = readTopology("(15_1,(1_1,((14_1,(((12_1,13_1),(11_1,H3hyb0.5_1)),(7_1,(10_1,(8_1,9_1))))),(((2_1,3_1),(6_1,(5_1,4_1)))))));")
 
 # calculate CFs
 q,t = countquartetsintrees(trees)
@@ -111,36 +111,13 @@ cfs = readTableCF(df)
 
 # calculate a h=0 network
 net0 = snaq!(start_tree, cfs, hmax=0, filename="h1_n6_ho_net0", seed=1234)
+
+exit()
 ```
 
-A transcript of the output is:
+The analysis is ready to run:
 
-```{bash, eval = FALSE}
-julia h1_n6_ho_net0.jl 2>&1 h1_n6_h0_net0.outerr 
-Reading in trees, looking at 126 quartets in each...
-0+--------------------------------------------------+100%
-  **************************************************
-3000.0 gene trees per 4-taxon set
-optimization of topology, BL and inheritance probabilities using:
- hmax = 0,
- tolerance parameters: ftolRel=1.0e-6, ftolAbs=1.0e-6,
-                       xtolAbs=0.001, xtolRel=0.01.
- max number of failed proposals = 75, liktolAbs = 1.0e-6.
-rootname for files: h1_n6_ho_net0
-BEGIN: 10 runs on starting tree (A_1,B_1,((C_1,D_1):0.0,((E_1,(F_1,(G_1,Hhyb0.5_1):0.002503130218118477):0.0):0.008578355774871729,H_1):0.0):0.011313759900273404);
-       using 5 processors
-2021-06-11 0:14:21.516
-      From worker 3:	seed: 1234 for run 1, 2021-06-11 0:14:37.401
-      From worker 5:	seed: 76679 for run 3, 2021-06-11 0:14:37.455
-      From worker 4:	seed: 59084 for run 2, 2021-06-11 0:14:37.532
-      From worker 2:	seed: 56623 for run 4, 2021-06-11 0:14:37.627
-      From worker 3:	seed: 46008 for run 5, 2021-06-11 0:17:25.128
-      From worker 5:	seed: 79402 for run 6, 2021-06-11 0:17:43.451
-      From worker 2:	seed: 85414 for run 7, 2021-06-11 0:17:49.578
-      From worker 4:	seed: 20058 for run 8, 2021-06-11 0:18:41.878
-      From worker 2:	seed: 29861 for run 9, 2021-06-11 0:19:51.07
-      From worker 3:	seed: 24683 for run 10, 2021-06-11 0:20:3.762
-
-MaxNet is (((((B_1,E_1):0.0028841945508996914,Hhyb0.5_1):0.0035572252369179057,F_1):0.005254479335434281,(C_1,G_1):0.007742950671429925):0.0011738626208142714,(H_1,A_1):0.014900497457803537,D_1); 
-with -loglik 2.3670289296421987
+```{bash}
+julia h1_n6_ho_net0.jl 
 ```
+
