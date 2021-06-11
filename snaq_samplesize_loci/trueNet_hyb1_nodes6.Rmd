@@ -77,37 +77,70 @@ Check results:
 tree .
 ```
 
+Apparently the function `readMultiTopology` from PhyloNetworks do not like the gene tree format from hybridLambda. The reason is that hybridLambda is converting a given hybrid edge into a tip called e.g., H#0.5_1. The message `Expected name after # but received 0 in left parenthesis 4...` suggests that `#` is being interpreted as a special character for defining a hybrid node in extnewick. Thus, `sed`ing it into a string (say `hyb`) for reference should suffice:
+
+```{bash}
+# backup the original results
+cp hybridLambda_output/net_h1_n6_ho_coal_unit hybridLambda_output/net_h1_n6_ho_coal_unit.bak
+
+# replace the numeral with the string 'hyb'
+sed -i 's/#/hyb/g' hybridLambda_output/net_h1_n6_ho_coal_unit
+```
+
 Now use the 3000 gene trees as input for SNaQ and use the theoretical tree as starting tree:
 
 ```{julia, eval = FALSE}
-using PhyloNetworks
+### h1_n6_ho_net0.jl
+using Distributed
+addprocs(4)
+@everywhere using PhyloNetworks
+
 using PhyloPlots
+using CSV
 
-trees = readMultiTopology("hybridLambda_output/net_h1_n6_ho_unic_coal")
+# load input trees
+trees = readMultiTopology("hybridLambda_output/net_h1_n6_ho_coal_unit")
+# terminals must be renamed in order to match gene-tree names from hybridLambda
+# also, an arbitrary position for the hybrid-induced terminal was chosen to be sister to G
+start_tree = readTopology("((((A_1,B_1),(C_1,D_1)),(E_1,(F_1,(G_1,Hhyb0.5_1)))),H_1);")
+
+# calculate CFs
+q,t = countquartetsintrees(trees)
+df = writeTableCF(q,t)
+cfs = readTableCF(df)
+
+# calculate a h=0 network
+net0 = snaq!(start_tree, cfs, hmax=0, filename="h1_n6_ho_net0", seed=1234)
 ```
 
-The code above results in the following error:
+A transcript of the output is:
 
-```{julia, eval = FALSE}
-...
-skipped phylogeny on line 2999 of file hybridLambda_output/net_h1_n6_ho_coal_unit:
-    Expected name after # but received 0 in left parenthesis 4. remaining:
-    .5_1:0.005955,B_1:0.005955):0.165189,(H_1:0.046404,F_1:0.046404):0.124739):0.227337,G_1:0.398480):1.289878,(E_1:0.713166,((C_1:0.018259,D_1:0.018259):0.024777,A_1:0.043036):0.670130):0.975192);.
-skipped phylogeny on line 3000 of file hybridLambda_output/net_h1_n6_ho_coal_unit:
-    Expected name after # but received 0 in left parenthesis 8. remaining:
-    .5_1:0.019839,B_1:0.019839):1.059972);.
-HybridNetwork[]
+```{bash, eval = FALSE}
+julia h1_n6_ho_net0.jl 2>&1 h1_n6_h0_net0.outerr 
+Reading in trees, looking at 126 quartets in each...
+0+--------------------------------------------------+100%
+  **************************************************
+3000.0 gene trees per 4-taxon set
+optimization of topology, BL and inheritance probabilities using:
+ hmax = 0,
+ tolerance parameters: ftolRel=1.0e-6, ftolAbs=1.0e-6,
+                       xtolAbs=0.001, xtolRel=0.01.
+ max number of failed proposals = 75, liktolAbs = 1.0e-6.
+rootname for files: h1_n6_ho_net0
+BEGIN: 10 runs on starting tree (A_1,B_1,((C_1,D_1):0.0,((E_1,(F_1,(G_1,Hhyb0.5_1):0.002503130218118477):0.0):0.008578355774871729,H_1):0.0):0.011313759900273404);
+       using 5 processors
+2021-06-11 0:14:21.516
+      From worker 3:	seed: 1234 for run 1, 2021-06-11 0:14:37.401
+      From worker 5:	seed: 76679 for run 3, 2021-06-11 0:14:37.455
+      From worker 4:	seed: 59084 for run 2, 2021-06-11 0:14:37.532
+      From worker 2:	seed: 56623 for run 4, 2021-06-11 0:14:37.627
+      From worker 3:	seed: 46008 for run 5, 2021-06-11 0:17:25.128
+      From worker 5:	seed: 79402 for run 6, 2021-06-11 0:17:43.451
+      From worker 2:	seed: 85414 for run 7, 2021-06-11 0:17:49.578
+      From worker 4:	seed: 20058 for run 8, 2021-06-11 0:18:41.878
+      From worker 2:	seed: 29861 for run 9, 2021-06-11 0:19:51.07
+      From worker 3:	seed: 24683 for run 10, 2021-06-11 0:20:3.762
 
-julia> trees
-HybridNetwork[]
-
-julia> trees[1]
-ERROR: BoundsError: attempt to access 0-element Vector{HybridNetwork} at index [1]
-Stacktrace:
- [1] getindex(A::Vector{HybridNetwork}, i1::Int64)
-   @ Base ./array.jl:801
- [2] top-level scope
-   @ REPL[6]:1
+MaxNet is (((((B_1,E_1):0.0028841945508996914,Hhyb0.5_1):0.0035572252369179057,F_1):0.005254479335434281,(C_1,G_1):0.007742950671429925):0.0011738626208142714,(H_1,A_1):0.014900497457803537,D_1); 
+with -loglik 2.3670289296421987
 ```
-
-Apparently the function `readMultiTopology` from PhyloNetworks did not like the gene tree format from hybridLambda.
