@@ -15,7 +15,7 @@ library(ape) # tools for handling phylo objects
 
 
 set.seed(200)
-numbsim=400
+numbsim=400#1000
 n1<-6
 bdNS <- NetSim::sim.bdh.taxa.ssa(n=n1, 
                                  numbsim = numbsim, 
@@ -34,7 +34,7 @@ bdNS <- NetSim::sim.bdh.taxa.ssa(n=n1,
 bdNS <- bdNS[!sapply(X = bdNS, FUN = is.null)]
 #Information about tree goes extinct=0 and no extinct tips are sampled=1
 bdNS <- bdNS[sapply(X = bdNS, FUN = is.phylo)]#birth dead tree with NetSim with value 0 or 1
- 
+ #
 
 
 #Squeme of evaluation if a sibling Reticulation is Recognosible
@@ -114,7 +114,7 @@ reff<-AssJupRet(ED=ED,reff=reff,allret=allret)
 Log<-!(i==2|is.na(reff))
 i=i+1
 }
-if(i==2){res<-"Root"}else if(i==3){res<-"NoRoot"}#else if (i<=1){res<-"No-Identificable"}
+if(i==2){res<-"Root"}else if(i==3){res<-"NoRoot"}else if (i<=1){res<-"No-Identificable"}
 return(res)
 }
 
@@ -122,14 +122,14 @@ return(res)
 Identiff<-function(Tree2,Hib1,Hib2,ED,father,RootTest,allret){
 Tiprev<-Tip(ED,reff=RootTest,father=father,allret=allret)
 Roo<-AssRoot(ED,reff=RootTest,allret=allret)
-#if(any(Roo%in%c("No-Identificable",NA,NULL))){resAll<-"No-Identificable"}else{
+if(any(Roo%in%c("No-Identificable",NA,NULL))){resAll<-"No-Identificable"}else{
 
 NodTip1<-Tiprev=="NoTip"|Roo=="NoRoot"
 NodTip2<-Tip(ED,reff=Hib1,father=father,allret=allret)=="NoTip"
 NodTip3<-Tip(ED,reff=Hib2,father=father,allret=allret)=="NoTip"
-#res1<-sum(c(NodTip1,NodTip2,NodTip3),na.rm = TRUE)#using (+) whit NA or NULL error will be apear, but if we use sum(,na.rm = TRUE), we omith that.7
-res1<-NodTip1+NodTip2+NodTip3
-if(res1>=2){resAll<-"Identificable"}else {resAll<-"No-Identificable"} #}
+res1<-sum(c(NodTip1,NodTip2,NodTip3),na.rm = TRUE)#using (+) whit NA or NULL error will be apear, but if we use sum(,na.rm = TRUE), we omith that.7
+#res1<-NodTip1+NodTip2+NodTip3
+if(res1>=2){resAll<-"Identificable"}else {resAll<-"No-Identificable"} }
 return(resAll)
 }
 
@@ -150,16 +150,22 @@ RetEv1<-RetEv[h,]
 Hib1<-RetEv1[2]#Hibrid
 Hib2<-RetEv1[1]#Father
 ED<-Tree2$edge
+
+Or1whitoutRet<-AssJupRet(ED,Hib1,allret)#Find the father omiting the reticulations
+Or2whitoutRet<-AssJupRet(ED,Hib2,allret)#Find the father omiting the reticulations
+
 Orig1<-ED[ED[,2]==Hib1,1]#Hibrid
-Orig2<-ED[ED[,2]==Hib2,1]	#Father 
+Orig2<-ED[ED[,2]==Hib2,1]#Father
+ 
 res<-Orig1==Orig2
-if(res){
+
+if(Or1whitoutRet==Or2whitoutRet&Orig1==Orig2){
 father<-Orig1
-RootTest<-ED[ED[,2]==Orig1,1]
+RootTest<-AssJupRet(ED,Orig1,allret)#Go direction to the root avoiding the reticulation nodes.
 
 Ident<-Identiff(Tree2,Hib1=Hib1,Hib2=Hib2,ED,father,RootTest,allret=allret)
 SiblingCross<-Ident
-}else{SiblingCross<-"NoSibCross"}
+}else if(Or1whitoutRet==Or2whitoutRet&Orig1!=Orig2){SiblingCross<-"not level-1"}else if(Or1whitoutRet!=Or2whitoutRet&Orig1!=Orig2){SiblingCross<-"Identificable"}#"NoSibCross"
 
 outRet<-c(outRet,SiblingCross)
 }
@@ -169,12 +175,23 @@ res<-list(infor=outRet,ret=RetEv)
 return(res)
 }
 
+##########################3333333333333333333333
+
+
+
+
+
+
+
+
+
+
 
 #Tree2<-bdNS[[13]]
 #SibCross(Tree2)
 
 
-#No Identificable for snaq
+#Identificable for snaq
 out<-c()
 for(i in 1:length(bdNS)){
 res<-SibCross(bdNS[[i]])$infor
@@ -183,22 +200,37 @@ out<-c(out,res2)
 }
 
 
+###
+
 posNotIdent1<-which(out);posNotIdent1
-TreeAnalize1<-bdNS[[posNotIdent1[4]]]
+for(i in 1:length(posNotIdent1)){
+Sys.sleep(time=2)
+TreeAnalize1<-bdNS[[posNotIdent1[i]]]
 
 sibcro1<-SibCross(TreeAnalize1)
+nod1<-sibcro1$ret[sibcro1$infor=="Identificable",]
+plot(TreeAnalize1,main=posNotIdent1[i])
+nodelabels(node=nod1)
+}
+#plot(plottable.net(TreeAnalize1))
+#nodelabels(node=nod1)
+
+TreeAnalize1<-bdNS[[64]]#160, 235
+
+sibcro1<-SibCross(TreeAnalize1);sibcro1
 nod1<-sibcro1$ret[sibcro1$infor=="Identificable",]
 plot(TreeAnalize1)
 nodelabels(node=nod1)
 
-#plot(plottable.net(TreeAnalize1))
-#nodelabels(node=nod1)
 
 
 
 
 
-#Identificable for snaq
+
+
+
+#No Identificable for snaq
 out2<-c()
 for(i in 1:length(bdNS)){
 res<-SibCross(bdNS[[i]])$infor
@@ -207,18 +239,34 @@ out2<-c(out2,res2)
 }
 posNotIdent<-which(out2);posNotIdent
 
-TreeAnalize<-bdNS[[posNotIdent[2]]]
-
+TreeAnalize<-bdNS[[posNotIdent[5]]]#4
 sibcro<-SibCross(TreeAnalize)
 nod<-sibcro$ret[sibcro$infor=="No-Identificable",]
 plot(TreeAnalize)
 nodelabels(node=nod)
 
 
+for(i in 1:length(posNotIdent)){
+Sys.sleep(time=2)
+TreeAnalize<-bdNS[[posNotIdent[i]]]#4
+sibcro<-SibCross(TreeAnalize)
+nod<-sibcro$ret[sibcro$infor=="No-Identificable",]
+plot(TreeAnalize,main=posNotIdent[i])
+nodelabels(node=nod)
+}
+
+
 #plot(plottable.net(TreeAnalize))
 #nodelabels(node=nod)
+#tiplabels()
+#edgelabels()
+
+SibCross(plottable.net(TreeAnalize))
 
 
+TreeAnalize1<-bdNS[[1]]#160, 235
+sibcro1<-SibCross(TreeAnalize1);sibcro1
 
-
-
+nod1<-sibcro1$ret[sibcro1$infor=="Identificable",]
+plot(TreeAnalize1)
+nodelabels()

@@ -1,0 +1,591 @@
+---
+title: "Networks characterization from Birth Dead method with NetSim"
+author: 
+    - Carlos Acosta
+output: 
+  bookdown::pdf_document2:
+  fig_caption: yes
+  number_sections: true
+urlcolor: blue
+toc: true
+fig_caption: yes
+
+header-includes:
+- \usepackage{float}
+---
+
+```{r setup, echo = FALSE}
+#library(kableExtra)
+#library("bookdown")
+library(knitr)
+knit_hooks$set(small.mar = function(before, options, envir) {
+    if (before)    par(mar=c(5,4,1,1)+.1)  # smaller margin on top and right
+})
+knitr::opts_chunk$set(tidy = TRUE, small.mar = TRUE, comment = "")
+```
+
+# Packages
+
+```{r,echo=TRUE}
+library(NetSim) # simulate bd time-tree networks: https://github.com/jjustison/NetSim
+library(TreeSim) # simulate bd time-trees
+library(ape) # tools for handling phylo objects
+library(diversitree) # tools for estimating lambda and mu
+library(phytools)
+library("dplyr")    # Data manipulation
+library(ggplot2)
+library(corrplot)
+library(cluster)
+library(vioplot)
+library(geiger)
+```
+
+# Functions
+## Functions with reticulations not and recornozible by snaq and not level-1 reticulation
+```{r chunk1, cache = TRUE, echo=TRUE}
+
+#We want to know if the reticulation node produce a Tip or Node
+##This function goes in the direction of the tips omiting reticulations nodes until it finds one no reticulation node
+DesJupRet<-function(ED,reff,father,allret){
+ti12<-reff
+Log=TRUE
+while(Log){
+ti12<-ED[ED[,1]==ti12&ED[,2]!=father,2][1]
+#we use father because when we want to evaluate RootRet we want to know if [Tip or Node 3] is a node or tip, no go for the reticulation way.
+Log<-ti12%in%allret
+}
+return(ti12)
+}
+
+
+#This function goes in the direction of the tips jumping node by node and determinate if the refference (reff) produce a Tip or not
+Tip<-function(ED,reff,father,allret){
+Log=TRUE
+i=0
+while(Log){
+reff<-DesJupRet(ED=ED,reff=reff,father=father,allret=allret)
+#
+Log<-!(i==2|is.na(reff))
+i=i+1
+}
+if(i==2){res<-"Tip"}else if(i==3){res<-"NoTip"}
+return(res)
+}
+
+
+##This function goes in the direction of the root omiting reticulations nodes until it finds one no reticulation node
+AssJupRet<-function(ED,reff,allret){
+ti12<-reff
+Log=TRUE
+while(Log){
+ti12<-ED[ED[,2]==ti12,1][1]###Loop
+Log<-ti12%in%allret
+}
+return(ti12)
+}
+
+#This function goes in the direction of the root jumping node by node and determinate if the refference (reff) produce a root or node
+AssRoot<-function(ED,reff,allret){
+Log=TRUE
+i=0
+while(Log){
+reff<-AssJupRet(ED=ED,reff=reff,allret=allret)
+Log<-!(i==2|is.na(reff))
+i=i+1
+}
+if(i==2){res<-"Root"}else if(i==3){res<-"NoRoot"}else if (i<=1){res<-"No-Identificable"}
+return(res)
+}
+
+#This function use the functions described before and determinate if the sibling reticulation can be Recognozible by snaq
+Identiff<-function(Tree2,Hib1,Hib2,ED,father,RootTest,allret){
+Tiprev<-Tip(ED,reff=RootTest,father=father,allret=allret)
+Roo<-AssRoot(ED,reff=RootTest,allret=allret)
+if(any(Roo%in%c("No-Identificable",NA,NULL))){resAll<-"No-Identificable"}else{
+
+NodTip1<-Tiprev=="NoTip"|Roo=="NoRoot"
+NodTip2<-Tip(ED,reff=Hib1,father=father,allret=allret)=="NoTip"
+NodTip3<-Tip(ED,reff=Hib2,father=father,allret=allret)=="NoTip"
+res1<-sum(c(NodTip1,NodTip2,NodTip3),na.rm = TRUE)#using (+) whit NA or NULL error will be apear, but if we use sum(,na.rm = TRUE), we omith that.7
+#res1<-NodTip1+NodTip2+NodTip3
+if(res1>=2){resAll<-"Identificable"}else {resAll<-"No-Identificable"} }
+return(resAll)
+}
+
+
+# This function analize the tree, determinate if there are reticulations and in the case that it exists evalaute if the reticulation is among siblings, and in the case that it exists evaluate if it is or not recognozible by snaq.
+
+SibCross<-function(Tree2){
+RetEv<-Tree2$"reticulation"
+allret<-unique(as.numeric(RetEv))
+ED<-Tree2$edge
+
+if(nrow(RetEv)==0){SiblingCross<-"NotRet"
+res<-list(infor=SiblingCross,ret=NA)}else{
+outRet<-c()
+
+for(h in 1:nrow(RetEv)){
+RetEv1<-RetEv[h,]
+Hib1<-RetEv1[2]#Hibrid
+Hib2<-RetEv1[1]#Father
+ED<-Tree2$edge
+
+Or1whitoutRet<-AssJupRet(ED,Hib1,allret)#Find the father omiting the reticulations
+Or2whitoutRet<-AssJupRet(ED,Hib2,allret)#Find the father omiting the reticulations
+
+Orig1<-ED[ED[,2]==Hib1,1]#Hibrid
+Orig2<-ED[ED[,2]==Hib2,1]#Father
+ 
+res<-Orig1==Orig2
+
+if(any(c(Hib1,Hib2)%in%c(Orig1,Orig2))){SiblingCross<-"RetCiclicI"}else if(Or1whitoutRet==Or2whitoutRet&Orig1==Orig2){
+father<-Orig1
+RootTest<-AssJupRet(ED,Orig1,allret)#Go direction to the root avoiding the reticulation nodes.
+
+Ident<-Identiff(Tree2,Hib1=Hib1,Hib2=Hib2,ED,father,RootTest,allret=allret)
+SiblingCross<-Ident
+}else if(Or1whitoutRet==Or2whitoutRet&Orig1!=Orig2){SiblingCross<-"not level-1"}else if(Or1whitoutRet!=Or2whitoutRet&Orig1!=Orig2){SiblingCross<-"Identificable"}#"NoSibCross"
+
+outRet<-c(outRet,SiblingCross)
+}
+res<-list(infor=outRet,ret=RetEv)
+}
+
+return(res)
+}
+
+```
+
+## Function to analize Network
+
+```{r chunk2, cache = TRUE, echo=TRUE}
+RetAnalysis<-function(TreeAnalize1){
+mat<-matrix(0,ncol=3,nrow=1)
+colnames(mat)<-c("NotIdent", "Ident", "NotLevel-1","RetCiclicI")
+colnam<-c("No-Identificable","Identificable","not level-1","RetCiclicI")
+
+#plot(TreeAnalize1)
+sibcro1<-SibCross(TreeAnalize1)
+tab1<-table(sibcro1$infor)
+namtab<-names(tab1)
+for(j in 1:length(namtab)){
+mat[,colnam==namtab[j]]<-tab1[j]
+}
+return(mat)
+}
+
+
+
+
+
+
+NetDescription<-function(bdNS){
+out1<-c()
+for(k in 1:length(bdNS)){
+Tree2<-bdNS[[k]]
+###Extracting general Information
+meEdgeL<-mean(Tree2$"edge.length")#mean of edge length
+sdEdgeL<-var(Tree2$"edge.length")
+cvEdgeL<-sdEdgeL/meEdgeL#cv of edge length
+#TipNum<-length(Tree2$"tip.label")# Number of tips
+#PorExtin<-(TipNum-10)/TipNum#Proportions of extintct taxa 
+NodeNum<-Tree2$Nnode#Number of internal Nodes# Maybe we can also divide it for TipNum
+LT2<-ltt(Tree2,plot=FALSE)
+Tim<-LT2$times
+TimeTree<-max(Tim)#Time to reach 10 taxa
+#extracting information about the Reticulations
+Ret<-Tree2$"reticulation"
+Ret1<-Ret
+RetNum<-nrow(Ret)# Reticulation Number
+if(RetNum>=1){
+for(i in 1:nrow(Ret1)){
+for(j in 1:ncol(Ret1)){
+Ret1[i,j]<-Tim[names(Tim)%in%Ret1[i,j]]
+}
+}
+TimeStartHibr<-apply(Ret1,1,max)/TimeTree#Time when birth the hibirds, we can divide it for the time to reach 10 taxa (TimeTree)
+TSHmean<-mean(TimeStartHibr)# Average time of birth of hybrids 
+TSHmin<-min(TimeStartHibr)# minimum time of birth of hybrids 
+TSHmax<-max(TimeStartHibr)# maximun time of birth of hybrids 
+}else{
+TSHmean<-0
+TSHmin<-0
+TSHmax<-0
+}
+
+SiblingCross<-RetAnalysis(TreeAnalize1=Tree2)
+
+
+#If reticulation number is one, TSHmean, TSHmin and TSHmax are the same, if there are not reticulation the value is cero.
+#dat<-data.frame(TipNum,NodeNum,PorExtin,meEdgeL,cvEdgeL,TimeTree,RetNum,TSHmean,TSHmin,TSHmax)
+dat<-data.frame(NodeNum,meEdgeL,cvEdgeL,TimeTree,RetNum,TSHmean,TSHmin,TSHmax,SiblingCross)
+out1<-rbind(out1,dat)
+}
+return(out1)
+}
+
+
+```
+
+
+# Parameters
+
+Simulation of 300 Trees with the following parameters using NetSim:
+
+* lambda = 0.9
+* mu = 0
+* nu = 0.01 and 0.03
+* hybprops = See table
+
+```{r chunk3, cache = TRUE,echo=TRUE}
+
+#hybprops Combinations
+Upp1<-1
+Low1<-0
+Gen<-c(rep(Upp1,4),rep(Low1,4))
+Deg<-rep(c(Upp1,Upp1,Low1,Low1),2)
+Neu<-rep(c(Low1,Upp1),4)
+
+
+HybTab1<-data.frame(Gen,Deg,Neu)
+HybTab<-HybTab1[-7,]#No acepta la combinacion c(0,0,0)
+HybTab
+
+```
+
+# simulation data
+
+```{r chunk4, cache = TRUE,echo=TRUE}
+#################################
+set.seed(501)
+
+outputNu0.01<-c()
+for(i in 1:nrow(HybTab)){
+numbsim=300
+n1<-15
+bdNS <- NetSim::sim.bdh.taxa.ssa(n=n1, 
+                                 numbsim = numbsim, 
+                                 lambda = 0.9, 
+                                 mu = 0, 
+                                 nu = 0.01,
+                                 hybprops = HybTab[i,], 
+                                 hyb.inher.fxn = NetSim::make.beta.draw(1, 1), 
+                                 frac = 1,
+                                 mrca = FALSE, 
+                                 complete = TRUE, 
+                                 stochsampling = FALSE, 
+                                 hyb.rate.fxn = NULL, 
+                                 trait.model = NULL)
+#
+bdNS <- bdNS[!sapply(X = bdNS, FUN = is.null)]
+#Information about tree goes extinct=0 and no extinct tips are sampled=1
+bdNS <- bdNS[sapply(X = bdNS, FUN = is.phylo)]#birth dead tree with NetSim with value 0 or 1
+
+res<-NetDescription(bdNS)
+res2<-data.frame(HybTab[i,],res,row.names = NULL)
+outputNu0.01<-rbind(outputNu0.01,res2)
+}
+
+
+
+
+outputNu0.02<-c()
+for(i in 1:nrow(HybTab)){
+numbsim=300
+n1<-15
+bdNS <- NetSim::sim.bdh.taxa.ssa(n=n1, 
+                                 numbsim = numbsim, 
+                                 lambda = 0.9, 
+                                 mu = 0, 
+                                 nu = 0.02,
+                                 hybprops = HybTab[i,], 
+                                 hyb.inher.fxn = NetSim::make.beta.draw(1, 1), 
+                                 frac = 1,
+                                 mrca = FALSE, 
+                                 complete = TRUE, 
+                                 stochsampling = FALSE, 
+                                 hyb.rate.fxn = NULL, 
+                                 trait.model = NULL)
+#
+bdNS <- bdNS[!sapply(X = bdNS, FUN = is.null)]
+#Information about tree goes extinct=0 and no extinct tips are sampled=1
+bdNS <- bdNS[sapply(X = bdNS, FUN = is.phylo)]#birth dead tree with NetSim with value 0 or 1
+
+res<-NetDescription(bdNS)
+res2<-data.frame(HybTab[i,],res,row.names = NULL)
+outputNu0.02<-rbind(outputNu0.02,res2)
+}
+
+
+
+
+
+
+## reorganize the data
+outputNu0.01$CombHybP<-apply(outputNu0.01[,c("Gen", "Deg", "Neu")],1,paste0,collapse="-")
+outputNu0.02$CombHybP<-apply(outputNu0.02[,c("Gen", "Deg", "Neu")],1,paste0,collapse="-")
+
+
+agNu0.02<-aggregate(RetNum~CombHybP,FUN=mean,data=outputNu0.02)
+agNu0.02Ord<-agNu0.02[order(agNu0.02$RetNum),]
+
+LevChar<-as.character(agNu0.02Ord$CombHybP)
+
+outputNu0.02[,"CombHybP"]<-factor(outputNu0.02[,"CombHybP"],levels=LevChar)
+outputNu0.01[,"CombHybP"]<-factor(outputNu0.01[,"CombHybP"],levels=LevChar)
+#########################################
+head(outputNu0.02)
+head(outputNu0.01)
+```
+
+
+# Reticulation functions
+```{r chunk55.1, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10)}
+numbsim=500
+n1<-15
+bdNS <- NetSim::sim.bdh.taxa.ssa(n=n1, 
+                                 numbsim = numbsim, 
+                                 lambda = 0.9, 
+                                 mu = 0, 
+                                 nu = 0.03,
+                                 hybprops = c(0.5,0.25,0.25), 
+                                 hyb.inher.fxn = NetSim::make.beta.draw(1, 1), 
+                                 frac = 1,
+                                 mrca = FALSE, 
+                                 complete = TRUE, 
+                                 stochsampling = FALSE, 
+                                 hyb.rate.fxn = NULL, 
+                                 trait.model = NULL)
+#
+bdNS <- bdNS[!sapply(X = bdNS, FUN = is.null)]
+#Information about tree goes extinct=0 and no extinct tips are sampled=1
+bdNS <- bdNS[sapply(X = bdNS, FUN = is.phylo)]
+
+```
+
+## No Recognozible by snaq
+```{r chunk55.2, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10)}
+#No Identificable for snaq
+out2<-c()
+for(i in 1:length(bdNS)){
+res<-SibCross(bdNS[[i]])$infor
+res2<-any(res=="No-Identificable")
+out2<-c(out2,res2)
+}
+posNotIdent<-which(out2);posNotIdent
+
+TreeAnalize<-bdNS[[posNotIdent[1]]]#4
+sibcro<-SibCross(TreeAnalize)
+nod<-sibcro$ret[sibcro$infor=="No-Identificable",]
+plot(TreeAnalize)
+nodelabels(node=nod)
+
+TreeAnalize<-bdNS[[posNotIdent[3]]]#4
+sibcro<-SibCross(TreeAnalize)
+nod<-sibcro$ret[sibcro$infor=="No-Identificable",]
+plot(TreeAnalize)
+nodelabels(node=nod)
+
+```
+
+
+## No level One
+```{r chunk55.3, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10)}
+#No Identificable for snaq
+out2<-c()
+for(i in 1:length(bdNS)){
+res<-SibCross(bdNS[[i]])$infor
+res2<-any(res=="not level-1")
+out2<-c(out2,res2)
+}
+posNotIdent<-which(out2);posNotIdent
+
+TreeAnalize<-bdNS[[posNotIdent[2]]]#4
+sibcro<-SibCross(TreeAnalize)
+nod<-sibcro$ret[sibcro$infor=="not level-1",]
+plot(TreeAnalize)
+nodelabels(node=nod)
+
+TreeAnalize<-bdNS[[posNotIdent[3]]]#4
+sibcro<-SibCross(TreeAnalize)
+nod<-sibcro$ret[sibcro$infor=="not level-1",]
+plot(TreeAnalize)
+nodelabels(node=nod)
+nodelabels()
+```
+
+## Ciclic reticulations
+```{r chunk55.4, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10)}
+#No Identificable for snaq
+out2<-c()
+for(i in 1:length(bdNS)){
+res<-SibCross(bdNS[[i]])$infor
+res2<-any(res=="RetCiclicI")
+out2<-c(out2,res2)
+}
+posNotIdent<-which(out2);posNotIdent
+
+TreeAnalize<-bdNS[[posNotIdent[2]]]#4
+sibcro<-SibCross(TreeAnalize)
+nod<-sibcro$ret[sibcro$infor=="RetCiclicI",]
+plot(TreeAnalize)
+nodelabels(node=nod)
+
+TreeAnalize<-bdNS[[posNotIdent[3]]]#4
+sibcro<-SibCross(TreeAnalize)
+nod<-sibcro$ret[sibcro$infor=="RetCiclicI",]
+plot(TreeAnalize)
+nodelabels(node=nod)
+
+```
+
+
+# Results 
+
+## Number of reticulation
+### Barplot
+```{r chunk5, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10)}
+colors1<-c("#daf8e3",
+"#97ebdb",
+"#00c2c7",
+"#0086ad",
+"#005582",
+
+"#ffbaba",
+"#ff7b7b",
+"#ff5252",
+"#ff0000",
+"#a70000")
+
+
+
+## Number of reticulation
+
+tabbNu0.01<-table(outputNu0.01[,c("RetNum","CombHybP")])
+tabbNu0.02<-table(outputNu0.02[,c("RetNum","CombHybP")])
+
+xxlab1<-"hybprops combination                              "
+pop<-par(mfrow=c(1,2),oma = c(0, 0, 2, 0))
+barplot(tabbNu0.02,legend.text=rownames(tabbNu0.02),col=colors1,xlim=c(0,11),main="nu=0.02",xlab=xxlab1,las=2)
+barplot(tabbNu0.01,legend.text=rownames(tabbNu0.01),col=colors1,xlim=c(0,11),main="nu=0.01",xlab=xxlab1,las=2)
+par(pop)
+mtext("Number of Reticulations", outer = TRUE, cex = 1.5,side=3,line=-2)
+```
+
+
+### GLM Poison
+```{r chunk5.1, cache = TRUE, echo=TRUE}
+ModNu0.01<-glm(RetNum~CombHybP,data=outputNu0.01,family=poisson(link = "log"))
+summary(ModNu0.01)
+
+ModNu0.02<-glm(RetNum~CombHybP,data=outputNu0.02,family=poisson(link = "log"))
+summary(ModNu0.02)
+
+summary(ModNu0.01)
+summary(ModNu0.02)
+```
+
+
+## Time
+
+```{r chunk6, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10)}
+pop<-par(mfrow=c(1,2),oma = c(0, 0, 2, 0))
+vioplot(TimeTree~CombHybP,data=outputNu0.01,main="0.01",ylim=c(0,16),las=2)
+vioplot(TimeTree~CombHybP,data=outputNu0.02,main="0.02",ylim=c(0,16),las=2)
+par(pop)
+mtext("Time to reach 15 tips", outer = TRUE, cex = 1.5,side=3,line=-2)
+
+```
+
+
+## Number of Nodes
+
+```{r chunk7, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10)}
+library(vioplot)
+pop<-par(mfrow=c(1,2),oma = c(0, 0, 2, 0))
+vioplot(NodeNum~CombHybP,data=outputNu0.01,main="nu = 0.01",ylim=c(14,33),las=2)
+vioplot(NodeNum~CombHybP,data=outputNu0.02,main="nu = 0.02",ylim=c(14,33),las=2)
+par(pop)
+mtext("Number of Nodes", outer = TRUE, cex = 1.5,side=3,line=-2)
+```
+
+
+
+## Prop of Reticulations Not Recognozible
+
+```{r chunk8, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10)}
+## Prop of Reticulations Not Recognozible
+
+SuboutputNu0.02Ret<-subset(outputNu0.02,RetNum>0)
+tabwNu0.02Ret<-table(SuboutputNu0.02Ret[,c("NotIdent","CombHybP")])
+
+tabw1Nu0.02Ret<-tabwNu0.02Ret
+retTotNu0.02Ret<-apply(tabw1Nu0.02Ret,2,sum)
+
+for(i in 1:ncol(tabw1Nu0.02Ret)){
+tabw1Nu0.02Ret[,i]<-tabw1Nu0.02Ret[,i]/retTotNu0.02Ret[i]
+}
+
+
+
+
+SuboutputNu0.01Ret<-subset(outputNu0.01,RetNum>0)
+tabwNu0.01Ret<-table(SuboutputNu0.01Ret[,c("NotIdent","CombHybP")])
+
+tabw1Nu0.01Ret<-tabwNu0.01Ret
+retTotNu0.01Ret<-apply(tabw1Nu0.01Ret,2,sum)
+
+for(i in 1:ncol(tabw1Nu0.01Ret)){
+tabw1Nu0.01Ret[,i]<-tabw1Nu0.01Ret[,i]/retTotNu0.01Ret[i]
+}
+
+
+
+pop<-par(mfrow=c(1,2),oma = c(0, 0, 2, 0))
+barplot(tabw1Nu0.02Ret,legend.text=rownames(tabw1Nu0.02Ret),col=colors1,main="nu=0.02",xlim=c(0,11),xlab=xxlab1,las=2)
+barplot(tabw1Nu0.01Ret,legend.text=rownames(tabw1Nu0.01Ret),col=colors1,main="nu=0.01",xlim=c(0,11),xlab=xxlab1,las=2)
+par(pop)
+mtext("Prop of Reticulations Not Recognozible", outer = TRUE, cex = 1.5,side=3,line=-2)
+
+
+```
+
+
+
+## Prop of Reticulations Not NotLevel.1
+
+```{r chunk9, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10)}
+## Prop of Reticulations Not NotLevel.1
+
+###########
+SuboutputNu0.02Ret<-subset(outputNu0.02,RetNum>0)
+tabwNu0.02Ret<-table(SuboutputNu0.02Ret[,c("NotLevel.1","CombHybP")])
+
+tabw1Nu0.02Ret<-tabwNu0.02Ret
+retTotNu0.02Ret<-apply(tabw1Nu0.02Ret,2,sum)
+
+for(i in 1:ncol(tabw1Nu0.02Ret)){
+tabw1Nu0.02Ret[,i]<-tabw1Nu0.02Ret[,i]/retTotNu0.02Ret[i]
+}
+
+
+
+
+SuboutputNu0.01Ret<-subset(outputNu0.01,RetNum>0)
+tabwNu0.01Ret<-table(SuboutputNu0.01Ret[,c("NotLevel.1","CombHybP")])
+
+tabw1Nu0.01Ret<-tabwNu0.01Ret
+retTotNu0.01Ret<-apply(tabw1Nu0.01Ret,2,sum)
+
+for(i in 1:ncol(tabw1Nu0.01Ret)){
+tabw1Nu0.01Ret[,i]<-tabw1Nu0.01Ret[,i]/retTotNu0.01Ret[i]
+}
+tabw1Nu0.01Ret
+
+
+pop<-par(mfrow=c(1,2),oma = c(0, 0, 2, 0))
+barplot(tabw1Nu0.02Ret,legend.text=rownames(tabw1Nu0.02Ret),col=colors1,main="nu=0.02",xlim=c(0,11),xlab=xxlab1,las=2)
+barplot(tabw1Nu0.01Ret,legend.text=rownames(tabw1Nu0.01Ret),col=colors1,main="nu=0.01",xlim=c(0,11),xlab=xxlab1,las=2)
+par(pop)
+mtext("Prop of Reticulations Not NotLevel.1", outer = TRUE, cex = 1.5,side=3,line=-2)
+```
