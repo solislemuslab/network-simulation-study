@@ -6,7 +6,8 @@ using PhyloNetworks, PhyloPlots
 using RCall
 
 net0 = readTopology("RNetwork")
-
+#cd("/home/acosta/GitProjects/network-simulation-study/BashScript_Network_NotLevelOne")
+writeTopology(net0, "JuliaNetwork1.txt")
 R"pdf(file='NetworkjuliaR2.pdf')"
 plot(net0, :R)
 R"dev.off()"
