@@ -312,8 +312,11 @@ id<-which(out)
 
 tree<-bdNS[[id[1]]]
 res<-SibCross(Tree2=tree);res
+pdf("NetsimNetwork.pdf")
 plot(tree)
 nod<-res$ret[res$infor=="not level-1",]
 nodelabels(node=nod)
+dev.off()
+
 write.net(tree,file="RNetwork")
 
