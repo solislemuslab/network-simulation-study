@@ -1,10 +1,8 @@
-
-
-library(NetSim) # simulate bd time-tree networks: https://github.com/jjustison/NetSim
+library(SiPhyNetwork) # simulate bd time-tree networks: https://github.com/jjustison/SiPhyNetwork
 library(ape) # tools for handling phylo objects
 library(diversitree) # tools for estimating lambda and mu
 library(phytools)
-library("dplyr")    # Data manipulation
+library(dplyr)    # Data manipulation
 library(geiger)
 ########
 #We want to know if the reticulation node produce a Tip or Node
@@ -373,14 +371,14 @@ HybTab <- HybTab1[-7, ]#No acepta la combinacion c(0,0,0)
 ###
 numbsim = 500
 n1 <- 15
-bdNS <- NetSim::sim.bdh.taxa.ssa(
+bdNS <- SiPhyNetwork::sim.bdh.taxa.ssa(
     n = n1,
     numbsim = numbsim,
     lambda = 0.9,
     mu = 0,
     nu = 0.03,
     hybprops = c(0.5, 0.25, 0.25),
-    hyb.inher.fxn = NetSim::make.beta.draw(1, 1),
+    hyb.inher.fxn = SiPhyNetwork::make.beta.draw(1, 1),
     frac = 1,
     mrca = FALSE,
     complete = TRUE,
@@ -400,15 +398,20 @@ for (i in 1:length(bdNS)) {
     out <- c(out, ro)
 }
 
-id <- which(out)
 
-tree <- bdNS[[id[1]]]
-res <- SibCross(Tree2 = tree)
-res
-pdf("NetsimNetwork.pdf")
-plot(tree)
-nod <- res$ret[res$infor == "not level-1", ]
-nodelabels(node = nod)
-dev.off()
+# check that these networks are ultrametric according to ape
+sapply(X = bdNS[out], FUN = ape::is.ultrametric)
 
-write.net(tree, file = "RNetwork")
+# write all the networks above level-1 to a file (all of them are)
+SiPhyNetwork::write.net(net = bdNS[out], file = "nets_not_level1.extnex")
+
+#tree <- bdNS[[id[1]]]
+#res <- SibCross(Tree2 = tree)
+#res
+#pdf("NetsimNetwork.pdf")
+#plot(tree)
+#nod <- res$ret[res$infor == "not level-1", ]
+#nodelabels(node = nod)
+#dev.off()
+
+#SiPhyNetwork::write.net(tree, file = "RNetwork")
