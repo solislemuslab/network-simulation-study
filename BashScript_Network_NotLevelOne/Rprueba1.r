@@ -4,6 +4,9 @@ library(diversitree) # tools for estimating lambda and mu
 library(phytools)
 library(dplyr)    # Data manipulation
 library(geiger)
+
+set.seed(10)
+
 ########
 #We want to know if the reticulation node produce a Tip or Node
 ##This function goes in the direction of the tips omiting reticulations nodes until it finds one no reticulation node
@@ -400,7 +403,9 @@ for (i in 1:length(bdNS)) {
 
 
 # check that these networks are ultrametric according to ape
-sapply(X = bdNS[out], FUN = ape::is.ultrametric)
+if (sum(sapply(X = bdNS[out], FUN = ape::is.ultrametric) == length(out))) {
+    cat("All networks to be written to nets_not_level1.extnex are ultrametric\n")
+}
 
 # write all the networks above level-1 to a file (all of them are)
 SiPhyNetwork::write.net(net = bdNS[out], file = "nets_not_level1.extnex")

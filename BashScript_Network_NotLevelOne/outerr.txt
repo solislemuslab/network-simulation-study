@@ -1,0 +1,342 @@
+Loading required package: ape
+Loading required package: maps
+
+Attaching package: ‘dplyr’
+
+The following object is masked from ‘package:diversitree’:
+
+    combine
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Processing network in line 1:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 2:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 3:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 4:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 5:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+./script.sh: line 23:  8781 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 6:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+./script.sh: line 23:  8784 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 7:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 8:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 9:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 10:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 11:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 12:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 13:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 14:
+./script.sh: line 23:  8802 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 15:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 16:
+./script.sh: line 23:  8812 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 17:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 18:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 19:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 20:
+./script.sh: line 23:  8824 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 21:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 22:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 23:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 24:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 25:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 26:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 27:
+./script.sh: line 23:  8838 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 28:
+./script.sh: line 23:  8844 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 29:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+./script.sh: line 23:  8852 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 30:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 31:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 32:
+./script.sh: line 23:  8865 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 33:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 34:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+WARNING! NOT ULTRAMETRIC!!!
+./script.sh: line 23:  8874 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 35:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 36:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+./script.sh: line 23:  8883 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 37:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 38:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 39:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 40:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+./script.sh: line 23:  8894 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 41:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 42:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 43:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+./script.sh: line 23:  8904 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 44:
+./script.sh: line 23:  8909 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 45:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 46:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 47:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 48:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 49:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 50:
+./script.sh: line 23:  8925 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 51:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 52:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+WARNING! NOT ULTRAMETRIC!!!
+./script.sh: line 23:  8934 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 53:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 54:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 55:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 56:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+./script.sh: line 23:  8947 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 57:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+WARNING! NOT ULTRAMETRIC!!!
+./script.sh: line 23:  8950 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 58:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+WARNING! NOT ULTRAMETRIC!!!
+./script.sh: line 23:  8958 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 59:
+./script.sh: line 23:  8966 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 60:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 61:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+WARNING! NOT ULTRAMETRIC!!!
+./script.sh: line 23:  8978 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 62:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
+Processing network in line 63:
+./script.sh: line 23:  8988 Segmentation fault      (core dumped) hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+Processing network in line 64:
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+level2_2_coal_unit
