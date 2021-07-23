@@ -18,6 +18,6 @@ julia JuliaPrueba.jl
 while read line
 do
     let LNUM+=1
-    echo "Processing network in line $LNUM:"
-    hybrid-Lambda -spcu $line -num 3 -seed 2 -o level2_2
+    printf "\nProcessing network in line $LNUM:\n"
+    ~/Dropbox/Gustavo/softwareDevel/hybrid-Lambda/./hybrid-Lambdav0.6.2-pathdiff -spcu $line -num 3 -seed 2 -o level2_2
 done < nets_not_level1.hybridlambda
