@@ -409,6 +409,9 @@ if (sum(sapply(X = bdNS[out], FUN = ape::is.ultrametric)) == sum(out)) {
     cat("Not all networks to be written to nets_not_level1.extnex are ultrametric\n")
 }
 
+
+### examining weird networks
+
 # write all the networks above level-1 to a file (all of them are)
 SiPhyNetwork::write.net(net = bdNS[out], file = "nets_not_level1.extnex")
 
