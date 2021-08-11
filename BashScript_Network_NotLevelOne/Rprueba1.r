@@ -403,8 +403,10 @@ for (i in 1:length(bdNS)) {
 
 
 # check that these networks are ultrametric according to ape
-if (sum(sapply(X = bdNS[out], FUN = ape::is.ultrametric) == length(out))) {
+if (sum(sapply(X = bdNS[out], FUN = ape::is.ultrametric)) == sum(out)) {
     cat("All networks to be written to nets_not_level1.extnex are ultrametric\n")
+} else {
+    cat("Not all networks to be written to nets_not_level1.extnex are ultrametric\n")
 }
 
 # write all the networks above level-1 to a file (all of them are)
