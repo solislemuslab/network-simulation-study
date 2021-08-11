@@ -1,5 +1,13 @@
+arg1<-commandArgs(trailingOnly=TRUE)[1]
+arg2<-commandArgs(trailingOnly=TRUE)[2]
+eval(parse(text=arg1))
+eval(parse(text=arg2))
 
-library(NetSim) # simulate bd time-tree networks: https://github.com/jjustison/NetSim
+pat<-getwd()
+setwd(paste(pat,"/RNetworks",sep=""))
+
+library(SiPhyNetwork)
+#library(NetSim) # simulate bd time-tree networks: https://github.com/jjustison/NetSim
 library(ape) # tools for handling phylo objects
 library(diversitree) # tools for estimating lambda and mu
 library(phytools)
@@ -281,14 +289,17 @@ HybTab<-HybTab1[-7,]#No acepta la combinacion c(0,0,0)
 
 
 ###
-numbsim=500
-n1<-15
-bdNS <- NetSim::sim.bdh.taxa.ssa(n=n1, 
-                                 numbsim = numbsim, 
-                                 lambda = 0.9, 
-                                 mu = 0, 
-                                 nu = 0.03,
-                                 hybprops = c(0.5,0.25,0.25), 
+
+n1<-n1
+
+numbsim1<-numbsim1
+
+bdNS <- sim.bdh.taxa.ssa(n=n1, 
+                                 numbsim = numbsim1, 
+                                 lambda = lambda, 
+                                 mu = mu , 
+                                 nu = nu,
+                                 hybprops = hybprops, 
                                  hyb.inher.fxn = NetSim::make.beta.draw(1, 1), 
                                  frac = 1,
                                  mrca = FALSE, 
@@ -308,15 +319,14 @@ ro<-any(res%in%"not level-1")
 out<-c(out,ro)
 }
 
+
 id<-which(out)
 
-tree<-bdNS[[id[1]]]
-res<-SibCross(Tree2=tree);res
-pdf("NetsimNetwork.pdf")
-plot(tree)
-nod<-res$ret[res$infor=="not level-1",]
-nodelabels(node=nod)
-dev.off()
-
-write.net(tree,file="RNetwork")
-
+for(i in 1:length(id)){
+tree<-bdNS[[id[i]]]
+res<-SibCross(Tree2=tree)
+#plot(tree)
+#nod<-res$ret[res$infor=="not level-1",]
+#nodelabels(node=nod)
+write.net(tree,file=paste("RNetwork_",i,sep=""))
+}
