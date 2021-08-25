@@ -1,0 +1,33 @@
+#+TITLE: Simulation of species trees (and networks) and gene trees
+#+AUTHOR: Gustavo A. Ballen
+#+LATEX_HEADER: \usepackage{natbib}
+#+BIBLIOGRAPHY: /home/ballen/Dropbox/Gustavo/Bibtex/phyloNetworks apalike
+
+* Simulation strategy
+
+  We will need a main scenario for testing limitations in snaq. First, we will need a species tree (ST)- or species network(SN)- gene tree (GT) scenario with a single species tree and multiple (say 500) gene trees for a tree with say 50 terminals. This main tree with help us tackle three main possible limitations:
+
+  1. Which kind of bias are present when snaq tries to estimate hybrid edges in level-2 SNs
+
+  2. Whether proportions of locus-level saturation (e.g., no locus showing saturation, 25% of the loci showing saturation, 50%, 75%, and all loci showing saturation) in a ST will generate any unexpected, false hybrid edges in snaq
+
+  3. Under which conditions false pseudo-root hybrid edges are recovered by snaq on a ST with regards to properties of the root, e.g., branch length, evolutionary length (i.e., whether a large part of the true tree is missing in the taxon set, thus making a large evolutionary gap between the root and the ingroup).
+
+  For the first question we will need a level-2 SN, from which gene trees are simulated. These will be then used for simulating unsaturated sequences, and then trees to feed snaq.
+
+  For the second and third questions, we will need a species tree without hybrid edges. Other than that, we need the same elements as in the first question: gene trees simulated on the species tree, and sequences for each gene tree. IN the second question, we will need varying levels of saturation, while in the third question we will need unsaturated sequences but will drop parts of the tree in order to mimic taxon-sampling-related biases.
+
+* Tree (or network) simulations
+
+** Level-2 species network
+   
+** Species tree
+
+   SimPhy is a species-gene tree simulator which as been shown to work appropriately and includes several gene tree-species tree discordance phenomena such as incomplete lineage sorting, gene duplicationand loss, and horizontal gene transfer Mallo et al. (2016). The program takes as input how many species tree to simulate, and then how many gene tree (named locus tree). from the ~simphy -h~ file, the following configurations seem to be relevant to our case:
+
+#+begin_src bash :exports both
+  # simulate a single tree, with a fixed number of terminals
+  # equal to 15 (F:15 fixed value = 15)
+  simphy -RS 1 -CS 1985 -SL F:15 -SB F:1.0 -SD F:0.0 -SP F:1000
+    -OT 0 -O single_tree
+#+end_src

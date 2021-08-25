@@ -1,0 +1,1 @@
+simphy -RS 1 -CS 1985 -SL F:15 -SB F:1.0 -SD F:0.0 -SP F:1000 -OT 0 -O single_tree 
