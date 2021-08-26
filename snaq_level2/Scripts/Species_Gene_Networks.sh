@@ -124,7 +124,7 @@ done
 cd $Path0
 
 
-Rscript UltrametricEvaluetion.r $patStoHL $pathR $pathRJ $pathJHL $PatUltR $PatUltRJ $PatUlJHL $PatUltHLStor $PatNuR $PatNuRJ $PatNuJHL $PatNuHLSt
+Rscript UltrametricEvaluation.r $patStoHL $pathR $pathRJ $pathJHL $PatUltR $PatUltRJ $PatUlJHL $PatUltHLStor $PatNuR $PatNuRJ $PatNuJHL $PatNuHLSt
 
 #How to delet the temporarily  files
 rm -r $pathR
