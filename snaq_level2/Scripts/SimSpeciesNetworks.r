@@ -8,14 +8,10 @@ eval(parse(text=arg2))
 #pathR
 setwd(arg3)
 
-library(SiPhyNetwork)
-#library(NetSim) # simulate bd time-tree networks: https://github.com/jjustison/NetSim
-library(ape) # tools for handling phylo objects
-library(diversitree) # tools for estimating lambda and mu
-library(phytools)
-library("dplyr")    # Data manipulation
-library(geiger)
-########
+library(SiPhyNetwork)#library to simulate Networks
+#library(ape)#its a SiPhyNetwork dependence, and it is activated when you activate SiPhyNetwork or geiger
+library(geiger)#is.phylo()##Information about tree goes extinct=0 and no extinct tips are sampled=1
+
 #We want to know if the reticulation node produce a Tip or Node
 ##This function goes in the direction of the tips omiting reticulations nodes until it finds one no reticulation node
 DesJupRet<-function(ED,reff,father,allret){
