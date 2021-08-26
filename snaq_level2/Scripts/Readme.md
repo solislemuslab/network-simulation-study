@@ -38,7 +38,7 @@ Which dependencies is has.
 
 Which scripts it runs automatically.
 
-## `UltrametricEvaluetion.r`
+## `UltrametricEvaluation.r`
 
 What the script does. 
 
