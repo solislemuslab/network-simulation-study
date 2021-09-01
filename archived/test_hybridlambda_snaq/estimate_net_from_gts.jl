@@ -8,8 +8,17 @@ using CSV
 # load input trees
 trees = readMultiTopology("smallnet_ultrametric_coal_unit")
 # terminals must be renamed in order to match gene-tree names from hybridLambda
+
+# drop the hybrid leaft H1hyb_1
+#for i in trees
+#    deleteleaf!(i, "H1hyb_1")
+#end
+
 # also, an arbitrary position for the hybrid-induced terminal was chosen to be sister to G
 start_tree = readTopology("(E_1:9.583042,(H1hyb_1:5.730323,((A_1:2.353569,B_1:2.353569):4.660416,(C_1:4.035818,D_1:4.035818):2.978167):0.716339):1.852719);")
+
+# drop the hybrid tip on starting tree
+#deleteleaf!(start_tree, "H1hyb_1")
 
 # calculate CFs
 q,t = countquartetsintrees(trees)
