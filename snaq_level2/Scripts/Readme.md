@@ -17,9 +17,9 @@ The tasks accomplished by each of the scripts is described below.. Please note t
 
 - Copy and paste the species Networks in Hybrid lambda format to "src" of hybrid lambda path, run Hybrid lambda and move all the results into the temporary path "Output/TemporaryHyLambdaStorage".
 
-- Evaluate the Hybrid lambda results to know if the specie networks are considered for Hybrid lambda as Ultrametric or not and save the previous results in the path "Output/UltraMetric" and "Output/NonUltraMetric" as appropriate using the script UltrametricEvaluation.r, ...
+- Evaluate the Hybrid lambda results to know if the specie networks are considered for Hybrid lambda as Ultrametric or not and save the previous results in the path "Output/UltraMetric" and "Output/NonUltraMetric" as appropriate using the script UltrametricEvaluation.r.
 
-- As we use hybrid lambda, at the moment we will only work with the ultrametric species networks
+- As we use hybrid lambda, at the moment we will only work with the ultrametric species networks.
 
 - Generate "-n" species tree from each ultrametric species networks (storage in "Output/UltraMetric/Ult_JuliaForHybLam") and save it in the path "Output/UltraMetric/GeneTrees" and also copy in the path "Output/SnaqOut/GeneTrees" to use later with snaq to reconstruct the reticulations.
 
@@ -29,16 +29,16 @@ The tasks accomplished by each of the scripts is described below.. Please note t
 we have to specify the hybrid lambda src path in the bash script (line 20)
 Then we have to write the follow parameters:
 
--t: It manages two R parameters separated with ";" and without space:
-   * numbsim1: Number of Net works
-   * n1: Number of tips
--s: It manages four R parameters separated with ";" and without space:
-   * lambda: 
-   * mu=0: extinction parameter, we use 0 (Yule model)
-   * nu: parameter of hybridization
+- t: It manages two R parameters separated with ";" and without space.
+   * numbsim1: Number of Net works.
+   * n1: Number of tips.
+- s: It manages four R parameters separated with ";" and without space.
+   * lambda: .
+   * mu=0: extinction parameter, we use 0 (Yule model).
+   * nu: parameter of hybridization.
    * hybprops: hybridation rates.
--n: Number of gene trees (hybrid lambda parameter)
--d: seed of hybrid lambda to generate gene trees.
+- n: Number of gene trees (hybrid lambda parameter).
+- d: seed of hybrid lambda to generate gene trees.
 
 Example: 
 bash scriptPru.sh -t "numbsim1=500;n1=8" -s "lambda=0.9;mu=0;nu=0.09;hybprops=c(0.5,0.25,0.25)" -n 500 -d 2
