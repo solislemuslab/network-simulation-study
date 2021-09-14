@@ -65,6 +65,8 @@ PatNuHLSt=$Pat1/$NuHLSt
 
 
 
+
+
 cd $Path0
 
 while getopts t:s:n:d: flag
@@ -77,7 +79,12 @@ do
     esac
 done
 
-Rscript SimSpeciesNetworks.r "$Tree" "$Netsim1" "$pathR"
+RANDOM=$seed
+HyLaSeed="$((1 + $RANDOM % 1000))"
+Rseed="$((1 + $RANDOM % 1000))"
+
+
+Rscript SimSpeciesNetworks.r "$Tree" "$Netsim1" "$pathR" "$Rseed"
 julia Net_HybridLamb_Format.jl "$pathR" "$pathRJ" "$pathJHL" 
 
 
@@ -150,7 +157,8 @@ ini="../src/hybrid-Lambda -spcu ../src/"
 subf="GeneTree"
 #$num
 #$seed
-mid=" -num $num -seed $seed -o "
+
+#mid=" -num $num -seed $HyLaSeed -o "
 #../src/hybrid-Lambda -spcu ../src/JuliaHibrid2 -num 500 -seed 2 -o example3
 ro="_coal_unit"
 #
@@ -164,6 +172,8 @@ patDes="$ini2$PatUltGT$Fins"
 #
 cd $PatSrcHyLa
 for entry in $Ult; do
+	HyLaSeed="$((1 + $RANDOM % 1000))"
+	mid=" -num $num -seed $HyLaSeed -o "
     top=${#entry}
 	HybFile2=${entry:11:top}
 	res="$ini$entry$mid$subf$HybFile2"
@@ -179,3 +189,5 @@ med="/* "
 la="$ini$PatUltGT$med$patGT"
 eval $la
 #
+echo "R.seed=$Rseed"
+echo "HyLambdaSeed=$HyLaSeed"

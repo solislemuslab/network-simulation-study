@@ -1,6 +1,7 @@
 arg1<-commandArgs(trailingOnly=TRUE)[1]
 arg2<-commandArgs(trailingOnly=TRUE)[2]
 arg3<-commandArgs(trailingOnly=TRUE)[3]
+arg4<-as.numeric(commandArgs(trailingOnly=TRUE)[4])
 eval(parse(text=arg1))
 eval(parse(text=arg2))
 
@@ -291,7 +292,7 @@ HybTab<-HybTab1[-7,]#No acepta la combinacion c(0,0,0)
 n1<-n1
 
 numbsim1<-numbsim1
-
+set.seed(arg4)
 bdNS <- sim.bdh.taxa.ssa(n=n1, 
                                  numbsim = numbsim1, 
                                  lambda = lambda, 
