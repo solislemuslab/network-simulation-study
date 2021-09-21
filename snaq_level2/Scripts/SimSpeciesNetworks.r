@@ -286,14 +286,28 @@ Neu<-rep(c(Low1,Upp1),4)
 HybTab1<-data.frame(Gen,Deg,Neu)
 HybTab<-HybTab1[-7,]#No acepta la combinacion c(0,0,0)
 
-
+catchToList <- function(expr) {
+  val <- NULL
+  myWarnings <- NULL
+  wHandler <- function(w) {
+    myWarnings <<- c(myWarnings, w$message)
+    invokeRestart("muffleWarning")
+  }
+  myError <- NULL
+  eHandler <- function(e) {
+    myError <<- e$message
+    NULL
+  }
+  val <- tryCatch(withCallingHandlers(expr, warning = wHandler), error = eHandler)
+  list(value = val, warnings = myWarnings, error=myError)
+} 
 ###
 
 n1<-n1
 
 numbsim1<-numbsim1
-set.seed(arg4)
-bdNS <- sim.bdh.taxa.ssa(n=n1, 
+set.seed(arg4,kind = "Mersenne-Twister", normal.kind = "Inversion")
+bdNS1 <- sim.bdh.taxa.ssa(n=n1, 
                                  numbsim = numbsim1, 
                                  lambda = lambda, 
                                  mu = mu , 
@@ -307,9 +321,23 @@ bdNS <- sim.bdh.taxa.ssa(n=n1,
                                  hyb.rate.fxn = NULL, 
                                  trait.model = NULL)
 #
-bdNS <- bdNS[!sapply(X = bdNS, FUN = is.null)]
+bdNS1 <- bdNS1[!sapply(X = bdNS1, FUN = is.null)]
 #Information about tree goes extinct=0 and no extinct tips are sampled=1
-bdNS <- bdNS[sapply(X = bdNS, FUN = is.phylo)]
+bdNS1 <- bdNS1[sapply(X = bdNS1, FUN = is.phylo)]
+
+outWarn<-c()
+for(i in 1:length(bdNS1)){
+tree<-bdNS1[[i]]
+warnn1<-length(catchToList(plot(tree,main="R Network",cex=1))$warnings)
+outWarn<-c(outWarn,warnn1)
+}
+
+x<-dir()
+file.remove(x)
+
+
+bdNS<-bdNS1[which(outWarn==0)]
+
 
 out<-c()
 for(i in 1:length(bdNS)){
@@ -318,14 +346,12 @@ ro<-any(res%in%"not level-1")
 out<-c(out,ro)
 }
 
+print(out)
 
 id<-which(out)
 
-for(i in 1:length(id)){
-tree<-bdNS[[id[i]]]
-res<-SibCross(Tree2=tree)
-#plot(tree)
-#nod<-res$ret[res$infor=="not level-1",]
-#nodelabels(node=nod)
-write.net(tree,file=paste("RNetwork_",i,sep=""))
+for(j in 1:length(id)){
+tree<-bdNS[[id[j]]]
+write.net(tree,file=paste("RNetwork_",j,sep=""))
 }
+

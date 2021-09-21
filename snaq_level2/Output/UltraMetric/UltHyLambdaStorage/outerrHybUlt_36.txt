@@ -1,0 +1,7 @@
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Dot figure generated in file: HybUltHybUlt_36.pdf
+Branch lengths are labelled.
+Random seed: 1632247089
+Produced gene tree files: 
+HybUltHybUlt_36_coal_unit

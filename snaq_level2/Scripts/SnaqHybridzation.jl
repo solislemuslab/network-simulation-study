@@ -32,7 +32,7 @@ for i in 1:3
 	namTree=nameCF*".QMC.tre"
 	TreeSnaq = readTopology(namTree)
 	#
-	net0 = snaq!(TreeSnaq,  raxmlCF, hmax=0, seed=123,runs=2)
+	net0 = snaq!(TreeSnaq,  raxmlCF, hmax=0, seed=123,runs=2)#for default they use runs=10
 	cd(patSnaq)
 	writeTopology(net0,nameSnaq)
 end

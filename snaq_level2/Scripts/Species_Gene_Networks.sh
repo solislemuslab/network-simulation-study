@@ -28,12 +28,16 @@ CF="Output/SnaqOut/CFactors"
 GT="Output/SnaqOut/GeneTrees"
 NET="Output/SnaqOut/SnaqNet"
 patGT="$Pat1/$GT"
+#RNetWar="Output/SnaqOut/RNetWarnings"
+
 
 mkdir -p {$R,$RJ,$JHL,$TstoHL,$CF,$GT,$NET}
 pathR=$Pat1/$R
 pathRJ=$Pat1/$RJ
 pathJHL=$Pat1/$JHL
 patStoHL=$Pat1/$TstoHL
+#patRNetWar=$Pat1/$RNetWar 
+
 
 #paths of ultrametric Networks
 UlJHL="Output/UltraMetric/Ult_JuliaForHybLam"
@@ -133,6 +137,9 @@ cd $Path0
 
 Rscript UltrametricEvaluation.r $patStoHL $pathR $pathRJ $pathJHL $PatUltR $PatUltRJ $PatUlJHL $PatUltHLStor $PatNuR $PatNuRJ $PatNuJHL $PatNuHLSt
 
+
+
+
 #How to delet the temporarily  files
 rm -r $pathR
 rm -r $pathRJ
@@ -157,8 +164,7 @@ ini="../src/hybrid-Lambda -spcu ../src/"
 subf="GeneTree"
 #$num
 #$seed
-
-#mid=" -num $num -seed $HyLaSeed -o "
+mid=" -num $num -seed $seed -o "
 #../src/hybrid-Lambda -spcu ../src/JuliaHibrid2 -num 500 -seed 2 -o example3
 ro="_coal_unit"
 #
@@ -172,8 +178,6 @@ patDes="$ini2$PatUltGT$Fins"
 #
 cd $PatSrcHyLa
 for entry in $Ult; do
-	HyLaSeed="$((1 + $RANDOM % 1000))"
-	mid=" -num $num -seed $HyLaSeed -o "
     top=${#entry}
 	HybFile2=${entry:11:top}
 	res="$ini$entry$mid$subf$HybFile2"
@@ -189,5 +193,4 @@ med="/* "
 la="$ini$PatUltGT$med$patGT"
 eval $la
 #
-echo "R.seed=$Rseed"
-echo "HyLambdaSeed=$HyLaSeed"
+
