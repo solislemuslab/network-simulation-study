@@ -1,0 +1,190 @@
+(((h1#0.5:4.0,D:4.0):3.0,((A:2.0,B:2.0):3.0,(C:2.0)h1#0.5:3.0):2.0):2.0,E:9.0);
+(((h1#0.5:4.0,D:4.0):3.0,((A:2.0,B:2.0):3.0,(C:2.0)h1#0.5:3.0):2.0):2.0,E:9.0)r;
+(((h1#0.5:2.0,D:4.0):3.0,((A:2.0,B:2.0):3.0,(C:2.0)h1#0.5:3.0):2.0):2.0,E:9.0);
+(((h1#0.5:2.0,D:4.0):3.0,((A:2.0,B:2.0):3.0,(C:2.0)h1#0.5:3.0):2.0):2.0,E:9.0)r;
+(((B:.6)h1#.5:.6,A:1.2)s1:.6,(h1#.5:.6,C:1.2)s2:.6)r;
+(((B:.6)h1#.5:.6,A:1.2)s1:.6,(h1#.5:.6,C:1.2)s2:.6);
+((((B:1,(D:0.6,(E:0.6,F:0.6)s5:0.6)s4:0.6)s3:.6)h1#.5:.6,A:1.2)s1:.6,(h1#.5:.6,C:1.2)s2:.6)r;
+((((B:1,(D:0.6,(E:0.6,F:0.6)s5:0.6)s4:0.6)s3:.6)h1#.5:.6,A:1.2)s1:.6,(h1#.5:.6,C:1.2)s2:.6);
+
+Processing (((h1#0.5:4.0,D:4.0):3.0,((A:2.0,B:2.0):3.0,(C:2.0)h1#0.5:3.0):2.0):2.0,E:9.0);...
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+out0.6.2_coal_unit
+((((A_1:2.291561,B_1:2.291561):2.813411,C_1:5.104972):2.956590,(D_1:5.898695,h1#0.5_1:5.898695):2.162867):1.080899,E_1:9.142461);
+((D_1:7.822784,(((A_1:2.834647,B_1:2.834647):2.224355,C_1:5.059002):2.132514,h1#0.5_1:7.191516):0.631268):1.370331,E_1:9.193115);
+(E_1:10.983763,((h1#0.5_1:8.657187,(C_1:6.141945,(A_1:2.412703,B_1:2.412703):3.729242):2.515241):0.759950,D_1:9.417136):1.566627);
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+out0.6.3_coal_unit
+((((A_1:2.291561,B_1:2.291561):2.813411,C_1:5.104972):2.956590,(D_1:5.898695,h1#0.5_1:5.898695):2.162867):1.080899,E_1:9.142461);
+((D_1:7.822784,(((A_1:2.834647,B_1:2.834647):2.224355,C_1:5.059002):2.132514,h1#0.5_1:7.191516):0.631268):1.370331,E_1:9.193115);
+(E_1:10.983763,((h1#0.5_1:8.657187,(C_1:6.141945,(A_1:2.412703,B_1:2.412703):3.729242):2.515241):0.759950,D_1:9.417136):1.566627);
+
+Processing (((h1#0.5:4.0,D:4.0):3.0,((A:2.0,B:2.0):3.0,(C:2.0)h1#0.5:3.0):2.0):2.0,E:9.0)r;...
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+out0.6.2_coal_unit
+((((A_1:2.291561,B_1:2.291561):2.813411,C_1:5.104972):2.956590,(D_1:5.898695,h1#0.5_1:5.898695):2.162867):1.080899,E_1:9.142461);
+((D_1:7.822784,(((A_1:2.834647,B_1:2.834647):2.224355,C_1:5.059002):2.132514,h1#0.5_1:7.191516):0.631268):1.370331,E_1:9.193115);
+(E_1:10.983763,((h1#0.5_1:8.657187,(C_1:6.141945,(A_1:2.412703,B_1:2.412703):3.729242):2.515241):0.759950,D_1:9.417136):1.566627);
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+out0.6.3_coal_unit
+((((A_1:2.291561,B_1:2.291561):2.813411,C_1:5.104972):2.956590,(D_1:5.898695,h1#0.5_1:5.898695):2.162867):1.080899,E_1:9.142461);
+((D_1:7.822784,(((A_1:2.834647,B_1:2.834647):2.224355,C_1:5.059002):2.132514,h1#0.5_1:7.191516):0.631268):1.370331,E_1:9.193115);
+(E_1:10.983763,((h1#0.5_1:8.657187,(C_1:6.141945,(A_1:2.412703,B_1:2.412703):3.729242):2.515241):0.759950,D_1:9.417136):1.566627);
+
+Processing (((h1#0.5:2.0,D:4.0):3.0,((A:2.0,B:2.0):3.0,(C:2.0)h1#0.5:3.0):2.0):2.0,E:9.0);...
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Square diff in paths: 4
+Absolute diff in paths: 2
+WARNING! NOT ULTRAMETRIC!!!
+Random seed: 2
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+Produced gene tree files: 
+out0.6.2_coal_unit
+((((A_1:2.291561,B_1:2.291561):2.813411,C_1:5.104972):2.956590,(D_1:5.898695,h1#0.5_1:3.898695):2.162867):1.080899,E_1:9.142461);
+((D_1:7.822784,(((A_1:2.834647,B_1:2.834647):2.224355,C_1:5.059002):2.132514,h1#0.5_1:5.191516):0.631268):1.370331,E_1:9.193115);
+(E_1:10.983763,((h1#0.5_1:6.657187,(C_1:6.141945,(A_1:2.412703,B_1:2.412703):3.729242):2.515241):0.759950,D_1:9.417136):1.566627);
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+WARNING! NOT ULTRAMETRIC!!!
+Random seed: 2
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+Produced gene tree files: 
+out0.6.3_coal_unit
+((((A_1:2.291561,B_1:2.291561):2.813411,C_1:5.104972):2.956590,(D_1:5.898695,h1#0.5_1:3.898695):2.162867):1.080899,E_1:9.142461);
+((D_1:7.822784,(((A_1:2.834647,B_1:2.834647):2.224355,C_1:5.059002):2.132514,h1#0.5_1:5.191516):0.631268):1.370331,E_1:9.193115);
+(E_1:10.983763,((h1#0.5_1:6.657187,(C_1:6.141945,(A_1:2.412703,B_1:2.412703):3.729242):2.515241):0.759950,D_1:9.417136):1.566627);
+
+Processing (((h1#0.5:2.0,D:4.0):3.0,((A:2.0,B:2.0):3.0,(C:2.0)h1#0.5:3.0):2.0):2.0,E:9.0)r;...
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Square diff in paths: 4
+Absolute diff in paths: 2
+WARNING! NOT ULTRAMETRIC!!!
+Random seed: 2
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+Produced gene tree files: 
+out0.6.2_coal_unit
+((((A_1:2.291561,B_1:2.291561):2.813411,C_1:5.104972):2.956590,(D_1:5.898695,h1#0.5_1:3.898695):2.162867):1.080899,E_1:9.142461);
+((D_1:7.822784,(((A_1:2.834647,B_1:2.834647):2.224355,C_1:5.059002):2.132514,h1#0.5_1:5.191516):0.631268):1.370331,E_1:9.193115);
+(E_1:10.983763,((h1#0.5_1:6.657187,(C_1:6.141945,(A_1:2.412703,B_1:2.412703):3.729242):2.515241):0.759950,D_1:9.417136):1.566627);
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+WARNING! NOT ULTRAMETRIC!!!
+Random seed: 2
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+Produced gene tree files: 
+out0.6.3_coal_unit
+((((A_1:2.291561,B_1:2.291561):2.813411,C_1:5.104972):2.956590,(D_1:5.898695,h1#0.5_1:3.898695):2.162867):1.080899,E_1:9.142461);
+((D_1:7.822784,(((A_1:2.834647,B_1:2.834647):2.224355,C_1:5.059002):2.132514,h1#0.5_1:5.191516):0.631268):1.370331,E_1:9.193115);
+(E_1:10.983763,((h1#0.5_1:6.657187,(C_1:6.141945,(A_1:2.412703,B_1:2.412703):3.729242):2.515241):0.759950,D_1:9.417136):1.566627);
+
+Processing (((B:.6)h1#.5:.6,A:1.2)s1:.6,(h1#.5:.6,C:1.2)s2:.6)r;...
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+out0.6.2_coal_unit
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Random seed: 2
+Produced gene tree files: 
+out0.6.3_coal_unit
+
+Processing (((B:.6)h1#.5:.6,A:1.2)s1:.6,(h1#.5:.6,C:1.2)s2:.6);...
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Square diff in paths: 0.36
+Absolute diff in paths: 0.6
+WARNING! NOT ULTRAMETRIC!!!
+Random seed: 2
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+Produced gene tree files: 
+out0.6.2_coal_unit
+((h1#.5_1:1.717184,C_1:2.317184):1.157862,(A_1:2.232417,B_1:2.232417):1.242629);
+(C_1:4.405919,(h1#.5_1:3.321777,(B_1:1.342461,A_1:1.342461):2.579316):0.484142);
+(C_1:2.203538,((A_1:1.774547,B_1:1.774547):0.235875,h1#.5_1:1.410423):0.193115);
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+WARNING! NOT ULTRAMETRIC!!!
+Random seed: 2
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+Produced gene tree files: 
+out0.6.3_coal_unit
+((h1#.5_1:1.717184,C_1:2.317184):1.157862,(A_1:2.232417,B_1:2.232417):1.242629);
+(C_1:4.405919,(h1#.5_1:3.321777,(B_1:1.342461,A_1:1.342461):2.579316):0.484142);
+(C_1:2.203538,((A_1:1.774547,B_1:1.774547):0.235875,h1#.5_1:1.410423):0.193115);
+
+Processing ((((B:1,(D:0.6,(E:0.6,F:0.6)s5:0.6)s4:0.6)s3:.6)h1#.5:.6,A:1.2)s1:.6,(h1#.5:.6,C:1.2)s2:.6)r;...
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Square diff in paths: 0.04
+Absolute diff in paths: 0.2
+WARNING! NOT ULTRAMETRIC!!!
+Random seed: 2
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+Produced gene tree files: 
+out0.6.2_coal_unit
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+WARNING! NOT ULTRAMETRIC!!!
+Random seed: 2
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+Produced gene tree files: 
+out0.6.3_coal_unit
+
+Processing ((((B:1,(D:0.6,(E:0.6,F:0.6)s5:0.6)s4:0.6)s3:.6)h1#.5:.6,A:1.2)s1:.6,(h1#.5:.6,C:1.2)s2:.6);...
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+Square diff in paths: 0.04
+Absolute diff in paths: 0.2
+WARNING! NOT ULTRAMETRIC!!!
+Random seed: 2
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+Produced gene tree files: 
+out0.6.2_coal_unit
+((h1#.5_1:2.260888,(F_1:3.542078,(E_1:1.883584,(B_1:1.048594,D_1:1.248594):0.034991):1.658494):1.118810):0.785922,(A_1:3.022269,C_1:3.022269):0.624541);
+(((h1#.5_1:1.056655,C_1:1.656655):0.655545,(((E_1:0.996610,F_1:0.996610):0.646552,D_1:1.043162):0.628633,B_1:1.471795):1.840405):1.390280,A_1:3.702480);
+((A_1:1.862379,(C_1:1.385222,h1#.5_1:0.785222):0.477157):1.079919,(B_1:1.495700,((E_1:1.098141,F_1:1.098141):0.265469,D_1:0.763609):0.932091):2.446598);
+Default Kingman coalescent on all branches.
+Default population size of 10000 on all branches. 
+WARNING! NOT ULTRAMETRIC!!!
+Random seed: 2
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+WARNING: Gene tree is not ultrametric
+Produced gene tree files: 
+out0.6.3_coal_unit
+((h1#.5_1:2.260888,(F_1:3.542078,(E_1:1.883584,(B_1:1.048594,D_1:1.248594):0.034991):1.658494):1.118810):0.785922,(A_1:3.022269,C_1:3.022269):0.624541);
+(((h1#.5_1:1.056655,C_1:1.656655):0.655545,(((E_1:0.996610,F_1:0.996610):0.646552,D_1:1.043162):0.628633,B_1:1.471795):1.840405):1.390280,A_1:3.702480);
+((A_1:1.862379,(C_1:1.385222,h1#.5_1:0.785222):0.477157):1.079919,(B_1:1.495700,((E_1:1.098141,F_1:1.098141):0.265469,D_1:0.763609):0.932091):2.446598);
