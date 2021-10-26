@@ -69,7 +69,7 @@ The following r libraries:
 - Net_HybridLamb_Format.jl
 - UltrametricEvaluation.r
 
-## `SimSpeciesNetworks.r`
+### `SimSpeciesNetworks.r`
 
 **What the script does.**
 Simulates specific number of networks under the following parameters:
@@ -95,7 +95,7 @@ Species networks with at least one no single reticulation.
 **Which scripts it runs automatically.**
 Nothing
 
-## `Net_HybridLamb_Format.jl`
+### `Net_HybridLamb_Format.jl`
 
 **What the script does.** 
 Reads the Species networks, saves the parenthetical format as julia and hybrid lambda format in the temporary path "Output/RJuliaNetworks" and "Output/JuliaForHybLam" respectively.
@@ -117,7 +117,7 @@ Nothing
 
 
 
-## `UltrametricEvaluation.r`
+### `UltrametricEvaluation.r`
 
 **What the script does.** 
 Reads the hybrid lambda output (outerrHybUlt_num.txt) where say if is or not Ultrametric and then puts all the files from the temporary path in the ultrametric or no ultrametric path as appropriate and finally deletes the temporary path.
