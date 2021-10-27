@@ -2,6 +2,8 @@ arg1<-commandArgs(trailingOnly=TRUE)[1]
 arg2<-commandArgs(trailingOnly=TRUE)[2]
 arg3<-commandArgs(trailingOnly=TRUE)[3]
 arg4<-as.numeric(commandArgs(trailingOnly=TRUE)[4])
+arg5<-commandArgs(trailingOnly=TRUE)[5]
+
 eval(parse(text=arg1))
 eval(parse(text=arg2))
 
@@ -286,6 +288,9 @@ Neu<-rep(c(Low1,Upp1),4)
 HybTab1<-data.frame(Gen,Deg,Neu)
 HybTab<-HybTab1[-7,]#No acepta la combinacion c(0,0,0)
 
+###
+#the following function help me to manage the warnings and I found it in this link:
+#https://stackoverflow.com/questions/4948361/how-do-i-save-warnings-and-errors-as-output-from-a-function
 catchToList <- function(expr) {
   val <- NULL
   myWarnings <- NULL
@@ -306,14 +311,14 @@ catchToList <- function(expr) {
 n1<-n1
 
 numbsim1<-numbsim1
-set.seed(arg4,kind = "Mersenne-Twister", normal.kind = "Inversion")
+set.seed(arg4)
 bdNS1 <- sim.bdh.taxa.ssa(n=n1, 
                                  numbsim = numbsim1, 
                                  lambda = lambda, 
                                  mu = mu , 
                                  nu = nu,
                                  hybprops = hybprops, 
-                                 hyb.inher.fxn = NetSim::make.beta.draw(1, 1), 
+                                 hyb.inher.fxn = make.beta.draw(1, 1), 
                                  frac = 1,
                                  mrca = FALSE, 
                                  complete = TRUE, 
@@ -325,6 +330,9 @@ bdNS1 <- bdNS1[!sapply(X = bdNS1, FUN = is.null)]
 #Information about tree goes extinct=0 and no extinct tips are sampled=1
 bdNS1 <- bdNS1[sapply(X = bdNS1, FUN = is.phylo)]
 
+
+
+#
 outWarn<-c()
 for(i in 1:length(bdNS1)){
 tree<-bdNS1[[i]]
@@ -332,11 +340,14 @@ warnn1<-length(catchToList(plot(tree,main="R Network",cex=1))$warnings)
 outWarn<-c(outWarn,warnn1)
 }
 
+#delete pdf, because it generate fatal error with Julia.
 x<-dir()
 file.remove(x)
 
 
 bdNS<-bdNS1[which(outWarn==0)]
+print(length(bdNS1))
+print(length(bdNS))
 
 
 out<-c()
@@ -346,7 +357,7 @@ ro<-any(res%in%"not level-1")
 out<-c(out,ro)
 }
 
-print(out)
+
 
 id<-which(out)
 
@@ -354,4 +365,14 @@ for(j in 1:length(id)){
 tree<-bdNS[[id[j]]]
 write.net(tree,file=paste("RNetwork_",j,sep=""))
 }
+
+
+setwd(arg5)
+bdNSWarnings<-bdNS1[which(outWarn>0)]
+for(k in 1:length(bdNSWarnings)){
+tree<-bdNSWarnings[[k]]
+write.net(tree,file=paste("RNetworkWarn_",k,sep=""))
+}
+
+
 
