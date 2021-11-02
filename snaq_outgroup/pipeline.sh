@@ -8,5 +8,7 @@ for i in `ls cropped_tree*.newick`; do
     hybrid-Lambdav0.6.2 -spcu $i -num 3000 -seed 1453 -o ${i}_gene_trees
 done
 
-# run snaq on the gene trees from hybrid-Lambda with the init-tree from QMC 
-julia snaq_cropped_tree.jl
+# run snaq on the gene trees from hybrid-Lambda with the init-tree from QMC
+for i in `ls *.newick_gene_trees_coal_unit`; do
+    julia snaq_cropped_tree.jl $i
+done
