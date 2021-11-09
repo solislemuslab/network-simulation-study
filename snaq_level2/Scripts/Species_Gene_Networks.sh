@@ -6,19 +6,7 @@ Path0=$(pwd)
 cd ..
 Pat1=$(pwd)
 
-mkdir -p LastRunnings
-n=`ls LastRunnings | wc -l`
-n1=$(($n+1))
-a=`ls`
-cu="Output"
-for entry in $a; do
-	if [ $entry == $cu ]
-	then
-	 mkdir -p "LastRunnings/Output$n1"
-	 mv Output/* "LastRunnings/Output$n1"
-	 rmdir Output
-	fi
-done
+
 
 #Path to src HybridLambda
 #PatSrcHyLa="/home/acosta/Descargas/hybrid-Lambda-0.6.2-beta/src"
@@ -295,6 +283,8 @@ julia SnaqHybridzationPreparing.jl "$PatUltCFact" "$PatUltGT" "$PatMaxCu" "$PatU
 
 
 
-
-
+a=`date +'%m-%d-%Y-%H:%M:%S'`
+MainFileNam=$Tree"_"$Netsim1"_GTnum="$num"_Date:"$a
+cd $Pat1
+mv Output $MainFileNam
 
