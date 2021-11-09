@@ -1,5 +1,5 @@
 using Distributed
-addprocs(4)
+addprocs(15)
 @everywhere using PhyloNetworks
 #using PhyloNetworks
 using PhyloPlots
