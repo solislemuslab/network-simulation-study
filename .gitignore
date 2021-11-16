@@ -155,3 +155,6 @@ Backup[ ]of[ ]*.numbers/
 
 ### initial tasks by GAB nor to be pushed to the project repo
 initial_tasks_gab/**
+
+### do not include get-pop-tree.pl as it is from TICR and we only need it as inspiration
+get-pop-tree/get-pop-tree.pl
