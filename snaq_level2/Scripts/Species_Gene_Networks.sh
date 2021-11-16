@@ -283,8 +283,14 @@ julia SnaqHybridzationPreparing.jl "$PatUltCFact" "$PatUltGT" "$PatMaxCu" "$PatU
 
 
 
+#get name with the parameters chosen
 a=`date +'%m-%d-%Y-%H:%M:%S'`
-MainFileNam=$Tree"_"$Netsim1"_GTnum="$num"_Date:"$a
+MainFileNam1=$Tree"_"$Netsim1"_GTnum="$num"_Date:"$a
+T1=`echo $MainFileNam1 | tr ";""="":""," _-`
+one="${T1/c(/}"
+MainFileNam="${one/)/}"
+
+
 cd $Pat1
 mv Output $MainFileNam
 
