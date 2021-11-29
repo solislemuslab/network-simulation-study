@@ -126,6 +126,7 @@ med="/* "
 la="$ini$pathJHL$med$PatSrcHyLa"
 eval $la
 
+#../src/hybrid-Lambda -spcu ../src/NetworkNameForHLFormat -dot -label -o NameforHyLambda > FilenameToStoreOutput.txt 2>&1
 
 cd $pathJHL
 a=`ls`

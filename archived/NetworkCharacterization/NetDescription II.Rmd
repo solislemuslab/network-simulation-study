@@ -1,5 +1,5 @@
 ---
-title: "Networks characterization from Birth Dead method with NetSim"
+title: "Networks characterization from Birth Dead method with SiPhyNetwork"
 author: 
     - Carlos Acosta
 output: 
@@ -27,10 +27,10 @@ knitr::opts_chunk$set(tidy = TRUE, small.mar = TRUE, comment = "")
 # Packages
 
 ```{r,echo=TRUE}
-library(NetSim) # simulate bd time-tree networks: https://github.com/jjustison/NetSim
-library(TreeSim) # simulate bd time-trees
+
+library(SiPhyNetwork)
 library(ape) # tools for handling phylo objects
-library(diversitree) # tools for estimating lambda and mu
+#library(diversitree) # tools for estimating lambda and mu
 library(phytools)
 library("dplyr")    # Data manipulation
 library(ggplot2)
@@ -318,7 +318,7 @@ return(out1)
 
 # Parameters
 
-Simulation of 300 Trees with the following parameters using NetSim:
+Simulation of 300 Trees with the following parameters using SiPhyNetwork:
 
 * lambda = 0.9
 * mu = 0
@@ -351,13 +351,13 @@ outputNu0.01<-c()
 for(i in 1:nrow(HybTab)){
 numbsim=300
 n1<-15
-bdNS <- NetSim::sim.bdh.taxa.ssa(n=n1, 
+bdNS <- SiPhyNetwork::sim.bdh.taxa.ssa(n=n1, 
                                  numbsim = numbsim, 
                                  lambda = 0.9, 
                                  mu = 0, 
                                  nu = 0.01,
                                  hybprops = HybTab[i,], 
-                                 hyb.inher.fxn = NetSim::make.beta.draw(1, 1), 
+                                 hyb.inher.fxn = SiPhyNetwork::make.beta.draw(1, 1), 
                                  frac = 1,
                                  mrca = FALSE, 
                                  complete = TRUE, 
@@ -367,7 +367,7 @@ bdNS <- NetSim::sim.bdh.taxa.ssa(n=n1,
 #
 bdNS <- bdNS[!sapply(X = bdNS, FUN = is.null)]
 #Information about tree goes extinct=0 and no extinct tips are sampled=1
-bdNS <- bdNS[sapply(X = bdNS, FUN = is.phylo)]#birth dead tree with NetSim with value 0 or 1
+bdNS <- bdNS[sapply(X = bdNS, FUN = is.phylo)]#birth dead tree with SiPhyNetwork with value 0 or 1
 
 res<-NetDescription(bdNS)
 res2<-data.frame(HybTab[i,],res,row.names = NULL)
@@ -381,13 +381,13 @@ outputNu0.02<-c()
 for(i in 1:nrow(HybTab)){
 numbsim=300
 n1<-15
-bdNS <- NetSim::sim.bdh.taxa.ssa(n=n1, 
+bdNS <- SiPhyNetwork::sim.bdh.taxa.ssa(n=n1, 
                                  numbsim = numbsim, 
                                  lambda = 0.9, 
                                  mu = 0, 
                                  nu = 0.02,
                                  hybprops = HybTab[i,], 
-                                 hyb.inher.fxn = NetSim::make.beta.draw(1, 1), 
+                                 hyb.inher.fxn = SiPhyNetwork::make.beta.draw(1, 1), 
                                  frac = 1,
                                  mrca = FALSE, 
                                  complete = TRUE, 
@@ -397,7 +397,7 @@ bdNS <- NetSim::sim.bdh.taxa.ssa(n=n1,
 #
 bdNS <- bdNS[!sapply(X = bdNS, FUN = is.null)]
 #Information about tree goes extinct=0 and no extinct tips are sampled=1
-bdNS <- bdNS[sapply(X = bdNS, FUN = is.phylo)]#birth dead tree with NetSim with value 0 or 1
+bdNS <- bdNS[sapply(X = bdNS, FUN = is.phylo)]#birth dead tree with SiPhyNetwork with value 0 or 1
 
 res<-NetDescription(bdNS)
 res2<-data.frame(HybTab[i,],res,row.names = NULL)
@@ -410,13 +410,13 @@ outputNu0.04<-c()
 for(i in 1:nrow(HybTab)){
 numbsim=300
 n1<-15
-bdNS <- NetSim::sim.bdh.taxa.ssa(n=n1, 
+bdNS <- SiPhyNetwork::sim.bdh.taxa.ssa(n=n1, 
                                  numbsim = numbsim, 
                                  lambda = 0.9, 
                                  mu = 0, 
                                  nu = 0.04,
                                  hybprops = HybTab[i,], 
-                                 hyb.inher.fxn = NetSim::make.beta.draw(1, 1), 
+                                 hyb.inher.fxn = SiPhyNetwork::make.beta.draw(1, 1), 
                                  frac = 1,
                                  mrca = FALSE, 
                                  complete = TRUE, 
@@ -426,7 +426,7 @@ bdNS <- NetSim::sim.bdh.taxa.ssa(n=n1,
 #
 bdNS <- bdNS[!sapply(X = bdNS, FUN = is.null)]
 #Information about tree goes extinct=0 and no extinct tips are sampled=1
-bdNS <- bdNS[sapply(X = bdNS, FUN = is.phylo)]#birth dead tree with NetSim with value 0 or 1
+bdNS <- bdNS[sapply(X = bdNS, FUN = is.phylo)]#birth dead tree with SiPhyNetwork with value 0 or 1
 
 res<-NetDescription(bdNS)
 res2<-data.frame(HybTab[i,],res,row.names = NULL)
@@ -464,13 +464,13 @@ head(outputNu0.04)
 ```{r chunk55.1, cache = TRUE, fig.asp = 1.0, dev.args  = list(pointsize = 10)}
 numbsim=500
 n1<-15
-bdNS <- NetSim::sim.bdh.taxa.ssa(n=n1, 
+bdNS <- SiPhyNetwork::sim.bdh.taxa.ssa(n=n1, 
                                  numbsim = numbsim, 
                                  lambda = 0.9, 
                                  mu = 0, 
                                  nu = 0.03,
                                  hybprops = c(0.5,0.25,0.25), 
-                                 hyb.inher.fxn = NetSim::make.beta.draw(1, 1), 
+                                 hyb.inher.fxn = SiPhyNetwork::make.beta.draw(1, 1), 
                                  frac = 1,
                                  mrca = FALSE, 
                                  complete = TRUE, 

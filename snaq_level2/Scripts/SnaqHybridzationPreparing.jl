@@ -3,7 +3,9 @@
 using PhyloNetworks, PhyloPlots
 using RCall
 using CSV
+###
 using DataFrames
+using DelimitedFiles
 
 #patFactors = "/home/acosta/GitProjects/network-simulation-study/BashScript_Network_NotLevelOne/BashSnaq/Output/SnaqOut/CFactors/"
 #patFactors = "/home/carlos/Testing/Filogenetica/Test1/Output/UltraMetric/CFactors/"
@@ -34,6 +36,17 @@ GenTrees = readdir()
 for i in 1:length(GenTrees)
 	cd(patGT)
 	GT1=GenTrees[i]
+	#Code to delet the sub indice "_1" that Hybrid Lambda add
+	OpenFile = open(GT1)
+	FileLines = readlines(OpenFile)
+
+	for line in 1:length(FileLines)
+		FileLines[line] = replace(FileLines[line ], r"_1:" => s":")
+	end
+
+	#writedlm(GT1, FileLines)
+	###finish code that delet subindice	"_1"
+	
 	TreSel = readMultiTopology(GT1)
 	n1=replace(GT1, "_coal_unit" => ".csv")
 	nameCF=replace(n1,"GeneTree"=>"CF")
