@@ -1,0 +1,96 @@
+#!/usr/bin/julia
+using DataFrames
+using CSV
+
+"""
+This is what get-pop-tree does:
+
+1. Read the qmc input file:
+1.1. Get rid of headers
+1.2. Use ',' to separate fields
+1.3. Create four fields, one for each taxon in the first four columns of the input file, then do the same with the CF frequs in columns 4, 7, and 10 (i.e., exclude the CIs)
+1.4. Pick each line which has both quartet configuration and the relative frequencies of ab|cd, ac|bd, and ad|cb.
+1.5 Pick the one with the largest value, or both of there are two equally large, or three of all of these are equally well represented f_q = 1/3 for each q, and append it to the qmc input file sequentially and just separeted from the one before by a space.
+1.6. Now we have the same information in the format which QMC likes, that is, an array of quartets separated from one another by spaces, in the notation a,b|c,d 
+2. Now, QMC seems to need ids instead of actual taxon names, so we need to replace them in the input file before running QMC.
+3. Run the program with the modified input and an arbitrary output name which will contain the tree
+4. Open the tree file and replace the ids with the actual taxon names
+"""
+
+function qmcformat(csv_file, qmc_file, columns, output)
+    # read the CFs as a data frame
+    quartets = CSV.read(csv_file, DataFrame)
+    
+    # pick taxa from the first four columns in the data frame and select only unique values
+    taxa = unique(vcat(quartets[!, columns[1]],
+                       quartets[!, columns[2]],
+                       quartets[!, columns[3]],
+                       quartets[!, columns[4]]))
+    
+    # create a dict for taxon vs. integer id
+    # if taxa is an array of Ints, it will be converted into String. If it is already String it remains the same type
+    dict_taxa = Dict(string.(taxa) .=> 1:length(taxa))
+    
+    # prepare an array for in 
+    max_cfs = String[]
+    
+    # collect the largest of the CFs, include more than one if there are ties
+    for i in eachrow(quartets)
+        #println(i[columns[5:7]])
+        to_choose = maximum(i[columns[5:7]]) .== collect(i[columns[5:7]])
+        #println(to_choose)
+        for j in names(i[columns[5:7]][to_choose])
+            #println(j)
+            j = j[[3,4,6,7]]
+            #println(j)
+            if j == "1234"
+                #println(string(i.taxon1, ",", i.taxon2, "|", i.taxon3, ",", i.taxon4, "\n"))
+                push!(max_cfs, string(i.taxon1, ",", i.taxon2, "|", i.taxon3, ",", i.taxon4))
+            elseif j == "1324"
+                #println(string(i.taxon1, ",", i.taxon3, "|", i.taxon2, ",", i.taxon4, "\n"))
+                push!(max_cfs, string(i.taxon1, ",", i.taxon3, "|", i.taxon2, ",", i.taxon4))
+            elseif j == "1423"
+                #println(string(i.taxon1, ",", i.taxon4, "|", i.taxon2, ",", i.taxon3, "\n"))
+                push!(max_cfs, string(i.taxon1, ",", i.taxon4, "|", i.taxon2, ",", i.taxon3))
+            else
+                println("CF = ", j)
+                @warn "Unexpected array of taxa in quartet"
+            end
+        end
+    end
+
+    # convert from the original leaf labels to the indices to be used by QMC
+    dict_keys = collect(keys(dict_taxa))
+    dict_values = collect(values(dict_taxa))
+    # flatten the max_cfs array
+    max_cfs = join(max_cfs, " ")
+    # iterate over keys and do replacements TAKE CARE OF NUMBERS WHICH GET MESSED WHEN BOTH AS KEY AND REPLACEMENT
+    for i in 1:length(dict_keys)
+        max_cfs = replace(max_cfs, dict_keys[i] => dict_values[i])
+    end
+    
+    # define here whether to return the formatted string to a textfile or a dict of taxa and indices
+    if lowercase(output) == "qmc_file"    
+        # write to output file joining everything as a single line of quartets separated by spaces
+        open(qmc_file, "w") do f
+            write(f, string(max_cfs, "\n"))
+            flush(f)
+        end
+        println("qmc_file written to ", pwd(), "/", qmc_file)
+    elseif lowercase(output) == "dict"
+        return(dict_taxa)
+    else
+        error("output must be either \"qmc_file\" or \"dict\" only")
+    end
+end
+
+# test the function above
+qmcformat("test.csv", "test.qmc", [1, 2, 3, 4, 5, 8, 11], "qmc_file")
+qmcformat("test.csv", "test.qmc", [1, 2, 3, 4, 5, 8, 11], "dict")
+qmcformat("test.csv", "test.qmc", [1, 2, 3, 4, 5, 8, 11], "blablabla")
+
+
+# test the function above
+qmcformat("1_seqgen.CFs.csv", "1_seqgen.CFs.qmc", [1, 2, 3, 4, 5, 8, 11], "qmc_file")
+qmcformat("1_seqgen.CFs.csv", "1_seqgen.CFs.qmc", [1, 2, 3, 4, 5, 8, 11], "dict")
+qmcformat("1_seqgen.CFs.csv", "1_seqgen.CFs.qmc", [1, 2, 3, 4, 5, 8, 11], "blablabla")
