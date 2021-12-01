@@ -17,57 +17,72 @@ This is what get-pop-tree does:
 4. Open the tree file and replace the ids with the actual taxon names
 """
 
-function get_pop_tree(quartet_file, columns, qmc_bin)
-    quartets = CSV.read(quartet_file, DataFrame)
+function qmcformat(csv_file, qmc_file, columns)
+#    csv_file = "1_seqgen.CFs.csv"
+
+#    columns = [1, 2, 3, 4, 5, 8, 11]
+
+#    qmc_bin = "find-cut-Mac"
+
+
+
+    # read the CFs as a data frame
+    quartets = CSV.read(csv_file, DataFrame)
+    
+    # pick taxa from the first four columns in the data frame and select only unique values
+    taxa = unique(vcat(quartets[!, columns[1]],
+                       quartets[!, columns[2]],
+                       quartets[!, columns[3]],
+                       quartets[!, columns[4]]))
+    
+    # create a dict for taxon vs. integer id
+    dict_taxa = Dict(taxa .=> 1:length(taxa))
+    
+    # prepare an array for in 
+    max_cfs = String[]
+    n
+    # collect the largest of the CFs, include more than one if there are ties
+    for i in eachrow(quartets)
+        #println(i[[5, 8, 11]])
+        to_choose = maximum(i[[5, 8, 11]]) .== collect(i[[5, 8, 11]])
+        #println(to_choose)
+        for j in names(i[[5, 8, 11]][to_choose])
+            #println(j)
+            j = j[[3,4,6,7]]
+            #println(j)
+            if j == "1234"
+                #println(string(i.taxon1, ",", i.taxon2, "|", i.taxon3, ",", i.taxon4, "\n"))
+                push!(max_cfs, string(i.taxon1, ",", i.taxon2, "|", i.taxon3, ",", i.taxon4))
+            elseif j == "1324"
+                #println(string(i.taxon1, ",", i.taxon3, "|", i.taxon2, ",", i.taxon4, "\n"))
+                push!(max_cfs, string(i.taxon1, ",", i.taxon3, "|", i.taxon2, ",", i.taxon4))
+            elseif j == "1423"
+                #println(string(i.taxon1, ",", i.taxon4, "|", i.taxon2, ",", i.taxon3, "\n"))
+                push!(max_cfs, string(i.taxon1, ",", i.taxon4, "|", i.taxon2, ",", i.taxon3))
+            else
+                println("CF = ", j)
+                @warn "Unexpected array of taxa in quartet"
+            end
+        end
+    end
+
+    # write to output file joining everything as a single line of quartets separated by spaces
+    open(qmc_file, "w") do f
+        write(f, string(join(max_cfs, " "), "\n"))
+        flush(f)
+    end
+end
+
+
+# test the function above
+qmcformat("1_seqgen.CFs.csv", "1_seqgen.CFs.qmc", [1, 2, 3, 4, 5, 8, 11])
+
+
+# write get-pop-tree() for julia
+function get_pop_tree(qmc_file, qmc_bin)
+    run(Cmd([qmc_bin, qmc_file]))
+    # reformat QMC's output in order to back-translate the original leaf labels
 end
 
 # simulate arguments below
 
-quartet_file = "1_seqgen.CFs.csv"
-
-columns =  [1, 2, 3, 4, 5, 8, 11]
-
-qmc_bin = "find-cut-Mac"
-
-
-# read the CFs as a data frame
-quartets = CSV.read(quartet_file, DataFrame)
-
-# pick taxa from the first four columns in the data frame and select only unique values
-taxa = unique(vcat(quartets[!, columns[1]],
-                   quartets[!, columns[2]],
-                   quartets[!, columns[3]],
-                   quartets[!, columns[4]]))
-
-# create a dict for taxon vs. integer id
-dict_taxa = Dict(taxa .=> 1:length(taxa))
-
-# prepare an array for in 
-max_cfs = String[]
-
-# collect the largest of the CFs, include more than one if there are ties
-for i in eachrow(quartets)
-#    println(i[[5, 8, 11]])
-    to_choose = maximum(i[[5, 8, 11]]) .== collect(i[[5, 8, 11]])
-#    println(to_choose)
-    for j in names(i[[5, 8, 11]][to_choose])
-#        println(j)
-        j = j[[3,4,6,7]]
-        println(j)
-        if j == "1234"
-            println(string(i.taxon1, ",", i.taxon2, "|", i.taxon3, ",", i.taxon4, "\n"))
-            push!(max_cfs, string(i.taxon1, ",", i.taxon2, "|", i.taxon3, ",", i.taxon4))
-        elseif j == "1324"
-            println(string(i.taxon1, ",", i.taxon3, "|", i.taxon2, ",", i.taxon4, "\n"))
-            push!(max_cfs, string(i.taxon1, ",", i.taxon3, "|", i.taxon2, ",", i.taxon4))
-        elseif j == "1423"
-            println(string(i.taxon1, ",", i.taxon4, "|", i.taxon2, ",", i.taxon3, "\n"))
-            push!(max_cfs, string(i.taxon1, ",", i.taxon4, "|", i.taxon2, ",", i.taxon3))
-        else
-            println("Unexpected array of taxa")
-        end
-    end
-end
-
-# now join everything as is required by QMC
-qmc_input = join(max_cfs, " ")
