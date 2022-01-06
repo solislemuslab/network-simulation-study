@@ -29,12 +29,13 @@ function qmcformat(csv_file, qmc_file, columns, output)
     
     # create a dict for taxon vs. integer id
     # if taxa is an array of Ints, it will be converted into String. If it is already String it remains the same type
+    # dot notation means element-wise
     dict_taxa = Dict(string.(taxa) .=> 1:length(taxa))
     
     # prepare an array for in 
     max_cfs = String[]
     
-    # collect the largest of the CFs, include more than one if there are ties
+    # collect the largest of the CFs, include more than one if there are ties dot-notation is element-wise
     for i in eachrow(quartets)
         #println(i[columns[5:7]])
         to_choose = maximum(i[columns[5:7]]) .== collect(i[columns[5:7]])
@@ -64,11 +65,13 @@ function qmcformat(csv_file, qmc_file, columns, output)
     dict_values = collect(values(dict_taxa))
     # flatten the max_cfs array
     max_cfs = join(max_cfs, " ")
-    # iterate over keys and do replacements TAKE CARE OF NUMBERS WHICH GET MESSED WHEN BOTH AS KEY AND REPLACEMENT
-    for i in 1:length(dict_keys)
-        max_cfs = replace(max_cfs, dict_keys[i] => dict_values[i])
-    end
-    
+######## REPLACEMENT AROUND HERE
+    # iterate over keys and do replacements CHECK HERE https://docs.julialang.org/en/v1/manual/strings/ I'M USING GROUP CAPTURE AND REPLACEMENT
+    # regex tested here https://regex101.com/
+#    for i in 1:length(dict_keys)
+#        max_cfs = replace(max_cfs, r"(,\|\s$^)?[$dict_keys[i]](,\|\s$^)"? => s"$dict_values[i] \1")
+#    end
+######## REPLACEMENT AROUND HERE    
     # define here whether to return the formatted string to a textfile or a dict of taxa and indices
     if lowercase(output) == "qmc_file"    
         # write to output file joining everything as a single line of quartets separated by spaces
@@ -94,3 +97,30 @@ qmcformat("test.csv", "test.qmc", [1, 2, 3, 4, 5, 8, 11], "blablabla")
 qmcformat("1_seqgen.CFs.csv", "1_seqgen.CFs.qmc", [1, 2, 3, 4, 5, 8, 11], "qmc_file")
 qmcformat("1_seqgen.CFs.csv", "1_seqgen.CFs.qmc", [1, 2, 3, 4, 5, 8, 11], "dict")
 qmcformat("1_seqgen.CFs.csv", "1_seqgen.CFs.qmc", [1, 2, 3, 4, 5, 8, 11], "blablabla")
+
+
+
+###### regexp playground
+
+reg = string("1,4|2,5 1,2|3,5 1,6|3,5 1,5|2,6 1,4|3,5 2,6|5,4 1,4|3,2 3,5|6,4 3,5|2,4 1,4|3,6 1,4|5,6 1,4|2,6 1,3|2,6 3,4|2,6 3,5|2,6 1,4|2,5 2,6|5,3 1,3|2,6 1,4|6,5 1,2|5,3 1,4|2,3 1,4|2,6 1,4|5,3 2,4|5,3 1,5|2,6 2,6|4,5 1,4|6,3 1,6|5,3 4,6|5,3 2,6|4,3")
+
+# convert from the original leaf labels to the indices to be used by QMC
+dict_keys = collect(1:6)
+dict_values = ["a", "b", "c", "d", "e", "f"]
+
+# regex tested here https://regex101.com/
+# r"regex" likes the beginning of line, however, it doesn't like interpolation. On th eother hand, Regex("regex") likes the interpolation but not the beginning of line :/
+for i in dict
+    (key, value) = i
+    println(i)
+    println(Regex("(,\|\s$^)?$(key)(,\|\s$^)?"))
+    reg = replace(reg, Regex("(,\|\s$^)?$(key)(,\|\s$^)?") => Regex("$(value)"))
+end
+
+
+# dicts ARE ITERABLE
+dict1 = Dict("a" => 1, "b" => 2, "c" => "Hello", 4 => 10)
+
+for i in dict1
+    println(i)
+end
