@@ -16,6 +16,7 @@ Goal: Study the variables that play a role in the running time of SNaQ.
 ## Running SNaQ
 
 (maybe we want to run it on chtc)
+GAB: I'm not sure, maybe the runtime will be affected by processor architecture, and the way CHTC is built we cannot be sure of whether individual runs went to different processors and thus are showing variation because of this. My feeling is that we need to run all of them on the same machine, or a couple times in different machines so that we can be sure that under the same architecture we are really characterising the runtime as a function of our parameters of interest.
 
 1. Create CF tables (save running time too and memory also)
 2. Run snaq in parallel for h=0 and nruns=1
