@@ -1,9 +1,3 @@
-# IGNORE DATASETS
-*.extnewick
-*.genetrees
-*.hybridlambda
-*/data/*
-
 # don't track cache nor intermediate directories from Rmd compilation
 *_cache/
 *_files/
