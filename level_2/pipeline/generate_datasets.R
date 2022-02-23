@@ -136,10 +136,10 @@ for (i in ntips) {
                                          trait.model = NULL)
             #GAB Code for removing bad networks before writing
             # get rid of null trees which go extinct=0 and no extinct tips are sampled=1
-            networks <- bdNS1[!sapply(X = networks, FUN = is.null)]
-            networks <- bdNS1[sapply(X = networks, FUN = is.phylo)]
-            #GAB code for picking only the networks of interest, Level-2? Ultrametric? We are now interested in taking only the good nets onwards
-            # CODE HERE
+            networks <- networks[!sapply(X = networks, FUN = is.null)]
+            networks <- networks[sapply(X = networks, FUN = is.phylo)]
+            #GAB code for picking only the networks of interest, Networks-only, Ultrametric-only, We are now interested in taking only the good nets onwards
+            ######## CODE HERE #######
 
             #GAB after selecting only the networks that we need, run the julia script extnewick2hybridlambda.jl for format conversion over each element network in networks
             net_counter <- 1
@@ -150,11 +150,16 @@ for (i in ntips) {
                 dir.create(network_filename)
                 net_counter <- net_counter + 1
                 # write the network to a file in extnewick format, inside the directory network_filename
-                SiPhyNetwork::write.net(net = network, file = paste(network_filename, "/", network_filename, ".extnewick", sep =""))
+                SiPhyNetwork::write.net(net = network, file = paste(network_filename,
+                                                                    "/",
+                                                                    network_filename,
+                                                                    ".extnewick", sep =""))
                 # run the script for format conversion in julia using the extnewick filename and an output filename as input
                 # INPUT would be something like net1_ntips15_nu0.2_ngt100/net1_ntips15_nu0.2_ngt100.extnewick 
                 # OUTPUT would be something like net1_ntips15_nu0.2_ngt100/net1_ntips15_nu0.2_ngt100.hybridlambda
-                system(command = paste("julia extnewick2hybridlambda.jl ", INPUT, " ", OUTPUT, sep = ""))
+                system(command = paste("julia extnewick2hybridlambda.jl ",
+                                       INPUT, " ",
+                                       OUTPUT, sep = ""))
             }
         }
     }
