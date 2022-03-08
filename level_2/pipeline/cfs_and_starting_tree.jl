@@ -7,7 +7,7 @@ get-pop-tree.pl script which uses QMC.
 
 Usage:
 
-julia cfs_and_starting_tree.jl path-to-genetrees-file.hybridlambda
+$ julia cfs_and_starting_tree.jl path-to-genetrees-file.hybridlambda
 
 Note: get-pop-tree.pl must be in the path. It should also be executable
 """
