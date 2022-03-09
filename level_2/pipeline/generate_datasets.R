@@ -36,42 +36,7 @@ is.phylo <- function(x) {
 }
 
 # GAB Path generation needs to be carried out by the end, when we need to store each combination of parameters which consist of a network and its gene trees, nothing more than that
-# #####################################################
-# ##2. Creating all the paths
-# #############################################
-# scrip_path <- getwd()#path where are all the scripts needed
-# setwd('..')#Go to the parent path
-# parent_pat <- getwd()#Parent path
-# 
-# #Temporaty path 
-# temp_path <- paste(parent_pat,"/","temporary_path",sep="")
-# 
-# #Into the temporary path save rnetwork, rextrange network, 
-# temp_r_net <- paste(temp_path ,"/","r_network",sep="")
-# temp_rextrange_net <- paste(temp_path ,"/","r_extrange_network",sep="")
-# temp_ju_net <- paste(temp_path ,"/","jul_network",sep="")
-# temp_hybla_net <- paste(temp_path ,"/","hyla_network",sep="")
-# 
-# # Also in temporary path save the ultramecric network
-# temp_ult_met <- paste(temp_path ,"/","Ultrametric",sep="")
-# temp_ult_met_hylaformat <- paste(temp_ult_met,"/","hyla_format",sep="")
-# 
-# temp_not_ult_met <- paste(temp_path ,"/","NotUltrametric",sep="")
-# temp_not_ult_met_hylaformat <- paste(temp_not_ult_met,"/","hyla_format",sep="")
-# #In output pat save only the genetrees.
-# out_path<- paste(parent_pat,"/","Output",sep="")
-# 
-# dir.create(path=temp_path)
-# dir.create(path=temp_r_net)
-# dir.create(path=temp_rextrange_net)
-# dir.create(path=temp_hybla_net)
-# dir.create(path=temp_ju_net)
-# dir.create(path=temp_ult_met)
-# dir.create(path=temp_not_ult_met)
-# dir.create(path=out_path)
-# dir.create(path=temp_ult_met_hylaformat)
-# dir.create(path=temp_not_ult_met_hylaformat)
-# ######################################################################
+
 
 #GAB This is handled by the code which simulates the gts with hybrid-Lambda as far as I remember
 # #########################################
@@ -79,21 +44,21 @@ is.phylo <- function(x) {
 # ###############################################
 # #the following function help me to manage the warnings and I found it in this link:
 # #https://stackoverflow.com/questions/4948361/how-do-i-save-warnings-and-errors-as-output-from-a-function
-# catchToList <- function(expr) {
-#   val <- NULL
-#   myWarnings <- NULL
-#   wHandler <- function(w) {
-#     myWarnings <<- c(myWarnings, w$message)
-#     invokeRestart("muffleWarning")
-#   }
-#   myError <- NULL
-#   eHandler <- function(e) {
-#     myError <<- e$message
-#     NULL
-#   }
-#   val <- tryCatch(withCallingHandlers(expr, warning = wHandler), error = eHandler)
-#   list(value = val, warnings = myWarnings, error=myError)
-# } 
+ catchToList <- function(expr) {
+   val <- NULL
+   myWarnings <- NULL
+   wHandler <- function(w) {
+     myWarnings <<- c(myWarnings, w$message)
+     invokeRestart("muffleWarning")
+   }
+   myError <- NULL
+   eHandler <- function(e) {
+     myError <<- e$message
+     NULL
+   }
+   val <- tryCatch(withCallingHandlers(expr, warning = wHandler), error = eHandler)
+   list(value = val, warnings = myWarnings, error=myError)
+ } 
 # ###############################################################################33
 
 ###################################################
@@ -108,9 +73,14 @@ library(SiPhyNetwork)#library to simulate Networks, this use "ape" as dependence
 # library(geiger)#is.phylo()##Information about tree goes extinct=0 and no extinct tips are sampled=1
 
 #GAB create a directory for storing the networks and their subdirs. the .. is necessary as it assumes that the script generate_datasets.R us run from the directory pipeline, which should only contain code and not data
+pat_scripts <- "/home/carlos/GitProjects/PhyloNetworks/network-simulation-study/level_2/pipeline"
+setwd(pat_scripts)
+
 dir.create(path = "../data")
 
 setwd("../data")
+path_output<-getwd()
+
 #3.1 Simulate networks
 #GAB set each seed as below, They are all pseudo-random, but dependent on the first set.seed(2022) above
 set.seed(sample.int(n = 1e6, size = 1))
@@ -121,6 +91,7 @@ for (i in ntips) {
     for (j in nu) {
         for (k in ngt) {
             # networks_raw will store the 150 networks for each combination of params
+			setwd(path_output)
             networks <- sim.bdh.taxa.ssa(n = i,
                                          numbsim = numbsim, 
                                          lambda = lambda, 
@@ -140,30 +111,83 @@ for (i in ntips) {
             networks <- networks[sapply(X = networks, FUN = is.phylo)]
             #GAB code for picking only the networks of interest, Networks-only, Ultrametric-only, We are now interested in taking only the good nets onwards
             ######## CODE HERE #######
+			
+			##############################
+			# Ommit Extrange Networks
+			##############################
+			#setwd(temp_r_net)#path
+			file_networks <- c()
+			for(n in 1:length(networks)){
+				neet_i <- networks[[n]]
+				ret_numb <- nrow(neet_i$reticulation)
+				if (ret_numb>=1){#omit trees, only select netcors
+					warnn1 <- length(catchToList(plot(neet_i,main="R Network",cex=1))$warnings)#Omit warnings networks
+					if(warnn1==0){
+						file_name_rnetwork <- paste("RNetwork_",n,sep="")
+						file_networks <- c(file_networks,file_name_rnetwork)
+						write.net(neet_i, file = file_name_rnetwork)
+					}
+				}
+			}
+			
+			setwd(pat_scripts)
+			INPUT=path_output
+            system(command = paste("julia extnewick2hybridlambda22.jl ", INPUT, sep = ""))
 
+			NameforHyLambda <- gsub(pattern = "RNetwork", replacement="HyLa_Output", x= file_networks)
+			name_out <- gsub(pattern = "RNetwork", replacement="Ult_out", x= file_networks)
+			hyla_network <- gsub(pattern = "RNetwork", replacement="JulHybrLamb", x= file_networks)
+			net_name_storage <- gsub(pattern = "RNetwork", replacement="net", x= file_networks)
+
+			
+			setwd(path_output)
+			for(m in 1:length(file_networks)){
+				#m=1
+				hyla_network_i <- hyla_network[m]
+				NameforHyLambda_i <- NameforHyLambda[m]
+				name_out_i<- name_out[m]
+				hylamb_instructions <- paste("hybrid-Lambda -spcu ", hyla_network_i, " -dot -label -o ", NameforHyLambda_i, " > ", name_out_i, ".txt 2>&1",sep="")
+				system(hylamb_instructions)
+
+				filename_ultrametricity <- paste(name_out_i,".txt",sep="")
+
+				file.remove(paste(NameforHyLambda_i,"_coal_unit",sep=""))
+				file.remove(paste(NameforHyLambda_i,".ps",sep=""))
+				file.remove(paste(NameforHyLambda_i,".pdf",sep=""))
+				file.remove(paste(NameforHyLambda_i,".eps",sep=""))
+				file.remove(paste(NameforHyLambda_i,".dot",sep=""))
+
+
+				ultrametric_logic <- grep(x=readLines(filename_ultrametricity)[3],pattern="Dot figure generated in file")
+
+				if(length(ultrametric_logic)==0){
+				 file.remove(hyla_network_i)#Remove HL format
+				 file.remove(file_networks[m])#RemoveRnetwork
+				 file.remove(filename_ultrametricity)
+				} else {
+
+					#Ultrametric, we can add more Not ultrametric outputs
+					file.remove(filename_ultrametricity)
+					network_filename <- paste(net_name_storage[m], "_ntips", i, "_nu", j, "_ngt", k)
+					dir.create(network_filename)
+					file.copy(hyla_network_i, network_filename)
+					file.copy(file_networks[m], network_filename)
+					file.remove(hyla_network_i)#Remove HL format
+					file.remove(file_networks[m])#RemoveRnetwork
+				}
+			}
+			
             #GAB after selecting only the networks that we need, run the julia script extnewick2hybridlambda.jl for format conversion over each element network in networks
-            net_counter <- 1
-            for (network in networks) {
-                #GAB the network file in extnewick will be called appending the parameter values as well as a counter for numbering each network from 1 no length(networks)
-                network_filename <- paste("net", net_counter, "_ntips", i, "_nu", j, "_ngt", k)
-                # create the subdirectory for a single network using network_filename
-                dir.create(network_filename)
-                net_counter <- net_counter + 1
-                # write the network to a file in extnewick format, inside the directory network_filename
-                SiPhyNetwork::write.net(net = network, file = paste(network_filename,
-                                                                    "/",
-                                                                    network_filename,
-                                                                    ".extnewick", sep =""))
-                # run the script for format conversion in julia using the extnewick filename and an output filename as input
-                # INPUT would be something like net1_ntips15_nu0.2_ngt100/net1_ntips15_nu0.2_ngt100.extnewick 
-                # OUTPUT would be something like net1_ntips15_nu0.2_ngt100/net1_ntips15_nu0.2_ngt100.hybridlambda
-                system(command = paste("julia extnewick2hybridlambda.jl ",
-                                       INPUT, " ",
-                                       OUTPUT, sep = ""))
-            }
         }
     }
 }
+
+
+
+
+
+
+
 
 #GAB Up to here, we have a series of directories netX_ntipsI_nuJ_ngtK, each with two files, one .extnewick, one .hybridlambda. Now we will iterate over each directory, and run hybrid-Lambda over each .hybridlambda file
 for i in (dir(pattern = "net")) {
