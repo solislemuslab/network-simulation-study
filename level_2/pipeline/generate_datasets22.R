@@ -132,8 +132,8 @@ for (i in ntips) {
 			
 			setwd(pat_scripts)
 			INPUT=path_output
-            system(command = paste("julia extnewick2hybridlambda2.jl ", INPUT, sep = ""))
-			
+            system(command = paste("julia extnewick2hybridlambda22.jl ", INPUT, sep = ""))
+
 			NameforHyLambda <- gsub(pattern = "RNetwork", replacement="HyLa_Output", x= file_networks)
 			name_out <- gsub(pattern = "RNetwork", replacement="Ult_out", x= file_networks)
 			hyla_network <- gsub(pattern = "RNetwork", replacement="JulHybrLamb", x= file_networks)
