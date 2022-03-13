@@ -43,7 +43,7 @@ cfs = readTableCF("$cf_table")
 start_tree = readTopology("$init_tree")
 
 # calculate a h=1 network
-net = snaq!(start_tree, cfs, hmax=h, filename="snaq_output_h$h", seed=seed, runs = nruns)
+net = snaq!(start_tree, cfs, hmax=h, filename="snaq_output_h$(h)_$(cf_table)", seed=seed, runs = nruns)
 
 #exit julia
 exit()
