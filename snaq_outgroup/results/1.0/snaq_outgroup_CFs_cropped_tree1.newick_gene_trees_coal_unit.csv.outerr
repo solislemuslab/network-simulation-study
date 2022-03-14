@@ -1,0 +1,54 @@
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+optimization of topology, BL and inheritance probabilities using:
+ hmax = 3,
+ tolerance parameters: ftolRel=1.0e-6, ftolAbs=1.0e-6,
+                       xtolAbs=0.001, xtolRel=0.01.
+ max number of failed proposals = 75, liktolAbs = 1.0e-6.
+rootname for files: snaq_output_h3_CFs_cropped_tree1.newick_gene_trees_coal_unit.csv
+BEGIN: 20 runs on starting tree (t10_1,t20_1,(t27_1,(((t23_1,(t12_1,(t1_1)#H16:::0.9765704781362574):0.2730923180387432):0.46354773204876304,((((t6_1,t5_1):0.15713709495029032,((t8_1,t9_1):0.008407365598480106)#H13:0.16996984042199573::0.9226647444941773):0.027310519323340374,t2_1):0.34619065401431,#H13:0.04790698813268911::0.0773352555058226):0.08446901740480824):0.1060262024050467,(t18_1,#H16:::0.023429521863742583):0.24203727400060035):0.17760310384321834):0.6551822143730559);
+       using 21 processors
+2022-03-13 21:6:20.018
+      From worker 6:	seed: 52136 for run 5, 2022-03-13 21:6:37.454
+      From worker 8:	seed: 74465 for run 7, 2022-03-13 21:6:37.393
+      From worker 12:	seed: 23629 for run 11, 2022-03-13 21:6:37.631
+      From worker 4:	seed: 77987 for run 3, 2022-03-13 21:6:37.542
+      From worker 3:	seed: 13213 for run 2, 2022-03-13 21:6:37.666
+      From worker 5:	seed: 56626 for run 4, 2022-03-13 21:6:37.728
+      From worker 14:	seed: 77229 for run 13, 2022-03-13 21:6:37.788
+      From worker 10:	seed: 96168 for run 9, 2022-03-13 21:6:37.77
+      From worker 18:	seed: 6153 for run 16, 2022-03-13 21:6:37.871
+      From worker 20:	seed: 5651 for run 18, 2022-03-13 21:6:37.782
+      From worker 2:	seed: 1989 for run 1, 2022-03-13 21:6:37.93
+      From worker 11:	seed: 79333 for run 10, 2022-03-13 21:6:37.934
+      From worker 15:	seed: 57891 for run 20, 2022-03-13 21:6:37.985
+      From worker 17:	seed: 87355 for run 15, 2022-03-13 21:6:38.066
+      From worker 9:	seed: 84249 for run 8, 2022-03-13 21:6:37.988
+      From worker 16:	seed: 39080 for run 14, 2022-03-13 21:6:38.128
+      From worker 21:	seed: 53919 for run 19, 2022-03-13 21:6:38.19
+      From worker 19:	seed: 41940 for run 17, 2022-03-13 21:6:38.221
+      From worker 7:	seed: 57162 for run 6, 2022-03-13 21:6:38.462
+      From worker 13:	seed: 94721 for run 12, 2022-03-13 21:6:38.667
+best network and networks with different hybrid/gene flow directions printed to .networks file
+
+MaxNet is (t20_1,((((t23_1,(t12_1,(t1_1)#H16:::0.9764069575220774):0.2732416110457152):0.463591349676567,((((t6_1,t5_1):0.15725983188116496,((t8_1,t9_1):0.007791360496723624)#H13:0.1710776885294929::0.9224387144707534):0.027207681070220514,t2_1):0.34385612722897646,#H13:0.006907340093504765::0.07756128552924658):0.08673869474769577):0.10598961902892708,(t18_1,#H16:::0.023593042477922616):0.22873951662683153):0.17443008415586797,(t27_1,#H15:::0.01249831983273682):0.6711271373516774):0.6711271373516774,(t10_1)#H15:::0.9875016801672631); 
+with -loglik 8.400436927972109

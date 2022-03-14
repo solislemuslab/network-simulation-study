@@ -1,0 +1,58 @@
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+┌ Warning: 
+│ ERROR found on SNaQ for run 9 seed 96168: BoundsError([0.0024102418141791018, 0.0, 0.39167814249668786, 0.03838436348881329, 0.00033507183257873484, 0.27461323527532855, 0.49381658292907066, 0.6899777880312625, 0.21765999236028255, 0.00024808631711984927, 0.0, 0.4984982687608086, 0.006938542345420827, 0.1634208741852129, 0.0, 0.048613424975074114, 0.0], (4:19,))
+└ @ PhyloNetworks ~/.julia/packages/PhyloNetworks/F0EiL/src/snaq_optimization.jl:1593
+optimization of topology, BL and inheritance probabilities using:
+ hmax = 3,
+ tolerance parameters: ftolRel=1.0e-6, ftolAbs=1.0e-6,
+                       xtolAbs=0.001, xtolRel=0.01.
+ max number of failed proposals = 75, liktolAbs = 1.0e-6.
+rootname for files: snaq_output_h3_CFs_cropped_tree0.5.newick_gene_trees_coal_unit.csv
+BEGIN: 20 runs on starting tree (t12_1,t1_1,(((((t5_1,t6_1):0.1563190249456311,(t8_1,t9_1):0.13286547758050976):0.020506532908016833,t2_1):0.39114972313817137,(t18_1,(((t20_1,(t10_1)#H14:::0.9576841426616151):0.6849101494834312,(t27_1,#H14:::0.04231585733838495):0.6849101494834312):0.1368492019442838)#H13:8.311713103050404e-6::0.965924564223865):0.13011125555967415):0.46054679373070156,(t23_1,#H13:0.645696391263627::0.03407543577613505):0.48779331389910935):0.19371828585344678);
+       using 21 processors
+2022-03-13 18:55:4.91
+      From worker 13:	seed: 74465 for run 7, 2022-03-13 18:55:21.265
+      From worker 10:	seed: 52136 for run 5, 2022-03-13 18:55:21.222
+      From worker 9:	seed: 56626 for run 4, 2022-03-13 18:55:21.244
+      From worker 11:	seed: 57162 for run 6, 2022-03-13 18:55:21.336
+      From worker 4:	seed: 13213 for run 2, 2022-03-13 18:55:21.344
+      From worker 12:	seed: 94721 for run 12, 2022-03-13 18:55:21.413
+      From worker 2:	seed: 1989 for run 1, 2022-03-13 18:55:21.44
+      From worker 6:	seed: 79333 for run 10, 2022-03-13 18:55:21.48
+      From worker 7:	seed: 39080 for run 14, 2022-03-13 18:55:21.652
+      From worker 14:	seed: 77229 for run 13, 2022-03-13 18:55:21.675
+      From worker 8:	seed: 77987 for run 3, 2022-03-13 18:55:21.849
+      From worker 3:	seed: 87355 for run 15, 2022-03-13 18:55:21.896
+      From worker 5:	seed: 23629 for run 11, 2022-03-13 18:55:21.96
+      From worker 16:	seed: 5651 for run 18, 2022-03-13 18:55:21.976
+      From worker 19:	seed: 41940 for run 17, 2022-03-13 18:55:22.018
+      From worker 21:	seed: 96168 for run 9, 2022-03-13 18:55:22.019
+      From worker 20:	seed: 57891 for run 20, 2022-03-13 18:55:22.909
+      From worker 17:	seed: 6153 for run 16, 2022-03-13 18:55:23.041
+      From worker 15:	seed: 53919 for run 19, 2022-03-13 18:55:23.055
+      From worker 18:	seed: 84249 for run 8, 2022-03-13 18:55:23.201
+best network and networks with different hybrid/gene flow directions printed to .networks file
+the network obtained by putting the new hybrid in node -11 is not good, inCycle,gammaz,containRoot: Bool[1, 1, 0], we will skip it
+
+MaxNet is (t12_1,t1_1,(((((t8_1,(t9_1)#H15:::0.9374217965135725):0.15084985514841903,(t5_1,(t6_1,#H15:::0.06257820348642747):0.18608933881306441):0.16440187423073307):0.013351212149670692,t2_1):0.3905883673000693,(t18_1,(((t20_1,(t10_1)#H14:::0.9571743463342824):0.6851515432094233,(t27_1,#H14:::0.04282565366571756):0.6851515432094233):0.1367164197292153)#H13:7.326221217310525e-6::0.9641844445218472):0.13075968647010217):0.46106399020234295,(t23_1,#H13:1.333792939667574::0.0358155554781529):0.43081392881270814):0.1941615378284527); 
+with -loglik 12.803065889273947
