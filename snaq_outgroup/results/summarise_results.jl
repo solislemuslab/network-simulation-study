@@ -774,3 +774,4 @@ fitCF = vcat(fitCF0, fitCF1)
 ggplot(fitCF, aes(x=:obsCF, y=:expCF)) + geom_point(alpha=0.1) +
   xlab("CF observed in gene trees") + ylab("CF expected under tree (h=0) or network (h=1)") +
   facet_grid(R"~h", labeller = label_both)
+
