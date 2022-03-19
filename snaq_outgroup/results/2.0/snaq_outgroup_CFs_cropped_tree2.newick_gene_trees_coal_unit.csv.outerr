@@ -1,0 +1,55 @@
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+WARNING: failed to select UTF-8 encoding, using ASCII
+optimization of topology, BL and inheritance probabilities using:
+ hmax = 3,
+ tolerance parameters: ftolRel=1.0e-6, ftolAbs=1.0e-6,
+                       xtolAbs=0.001, xtolRel=0.01.
+ max number of failed proposals = 75, liktolAbs = 1.0e-6.
+rootname for files: snaq_output_h3_CFs_cropped_tree2.newick_gene_trees_coal_unit.csv
+BEGIN: 20 runs on starting tree (t10_1,t20_1,(t27_1,((((t23_1)#H14:::0.9866784236577699,(t12_1,(t1_1,#H14:::0.013321576342230057):0.2596100689565923):0.192634486777029):0.47962250228788766,(((t5_1,(t6_1)#H13:::0.986446414480225):0.16569973896992016,t2_1):0.010453151709440854,(t9_1,t8_1):0.11844169694007714):0.4197463220407598):0.11304134482650019,(t18_1,#H13:::0.013553585519775053):4.51290426206147):0.15466116772938474):0.6641852002285558);
+       using 21 processors
+2022-03-13 20:23:41.841
+      From worker 3:	seed: 13213 for run 2, 2022-03-13 20:23:58.34
+      From worker 8:	seed: 57162 for run 6, 2022-03-13 20:23:58.337
+      From worker 17:	seed: 39080 for run 14, 2022-03-13 20:23:58.43
+      From worker 19:	seed: 6153 for run 16, 2022-03-13 20:23:58.519
+      From worker 15:	seed: 77229 for run 13, 2022-03-13 20:23:58.535
+      From worker 10:	seed: 84249 for run 8, 2022-03-13 20:23:58.595
+      From worker 5:	seed: 57891 for run 20, 2022-03-13 20:23:58.602
+      From worker 6:	seed: 56626 for run 4, 2022-03-13 20:23:58.681
+      From worker 18:	seed: 87355 for run 15, 2022-03-13 20:23:58.686
+      From worker 20:	seed: 41940 for run 17, 2022-03-13 20:23:58.745
+      From worker 21:	seed: 5651 for run 18, 2022-03-13 20:23:58.793
+      From worker 9:	seed: 74465 for run 7, 2022-03-13 20:23:58.894
+      From worker 14:	seed: 94721 for run 12, 2022-03-13 20:23:59.074
+      From worker 7:	seed: 52136 for run 5, 2022-03-13 20:23:59.169
+      From worker 12:	seed: 79333 for run 10, 2022-03-13 20:23:59.216
+      From worker 13:	seed: 23629 for run 11, 2022-03-13 20:23:59.177
+      From worker 11:	seed: 96168 for run 9, 2022-03-13 20:23:59.238
+      From worker 4:	seed: 77987 for run 3, 2022-03-13 20:23:59.297
+      From worker 2:	seed: 1989 for run 1, 2022-03-13 20:24:0.05
+      From worker 16:	seed: 53919 for run 19, 2022-03-13 20:23:59.928
+best network and networks with different hybrid/gene flow directions printed to .networks file
+the network obtained by putting the new hybrid in node -5 is not good, inCycle,gammaz,containRoot: Bool[1, 1, 0], we will skip it
+
+MaxNet is (t12_1,#H14:0.8646024548139345::0.025834046281953082,(t1_1,(((((t2_1,(t5_1,(t6_1)#H13:::0.9863697191583681):0.1658343274603607):0.010384587272196854,(t9_1,t8_1):0.11837281125388063):0.41980051589849077,((t18_1,#H13:::0.013630280841631865):5.138986922016957,(t27_1,(t10_1,t20_1):0.6642898732580516):0.1545929795878634):0.11309226476550865):0.0)#H14:0.5288491351599878::0.9741659537180469,t23_1):0.20070335703086595):0.17595256685508878); 
+with -loglik 8.086984879769187

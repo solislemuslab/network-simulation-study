@@ -1,4 +1,3 @@
-
 ### Revised simulation strategy as per 2022 (from notion)
 #GAB 1. R script with simulation of networks and gene trees
 #GAB     1. Input: Parameters (lambda, mu, hybprobs, N, ntips, ngt, nu, seed)
