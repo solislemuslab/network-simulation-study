@@ -1,26 +1,18 @@
-#GAB we need to modify this script so that it has two arguments: the file name of the extnewick which comes from SiPhyNetwork, and a filename for conversion to hybridlambda
-#GAB Note that this script should be then operating over one single file at a time: One in, one out. The R script generate_datasets will take care of iterations
-r_net_path = ARGS[1]
+rnetwork=ARGS[1]
+#cd("/home/acosta/GitProjects/network-simulation-study/BashScript_Network_NotLevelOne/RNetworks")
+using PhyloNetworks
 
-cd(r_net_path)#cd("/home/acosta/GitProjects/network-simulation-study/BashScript_Network_NotLevelOne/RNetworks")
-using PhyloNetworks, PhyloPlots
-using RCall
+a=split(rnetwork,"_")
 
-#net0 = readTopology("RNetwork")
-#Nets=split(read(`ls`, String))
-Nets=filter(x->startswith(x, "RNetwork"), readdir())
+netini = readTopology(a[1])
+HyLaFini = hybridlambdaformat(netini)
+print(HyLaFini)
 
-for i in 1:length(Nets)
-	RNet = Nets[i]
-	net0 = readTopology(RNet)
-	#namefileJu = replace(RNet,"RNetwork"=>"RJuliaNet")*".txt"
-	namefileHy = replace(RNet,"RNetwork"=>"JulHybrLamb")
-	#cd(ju_net_path)#ju
-	#writeTopology(net0,namefileJu)
-	#cd(hyla_format_path)#hyla
-	HyLaF = hybridlambdaformat(net0)
-	open(namefileHy, "w") do io
-		write(io, HyLaF)
-	end
-	#cd(r_net_path)
-end 
+for i in 2:length(a)
+	print("_")
+	net0 = readTopology(a[i])
+	HyLaF1 = hybridlambdaformat(net0)
+	#HyLaF0 = HyLaF0*"_"*HyLaF1
+	print(HyLaF1)
+	
+end
