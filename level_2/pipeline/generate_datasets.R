@@ -39,21 +39,18 @@ dir.create(path = "../data")
 #GAB set each seed as below, They are all pseudo-random, but dependent on the first set.seed(2022) above
 
 ##General seed
-set.seed(500)
+set.seed(501)
 
 #GAB nested for for generating the params one at a time for those which vary, i.e., ntips, nu, ngt
 
 for (i in ntips) {
     for (j in nu) {
         for (k in ngt) {
-			
 			setwd("../data")
-            # networks_raw will store the 150 networks for each combination of params
+      # networks_raw will store the 150 networks for each combination of params
 			r_seed <- sample.int(n = 1e6, size = 1)
 			set.seed(r_seed)
-	    #i=30		
-	    #j=nu[1]
-	    #k=ngt[1]		
+	    #i=50; j=nu[1]; k=ngt[1]		
             networks <- sim.bdh.taxa.ssa(n = i,
                                          numbsim = numbsim, 
                                          lambda = lambda, 
@@ -71,9 +68,9 @@ for (i in ntips) {
             # get rid of null trees which go extinct=0 and no extinct tips are sampled=1
             networks <- networks[!sapply(X = networks, FUN = is.null)]
             networks <- networks[sapply(X = networks, FUN = is.phylo)]
-            #GAB code for picking only the networks of interest, Networks-only, Ultrametric-only, We are now interested in taking only the good nets onwards
-            ######## CODE HERE #######
+
 			
+      #Code to select only networks (omit trees)
 			file_networks <- c()
 			for(x in 1:length(networks)){
 			  neet_i <- networks[[x]]
@@ -85,42 +82,49 @@ for (i in ntips) {
 			networks1<-networks[file_networks]
 			
 			
-			################################
-			#need to improve this part because when the string is so long it can not pass to julia
-			#one alternative is split in suitable parts and pas to julia
-			###############################			
-			rnet_for_julia0<-write.net(networks1)
-			
-			rnet_for_julia<-paste0(rnet_for_julia0, collapse = "_")
 			setwd(script_path)
 			
-			net_hyla_format0<-system(paste("extnewick2hybridlambda.jl ", "'", rnet_for_julia, "'", sep = ""),intern = T)
-
-			net_hyla_format <- strsplit(net_hyla_format0, split = "_")[[1]]
+			rnet_for_julia0<-write.net(networks1)#Convert the networks in strings
+			#R can not pass big strings as input to julia, so I stimated empirically the limit and split the process if is needed
+			#this estimation need to be improved for formality, but this estimation runs
+			ndiv<-ceiling(as.numeric(object.size(rnet_for_julia0)/130333))
+			#spliting of the process when is needed
+			nets_hyla_format <- c()
+			for(g in 1:ndiv){
+			  seg_1 <- floor((g-1)*(length(rnet_for_julia0)/ndiv))
+			  seg_2 <- floor(g*(length(rnet_for_julia0)/ndiv))
+			  rnet_for_julia_i<-paste0(rnet_for_julia0[(seg_1+1):seg_2], collapse = "_")
+			  net_hyla_format0<-system(paste("julia extnewick2hybridlambda.jl ", "'", rnet_for_julia_i, "'", sep = ""),intern = T)
+			  snet_hyla_format1 <- strsplit(net_hyla_format0, split = "_")[[1]]
+			  nets_hyla_format <- c(nets_hyla_format,snet_hyla_format1)
+			}
+			length(nets_hyla_format)
 			###################################################################
-			
-			
 			
 			
 			setwd("../data")
 			
-            #GAB after selecting only the networks that we need, run the julia script extnewick2hybridlambda.jl for format conversion over each element network in networks
-            net_counter <- 1
-            for (l in 1:length(networks1)) {
+
+        net_counter <- 1
+        for (l in 1:length(networks1)) {
 				
 				network<-networks1[l]
+				net_hyla_format<-nets_hyla_format[l]
   
-				#kl=net_hyla_format[l]
 				hyla_seed = sample.int(n = 1e6, size = 1)
 				
 				gt_filename <- paste("genetree", net_counter, "_ntips", i, "_nu", j, "_ngt", k, "_rseed", r_seed, "_gtseed",hyla_seed,sep="")
-								
-				w<-system(paste("hybrid-Lambda -spcu ", "'",net_hyla_format[l],"'", " -num ", k," -seed ", hyla_seed, " -o ",gt_filename," > ult_test.txt 2>&1",sep=""))
-
-				ultrametric_logic <- grep(x=readLines("ult_test.txt")[3],pattern="Dot figure generated in file")
 				net_counter <- net_counter + 1
+				
+				system(paste("hybrid-Lambda -spcu ", "'",
+				             net_hyla_format,"'", " -num ", 
+				             k," -seed ", hyla_seed, " -o ",
+				             gt_filename," > ult_test.txt 2>&1",sep=""))
 
-				if(length(ultrametric_logic)==0){
+				ultrametric_logic <- grep(x=readLines("ult_test.txt")[3],pattern="WARNING! NOT ULTRAMETRIC!!!")
+				ultrametric_logic
+				
+				if(length(ultrametric_logic)==0){#Is ultrametric
 				  #GAB the network file in extnewick will be called appending the parameter values as well as a counter for numbering each network from 1 no length(networks)
 				  network_filename <- paste("net", net_counter, "_ntips", i, "_nu", j, "_ngt", k, "_rseed-", r_seed)
 				  # create the subdirectory for a single network using network_filename
@@ -141,3 +145,4 @@ for (i in ntips) {
 				}
 			
 }}}
+
