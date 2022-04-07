@@ -12,8 +12,7 @@ example
 input_net_path = ARGS[1]
 output_net_path = ARGS[2]
 
-using PhyloNetworks, PhyloPlots
-using RCall
+using PhyloNetworks
 
 # read the input netowrk in extnewick
 input_net = readTopology(input_net_path)
