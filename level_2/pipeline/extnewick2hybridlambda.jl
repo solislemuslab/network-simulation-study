@@ -1,18 +1,29 @@
-rnetwork=ARGS[1]
-#cd("/home/acosta/GitProjects/network-simulation-study/BashScript_Network_NotLevelOne/RNetworks")
-using PhyloNetworks
+"""
+extnewick2hybridlambda.jl 
+Script for format conversion between
+extended newick (input) and hybrid-Lambda (output)
+This script reads the first argument as the path to 
+the input file, and the second as the path to the 
+output file.
+example
+ julia extnewick2hybridlambda.jl input.extnewick input.hybridlambda
+"""
 
-a=split(rnetwork,"_")
+input_net_path = ARGS[1]
+output_net_path = ARGS[2]
 
-netini = readTopology(a[1])
-HyLaFini = hybridlambdaformat(netini)
-print(HyLaFini)
+using PhyloNetworks, PhyloPlots
+using RCall
 
-for i in 2:length(a)
-	print("_")
-	net0 = readTopology(a[i])
-	HyLaF1 = hybridlambdaformat(net0)
-	#HyLaF0 = HyLaF0*"_"*HyLaF1
-	print(HyLaF1)
-	
+# read the input netowrk in extnewick
+input_net = readTopology(input_net_path)
+
+# convert to hybridlambda format
+output_net = hybridlambdaformat(input_net)
+
+# write to file
+open(output_net_path, "w") do io
+    write(io, output_net)
 end
+
+exit()
