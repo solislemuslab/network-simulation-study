@@ -46,10 +46,10 @@ set.seed(501)
 for (i in ntips) {
     for (j in nu) {
         for (k in ngt) {
-			setwd("../data")
+            setwd("../data")
       # networks_raw will store the 150 networks for each combination of params
-			r_seed <- sample.int(n = 1e6, size = 1)
-			set.seed(r_seed)
+            r_seed <- sample.int(n = 1e6, size = 1)
+            set.seed(r_seed)
 	    #i=50; j=nu[1]; k=ngt[1]		
             networks <- sim.bdh.taxa.ssa(n = i,
                                          numbsim = numbsim, 
@@ -68,81 +68,82 @@ for (i in ntips) {
             # get rid of null trees which go extinct=0 and no extinct tips are sampled=1
             networks <- networks[!sapply(X = networks, FUN = is.null)]
             networks <- networks[sapply(X = networks, FUN = is.phylo)]
-
-			
+                        
       #Code to select only networks (omit trees)
-			file_networks <- c()
-			for(x in 1:length(networks)){
-			  neet_i <- networks[[x]]
-			  ret_numb <- nrow(neet_i$reticulation)
-			  if (ret_numb>=1){
-			  file_networks <- c(file_networks,x)
-			  }
-			}
-			networks1<-networks[file_networks]
+            file_networks <- c()
+            for(x in 1:length(networks)){
+                neet_i <- networks[[x]]
+                ret_numb <- nrow(neet_i$reticulation)
+                if (ret_numb>=1){
+                    file_networks <- c(file_networks,x)
+                }
+            }
+            networks1<-networks[file_networks]
 			
 			
-			setwd(script_path)
+            setwd(script_path)
 			
-			rnet_for_julia0<-write.net(networks1)#Convert the networks in strings
+            rnet_for_julia0<-write.net(networks1)#Convert the networks in strings
 			#R can not pass big strings as input to julia, so I stimated empirically the limit and split the process if is needed
 			#this estimation need to be improved for formality, but this estimation runs
-			ndiv<-ceiling(as.numeric(object.size(rnet_for_julia0)/130333))
+            ndiv<-ceiling(as.numeric(object.size(rnet_for_julia0)/130333))
 			#spliting of the process when is needed
-			nets_hyla_format <- c()
-			for(g in 1:ndiv){
-			  seg_1 <- floor((g-1)*(length(rnet_for_julia0)/ndiv))
-			  seg_2 <- floor(g*(length(rnet_for_julia0)/ndiv))
-			  rnet_for_julia_i<-paste0(rnet_for_julia0[(seg_1+1):seg_2], collapse = "_")
-			  net_hyla_format0<-system(paste("julia extnewick2hybridlambda.jl ", "'", rnet_for_julia_i, "'", sep = ""),intern = T)
-			  snet_hyla_format1 <- strsplit(net_hyla_format0, split = "_")[[1]]
-			  nets_hyla_format <- c(nets_hyla_format,snet_hyla_format1)
-			}
-			length(nets_hyla_format)
+            nets_hyla_format <- c()
+            for(g in 1:ndiv){
+                seg_1 <- floor((g-1)*(length(rnet_for_julia0)/ndiv))
+                seg_2 <- floor(g*(length(rnet_for_julia0)/ndiv))
+                rnet_for_julia_i<-paste0(rnet_for_julia0[(seg_1+1):seg_2], collapse = "_")
+                net_hyla_format0<-system(paste("julia extnewick2hybridlambda.jl ", "'", rnet_for_julia_i, "'", sep = ""),intern = T)
+                snet_hyla_format1 <- strsplit(net_hyla_format0, split = "_")[[1]]
+                nets_hyla_format <- c(nets_hyla_format,snet_hyla_format1)
+            }
+            length(nets_hyla_format)
 			###################################################################
 			
 			
-			setwd("../data")
+            setwd("../data")
 			
 
-        net_counter <- 1
-        for (l in 1:length(networks1)) {
+            net_counter <- 1
+            for (l in 1:length(networks1)) {
 				
-				network<-networks1[l]
-				net_hyla_format<-nets_hyla_format[l]
+                network<-networks1[l]
+                net_hyla_format<-nets_hyla_format[l]
   
-				hyla_seed = sample.int(n = 1e6, size = 1)
+                hyla_seed = sample.int(n = 1e6, size = 1)
 				
-				gt_filename <- paste("genetree", net_counter, "_ntips", i, "_nu", j, "_ngt", k, "_rseed", r_seed, "_gtseed",hyla_seed,sep="")
-				net_counter <- net_counter + 1
-				
-				system(paste("hybrid-Lambda -spcu ", "'",
-				             net_hyla_format,"'", " -num ", 
-				             k," -seed ", hyla_seed, " -o ",
-				             gt_filename," > ult_test.txt 2>&1",sep=""))
+                gt_filename <- paste("genetree", net_counter, "_ntips", i, "_nu", j, "_ngt", k, "_rseed", r_seed, "_gtseed",hyla_seed,sep="")
+                net_counter <- net_counter + 1
 
-				ultrametric_logic <- grep(x=readLines("ult_test.txt")[3],pattern="WARNING! NOT ULTRAMETRIC!!!")
-				ultrametric_logic
+                system(paste("hybrid-Lambda -spcu ", "'",
+                             net_hyla_format,"'", " -num ", 
+                             k," -seed ", hyla_seed, " -o ",
+                             gt_filename," > ult_test.txt 2>&1",sep=""))
+
+                ultrametric_logic <- grep(x=readLines("ult_test.txt")[3],pattern="WARNING! NOT ULTRAMETRIC!!!")
+                ultrametric_logic
 				
-				if(length(ultrametric_logic)==0){#Is ultrametric
+                if(length(ultrametric_logic)==0){#Is ultrametric
 				  #GAB the network file in extnewick will be called appending the parameter values as well as a counter for numbering each network from 1 no length(networks)
-				  network_filename <- paste("net", net_counter, "_ntips", i, "_nu", j, "_ngt", k, "_rseed-", r_seed)
+                    network_filename <- paste("net", net_counter, "_ntips", i, "_nu", j, "_ngt", k, "_rseed-", r_seed)
 				  # create the subdirectory for a single network using network_filename
-				  dir.create(network_filename)
+                    dir.create(network_filename)
 				  
 				  # write the network to a file in extnewick format, inside the directory network_filename
-				  rnet_name <- paste(network_filename, "/", network_filename, ".extnewick", sep ="")
-				  SiPhyNetwork::write.net(net = network, file = rnet_name)
+                    rnet_name <- paste(network_filename, "/", network_filename, ".extnewick", sep ="")
+                    SiPhyNetwork::write.net(net = network, file = rnet_name)
 
-				  file.remove("ult_test.txt")
-				  file.copy(paste(gt_filename,"_coal_unit",sep=""),network_filename)
-				  file.remove(paste(gt_filename,"_coal_unit",sep=""))
-				}else{
-					  file.remove("ult_test.txt")
-					  file.remove(paste(gt_filename,"_coal_unit",sep=""))
-					}
+                    file.remove("ult_test.txt")
+                    file.copy(paste(gt_filename,"_coal_unit",sep=""),network_filename)
+                    file.remove(paste(gt_filename,"_coal_unit",sep=""))
+                } else {
+                    file.remove("ult_test.txt")
+                    file.remove(paste(gt_filename,"_coal_unit",sep=""))
+                }
 				
-				}
-			
-}}}
+
+            }
+        }
+    }
+}
 
