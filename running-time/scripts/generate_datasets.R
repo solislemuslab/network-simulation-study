@@ -1,3 +1,5 @@
+warning("This function should not be called because it is in the wrong folder")
+
 library(SiPhyNetwork)
 library(ape)
 

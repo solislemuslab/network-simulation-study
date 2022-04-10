@@ -1,5 +1,8 @@
 #GAB we need to modify this script so that it has two arguments: the file name of the extnewick which comes from SiPhyNetwork, and a filename for conversion to hybridlambda
 #GAB Note that this script should be then operating over one single file at a time: One in, one out. The R script generate_datasets will take care of iterations
+
+@warn "This function should not be called since it is in the wrong folder"
+
 r_net_path = ARGS[1]
 ju_net_path = ARGS[2]
 hyla_format_path = ARGS[3]
