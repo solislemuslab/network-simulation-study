@@ -218,6 +218,27 @@ done
 cd ..
 done
 ```
+(finished at 9:51am)
+
+For the cases of n25 and n50, we first have to rename the files so that it is easier to call them:
+- `n25h5-gt50-1` -> `n25-gt50-1`
+
+Real runs (started 4/10 9:55am):
+```shell
+for i in 25 50
+do
+cd n$i
+for j in 50 100 500 1000
+do
+for k in 1 2
+do
+echo "$i, $j, $k"
+gtime -f "mem=%K RSS=%M elapsed=%e cpu.sys=%S" julia ../../../snaq_outgroup/cfs_and_starting_tree.jl n${i}-gt${j}-${k}.tre 2> n${i}-gt${j}-${k}.time 1> n${i}-gt${j}-${k}.log
+done
+done
+cd ..
+done
+```
 
 **To do** 
 - test the julia script (save time and memory also) on each of the cases
