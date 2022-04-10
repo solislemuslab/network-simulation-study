@@ -239,6 +239,7 @@ done
 cd ..
 done
 ```
+(finished 10:03am)
 
 **To do** 
 - test the julia script (save time and memory also) on each of the cases
