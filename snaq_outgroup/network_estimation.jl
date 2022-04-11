@@ -28,7 +28,9 @@ seed = parse(Int, ARGS[5])
 using Distributed
 
 # set up the max number of threads to use based on nruns
-addprocs(nruns)
+# The commands adds nruns threads and we want nruns threads total
+# Note that addprocs(0) does not throw any errors
+addprocs(nruns-1)
 
 # load packages to parallel threads
 @everywhere using PhyloNetworks
