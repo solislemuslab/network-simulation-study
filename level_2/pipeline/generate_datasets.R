@@ -22,9 +22,6 @@ dir.create(path = "../data")
 #3.1 Simulate networks
 #GAB set each seed as below, They are all pseudo-random, but dependent on the first set.seed(2022) above
 
-##General seed
-set.seed(501)
-
 #GAB nested for for generating the params one at a time for those which vary, i.e., ntips, nu, ngt
 
 for (i in ntips) {
