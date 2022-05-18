@@ -15,6 +15,9 @@ is.phylo <- function(x) {
 
 library(SiPhyNetwork) #library to simulate Networks, this use "ape" as dependence
 
+#CA path were the scrips are located
+#CA #patscripts<-"/home/carlos/Desktop/Pruebas/pipeline"
+
 #GAB create a directory for storing the networks and their subdirs. the .. is necessary as it assumes that the script generate_datasets.R us run from the directory pipeline, which should only contain code and not data
 dir.create(path = "../data")
 
