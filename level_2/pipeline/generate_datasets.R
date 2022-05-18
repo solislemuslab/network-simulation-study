@@ -66,6 +66,8 @@ for (i in ntips) {
 
                 dir.create(filename)
                 setwd(filename)
+		#CA
+		#CA #patfile<-getwd()
                 
                 gt_seed <- sample.int(n = 1e6, size = 1)
                 cat("gt_seed = ", gt_seed, "\n", sep = "")
@@ -77,18 +79,31 @@ for (i in ntips) {
                 hybridlambda_filename <- paste(filename, ".hybridlambda", sep = "")
                 
                 # convert from extnewick to hybridlambda
+		#CA we have to indicate where ins the julia script
+		#CA #system(paste(paste("julia ",patscripts,"/extnewick2hybridlambda.jl ",sep=""), 
+			#CA #extnewick_filename, " ", hybridlambda_filename, sep = ""))
+		    
                 system(paste("julia extnewick2hybridlambda.jl ", extnewick_filename, " ", hybridlambda_filename, sep = ""))
 
+		#CA we have to specify the path of hibrid lambda format, so I nomite it as net_hyla_format
+		#CA #net_hyla_format<-paste(patfile,"/",hybridlambda_filename,sep="")   
+		    
                 # run hybrid-Lambda on filename_extnewick and capture the output
+		#CA we have to indicate where ins the julia script
+		#CA #system(paste(paste("julia ",patscripts,"/extnewick2hybridlambda.jl ",sep=""), 
+			#CA #extnewick_filename, " ", hybridlambda_filename, sep = ""))
+		    
                 system(paste("hybrid-Lambda -spcu ", "'",
                              net_hyla_format,"'", " -num ", 
                              k," -seed ", gt_seed, " -o ",
                              hybridlambda_filename," > hybridlambda_output 2>&1",sep=""))
-
+		#CA for Gustavo's Hybrid lambda we have to use "ERROR: Non-ultrametric tree"
                 notultram_bool <- sum(grepl(x = readLines("hybridlambda_output"),
                                         pattern = "WARNING! NOT ULTRAMETRIC!!!"))
                 notultram_bool
-                
+                #CA we have to especify the logic function
+		#CA #if(notultram_bool>0){#No is ultramectric
+		#CA Is not ultrametric, so the path have to be removed
                 if(notultram_bool){#Is ultrametric
 				  #GAB the network file in extnewick will be called appending the parameter values as well as a counter for numbering each network from 1 no length(networks)
                     setwd("../")
