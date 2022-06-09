@@ -16,7 +16,7 @@ their respective order:
 
 Usage: 
 
-$ julia network_estimation.jl cf_table init_tree h nruns seed
+julia network_estimation.jl cf_table init_tree h nruns seed
 """
 # use arguments for feeding tree and cfs
 cf_table = ARGS[1]
