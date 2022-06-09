@@ -91,7 +91,7 @@ sibCross <- function(Tree2){
   EDche <- Tree2$"edge"
   RetRvCiclChe <- Tree2$"reticulation"
   RetRvCiclChe1 <- RetRvCiclChe
-  
+
     if(nrow(RetRvCiclChe) == 0){
         res <- list(infor = "NotRet", ret = NA)
     } else { #GAB esto no cierra?
@@ -107,12 +107,12 @@ sibCross <- function(Tree2){
       res <- any(out)
       out2 <- c(out2, res)
     }
-    
+
     #EDcheWioutCicli
     #Lista de reticulaciones ciclicas
     RetClicli <- matrix(RetRvCiclChe[out2, ], ncol=2)
-    
-    #Remover las reticulaciones ciclicas del file de nodos y de las reticulaciones 
+
+    #Remover las reticulaciones ciclicas del file de nodos y de las reticulaciones
     if(nrow(RetClicli) == 0){
       RetEv <- RetRvCiclChe
       ED <- EDche
@@ -120,13 +120,13 @@ sibCross <- function(Tree2){
       ED <- EDche
       RetEv <- matrix(RetRvCiclChe[!out2, ], ncol=2)
     }
-    
-    
+
+
     RetEv <- RetEv
     ED <- ED
     allret <- unique(as.numeric(RetEv))
-    
-    
+
+
     ##This function jumps until it reaches the nearest node, and in the way record the reticulation nodes which are no level one
     out3 <- c()
     for(i in 1:length(allret)){
@@ -143,59 +143,59 @@ sibCross <- function(Tree2){
       if(length(out) == 0){res <- NA}else{res <- c(reff, out)}
       out3 <- c(out3, res)
     }
-    
+
     NotL1 <- na.omit(unique(out3))
     if(length(NotL1) == 0){RetEv <- RetEv;RetNoLev1=matrix(ncol=2)[-1, ]}else{
       logi1 <- !(RetEv[, 1]%in%NotL1|RetEv[, 2]%in%NotL1)
       RetNoLev1 <- matrix(RetEv[!logi1, ], ncol=2)
       RetEv <- matrix(RetEv[logi1, ], ncol=2)}
-    
-    
+
+
     ###############################################
     #GAB qué hacen las siguientes dos líneas de código?
     ED <- ED
     RetEv <- RetEv
     allret <- unique(as.numeric(RetEv))
     #######
-    
-    
+
+
     if(nrow(RetEv) == 0){
       res <- list(infor=c(rep("not level-1", nrow(RetNoLev1)), rep("RetCiclicI", nrow(RetClicli))), ret=rbind(RetClicli, RetNoLev1))}else{
         outRet <- c()
-        
+
         for(h in 1:nrow(RetEv)){
           RetEv1 <- RetEv[h, ]
           Hib1 <- RetEv1[2]#Hibrid
           Hib2 <- RetEv1[1]#Father
           ED <- Tree2$edge
-          
+
           Or1whitoutRet <- assJupRet(ED, Hib1, allret)#Find the father omiting the reticulations
           Or2whitoutRet <- assJupRet(ED, Hib2, allret)#Find the father omiting the reticulations
-          
+
           Orig1 <- ED[ED[, 2] == Hib1, 1]#Hibrid
           Orig2 <- ED[ED[, 2] == Hib2, 1]#Father
-          
+
           #res <- Orig1 == Orig2
-          
+
           if(Or1whitoutRet == Or2whitoutRet){
             father <- Orig1
             RootTest <- assJupRet(ED, Orig1, allret)#Go direction to the root avoiding the reticulation nodes.
-            
+
             Ident <- identiff(Tree2, Hib1=Hib1, Hib2=Hib2, ED, father, RootTest, allret=allret)
             SiblingCross <- Ident
           }else{SiblingCross <- "Identificable"}#"NoSibCross"
-          
+
           outRet <- c(outRet, SiblingCross)
         }
         outRet <- c(outRet, c(rep("not level-1", nrow(RetNoLev1)), rep("RetCiclicI", nrow(RetClicli))))
-        
+
         RetEv <- rbind(RetEv, rbind(RetClicli, RetNoLev1))
         res <- list(infor=outRet, ret=RetEv)
       }
-    
-    
+
+
   }
-  
+
   return(res)
 }
 
@@ -244,44 +244,44 @@ for (i in ntips) {
       r_seed <- sample.int(n = 1e6, size = 1)
       cat("r_seed = ", r_seed, "\n", sep = "")
       set.seed(r_seed)
-      
-      networks <- sim.bdh.taxa.ssa(n = i, 
-                                   numbsim = numbsim, 
-                                   lambda = lambda, 
-                                   mu = mu , 
-                                   nu = j, 
-                                   hybprops = hybprops, 
-                                   hyb.inher.fxn = make.beta.draw(1, 1), 
-                                   frac = 1, 
-                                   mrca = FALSE, 
-                                   complete = TRUE, 
-                                   stochsampling = FALSE, 
-                                   hyb.rate.fxn = NULL, 
+
+      networks <- sim.bdh.taxa.ssa(n = i,
+                                   numbsim = numbsim,
+                                   lambda = lambda,
+                                   mu = mu ,
+                                   nu = j,
+                                   hybprops = hybprops,
+                                   hyb.inher.fxn = make.beta.draw(1, 1),
+                                   frac = 1,
+                                   mrca = FALSE,
+                                   complete = TRUE,
+                                   stochsampling = FALSE,
+                                   hyb.rate.fxn = NULL,
                                    trait.model = NULL)
       #GAB Code for removing bad networks before writing
       # get rid of null trees which go extinct=0 and no extinct tips are sampled=1
       networks <- networks[!sapply(X = networks, FUN = is.null)]
       networks <- networks[sapply(X = networks, FUN = is.phylo)]
-      
+
       #Code to select only networks (omit trees)
       file_networks <- vector(length = length(networks))
-      for(x in 1:length(networks)){          
+      for(x in 1:length(networks)){
         file_networks[x] <- as.logical(nrow(networks[[x]]$reticulation))
       }
       networks <- networks[file_networks]
-      
+
       net_counter <- 1
       for (y in networks) {
-        
+
         #net_counter <- 3;y=networks[[net_counter]]
-        filename <- paste("network", net_counter, 
-                          "_ntips_", i, 
-                          "_nu_", j, 
+        filename <- paste("network", net_counter,
+                          "_ntips_", i,
+                          "_nu_", j,
                           "_ngt_", k, sep="")
-        
+
         dir.create(filename)
         setwd(filename)
-        
+
         # CA: Not level one warning ########
         res <- sibCross(Tree2=y)$infor
         ro <- any(res%in%"not level-1")
@@ -291,33 +291,34 @@ for (i in ntips) {
           sink()
         }
         ################################
-        
+
         gt_seed <- sample.int(n = 1e6, size = 1)
         cat("gt_seed = ", gt_seed, "\n", sep = "")
         extnewick_filename <- paste(filename, ".extnewick", sep = "")
-        
+
         # write to string file
         SiPhyNetwork::write.net(net = y, file = extnewick_filename)
-        
+
         hybridlambda_filename <- paste(filename, ".hybridlambda", sep = "")
-        
+
         # convert from extnewick to hybridlambda
-        
-        system(paste("julia ../../pipeline/extnewick2hybridlambda.jl ", 
+
+        system(paste("julia ../../pipeline/extnewick2hybridlambda.jl ",
                      extnewick_filename, " ", hybridlambda_filename, sep = ""))
-        
+
         ### we want to simulat gt_replic number of replicate gt samples around here
-          
+
         # run hybrid-Lambda on filename_extnewick and capture the output
-        system(paste("hybrid-Lambda -spcu ", "'", 
-                     hybridlambda_filename, "'", " -num ", 
-                     k, " -seed ", gt_seed, " -o ", 
+        system(paste("hybrid-Lambda -spcu ", "'",
+                     hybridlambda_filename, "'", " -num ",
+                     k, " -seed ", gt_seed, " -o ",
                      hybridlambda_filename, " > hybridlambda_output 2>&1", sep=""))
-        
-        notultram_bool <- sum(grepl(x = readLines("hybridlambda_output"), 
-                                    pattern = "ERROR: Non-ultrametric tree"))#for Gustavo's Hybrid lambda
-        notultram_bool
-        
+
+        notultram_bool <- sum(c(grepl(x = readLines("hybridlambda_output"),
+                                      pattern = "ERROR: Non-ultrametric tree"),
+                                grepl(x = readLines("hybridlambda_output"),
+                                    pattern = "Segmentation fault")))#for Gustavo's Hybrid lambda
+
         if(notultram_bool>0){#Is Not ultrametric
           #GAB the network file in extnewick will be called appending the parameter values as well as a counter for numbering each network from 1 no length(networks)
           setwd("../")
@@ -326,7 +327,7 @@ for (i in ntips) {
           file.remove("hybridlambda_output")
           setwd("../")
         }
-        net_counter <- net_counter + 1
+          net_counter <- net_counter + 1
       } #GAB hay un problema acá, no cierra el corchete
     }
   }
