@@ -216,6 +216,7 @@ nu <- c(0.02, 0.04)
 hybprops <- c(1, 1, 1) # we are starting with all-equal
 ngt <- c(100, 1000, 10000)
 #ngt <- c(50)
+gt_replics <- 30 # we want 30 replicates of gene tree samples
 set.seed(2022) # our initial seed, all the others below will depend on sample.int()
 
 #GAB  original construction of the is.phylo function in geiger. Unnecessary to load the whole thing for just a function
@@ -305,7 +306,8 @@ for (i in ntips) {
         system(paste("julia ../../pipeline/extnewick2hybridlambda.jl ", 
                      extnewick_filename, " ", hybridlambda_filename, sep = ""))
         
-        
+        ### we want to simulat gt_replic number of replicate gt samples around here
+          
         # run hybrid-Lambda on filename_extnewick and capture the output
         system(paste("hybrid-Lambda -spcu ", "'", 
                      hybridlambda_filename, "'", " -num ", 
@@ -325,7 +327,8 @@ for (i in ntips) {
           setwd("../")
         }
         net_counter <- net_counter + 1
-      }
+      } #GAB hay un problema acá, no cierra el corchete
     }
   }
 }
+
