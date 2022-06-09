@@ -29,9 +29,9 @@ The scripts in this repository should be run in the following order
 
 1. `generate_datasets.R`: First at all the script create a path to store the results, then simulate networks with SinphyNetworks library with the combination of parameters defined in the script: numbsim (150), ntips (15, 30 ,50), lambda (0.9), mu(0), nu(0.02, 0.04), hyprobs (1, 1, 1). Only networks are selected. This  process is performed for generate gene trees with lengths defined in the script (100, 1000, 10000).
 
-The networks is stores in his own path with extnewick extention, which name is the combination of parameters used to generate the network plus the gene tree size, the r seed and hybrid lambda seed (these seeds is controlled by general seed).
+The networks is stored in his own path with extnewick extension, whose name includes the combination of parameters used to generate the network plus the gene tree size, the r seed and hybrid lambda seed.
 
-This script itself calls `extnewick2hybridlambda.jl` as the engine of format conversion between extended newick and hybrid-Lambda's specific network format to generate gene trees whit hybrid lambda. If the network is not ultrametric the path where is stores is removed.
+This script itself calls `extnewick2hybridlambda.jl` as the engine of format conversion between extended newick and hybrid-Lambda's specific network format to generate gene trees whit hybrid lambda. If the network is not ultrametric the directory where it is stored is removed.
 
 ```{bash}
 Rscript -f generate_datasets.R
