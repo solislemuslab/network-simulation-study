@@ -80,13 +80,13 @@ for (i in ntips) {
         setwd(filename)
 
         # CA: Not level one warning ########
-        res <- sibCross(Tree2=y)$infor
-        ro <- any(res%in%"not level-1")
-        if(ro){
-          sink("not_level1_warn.txt")
-          cat(res)
-          sink()
-        }
+        #res <- sibCross(Tree2=y)$infor
+        #ro <- any(res%in%"not level-1")
+        #if(ro){
+        #  sink("not_level1_warn.txt")
+        #  cat(res)
+        #  sink()
+        #}
         ################################
 
         gt_seed <- sample.int(n = 1e6, size = 1)
@@ -109,7 +109,7 @@ for (i in ntips) {
         system(paste("hybrid-Lambda -spcu ", "'",
                      hybridlambda_filename, "'", " -num ",
                      k, " -seed ", gt_seed, " -o ",
-                     hybridlambda_filename, " > hybridlambda_output 2>&1", sep=""))
+                     hybridlambda_filename,"_",gt_seed, " > hybridlambda_output 2>&1", sep=""))
 
         notultram_bool <- sum(c(grepl(x = readLines("hybridlambda_output"),
                                       pattern = "ERROR: Non-ultrametric tree"),
@@ -121,6 +121,16 @@ for (i in ntips) {
           setwd("../")
           system(paste("rm -rf ", filename, sep = ""))
         } else {
+          #CA
+          seed_replics <- sample.int(n = 1e6, size = (gt_replics-1))
+          for(l in 1:length(seed_replics)){
+            system(paste("hybrid-Lambda -spcu ", "'",
+                         hybridlambda_filename,"'", " -num ",
+                         k, " -seed ", seed_replics[l], " -o ",
+                         hybridlambda_filename, "_", seed_replics[l], sep=""))#
+            
+          }
+
           file.remove("hybridlambda_output")
           setwd("../")
         }
