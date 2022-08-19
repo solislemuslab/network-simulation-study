@@ -69,16 +69,16 @@ for (i in ntips) {
 
       net_counter <- 1
       for (y in networks) {
-
-        #net_counter <- 3;y=networks[[net_counter]]
+        
+        #net_counter <- 2;y=networks[[net_counter]]
         filename <- paste("network", net_counter,
                           "_ntips_", i,
                           "_nu_", j,
                           "_ngt_", k, sep="")
-
+        
         dir.create(filename)
         setwd(filename)
-
+        
         # CA: Not level one warning ########
         #res <- sibCross(Tree2=y)$infor
         #ro <- any(res%in%"not level-1")
@@ -88,55 +88,44 @@ for (i in ntips) {
         #  sink()
         #}
         ################################
-
+        
+        # CA We have to use it as seed to generare gene tree with "ms"
         gt_seed <- sample.int(n = 1e6, size = 1)
-        cat("gt_seed = ", gt_seed, "\n", sep = "")
+        
         extnewick_filename <- paste(filename, ".extnewick", sep = "")
-
+        
         # write to string file
         SiPhyNetwork::write.net(net = y, file = extnewick_filename)
-
-        hybridlambda_filename <- paste(filename, ".hybridlambda", sep = "")
-
-        # convert from extnewick to hybridlambda
-
-        system(paste("julia ../../pipeline/extnewick2hybridlambda.jl ",
-                     extnewick_filename, " ", hybridlambda_filename, sep = ""))
-
-        ### we want to simulat gt_replic number of replicate gt samples around here
-
-        # run hybrid-Lambda on filename_extnewick and capture the output
-        system(paste("hybrid-Lambda -spcu ", "'",
-                     hybridlambda_filename, "'", " -num ",
-                     k, " -seed ", gt_seed, " -o ",
-                     hybridlambda_filename,"_",gt_seed, " > hybridlambda_output 2>&1", sep=""))
-
-        notultram_bool <- sum(c(grepl(x = readLines("hybridlambda_output"),
-                                      pattern = "ERROR: Non-ultrametric tree"),
-                                grepl(x = readLines("hybridlambda_output"),
-                                    pattern = "Segmentation fault")))#for Gustavo's Hybrid lambda
-
-        if(notultram_bool>0){#Is Not ultrametric
-          #GAB the network file in extnewick will be called appending the parameter values as well as a counter for numbering each network from 1 no length(networks)
-          setwd("../")
-          system(paste("rm -rf ", filename, sep = ""))
-        } else {
-          #CA
-          seed_replics <- sample.int(n = 1e6, size = (gt_replics-1))
-          for(l in 1:length(seed_replics)){
-            system(paste("hybrid-Lambda -spcu ", "'",
-                         hybridlambda_filename,"'", " -num ",
-                         k, " -seed ", seed_replics[l], " -o ",
-                         hybridlambda_filename, "_", seed_replics[l], sep=""))#
-            
-          }
-
-          file.remove("hybridlambda_output")
-          setwd("../")
-        }
-          net_counter <- net_counter + 1
+        
+        #CA
+        network_i <- write.net(net = y)
+        
+        #CA converting networks to ms format
+        system(paste('ms-converter --newick ', "'", network_i , "'>ms_convert_res.txt", sep = ""))
+        
+        #CA reading ms format file and change the gene tree number (by default is 1)
+        #CA ms 15 1 -T -I 15 1 1 1......
+        #CA for do that split out form  position when -T appear to the end of the string
+        #split out from the beginning the string until the number 1 that make reference to the gene tree number 
+        #and change it for the number of gene tree that we define before
+        ms_convert_res <- readLines("ms_convert_res.txt")
+        pos_cut_ms_string <- regexpr(pattern="-T", text= ms_convert_res)[1]-3
+        tail_ms_mod <- substring(ms_convert_res, pos_cut_ms_string + 2, nchar(ms_convert_res))
+        head_ms_mod <- substring(ms_convert_res, 1, pos_cut_ms_string)
+        
+        # Generate gene tree with ms
+        system(paste(head_ms_mod , k , tail_ms_mod, 
+                     ">", filename,"_GT.txt", sep=""))
+        
+        net_counter <- net_counter + 1
+        
+        setwd("../")
+        
+        
+        
       } #GAB hay un problema acá, no cierra el corchete
     }
   }
 }
+
 
