@@ -15,12 +15,12 @@ Goal: This simulation study will investigate the performance of SNaQ when the tr
   install.packages("ape")
   ```
 - [ms converter](https://github.com/NathanKolbow/msConverter)
-```
-git clone https://github.com/NathanKolbow/msConverter.git
-cd msConverter
-cmake -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build --config Release
-```
+  ```
+  git clone https://github.com/NathanKolbow/msConverter.git
+  cd msConverter
+  cmake -B build -DCMAKE_BUILD_TYPE=Release
+  cmake --build build --config Release
+  ```
   + The executable `ms-converter` will then be located in `build/ms-converter`
   + In Mac, you might need to install `cmake` first: `brew install cmake` using [Homebrew](https://brew.sh/)
   + In Mac, you might also need to install BOOST: `brew install boost`
@@ -56,9 +56,10 @@ The scripts in this repository should be run in the following order
     - Number of replicates per simulation scenario (gt_replics)
     - Global seed
   - **Output:** The script produces one folder per (network, gene trees) pair. The output folder has the name `network1_ntips_15_nu_0.02_ngt_100_rep_1` where `network1` corresponds to the first simulated network (out of the numbsim specified), `ntips, nu, ngt` correspond to the parameters that vary in the simulations, and `rep_1` corresponds to the first replicate of this simulation scenario (out of gt_replics).
-```{bash}
-Rscript -f generate_datasets.R
-```
+  - **Usage:**
+  ```{bash}
+  Rscript -f generate_datasets.R
+  ```
 
 
 
