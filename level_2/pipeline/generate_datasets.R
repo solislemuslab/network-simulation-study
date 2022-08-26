@@ -124,7 +124,7 @@ for (i in ntips) {
           " ,lambda=",lambda,   
           " ,mu=",mu,    
           " ,nu=",j,
-          " ,hybprops=",hybprobs[1],",",hybprobs[2],",",hybprobs[3],
+          " ,hybprops=",hybprops[1],",",hybprops[2],",",hybprops[3],
           " ,ngt=",k,
           ", global seed=", globalseed, 
           ", SiPhyNetwork seed=", r_seed,
@@ -137,7 +137,7 @@ for (i in ntips) {
           
           net_counter <- net_counter + 1
         }
-      } # GAB hay un problema acá, no cierra el corchete
+      }
     }
   }
 }

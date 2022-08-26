@@ -1,5 +1,6 @@
 # folders
 running-time/data/*
+level_2/data/*
 
 # don't track cache nor intermediate directories from Rmd compilation
 *_cache/
