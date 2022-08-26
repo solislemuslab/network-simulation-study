@@ -136,6 +136,7 @@ for (i in ntips) {
           close(logfile)
           
           net_counter <- net_counter + 1
+          setwd("../")
         }
       }
     }
