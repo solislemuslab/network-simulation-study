@@ -1,3 +1,13 @@
+### R functions needed for generate_datasets.R
+### GAB, CA, CSL (August 2022)
+
+
+## GAB: original construction of the is.phylo function in geiger. 
+## Unnecessary to load the whole thing for just a function
+is.phylo <- function(x) {
+  "phylo" %in% class(x)
+}
+
 #We want to know if the reticulation node produce a Tip or Node
 ##This function goes in the direction of the tips omiting reticulations nodes until it finds one no reticulation node
 desJupRet <- function(ED, reff, father, allret){
