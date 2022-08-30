@@ -64,7 +64,7 @@ for (i in ntips) {
       networks <- networks[!sapply(X = networks, FUN = is.null)]
       networks <- networks[sapply(X = networks, FUN = is.phylo)]
 
-      # Code to select only networks (omit trees)
+      # Select only networks (omit trees)
       file_networks <- vector(length = length(networks))
       for(x in 1:length(networks)){
         file_networks[x] <- as.logical(nrow(networks[[x]]$reticulation))
@@ -102,7 +102,8 @@ for (i in ntips) {
           gt_seed <- sample.int(n = 1e6, size = 1)
           seedms<-file("seedms")
           writeLines(paste(gt_seed), seedms)
-          close(seedms)
+          #GAB: writeLines will close the connection upon completion, so the next line is unnecessary  
+          #close(seedms)
         
           # write parenthetical format to file
           extnewick_filename <- paste(filename, ".extnewick", sep = "")
@@ -120,20 +121,21 @@ for (i in ntips) {
           ## writing everything in a logfile inside the folder
           logfile<-file("logfile.txt")
         
-          str = paste("ntips=",i,
-          " ,lambda=",lambda,   
-          " ,mu=",mu,    
-          " ,nu=",j,
-          " ,hybprops=",hybprops[1],",",hybprops[2],",",hybprops[3],
-          " ,ngt=",k,
-          ", global seed=", globalseed, 
-          ", SiPhyNetwork seed=", r_seed,
-          ", this is network ", net_counter, 
-          ", ms seed=", gt_seed, "\n",
-           mscmd)
+          str <- paste("ntips=",i,
+            " ,lambda=",lambda,   
+            " ,mu=",mu,    
+            " ,nu=",j,
+            " ,hybprops=",hybprops[1],",",hybprops[2],",",hybprops[3],
+            " ,ngt=",k,
+            ", global seed=", globalseed, 
+            ", SiPhyNetwork seed=", r_seed,
+            ", this is network ", net_counter, 
+            ", ms seed=", gt_seed, "\n",
+             mscmd)
         
           writeLines(str, logfile)
-          close(logfile)
+          #GAB: closing the connection is unncessary  
+          #close(logfile)
           
           net_counter <- net_counter + 1
           setwd("../")
