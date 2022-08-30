@@ -1,0 +1,2319 @@
+../data/network10_ntips_15_nu_0.02_ngt_10_rep_5:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   845 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   604 Aug 30 21:08 network10_ntips_15_nu_0.02_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network10_ntips_15_nu_0.02_ngt_15_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   849 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   608 Aug 30 21:08 network10_ntips_15_nu_0.02_ngt_15_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   384 Aug 30 21:08 network10_ntips_15_nu_0.02_ngt_15_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network10_ntips_15_nu_0.02_ngt_5_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   753 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   514 Aug 30 21:08 network10_ntips_15_nu_0.02_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   337 Aug 30 21:08 network10_ntips_15_nu_0.02_ngt_5_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network10_ntips_15_nu_0.04_ngt_10_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   885 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   646 Aug 30 21:08 network10_ntips_15_nu_0.04_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   426 Aug 30 21:08 network10_ntips_15_nu_0.04_ngt_10_rep_5.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network10_ntips_15_nu_0.04_ngt_15_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   966 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   725 Aug 30 21:08 network10_ntips_15_nu_0.04_ngt_15_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   471 Aug 30 21:08 network10_ntips_15_nu_0.04_ngt_15_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network10_ntips_15_nu_0.04_ngt_5_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   775 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   536 Aug 30 21:08 network10_ntips_15_nu_0.04_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network10_ntips_15_nu_0.04_ngt_5_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network10_ntips_30_nu_0.02_ngt_10_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1390 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1149 Aug 30 21:08 network10_ntips_30_nu_0.02_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   742 Aug 30 21:08 network10_ntips_30_nu_0.02_ngt_10_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network10_ntips_30_nu_0.02_ngt_15_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1411 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1170 Aug 30 21:08 network10_ntips_30_nu_0.02_ngt_15_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   740 Aug 30 21:08 network10_ntips_30_nu_0.02_ngt_15_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network10_ntips_30_nu_0.02_ngt_5_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1318 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1081 Aug 30 21:08 network10_ntips_30_nu_0.02_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   696 Aug 30 21:08 network10_ntips_30_nu_0.02_ngt_5_rep_5.ms
+-rw-r--r--   1 balleng balleng     5 Aug 30 21:08 seedms
+
+../data/network10_ntips_30_nu_0.04_ngt_10_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1706 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1465 Aug 30 21:08 network10_ntips_30_nu_0.04_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   964 Aug 30 21:08 network10_ntips_30_nu_0.04_ngt_10_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network10_ntips_30_nu_0.04_ngt_15_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  2040 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1800 Aug 30 21:08 network10_ntips_30_nu_0.04_ngt_15_rep_5.extnewick
+-rw-r--r--   1 balleng balleng  1091 Aug 30 21:08 network10_ntips_30_nu_0.04_ngt_15_rep_5.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network10_ntips_30_nu_0.04_ngt_5_rep_5:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  2216 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1977 Aug 30 21:08 network10_ntips_30_nu_0.04_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network11_ntips_15_nu_0.02_ngt_10_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   755 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   514 Aug 30 21:08 network11_ntips_15_nu_0.02_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network11_ntips_15_nu_0.02_ngt_10_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network11_ntips_15_nu_0.02_ngt_15_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   755 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   514 Aug 30 21:08 network11_ntips_15_nu_0.02_ngt_15_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network11_ntips_15_nu_0.02_ngt_15_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network11_ntips_15_nu_0.02_ngt_5_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   783 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   544 Aug 30 21:08 network11_ntips_15_nu_0.02_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network11_ntips_15_nu_0.02_ngt_5_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network11_ntips_15_nu_0.04_ngt_10_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   833 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   593 Aug 30 21:08 network11_ntips_15_nu_0.04_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   382 Aug 30 21:08 network11_ntips_15_nu_0.04_ngt_10_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network11_ntips_15_nu_0.04_ngt_15_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1010 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   769 Aug 30 21:08 network11_ntips_15_nu_0.04_ngt_15_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   471 Aug 30 21:08 network11_ntips_15_nu_0.04_ngt_15_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network11_ntips_15_nu_0.04_ngt_5_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   832 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   593 Aug 30 21:08 network11_ntips_15_nu_0.04_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   381 Aug 30 21:08 network11_ntips_15_nu_0.04_ngt_5_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network11_ntips_30_nu_0.02_ngt_10_rep_1:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1663 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1422 Aug 30 21:08 network11_ntips_30_nu_0.02_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network11_ntips_30_nu_0.02_ngt_15_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1442 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1201 Aug 30 21:08 network11_ntips_30_nu_0.02_ngt_15_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   786 Aug 30 21:08 network11_ntips_30_nu_0.02_ngt_15_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network11_ntips_30_nu_0.02_ngt_5_rep_1:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1758 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1519 Aug 30 21:08 network11_ntips_30_nu_0.02_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network11_ntips_30_nu_0.04_ngt_10_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1597 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1357 Aug 30 21:08 network11_ntips_30_nu_0.04_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   870 Aug 30 21:08 network11_ntips_30_nu_0.04_ngt_10_rep_1.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network11_ntips_30_nu_0.04_ngt_15_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1717 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1476 Aug 30 21:08 network11_ntips_30_nu_0.04_ngt_15_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   916 Aug 30 21:08 network11_ntips_30_nu_0.04_ngt_15_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network11_ntips_30_nu_0.04_ngt_5_rep_1:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  2023 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1784 Aug 30 21:08 network11_ntips_30_nu_0.04_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network12_ntips_15_nu_0.02_ngt_10_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   754 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   514 Aug 30 21:08 network12_ntips_15_nu_0.02_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network12_ntips_15_nu_0.02_ngt_10_rep_2.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network12_ntips_15_nu_0.02_ngt_15_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   755 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   514 Aug 30 21:08 network12_ntips_15_nu_0.02_ngt_15_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network12_ntips_15_nu_0.02_ngt_15_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network12_ntips_15_nu_0.02_ngt_5_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   783 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   544 Aug 30 21:08 network12_ntips_15_nu_0.02_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network12_ntips_15_nu_0.02_ngt_5_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network12_ntips_15_nu_0.04_ngt_10_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   833 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   593 Aug 30 21:08 network12_ntips_15_nu_0.04_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   382 Aug 30 21:08 network12_ntips_15_nu_0.04_ngt_10_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network12_ntips_15_nu_0.04_ngt_15_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1010 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   769 Aug 30 21:08 network12_ntips_15_nu_0.04_ngt_15_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   471 Aug 30 21:08 network12_ntips_15_nu_0.04_ngt_15_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network12_ntips_15_nu_0.04_ngt_5_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   832 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   593 Aug 30 21:08 network12_ntips_15_nu_0.04_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   381 Aug 30 21:08 network12_ntips_15_nu_0.04_ngt_5_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network12_ntips_30_nu_0.02_ngt_10_rep_2:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1663 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1422 Aug 30 21:08 network12_ntips_30_nu_0.02_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network12_ntips_30_nu_0.02_ngt_15_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1442 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1201 Aug 30 21:08 network12_ntips_30_nu_0.02_ngt_15_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   786 Aug 30 21:08 network12_ntips_30_nu_0.02_ngt_15_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network12_ntips_30_nu_0.02_ngt_5_rep_2:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1758 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1519 Aug 30 21:08 network12_ntips_30_nu_0.02_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network12_ntips_30_nu_0.04_ngt_10_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1597 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1357 Aug 30 21:08 network12_ntips_30_nu_0.04_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   870 Aug 30 21:08 network12_ntips_30_nu_0.04_ngt_10_rep_2.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network12_ntips_30_nu_0.04_ngt_15_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1717 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1476 Aug 30 21:08 network12_ntips_30_nu_0.04_ngt_15_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   916 Aug 30 21:08 network12_ntips_30_nu_0.04_ngt_15_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network12_ntips_30_nu_0.04_ngt_5_rep_2:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  2023 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1784 Aug 30 21:08 network12_ntips_30_nu_0.04_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network13_ntips_15_nu_0.02_ngt_10_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   755 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   514 Aug 30 21:08 network13_ntips_15_nu_0.02_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network13_ntips_15_nu_0.02_ngt_10_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network13_ntips_15_nu_0.02_ngt_15_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   755 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   514 Aug 30 21:08 network13_ntips_15_nu_0.02_ngt_15_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network13_ntips_15_nu_0.02_ngt_15_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network13_ntips_15_nu_0.02_ngt_5_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   783 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   544 Aug 30 21:08 network13_ntips_15_nu_0.02_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network13_ntips_15_nu_0.02_ngt_5_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network13_ntips_15_nu_0.04_ngt_10_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   833 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   593 Aug 30 21:08 network13_ntips_15_nu_0.04_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   382 Aug 30 21:08 network13_ntips_15_nu_0.04_ngt_10_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network13_ntips_15_nu_0.04_ngt_15_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1010 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   769 Aug 30 21:08 network13_ntips_15_nu_0.04_ngt_15_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   471 Aug 30 21:08 network13_ntips_15_nu_0.04_ngt_15_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network13_ntips_15_nu_0.04_ngt_5_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   832 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   593 Aug 30 21:08 network13_ntips_15_nu_0.04_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   381 Aug 30 21:08 network13_ntips_15_nu_0.04_ngt_5_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network13_ntips_30_nu_0.02_ngt_10_rep_3:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1663 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1422 Aug 30 21:08 network13_ntips_30_nu_0.02_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network13_ntips_30_nu_0.02_ngt_15_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1441 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1201 Aug 30 21:08 network13_ntips_30_nu_0.02_ngt_15_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   786 Aug 30 21:08 network13_ntips_30_nu_0.02_ngt_15_rep_3.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network13_ntips_30_nu_0.02_ngt_5_rep_3:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1758 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1519 Aug 30 21:08 network13_ntips_30_nu_0.02_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network13_ntips_30_nu_0.04_ngt_10_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1598 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1357 Aug 30 21:08 network13_ntips_30_nu_0.04_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   870 Aug 30 21:08 network13_ntips_30_nu_0.04_ngt_10_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network13_ntips_30_nu_0.04_ngt_15_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1717 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1476 Aug 30 21:08 network13_ntips_30_nu_0.04_ngt_15_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   916 Aug 30 21:08 network13_ntips_30_nu_0.04_ngt_15_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network13_ntips_30_nu_0.04_ngt_5_rep_3:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  2023 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1784 Aug 30 21:08 network13_ntips_30_nu_0.04_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network14_ntips_15_nu_0.02_ngt_10_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   754 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   514 Aug 30 21:08 network14_ntips_15_nu_0.02_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network14_ntips_15_nu_0.02_ngt_10_rep_4.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network14_ntips_15_nu_0.02_ngt_15_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   755 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   514 Aug 30 21:08 network14_ntips_15_nu_0.02_ngt_15_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network14_ntips_15_nu_0.02_ngt_15_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network14_ntips_15_nu_0.02_ngt_5_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   783 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   544 Aug 30 21:08 network14_ntips_15_nu_0.02_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network14_ntips_15_nu_0.02_ngt_5_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network14_ntips_15_nu_0.04_ngt_10_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   833 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   593 Aug 30 21:08 network14_ntips_15_nu_0.04_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   382 Aug 30 21:08 network14_ntips_15_nu_0.04_ngt_10_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network14_ntips_15_nu_0.04_ngt_15_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1010 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   769 Aug 30 21:08 network14_ntips_15_nu_0.04_ngt_15_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   471 Aug 30 21:08 network14_ntips_15_nu_0.04_ngt_15_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network14_ntips_15_nu_0.04_ngt_5_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   832 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   593 Aug 30 21:08 network14_ntips_15_nu_0.04_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   381 Aug 30 21:08 network14_ntips_15_nu_0.04_ngt_5_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network14_ntips_30_nu_0.02_ngt_10_rep_4:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1663 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1422 Aug 30 21:08 network14_ntips_30_nu_0.02_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network14_ntips_30_nu_0.02_ngt_15_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1442 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1201 Aug 30 21:08 network14_ntips_30_nu_0.02_ngt_15_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   786 Aug 30 21:08 network14_ntips_30_nu_0.02_ngt_15_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network14_ntips_30_nu_0.02_ngt_5_rep_4:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1757 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1519 Aug 30 21:08 network14_ntips_30_nu_0.02_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network14_ntips_30_nu_0.04_ngt_10_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1598 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1357 Aug 30 21:08 network14_ntips_30_nu_0.04_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   870 Aug 30 21:08 network14_ntips_30_nu_0.04_ngt_10_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network14_ntips_30_nu_0.04_ngt_15_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1717 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1476 Aug 30 21:08 network14_ntips_30_nu_0.04_ngt_15_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   916 Aug 30 21:08 network14_ntips_30_nu_0.04_ngt_15_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network14_ntips_30_nu_0.04_ngt_5_rep_4:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  2022 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1784 Aug 30 21:08 network14_ntips_30_nu_0.04_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network15_ntips_15_nu_0.02_ngt_10_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   755 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   514 Aug 30 21:08 network15_ntips_15_nu_0.02_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network15_ntips_15_nu_0.02_ngt_10_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network15_ntips_15_nu_0.02_ngt_15_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   755 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   514 Aug 30 21:08 network15_ntips_15_nu_0.02_ngt_15_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network15_ntips_15_nu_0.02_ngt_15_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network15_ntips_15_nu_0.02_ngt_5_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   783 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   544 Aug 30 21:08 network15_ntips_15_nu_0.02_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network15_ntips_15_nu_0.02_ngt_5_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network15_ntips_15_nu_0.04_ngt_10_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   833 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   593 Aug 30 21:08 network15_ntips_15_nu_0.04_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   382 Aug 30 21:08 network15_ntips_15_nu_0.04_ngt_10_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network15_ntips_15_nu_0.04_ngt_15_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1010 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   769 Aug 30 21:08 network15_ntips_15_nu_0.04_ngt_15_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   471 Aug 30 21:08 network15_ntips_15_nu_0.04_ngt_15_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network15_ntips_15_nu_0.04_ngt_5_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   832 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   593 Aug 30 21:08 network15_ntips_15_nu_0.04_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   381 Aug 30 21:08 network15_ntips_15_nu_0.04_ngt_5_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network15_ntips_30_nu_0.02_ngt_10_rep_5:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1663 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1422 Aug 30 21:08 network15_ntips_30_nu_0.02_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network15_ntips_30_nu_0.02_ngt_15_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1442 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1201 Aug 30 21:08 network15_ntips_30_nu_0.02_ngt_15_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   786 Aug 30 21:08 network15_ntips_30_nu_0.02_ngt_15_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network15_ntips_30_nu_0.02_ngt_5_rep_5:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1758 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1519 Aug 30 21:08 network15_ntips_30_nu_0.02_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network15_ntips_30_nu_0.04_ngt_10_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1598 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1357 Aug 30 21:08 network15_ntips_30_nu_0.04_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   870 Aug 30 21:08 network15_ntips_30_nu_0.04_ngt_10_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network15_ntips_30_nu_0.04_ngt_15_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1717 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1476 Aug 30 21:08 network15_ntips_30_nu_0.04_ngt_15_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   916 Aug 30 21:08 network15_ntips_30_nu_0.04_ngt_15_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network15_ntips_30_nu_0.04_ngt_5_rep_5:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  2023 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1784 Aug 30 21:08 network15_ntips_30_nu_0.04_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network16_ntips_15_nu_0.02_ngt_10_rep_1:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   762 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   521 Aug 30 21:08 network16_ntips_15_nu_0.02_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network16_ntips_15_nu_0.02_ngt_5_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   766 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   527 Aug 30 21:08 network16_ntips_15_nu_0.02_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network16_ntips_15_nu_0.02_ngt_5_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network16_ntips_15_nu_0.04_ngt_10_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   835 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   595 Aug 30 21:08 network16_ntips_15_nu_0.04_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   385 Aug 30 21:08 network16_ntips_15_nu_0.04_ngt_10_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network16_ntips_15_nu_0.04_ngt_15_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1063 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   822 Aug 30 21:08 network16_ntips_15_nu_0.04_ngt_15_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   511 Aug 30 21:08 network16_ntips_15_nu_0.04_ngt_15_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network16_ntips_15_nu_0.04_ngt_5_rep_1:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   913 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   674 Aug 30 21:08 network16_ntips_15_nu_0.04_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network16_ntips_30_nu_0.02_ngt_10_rep_1:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1456 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1215 Aug 30 21:08 network16_ntips_30_nu_0.02_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network16_ntips_30_nu_0.02_ngt_15_rep_1:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1540 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1299 Aug 30 21:08 network16_ntips_30_nu_0.02_ngt_15_rep_1.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network16_ntips_30_nu_0.02_ngt_5_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1558 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1319 Aug 30 21:08 network16_ntips_30_nu_0.02_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   827 Aug 30 21:08 network16_ntips_30_nu_0.02_ngt_5_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network16_ntips_30_nu_0.04_ngt_10_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1677 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1437 Aug 30 21:08 network16_ntips_30_nu_0.04_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   918 Aug 30 21:08 network16_ntips_30_nu_0.04_ngt_10_rep_1.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network16_ntips_30_nu_0.04_ngt_15_rep_1:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1890 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1649 Aug 30 21:08 network16_ntips_30_nu_0.04_ngt_15_rep_1.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network16_ntips_30_nu_0.04_ngt_5_rep_1:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1787 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1548 Aug 30 21:08 network16_ntips_30_nu_0.04_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network17_ntips_15_nu_0.02_ngt_10_rep_2:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   762 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   521 Aug 30 21:08 network17_ntips_15_nu_0.02_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network17_ntips_15_nu_0.02_ngt_5_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   766 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   527 Aug 30 21:08 network17_ntips_15_nu_0.02_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network17_ntips_15_nu_0.02_ngt_5_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network17_ntips_15_nu_0.04_ngt_10_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   835 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   595 Aug 30 21:08 network17_ntips_15_nu_0.04_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   385 Aug 30 21:08 network17_ntips_15_nu_0.04_ngt_10_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network17_ntips_15_nu_0.04_ngt_15_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1063 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   822 Aug 30 21:08 network17_ntips_15_nu_0.04_ngt_15_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   511 Aug 30 21:08 network17_ntips_15_nu_0.04_ngt_15_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network17_ntips_15_nu_0.04_ngt_5_rep_2:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   913 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   674 Aug 30 21:08 network17_ntips_15_nu_0.04_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network17_ntips_30_nu_0.02_ngt_10_rep_2:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1456 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1215 Aug 30 21:08 network17_ntips_30_nu_0.02_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network17_ntips_30_nu_0.02_ngt_15_rep_2:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1540 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1299 Aug 30 21:08 network17_ntips_30_nu_0.02_ngt_15_rep_2.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network17_ntips_30_nu_0.02_ngt_5_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1558 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1319 Aug 30 21:08 network17_ntips_30_nu_0.02_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   827 Aug 30 21:08 network17_ntips_30_nu_0.02_ngt_5_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network17_ntips_30_nu_0.04_ngt_10_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1678 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1437 Aug 30 21:08 network17_ntips_30_nu_0.04_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   918 Aug 30 21:08 network17_ntips_30_nu_0.04_ngt_10_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network17_ntips_30_nu_0.04_ngt_15_rep_2:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1890 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1649 Aug 30 21:08 network17_ntips_30_nu_0.04_ngt_15_rep_2.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network17_ntips_30_nu_0.04_ngt_5_rep_2:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1787 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1548 Aug 30 21:08 network17_ntips_30_nu_0.04_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network18_ntips_15_nu_0.02_ngt_10_rep_3:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   762 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   521 Aug 30 21:08 network18_ntips_15_nu_0.02_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network18_ntips_15_nu_0.02_ngt_5_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   766 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   527 Aug 30 21:08 network18_ntips_15_nu_0.02_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network18_ntips_15_nu_0.02_ngt_5_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network18_ntips_15_nu_0.04_ngt_10_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   835 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   595 Aug 30 21:08 network18_ntips_15_nu_0.04_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   385 Aug 30 21:08 network18_ntips_15_nu_0.04_ngt_10_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network18_ntips_15_nu_0.04_ngt_15_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1063 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   822 Aug 30 21:08 network18_ntips_15_nu_0.04_ngt_15_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   511 Aug 30 21:08 network18_ntips_15_nu_0.04_ngt_15_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network18_ntips_15_nu_0.04_ngt_5_rep_3:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   913 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   674 Aug 30 21:08 network18_ntips_15_nu_0.04_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network18_ntips_30_nu_0.02_ngt_10_rep_3:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1456 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1215 Aug 30 21:08 network18_ntips_30_nu_0.02_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network18_ntips_30_nu_0.02_ngt_15_rep_3:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1540 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1299 Aug 30 21:08 network18_ntips_30_nu_0.02_ngt_15_rep_3.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network18_ntips_30_nu_0.02_ngt_5_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1557 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1319 Aug 30 21:08 network18_ntips_30_nu_0.02_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   827 Aug 30 21:08 network18_ntips_30_nu_0.02_ngt_5_rep_3.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network18_ntips_30_nu_0.04_ngt_10_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1678 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1437 Aug 30 21:08 network18_ntips_30_nu_0.04_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   918 Aug 30 21:08 network18_ntips_30_nu_0.04_ngt_10_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network18_ntips_30_nu_0.04_ngt_15_rep_3:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1890 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1649 Aug 30 21:08 network18_ntips_30_nu_0.04_ngt_15_rep_3.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network18_ntips_30_nu_0.04_ngt_5_rep_3:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1787 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1548 Aug 30 21:08 network18_ntips_30_nu_0.04_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network19_ntips_15_nu_0.02_ngt_10_rep_4:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   762 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   521 Aug 30 21:08 network19_ntips_15_nu_0.02_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network19_ntips_15_nu_0.02_ngt_5_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   766 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   527 Aug 30 21:08 network19_ntips_15_nu_0.02_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network19_ntips_15_nu_0.02_ngt_5_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network19_ntips_15_nu_0.04_ngt_10_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   835 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   595 Aug 30 21:08 network19_ntips_15_nu_0.04_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   385 Aug 30 21:08 network19_ntips_15_nu_0.04_ngt_10_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network19_ntips_15_nu_0.04_ngt_15_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1063 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   822 Aug 30 21:08 network19_ntips_15_nu_0.04_ngt_15_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   511 Aug 30 21:08 network19_ntips_15_nu_0.04_ngt_15_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network19_ntips_15_nu_0.04_ngt_5_rep_4:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   913 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   674 Aug 30 21:08 network19_ntips_15_nu_0.04_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network19_ntips_30_nu_0.02_ngt_10_rep_4:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1456 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1215 Aug 30 21:08 network19_ntips_30_nu_0.02_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network19_ntips_30_nu_0.02_ngt_15_rep_4:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1540 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1299 Aug 30 21:08 network19_ntips_30_nu_0.02_ngt_15_rep_4.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network19_ntips_30_nu_0.02_ngt_5_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1557 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1319 Aug 30 21:08 network19_ntips_30_nu_0.02_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   827 Aug 30 21:08 network19_ntips_30_nu_0.02_ngt_5_rep_4.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network19_ntips_30_nu_0.04_ngt_10_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1678 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1437 Aug 30 21:08 network19_ntips_30_nu_0.04_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   918 Aug 30 21:08 network19_ntips_30_nu_0.04_ngt_10_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network19_ntips_30_nu_0.04_ngt_15_rep_4:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1890 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1649 Aug 30 21:08 network19_ntips_30_nu_0.04_ngt_15_rep_4.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network19_ntips_30_nu_0.04_ngt_5_rep_4:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1786 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1548 Aug 30 21:08 network19_ntips_30_nu_0.04_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network1_ntips_15_nu_0.02_ngt_10_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   851 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   612 Aug 30 21:08 network1_ntips_15_nu_0.02_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   386 Aug 30 21:08 network1_ntips_15_nu_0.02_ngt_10_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network1_ntips_15_nu_0.02_ngt_15_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   773 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   534 Aug 30 21:08 network1_ntips_15_nu_0.02_ngt_15_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network1_ntips_15_nu_0.02_ngt_15_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network1_ntips_15_nu_0.02_ngt_5_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   823 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   586 Aug 30 21:08 network1_ntips_15_nu_0.02_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   383 Aug 30 21:08 network1_ntips_15_nu_0.02_ngt_5_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network1_ntips_15_nu_0.04_ngt_10_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   828 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   590 Aug 30 21:08 network1_ntips_15_nu_0.04_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   381 Aug 30 21:08 network1_ntips_15_nu_0.04_ngt_10_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network1_ntips_15_nu_0.04_ngt_15_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   761 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   522 Aug 30 21:08 network1_ntips_15_nu_0.04_ngt_15_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network1_ntips_15_nu_0.04_ngt_15_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network1_ntips_15_nu_0.04_ngt_5_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   777 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   540 Aug 30 21:08 network1_ntips_15_nu_0.04_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network1_ntips_15_nu_0.04_ngt_5_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network1_ntips_30_nu_0.02_ngt_10_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1337 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1098 Aug 30 21:08 network1_ntips_30_nu_0.02_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   695 Aug 30 21:08 network1_ntips_30_nu_0.02_ngt_10_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network1_ntips_30_nu_0.02_ngt_15_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1558 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1319 Aug 30 21:08 network1_ntips_30_nu_0.02_ngt_15_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   828 Aug 30 21:08 network1_ntips_30_nu_0.02_ngt_15_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network1_ntips_30_nu_0.02_ngt_5_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1405 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1168 Aug 30 21:08 network1_ntips_30_nu_0.02_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   741 Aug 30 21:08 network1_ntips_30_nu_0.02_ngt_5_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network1_ntips_30_nu_0.04_ngt_10_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1510 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1271 Aug 30 21:08 network1_ntips_30_nu_0.04_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   827 Aug 30 21:08 network1_ntips_30_nu_0.04_ngt_10_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network1_ntips_30_nu_0.04_ngt_15_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1617 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1378 Aug 30 21:08 network1_ntips_30_nu_0.04_ngt_15_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   872 Aug 30 21:08 network1_ntips_30_nu_0.04_ngt_15_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network1_ntips_30_nu_0.04_ngt_5_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1657 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1420 Aug 30 21:08 network1_ntips_30_nu_0.04_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   914 Aug 30 21:08 network1_ntips_30_nu_0.04_ngt_5_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network20_ntips_15_nu_0.02_ngt_10_rep_5:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   762 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   521 Aug 30 21:08 network20_ntips_15_nu_0.02_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network20_ntips_15_nu_0.02_ngt_5_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   766 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   527 Aug 30 21:08 network20_ntips_15_nu_0.02_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network20_ntips_15_nu_0.02_ngt_5_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network20_ntips_15_nu_0.04_ngt_10_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   835 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   595 Aug 30 21:08 network20_ntips_15_nu_0.04_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   385 Aug 30 21:08 network20_ntips_15_nu_0.04_ngt_10_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network20_ntips_15_nu_0.04_ngt_15_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1063 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   822 Aug 30 21:08 network20_ntips_15_nu_0.04_ngt_15_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   511 Aug 30 21:08 network20_ntips_15_nu_0.04_ngt_15_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network20_ntips_15_nu_0.04_ngt_5_rep_5:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   912 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   674 Aug 30 21:08 network20_ntips_15_nu_0.04_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network20_ntips_30_nu_0.02_ngt_10_rep_5:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1456 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1215 Aug 30 21:08 network20_ntips_30_nu_0.02_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network20_ntips_30_nu_0.02_ngt_15_rep_5:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1540 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1299 Aug 30 21:08 network20_ntips_30_nu_0.02_ngt_15_rep_5.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network20_ntips_30_nu_0.02_ngt_5_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1558 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1319 Aug 30 21:08 network20_ntips_30_nu_0.02_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   827 Aug 30 21:08 network20_ntips_30_nu_0.02_ngt_5_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network20_ntips_30_nu_0.04_ngt_10_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1678 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1437 Aug 30 21:08 network20_ntips_30_nu_0.04_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   918 Aug 30 21:08 network20_ntips_30_nu_0.04_ngt_10_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network20_ntips_30_nu_0.04_ngt_15_rep_5:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1890 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1649 Aug 30 21:08 network20_ntips_30_nu_0.04_ngt_15_rep_5.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network20_ntips_30_nu_0.04_ngt_5_rep_5:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1787 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1548 Aug 30 21:08 network20_ntips_30_nu_0.04_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network21_ntips_15_nu_0.04_ngt_15_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   776 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   535 Aug 30 21:08 network21_ntips_15_nu_0.04_ngt_15_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network21_ntips_15_nu_0.04_ngt_15_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network21_ntips_30_nu_0.02_ngt_10_rep_1:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1320 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1079 Aug 30 21:08 network21_ntips_30_nu_0.02_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network21_ntips_30_nu_0.02_ngt_5_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1244 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1005 Aug 30 21:08 network21_ntips_30_nu_0.02_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   655 Aug 30 21:08 network21_ntips_30_nu_0.02_ngt_5_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network21_ntips_30_nu_0.04_ngt_10_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1653 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1412 Aug 30 21:08 network21_ntips_30_nu_0.04_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   914 Aug 30 21:08 network21_ntips_30_nu_0.04_ngt_10_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network21_ntips_30_nu_0.04_ngt_15_rep_1:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:09 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1596 Aug 30 21:09 logfile.txt
+-rw-r--r--   1 balleng balleng  1355 Aug 30 21:08 network21_ntips_30_nu_0.04_ngt_15_rep_1.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network21_ntips_30_nu_0.04_ngt_5_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1519 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1280 Aug 30 21:08 network21_ntips_30_nu_0.04_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   827 Aug 30 21:08 network21_ntips_30_nu_0.04_ngt_5_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network22_ntips_15_nu_0.04_ngt_15_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   776 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   535 Aug 30 21:08 network22_ntips_15_nu_0.04_ngt_15_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network22_ntips_15_nu_0.04_ngt_15_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network22_ntips_30_nu_0.02_ngt_10_rep_2:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1320 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1079 Aug 30 21:08 network22_ntips_30_nu_0.02_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network22_ntips_30_nu_0.02_ngt_5_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1244 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1005 Aug 30 21:08 network22_ntips_30_nu_0.02_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   655 Aug 30 21:08 network22_ntips_30_nu_0.02_ngt_5_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network22_ntips_30_nu_0.04_ngt_10_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1653 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1412 Aug 30 21:08 network22_ntips_30_nu_0.04_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   914 Aug 30 21:08 network22_ntips_30_nu_0.04_ngt_10_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network22_ntips_30_nu_0.04_ngt_15_rep_2:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:09 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1596 Aug 30 21:09 logfile.txt
+-rw-r--r--   1 balleng balleng  1355 Aug 30 21:09 network22_ntips_30_nu_0.04_ngt_15_rep_2.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:09 seedms
+
+../data/network22_ntips_30_nu_0.04_ngt_5_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1519 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1280 Aug 30 21:08 network22_ntips_30_nu_0.04_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   827 Aug 30 21:08 network22_ntips_30_nu_0.04_ngt_5_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network23_ntips_15_nu_0.04_ngt_15_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   776 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   535 Aug 30 21:08 network23_ntips_15_nu_0.04_ngt_15_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network23_ntips_15_nu_0.04_ngt_15_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network23_ntips_30_nu_0.02_ngt_10_rep_3:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1320 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1079 Aug 30 21:08 network23_ntips_30_nu_0.02_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network23_ntips_30_nu_0.02_ngt_5_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1244 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1005 Aug 30 21:08 network23_ntips_30_nu_0.02_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   655 Aug 30 21:08 network23_ntips_30_nu_0.02_ngt_5_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network23_ntips_30_nu_0.04_ngt_10_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1653 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1412 Aug 30 21:08 network23_ntips_30_nu_0.04_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   914 Aug 30 21:08 network23_ntips_30_nu_0.04_ngt_10_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network23_ntips_30_nu_0.04_ngt_15_rep_3:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:09 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1595 Aug 30 21:09 logfile.txt
+-rw-r--r--   1 balleng balleng  1355 Aug 30 21:09 network23_ntips_30_nu_0.04_ngt_15_rep_3.extnewick
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:09 seedms
+
+../data/network23_ntips_30_nu_0.04_ngt_5_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1519 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1280 Aug 30 21:08 network23_ntips_30_nu_0.04_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   827 Aug 30 21:08 network23_ntips_30_nu_0.04_ngt_5_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network24_ntips_15_nu_0.04_ngt_15_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   775 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   535 Aug 30 21:08 network24_ntips_15_nu_0.04_ngt_15_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network24_ntips_15_nu_0.04_ngt_15_rep_4.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network24_ntips_30_nu_0.02_ngt_10_rep_4:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1320 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1079 Aug 30 21:08 network24_ntips_30_nu_0.02_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network24_ntips_30_nu_0.02_ngt_5_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1244 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1005 Aug 30 21:08 network24_ntips_30_nu_0.02_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   655 Aug 30 21:08 network24_ntips_30_nu_0.02_ngt_5_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network24_ntips_30_nu_0.04_ngt_10_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1653 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1412 Aug 30 21:08 network24_ntips_30_nu_0.04_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   914 Aug 30 21:08 network24_ntips_30_nu_0.04_ngt_10_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network24_ntips_30_nu_0.04_ngt_15_rep_4:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:09 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1596 Aug 30 21:09 logfile.txt
+-rw-r--r--   1 balleng balleng  1355 Aug 30 21:09 network24_ntips_30_nu_0.04_ngt_15_rep_4.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:09 seedms
+
+../data/network24_ntips_30_nu_0.04_ngt_5_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1519 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1280 Aug 30 21:08 network24_ntips_30_nu_0.04_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   827 Aug 30 21:08 network24_ntips_30_nu_0.04_ngt_5_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network25_ntips_15_nu_0.04_ngt_15_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   776 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   535 Aug 30 21:08 network25_ntips_15_nu_0.04_ngt_15_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   339 Aug 30 21:08 network25_ntips_15_nu_0.04_ngt_15_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network25_ntips_30_nu_0.02_ngt_10_rep_5:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1320 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1079 Aug 30 21:08 network25_ntips_30_nu_0.02_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network25_ntips_30_nu_0.02_ngt_5_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1244 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1005 Aug 30 21:08 network25_ntips_30_nu_0.02_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   655 Aug 30 21:08 network25_ntips_30_nu_0.02_ngt_5_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network25_ntips_30_nu_0.04_ngt_10_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1653 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1412 Aug 30 21:08 network25_ntips_30_nu_0.04_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   914 Aug 30 21:08 network25_ntips_30_nu_0.04_ngt_10_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network25_ntips_30_nu_0.04_ngt_15_rep_5:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:09 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1596 Aug 30 21:09 logfile.txt
+-rw-r--r--   1 balleng balleng  1355 Aug 30 21:09 network25_ntips_30_nu_0.04_ngt_15_rep_5.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:09 seedms
+
+../data/network25_ntips_30_nu_0.04_ngt_5_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1519 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1280 Aug 30 21:08 network25_ntips_30_nu_0.04_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   827 Aug 30 21:08 network25_ntips_30_nu_0.04_ngt_5_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network2_ntips_15_nu_0.02_ngt_10_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   851 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   612 Aug 30 21:08 network2_ntips_15_nu_0.02_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   386 Aug 30 21:08 network2_ntips_15_nu_0.02_ngt_10_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network2_ntips_15_nu_0.02_ngt_15_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   773 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   534 Aug 30 21:08 network2_ntips_15_nu_0.02_ngt_15_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network2_ntips_15_nu_0.02_ngt_15_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network2_ntips_15_nu_0.02_ngt_5_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   823 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   586 Aug 30 21:08 network2_ntips_15_nu_0.02_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   383 Aug 30 21:08 network2_ntips_15_nu_0.02_ngt_5_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network2_ntips_15_nu_0.04_ngt_10_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   828 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   590 Aug 30 21:08 network2_ntips_15_nu_0.04_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   381 Aug 30 21:08 network2_ntips_15_nu_0.04_ngt_10_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network2_ntips_15_nu_0.04_ngt_15_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   761 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   522 Aug 30 21:08 network2_ntips_15_nu_0.04_ngt_15_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network2_ntips_15_nu_0.04_ngt_15_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network2_ntips_15_nu_0.04_ngt_5_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   776 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   540 Aug 30 21:08 network2_ntips_15_nu_0.04_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network2_ntips_15_nu_0.04_ngt_5_rep_2.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network2_ntips_30_nu_0.02_ngt_10_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1336 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1098 Aug 30 21:08 network2_ntips_30_nu_0.02_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   695 Aug 30 21:08 network2_ntips_30_nu_0.02_ngt_10_rep_2.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network2_ntips_30_nu_0.02_ngt_15_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1557 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1319 Aug 30 21:08 network2_ntips_30_nu_0.02_ngt_15_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   828 Aug 30 21:08 network2_ntips_30_nu_0.02_ngt_15_rep_2.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network2_ntips_30_nu_0.02_ngt_5_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1405 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1168 Aug 30 21:08 network2_ntips_30_nu_0.02_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   741 Aug 30 21:08 network2_ntips_30_nu_0.02_ngt_5_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network2_ntips_30_nu_0.04_ngt_10_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1510 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1271 Aug 30 21:08 network2_ntips_30_nu_0.04_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   827 Aug 30 21:08 network2_ntips_30_nu_0.04_ngt_10_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network2_ntips_30_nu_0.04_ngt_15_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1617 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1378 Aug 30 21:08 network2_ntips_30_nu_0.04_ngt_15_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   872 Aug 30 21:08 network2_ntips_30_nu_0.04_ngt_15_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network2_ntips_30_nu_0.04_ngt_5_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1657 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1420 Aug 30 21:08 network2_ntips_30_nu_0.04_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   914 Aug 30 21:08 network2_ntips_30_nu_0.04_ngt_5_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network3_ntips_15_nu_0.02_ngt_10_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   851 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   612 Aug 30 21:08 network3_ntips_15_nu_0.02_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   386 Aug 30 21:08 network3_ntips_15_nu_0.02_ngt_10_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network3_ntips_15_nu_0.02_ngt_15_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   772 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   534 Aug 30 21:08 network3_ntips_15_nu_0.02_ngt_15_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network3_ntips_15_nu_0.02_ngt_15_rep_3.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network3_ntips_15_nu_0.02_ngt_5_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   823 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   586 Aug 30 21:08 network3_ntips_15_nu_0.02_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   383 Aug 30 21:08 network3_ntips_15_nu_0.02_ngt_5_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network3_ntips_15_nu_0.04_ngt_10_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   828 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   590 Aug 30 21:08 network3_ntips_15_nu_0.04_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   381 Aug 30 21:08 network3_ntips_15_nu_0.04_ngt_10_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network3_ntips_15_nu_0.04_ngt_15_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   761 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   522 Aug 30 21:08 network3_ntips_15_nu_0.04_ngt_15_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network3_ntips_15_nu_0.04_ngt_15_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network3_ntips_15_nu_0.04_ngt_5_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   777 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   540 Aug 30 21:08 network3_ntips_15_nu_0.04_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network3_ntips_15_nu_0.04_ngt_5_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network3_ntips_30_nu_0.02_ngt_10_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1336 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1098 Aug 30 21:08 network3_ntips_30_nu_0.02_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   695 Aug 30 21:08 network3_ntips_30_nu_0.02_ngt_10_rep_3.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network3_ntips_30_nu_0.02_ngt_15_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1558 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1319 Aug 30 21:08 network3_ntips_30_nu_0.02_ngt_15_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   828 Aug 30 21:08 network3_ntips_30_nu_0.02_ngt_15_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network3_ntips_30_nu_0.02_ngt_5_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1405 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1168 Aug 30 21:08 network3_ntips_30_nu_0.02_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   741 Aug 30 21:08 network3_ntips_30_nu_0.02_ngt_5_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network3_ntips_30_nu_0.04_ngt_10_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1510 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1271 Aug 30 21:08 network3_ntips_30_nu_0.04_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   827 Aug 30 21:08 network3_ntips_30_nu_0.04_ngt_10_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network3_ntips_30_nu_0.04_ngt_15_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1617 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1378 Aug 30 21:08 network3_ntips_30_nu_0.04_ngt_15_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   872 Aug 30 21:08 network3_ntips_30_nu_0.04_ngt_15_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network3_ntips_30_nu_0.04_ngt_5_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1657 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1420 Aug 30 21:08 network3_ntips_30_nu_0.04_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   914 Aug 30 21:08 network3_ntips_30_nu_0.04_ngt_5_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network4_ntips_15_nu_0.02_ngt_10_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   851 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   612 Aug 30 21:08 network4_ntips_15_nu_0.02_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   386 Aug 30 21:08 network4_ntips_15_nu_0.02_ngt_10_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network4_ntips_15_nu_0.02_ngt_15_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   773 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   534 Aug 30 21:08 network4_ntips_15_nu_0.02_ngt_15_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network4_ntips_15_nu_0.02_ngt_15_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network4_ntips_15_nu_0.02_ngt_5_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   823 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   586 Aug 30 21:08 network4_ntips_15_nu_0.02_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   383 Aug 30 21:08 network4_ntips_15_nu_0.02_ngt_5_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network4_ntips_15_nu_0.04_ngt_10_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   828 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   590 Aug 30 21:08 network4_ntips_15_nu_0.04_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   381 Aug 30 21:08 network4_ntips_15_nu_0.04_ngt_10_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network4_ntips_15_nu_0.04_ngt_15_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   761 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   522 Aug 30 21:08 network4_ntips_15_nu_0.04_ngt_15_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network4_ntips_15_nu_0.04_ngt_15_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network4_ntips_15_nu_0.04_ngt_5_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   777 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   540 Aug 30 21:08 network4_ntips_15_nu_0.04_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network4_ntips_15_nu_0.04_ngt_5_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network4_ntips_30_nu_0.02_ngt_10_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1337 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1098 Aug 30 21:08 network4_ntips_30_nu_0.02_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   695 Aug 30 21:08 network4_ntips_30_nu_0.02_ngt_10_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network4_ntips_30_nu_0.02_ngt_15_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1557 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1319 Aug 30 21:08 network4_ntips_30_nu_0.02_ngt_15_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   828 Aug 30 21:08 network4_ntips_30_nu_0.02_ngt_15_rep_4.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network4_ntips_30_nu_0.02_ngt_5_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1405 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1168 Aug 30 21:08 network4_ntips_30_nu_0.02_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   741 Aug 30 21:08 network4_ntips_30_nu_0.02_ngt_5_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network4_ntips_30_nu_0.04_ngt_10_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1510 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1271 Aug 30 21:08 network4_ntips_30_nu_0.04_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   827 Aug 30 21:08 network4_ntips_30_nu_0.04_ngt_10_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network4_ntips_30_nu_0.04_ngt_15_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1617 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1378 Aug 30 21:08 network4_ntips_30_nu_0.04_ngt_15_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   872 Aug 30 21:08 network4_ntips_30_nu_0.04_ngt_15_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network4_ntips_30_nu_0.04_ngt_5_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1657 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1420 Aug 30 21:08 network4_ntips_30_nu_0.04_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   914 Aug 30 21:08 network4_ntips_30_nu_0.04_ngt_5_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network5_ntips_15_nu_0.02_ngt_10_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   851 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   612 Aug 30 21:08 network5_ntips_15_nu_0.02_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   386 Aug 30 21:08 network5_ntips_15_nu_0.02_ngt_10_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network5_ntips_15_nu_0.02_ngt_15_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   773 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   534 Aug 30 21:08 network5_ntips_15_nu_0.02_ngt_15_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network5_ntips_15_nu_0.02_ngt_15_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network5_ntips_15_nu_0.02_ngt_5_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   823 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   586 Aug 30 21:08 network5_ntips_15_nu_0.02_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   383 Aug 30 21:08 network5_ntips_15_nu_0.02_ngt_5_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network5_ntips_15_nu_0.04_ngt_10_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   828 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   590 Aug 30 21:08 network5_ntips_15_nu_0.04_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   381 Aug 30 21:08 network5_ntips_15_nu_0.04_ngt_10_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network5_ntips_15_nu_0.04_ngt_15_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   761 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   522 Aug 30 21:08 network5_ntips_15_nu_0.04_ngt_15_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network5_ntips_15_nu_0.04_ngt_15_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network5_ntips_15_nu_0.04_ngt_5_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   777 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   540 Aug 30 21:08 network5_ntips_15_nu_0.04_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network5_ntips_15_nu_0.04_ngt_5_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network5_ntips_30_nu_0.02_ngt_10_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1337 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1098 Aug 30 21:08 network5_ntips_30_nu_0.02_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   695 Aug 30 21:08 network5_ntips_30_nu_0.02_ngt_10_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network5_ntips_30_nu_0.02_ngt_15_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1558 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1319 Aug 30 21:08 network5_ntips_30_nu_0.02_ngt_15_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   828 Aug 30 21:08 network5_ntips_30_nu_0.02_ngt_15_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network5_ntips_30_nu_0.02_ngt_5_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1405 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1168 Aug 30 21:08 network5_ntips_30_nu_0.02_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   741 Aug 30 21:08 network5_ntips_30_nu_0.02_ngt_5_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network5_ntips_30_nu_0.04_ngt_10_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1510 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1271 Aug 30 21:08 network5_ntips_30_nu_0.04_ngt_10_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   827 Aug 30 21:08 network5_ntips_30_nu_0.04_ngt_10_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network5_ntips_30_nu_0.04_ngt_15_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1617 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1378 Aug 30 21:08 network5_ntips_30_nu_0.04_ngt_15_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   872 Aug 30 21:08 network5_ntips_30_nu_0.04_ngt_15_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network5_ntips_30_nu_0.04_ngt_5_rep_5:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1657 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1420 Aug 30 21:08 network5_ntips_30_nu_0.04_ngt_5_rep_5.extnewick
+-rw-r--r--   1 balleng balleng   914 Aug 30 21:08 network5_ntips_30_nu_0.04_ngt_5_rep_5.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network6_ntips_15_nu_0.02_ngt_10_rep_1:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   843 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   604 Aug 30 21:08 network6_ntips_15_nu_0.02_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network6_ntips_15_nu_0.02_ngt_15_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   847 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   608 Aug 30 21:08 network6_ntips_15_nu_0.02_ngt_15_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   384 Aug 30 21:08 network6_ntips_15_nu_0.02_ngt_15_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network6_ntips_15_nu_0.02_ngt_5_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   751 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   514 Aug 30 21:08 network6_ntips_15_nu_0.02_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   337 Aug 30 21:08 network6_ntips_15_nu_0.02_ngt_5_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network6_ntips_15_nu_0.04_ngt_10_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   884 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   646 Aug 30 21:08 network6_ntips_15_nu_0.04_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   426 Aug 30 21:08 network6_ntips_15_nu_0.04_ngt_10_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network6_ntips_15_nu_0.04_ngt_15_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   963 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   725 Aug 30 21:08 network6_ntips_15_nu_0.04_ngt_15_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   471 Aug 30 21:08 network6_ntips_15_nu_0.04_ngt_15_rep_1.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network6_ntips_15_nu_0.04_ngt_5_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   773 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   536 Aug 30 21:08 network6_ntips_15_nu_0.04_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network6_ntips_15_nu_0.04_ngt_5_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network6_ntips_30_nu_0.02_ngt_10_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1388 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1149 Aug 30 21:08 network6_ntips_30_nu_0.02_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   742 Aug 30 21:08 network6_ntips_30_nu_0.02_ngt_10_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network6_ntips_30_nu_0.02_ngt_15_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1409 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1170 Aug 30 21:08 network6_ntips_30_nu_0.02_ngt_15_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   740 Aug 30 21:08 network6_ntips_30_nu_0.02_ngt_15_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network6_ntips_30_nu_0.02_ngt_5_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1317 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1081 Aug 30 21:08 network6_ntips_30_nu_0.02_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   696 Aug 30 21:08 network6_ntips_30_nu_0.02_ngt_5_rep_1.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network6_ntips_30_nu_0.04_ngt_10_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1704 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1465 Aug 30 21:08 network6_ntips_30_nu_0.04_ngt_10_rep_1.extnewick
+-rw-r--r--   1 balleng balleng   964 Aug 30 21:08 network6_ntips_30_nu_0.04_ngt_10_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network6_ntips_30_nu_0.04_ngt_15_rep_1:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  2039 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1800 Aug 30 21:08 network6_ntips_30_nu_0.04_ngt_15_rep_1.extnewick
+-rw-r--r--   1 balleng balleng  1091 Aug 30 21:08 network6_ntips_30_nu_0.04_ngt_15_rep_1.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network6_ntips_30_nu_0.04_ngt_5_rep_1:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  2214 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1977 Aug 30 21:08 network6_ntips_30_nu_0.04_ngt_5_rep_1.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network7_ntips_15_nu_0.02_ngt_10_rep_2:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   843 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   604 Aug 30 21:08 network7_ntips_15_nu_0.02_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network7_ntips_15_nu_0.02_ngt_15_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   847 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   608 Aug 30 21:08 network7_ntips_15_nu_0.02_ngt_15_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   384 Aug 30 21:08 network7_ntips_15_nu_0.02_ngt_15_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network7_ntips_15_nu_0.02_ngt_5_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   751 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   514 Aug 30 21:08 network7_ntips_15_nu_0.02_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   337 Aug 30 21:08 network7_ntips_15_nu_0.02_ngt_5_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network7_ntips_15_nu_0.04_ngt_10_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   884 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   646 Aug 30 21:08 network7_ntips_15_nu_0.04_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   426 Aug 30 21:08 network7_ntips_15_nu_0.04_ngt_10_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network7_ntips_15_nu_0.04_ngt_15_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   964 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   725 Aug 30 21:08 network7_ntips_15_nu_0.04_ngt_15_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   471 Aug 30 21:08 network7_ntips_15_nu_0.04_ngt_15_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network7_ntips_15_nu_0.04_ngt_5_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   773 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   536 Aug 30 21:08 network7_ntips_15_nu_0.04_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network7_ntips_15_nu_0.04_ngt_5_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network7_ntips_30_nu_0.02_ngt_10_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1388 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1149 Aug 30 21:08 network7_ntips_30_nu_0.02_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   742 Aug 30 21:08 network7_ntips_30_nu_0.02_ngt_10_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network7_ntips_30_nu_0.02_ngt_15_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1409 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1170 Aug 30 21:08 network7_ntips_30_nu_0.02_ngt_15_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   740 Aug 30 21:08 network7_ntips_30_nu_0.02_ngt_15_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network7_ntips_30_nu_0.02_ngt_5_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1318 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1081 Aug 30 21:08 network7_ntips_30_nu_0.02_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   696 Aug 30 21:08 network7_ntips_30_nu_0.02_ngt_5_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network7_ntips_30_nu_0.04_ngt_10_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1704 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1465 Aug 30 21:08 network7_ntips_30_nu_0.04_ngt_10_rep_2.extnewick
+-rw-r--r--   1 balleng balleng   964 Aug 30 21:08 network7_ntips_30_nu_0.04_ngt_10_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network7_ntips_30_nu_0.04_ngt_15_rep_2:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  2039 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1800 Aug 30 21:08 network7_ntips_30_nu_0.04_ngt_15_rep_2.extnewick
+-rw-r--r--   1 balleng balleng  1091 Aug 30 21:08 network7_ntips_30_nu_0.04_ngt_15_rep_2.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network7_ntips_30_nu_0.04_ngt_5_rep_2:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  2214 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1977 Aug 30 21:08 network7_ntips_30_nu_0.04_ngt_5_rep_2.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network8_ntips_15_nu_0.02_ngt_10_rep_3:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   841 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   604 Aug 30 21:08 network8_ntips_15_nu_0.02_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng     5 Aug 30 21:08 seedms
+
+../data/network8_ntips_15_nu_0.02_ngt_15_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   847 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   608 Aug 30 21:08 network8_ntips_15_nu_0.02_ngt_15_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   384 Aug 30 21:08 network8_ntips_15_nu_0.02_ngt_15_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network8_ntips_15_nu_0.02_ngt_5_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   751 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   514 Aug 30 21:08 network8_ntips_15_nu_0.02_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   337 Aug 30 21:08 network8_ntips_15_nu_0.02_ngt_5_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network8_ntips_15_nu_0.04_ngt_10_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   884 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   646 Aug 30 21:08 network8_ntips_15_nu_0.04_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   426 Aug 30 21:08 network8_ntips_15_nu_0.04_ngt_10_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network8_ntips_15_nu_0.04_ngt_15_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   963 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   725 Aug 30 21:08 network8_ntips_15_nu_0.04_ngt_15_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   471 Aug 30 21:08 network8_ntips_15_nu_0.04_ngt_15_rep_3.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network8_ntips_15_nu_0.04_ngt_5_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   773 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   536 Aug 30 21:08 network8_ntips_15_nu_0.04_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network8_ntips_15_nu_0.04_ngt_5_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network8_ntips_30_nu_0.02_ngt_10_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1388 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1149 Aug 30 21:08 network8_ntips_30_nu_0.02_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   742 Aug 30 21:08 network8_ntips_30_nu_0.02_ngt_10_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network8_ntips_30_nu_0.02_ngt_15_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1409 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1170 Aug 30 21:08 network8_ntips_30_nu_0.02_ngt_15_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   740 Aug 30 21:08 network8_ntips_30_nu_0.02_ngt_15_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network8_ntips_30_nu_0.02_ngt_5_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1317 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1081 Aug 30 21:08 network8_ntips_30_nu_0.02_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   696 Aug 30 21:08 network8_ntips_30_nu_0.02_ngt_5_rep_3.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network8_ntips_30_nu_0.04_ngt_10_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1704 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1465 Aug 30 21:08 network8_ntips_30_nu_0.04_ngt_10_rep_3.extnewick
+-rw-r--r--   1 balleng balleng   964 Aug 30 21:08 network8_ntips_30_nu_0.04_ngt_10_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network8_ntips_30_nu_0.04_ngt_15_rep_3:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  2039 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1800 Aug 30 21:08 network8_ntips_30_nu_0.04_ngt_15_rep_3.extnewick
+-rw-r--r--   1 balleng balleng  1091 Aug 30 21:08 network8_ntips_30_nu_0.04_ngt_15_rep_3.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network8_ntips_30_nu_0.04_ngt_5_rep_3:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  2214 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1977 Aug 30 21:08 network8_ntips_30_nu_0.04_ngt_5_rep_3.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network9_ntips_15_nu_0.02_ngt_10_rep_4:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   843 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   604 Aug 30 21:08 network9_ntips_15_nu_0.02_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network9_ntips_15_nu_0.02_ngt_15_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   847 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   608 Aug 30 21:08 network9_ntips_15_nu_0.02_ngt_15_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   384 Aug 30 21:08 network9_ntips_15_nu_0.02_ngt_15_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network9_ntips_15_nu_0.02_ngt_5_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   751 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   514 Aug 30 21:08 network9_ntips_15_nu_0.02_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   337 Aug 30 21:08 network9_ntips_15_nu_0.02_ngt_5_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network9_ntips_15_nu_0.04_ngt_10_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   884 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   646 Aug 30 21:08 network9_ntips_15_nu_0.04_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   426 Aug 30 21:08 network9_ntips_15_nu_0.04_ngt_10_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network9_ntips_15_nu_0.04_ngt_15_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   964 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   725 Aug 30 21:08 network9_ntips_15_nu_0.04_ngt_15_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   471 Aug 30 21:08 network9_ntips_15_nu_0.04_ngt_15_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network9_ntips_15_nu_0.04_ngt_5_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng   773 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng   536 Aug 30 21:08 network9_ntips_15_nu_0.04_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   338 Aug 30 21:08 network9_ntips_15_nu_0.04_ngt_5_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network9_ntips_30_nu_0.02_ngt_10_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1388 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1149 Aug 30 21:08 network9_ntips_30_nu_0.02_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   742 Aug 30 21:08 network9_ntips_30_nu_0.02_ngt_10_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network9_ntips_30_nu_0.02_ngt_15_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1409 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1170 Aug 30 21:08 network9_ntips_30_nu_0.02_ngt_15_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   740 Aug 30 21:08 network9_ntips_30_nu_0.02_ngt_15_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network9_ntips_30_nu_0.02_ngt_5_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1318 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1081 Aug 30 21:08 network9_ntips_30_nu_0.02_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   696 Aug 30 21:08 network9_ntips_30_nu_0.02_ngt_5_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network9_ntips_30_nu_0.04_ngt_10_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  1703 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1465 Aug 30 21:08 network9_ntips_30_nu_0.04_ngt_10_rep_4.extnewick
+-rw-r--r--   1 balleng balleng   964 Aug 30 21:08 network9_ntips_30_nu_0.04_ngt_10_rep_4.ms
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms
+
+../data/network9_ntips_30_nu_0.04_ngt_15_rep_4:
+total 48
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  2039 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1800 Aug 30 21:08 network9_ntips_30_nu_0.04_ngt_15_rep_4.extnewick
+-rw-r--r--   1 balleng balleng  1091 Aug 30 21:08 network9_ntips_30_nu_0.04_ngt_15_rep_4.ms
+-rw-r--r--   1 balleng balleng     7 Aug 30 21:08 seedms
+
+../data/network9_ntips_30_nu_0.04_ngt_5_rep_4:
+total 44
+drwxr-xr-x   2 balleng balleng  4096 Aug 30 21:08 .
+drwxr-xr-x 267 balleng balleng 24576 Aug 30 21:09 ..
+-rw-r--r--   1 balleng balleng  2213 Aug 30 21:08 logfile.txt
+-rw-r--r--   1 balleng balleng  1977 Aug 30 21:08 network9_ntips_30_nu_0.04_ngt_5_rep_4.extnewick
+-rw-r--r--   1 balleng balleng     6 Aug 30 21:08 seedms

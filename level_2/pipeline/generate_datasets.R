@@ -5,14 +5,18 @@
 
 
 ### Parameters ----------------------------------------------------------
-numbsim <- 150             ## number of networks to simulate
-ntips <- c(15, 30, 50)     ## number of leaves in the network
+#numbsim <- 150             ## number of networks to simulate
+numbsim <- 5             ## number of networks to simulate
+#ntips <- c(15, 30, 50)     ## number of leaves in the network
+ntips <- c(15, 30)     ## number of leaves in the network
 lambda <- 0.9              ## speciation rate
 mu <- 0                    ## extinction rate
 nu <- c(0.02, 0.04)        ## hybridization rate
 hybprops <- c(1, 1, 1)     ## probabilities for each type of hybridization
-ngt <- c(100, 1000, 10000) ## number of gene trees to simulate per network
-gt_replics <- 30           ## number of replicates per simulating scenario
+#ngt <- c(100, 1000, 10000) ## number of gene trees to simulate per network
+ngt <- c(5, 10, 15) ## number of gene trees to simulate per network
+#gt_replics <- 30           ## number of replicates per simulating scenario
+gt_replics <- 5           ## number of replicates per simulating scenario
 globalseed <- 2022         ## global seed
 ### ---------------------------------------------------------------------
 
@@ -111,11 +115,16 @@ for (i in ntips) {
         
           # store parenthetical format in string variable
           network_i <- write.net(net = y)
-        
+
+          #GAB: cat the network being processed
+          cat("Processing network ", filename, "\n", sep = "")
           # Converting parenthetical format to ms format using ms converter
           # We are using the new version of ms-converter that runs ms
-          mscmd = paste('ms-converter --newick ', "'", network_i , "' --run --n ", k, 
-                        " > ", filename,"_GT.txt", sep = "")
+          #GAB: the commented-out line is the original one which tells ms-converter to run ms
+#          mscmd = paste('ms-converter --newick ', "'", network_i , "' --run --n ", k, 
+#                        " > ", filename,"_GT.txt", sep = "") 
+          mscmd = paste("ms-converter --newick '", network_i, "' --output ", filename, ".ms", 
+                         sep = "")
           system(mscmd)
         
           ## writing everything in a logfile inside the folder
@@ -134,7 +143,6 @@ for (i in ntips) {
              mscmd)
         
           writeLines(str, logfile)
-          #GAB: closing the connection is unncessary  
           #close(logfile)
           
           net_counter <- net_counter + 1
