@@ -6,7 +6,5 @@ Folders:
 
 - `archived`: old code not useful anymore
 - `level_2`: implementation of simulations to test SNaQ under non-level-1 conditions
-- `minimal_test`: xxx
 - `running-time`: implementation of simulations to get estimates of running times for different data sizes in SNaQ
-- `scaleBranches_Ultrametric`: xxx
 - `snaq_outgroup`: implementation of simulations to test spurious hybridizations with the outgroup in SNaQ
