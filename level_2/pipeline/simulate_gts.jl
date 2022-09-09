@@ -5,9 +5,11 @@ using a network in extnewick (input) and returning the
 gene trees in newick (output).
 This script reads the first argument as the path to 
 the input file, and the second as the path to the 
-output file.
+output file. Arguments nsims and seed are integers
+indicating the number of gene trees to simulate and
+the random seed respectively.
 example
- julia extnewick2hybridlambda.jl input.extnewick output.newick
+ julia simulate_gts.jl input.extnewick output.newick nsims seed
 """
 
 input_net_path = ARGS[1]
