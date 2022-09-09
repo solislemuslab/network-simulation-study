@@ -11,11 +11,15 @@ example
 """
 
 input_net_path = ARGS[1]
-nsims = parse(Int64, ARGS[2])
-output_gts_path = ARGS[3]
+output_gts_path = ARGS[2]
+nsims = parse(Int64, ARGS[3])
+seed = parse(Int64, ARGS[4])
 
 using PhyloNetworks
 using PhyloCoalSimulations
+using Random
+
+Random.seed!(seed)
 
 # read the input netowrk in extnewick
 input_net = readTopology(input_net_path)

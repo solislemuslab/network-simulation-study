@@ -75,7 +75,7 @@ for (i in ntips) {
       }
       networks <- networks[file_networks]
 
-      ## For every network, we simulate gene trees using ms
+      ## For every network, we simulate gene trees using PhyloCoalSimulations
       net_counter <- 1
       for (y in networks) {
         ## We do several replicates per network:
@@ -102,31 +102,17 @@ for (i in ntips) {
           #}
           ################################
         
-          # CA We have to use it as seed to generate gene tree with "ms"
+          # generate the seed for simulate_gts.jl which uses Random.seed!(gt_seed)
           gt_seed <- sample.int(n = 1e6, size = 1)
-          seedms<-file("seedms")
-          writeLines(paste(gt_seed), seedms)
-          #GAB: writeLines will close the connection upon completion, so the next line is unnecessary  
-          #close(seedms)
         
           # write parenthetical format to file
           extnewick_filename <- paste(filename, ".extnewick", sep = "")
+          output_newick_filename <- paste(filename, ".newick", sep = "")
           SiPhyNetwork::write.net(net = y, file = extnewick_filename)
         
           # store parenthetical format in string variable
           network_i <- write.net(net = y)
 
-          #GAB: cat the network being processed
-          cat("Processing network ", filename, "\n", sep = "")
-          # Converting parenthetical format to ms format using ms converter
-          # We are using the new version of ms-converter that runs ms
-          #GAB: the commented-out line is the original one which tells ms-converter to run ms
-#          mscmd = paste('ms-converter --newick ', "'", network_i , "' --run --n ", k, 
-#                        " > ", filename,"_GT.txt", sep = "") 
-          mscmd = paste("ms-converter --newick '", network_i, "' --output ", filename, ".ms", 
-                         sep = "")
-          system(mscmd)
-        
           ## writing everything in a logfile inside the folder
           logfile<-file("logfile.txt")
         
@@ -139,11 +125,14 @@ for (i in ntips) {
             ", global seed=", globalseed, 
             ", SiPhyNetwork seed=", r_seed,
             ", this is network ", net_counter, 
-            ", ms seed=", gt_seed, "\n",
-             mscmd)
+            ", phylocoalsims seed=", gt_seed, "\n")
         
           writeLines(str, logfile)
           #close(logfile)
+
+          # simuate gene trees with PhyloCoalSimulations. note k = number of gene trees
+          simgtcmd <- paste("julia ../../pipeline/simulate_gts.jl", extnewick_filename, output_newick_filename, k, gt_seed, sep = " ")
+          system(simgtcmd)
           
           net_counter <- net_counter + 1
           setwd("../")
