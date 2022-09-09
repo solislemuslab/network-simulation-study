@@ -37,10 +37,10 @@ addprocs(nruns)
 @everywhere using CSV
 
 # read the concordance factor table
-cfs = readTableCF("$cf_table")
+cfs = readTableCF(cf_table)
 
 # read starting tree
-start_tree = readTopology("$init_tree")
+start_tree = readTopology(init_tree)
 
 # calculate a h=1 network
 net = snaq!(start_tree, cfs, hmax=h, filename="snaq_output_h$h", seed=seed, runs = nruns)
