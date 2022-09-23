@@ -12,24 +12,36 @@ example
  julia simulate_gts.jl input.extnewick output.newick nsims seed
 """
 
-input_net_path = ARGS[1]
-output_gts_path = ARGS[2]
-nsims = parse(Int64, ARGS[3])
-seed = parse(Int64, ARGS[4])
+directory = ARGS[1]
+nsims = parse(Int64, ARGS[2])[1]
 
 using PhyloNetworks
 using PhyloCoalSimulations
 using Random
 
-Random.seed!(seed)
+cd(directory)
 
-# read the input netowrk in extnewick
-input_net = readTopology(input_net_path)
+network_dirs = readdir(join=true)
 
-# simulate gene trees 
-output_gts = simulatecoalescent(input_net, nsims, 1)
+for i in network_dirs
+    cd(i)
+    dircontents = readdir(join=true)
+    network_id = findall( x -> occursin("extnewick", x), dircontents)
+    network_file = dircontents[network_id]
+    seed_id = findall( x -> occursin("seed", x), dircontents)
+    seed_file = dircontents[seed_id]
+    output_file = replace(network_file[1], "ext"=>"")
+    seed = open(f->read(f, String), "gt_seed")
 
-# write to file
-writeMultiTopology(output_gts, output_gts_path)
+    Random.seed!(parse(Int64, seed))    
+
+    # read the input netowrk in extnewick
+    input_net = readTopology(network_file[1])
+    # simulate gene trees 
+    output_gts = simulatecoalescent(input_net, nsims, 1)
+    # write to file
+    writeMultiTopology(output_gts, output_file)
+    cd("..")
+end
 
 exit()

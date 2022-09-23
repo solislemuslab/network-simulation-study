@@ -91,19 +91,10 @@ for (i in ntips) {
             dir.create(filename)
           }
           setwd(filename)
-        
-          # CA: Not level one warning ########
-          #res <- sibCross(Tree2=y)$infor
-          #ro <- any(res%in%"not level-1")
-          #if(ro){
-          #  sink("not_level1_warn.txt")
-          #  cat(res)
-          #  sink()
-          #}
-          ################################
-        
+                
           # generate the seed for simulate_gts.jl which uses Random.seed!(gt_seed)
           gt_seed <- sample.int(n = 1e6, size = 1)
+          writeLines(as.character(gt_seed), "gt_seed")
         
           # write parenthetical format to file
           extnewick_filename <- paste(filename, ".extnewick", sep = "")
@@ -128,12 +119,7 @@ for (i in ntips) {
             ", phylocoalsims seed=", gt_seed, "\n")
         
           writeLines(str, logfile)
-          #close(logfile)
-
-          # simuate gene trees with PhyloCoalSimulations. note k = number of gene trees
-          simgtcmd <- paste("julia ../../pipeline/simulate_gts.jl", extnewick_filename, output_newick_filename, k, gt_seed, sep = " ")
-          system(simgtcmd)
-          
+          #close(logfile)          
           net_counter <- net_counter + 1
           setwd("../")
         }
@@ -141,5 +127,5 @@ for (i in ntips) {
     }
   }
 }
-
-
+setwd("../pipeline")
+system(paste("julia simulate_gts.jl ../data", ngt, sep = " "))
