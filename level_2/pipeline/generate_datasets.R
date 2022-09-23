@@ -57,7 +57,7 @@ for (i in ntips) {
                                    hybprops = hybprops,
                                    hyb.inher.fxn = make.beta.draw(1, 1),
                                    frac = 1,
-                                   mrca = FALSE,
+                                   mrca = TRUE,
                                    complete = TRUE,
                                    stochsampling = FALSE,
                                    hyb.rate.fxn = NULL,
