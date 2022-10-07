@@ -128,4 +128,4 @@ for (i in ntips) {
   }
 }
 setwd("../pipeline")
-system(paste("julia simulate_gts.jl ../data", ngt, sep = " "))
+system(paste("julia sim_gts_calc_cf_startingtree.jl ../data", ngt, sep = " "))
