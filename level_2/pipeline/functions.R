@@ -18,7 +18,7 @@ networks <- sim.bdh.taxa.ssa(n = 15,
                              numbsim = 150,
                              lambda = 0.9,
                              mu = 0 ,
-                             nu = 0.2,#0.02
+                             nu = 0.4,#0.02
                              hybprops = c(1, 1, 1),
                              hyb.inher.fxn = make.beta.draw(1, 1),
                              frac = 1,
@@ -39,31 +39,34 @@ for(x in 1:length(networks)){
 }
 networks <- networks[file_networks]
 
-
 net1 <- networks[[1]]
 
 plot(net1)
 nodelabels(cex=0.7) #add node numbers
 tiplabels(cex=0.7) 
-#edgelabels(cex=0.7)
 
-net1$edge
-net1$reticulation
+
+
 
 
 
 # commenting scripts ####
 
 # sibling_ret ####
-# Find if there are reticulation among siblings not recognozible by snaq
+
+# input: Evolutionary network
+# Output: message "No sibling reticulation" or "Sibling reticulation"
+# and also shows the No sibling reticulation nodes.
+
+# Find if there are reticulation among siblings, that is not recognozible by snaq
 # it happens when the father of the nodes of the reticulations are a root
 # or when the son of both reticulation node are a tip
 
-sibling_ret <- function(net1){
+sibling_ret <- function(network){
   ## Estimations ####
   ### rets and edges ####
-  rets <- net1$reticulation# Reticulations
-  ed_1 <- net1$edge# Edges
+  rets <- network$reticulation# Reticulations
+  ed_1 <- network$edge# Edges
   
   ### Tips ####
   # A tip is a node that has no children
@@ -79,7 +82,7 @@ sibling_ret <- function(net1){
   if(length(h_p1)==2){root <- p1}
   root
   
-    ## body ####
+  ## body ####
   out <- c()
   for(i in 1:nrow(rets)){
     #i=1
@@ -115,15 +118,65 @@ sibling_ret <- function(net1){
 }
 
 
-sibling_ret(net1)
 
 
 
+# ret_higher_level_detection complementary functions ####
+# This function finds the start node of the edge that contains the reticulation
+# input: Reticulation node to find the limits of the edge and the network
+# Output: Start node of the edge that contains the reticulation
+start_node_edge_ret <- function(ret_to_evaluate,network){
+  edges<-network$edge
+  rets<-network$reticulation
+  
+  logi_father_is_ret <- TRUE
+  rets_all <- as.numeric(rets)
+  while(logi_father_is_ret){
+    father_ret1 <- edges[edges[,2]==ret_to_evaluate, 1]
+    logi_father_is_ret <- any(father_ret1==rets_all)
+    logi_father_is_ret
+    ret_to_evaluate<-father_ret1
+  }
+  father_node_rets<-father_ret1
+  
+  return(father_node_rets)
+}
+
+# This function finds the end node of the edge that contains the reticulation
+# input: Reticulation node to find the limits of the edge and the network
+# Output: End node or leave of the edge that contains the reticulation
+end_node_edge_ret <- function(ret_to_evaluate,network){
+  edges<-network$edge
+  rets<-network$reticulation
+  leaves <- edges[,2][!edges[,2]%in%edges[,1]]
+  
+  logi_son_is_ret <- TRUE
+  rets_all <- as.numeric(rets)
+  if(any(ret_to_evaluate==leaves)){son_node_rets <- ret_to_evaluate}else{
+    
+    while(logi_son_is_ret){
+      son_ret1 <- edges[edges[,1]==ret_to_evaluate, 2]
+      logi_son_is_ret <- !(!any(son_ret1==rets_all)|any(son_ret1%in%leaves))
+      logi_son_is_ret
+      ret_to_evaluate <- son_ret1
+    }
+    son_node_rets <- son_ret1
+  }
+  son_node_rets
+  
+  return(son_node_rets)
+}
 
 
 
-# higher_level detection####
-is_not_single_ret <- function(network){
+# Detection of higher level reticulation ####
+# input: Evolutionary network
+# output: message of "level_one" or "higher_level"
+# if there are at least one higher_level reticulation
+# show also the reticulations and the edges with the number of reticulations 
+# so we can see th level of reticulations
+
+ret_higher_level_detection <- function(network){
   ## Estimations ####
   ### Reticualtions and edges
   net1 <- network
@@ -135,31 +188,48 @@ is_not_single_ret <- function(network){
   padres <- edges[edges[,2]%in%rets,1]
   hijos_padres_ret <- c(hijos, padres)
   
-  # If some of the child or parent nodes of the crosslinks belong to the list 
-  # of total crosslink nodes, it means that there is at least one branch with 
-  # more than one crosslink
-  not_single_log <- any(hijos_padres_ret %in% rets)
+  # If some of the child or parent nodes of the reticulations belong to the list 
+  # of total nodes in the edges, it means that there is at least one branch with 
+  # more than one reticulation (higher level reticulation)
+  not_single_log <- any(hijos_padres_ret %in% rets)# Logic
   
-  
-  out <-c()
+  branch_rets <-c()
   if(not_single_log){
-    for(i in 1:nrow(rets)){
-      # i = 1
-      ret_in_hijos_padres <- any(as.numeric(rets[i,])%in%hijos_padres_ret)
-      if(ret_in_hijos_padres){
-        out<-c(out,i)
-      }else{}
+    
+    
+    nodes_ret_higher_level <- hijos_padres_ret[hijos_padres_ret %in% rets]
+    rets_hig_log <- rets[,1]%in%nodes_ret_higher_level|rets[,2]%in%nodes_ret_higher_level
+    rets_hig <- rets[rets_hig_log,]
+
+    for(i in 1:length(nodes_ret_higher_level)){
+      # Find the limits of the branch that contains the reticulation nodes 
+      # so we can count the reticulation nodes inside the branch and 
+      # determiante the level 
+      ret_to_find_limits <- nodes_ret_higher_level[i]
+      branch_ini <- start_node_edge_ret(ret_to_find_limits , network=net1)
+      branch_fini <- end_node_edge_ret(ret_to_find_limits, network=net1)
+      res <- data.frame(Node=ret_to_find_limits, branch_ini = branch_ini, branch_fini = branch_fini)
+      branch_rets <- rbind(branch_rets,res);branch_rets 
     }
-    list1<-list(resp ="higher_level", rets=rets[out,])
+    
+    # 
+    branch_rets$Num_rets<-1
+    banch_freq_rets <- aggregate(Num_rets~branch_ini+branch_fini,data=branch_rets,FUN="length")
+    
+    list1<-list(resp ="higher_level", rets=rets_hig, branch =banch_freq_rets)
   }else{
-    list1<-list(resp ="level_one", rets="")
+    list1<-list(resp ="level_one", rets="",branch="")
   }
   
   return(list1)
 }
 
 
-is_not_single_ret(net1)
+
+is_not_single_ret(networks[[1]])
+
+sibling_ret(networks[[1]])
+
 
 
 
