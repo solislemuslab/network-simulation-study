@@ -8,7 +8,19 @@ is.phylo <- function(x) {
   "phylo" %in% class(x)
 }
 
-
+## GAB:: a version of is.rooted that works on networks
+# phy: an object that inherits from the class phylo.
+# returns TRUE if the only node which is an ancestor is not a descendant itself and it
+# has exactly two children 
+is.really.rooted <- function(phy) {
+    root_candidates <- phy$edge[!(phy$edge[,1] %in% phy$edge[,2]), 1]
+    anc_table <- table(root_candidates)
+    if (min(anc_table) == 2) {
+        return(TRUE)
+    } else {
+        return(FALSE)
+    }
+}
 
 library(SiPhyNetwork) #library to simulate Networks, this use "ape" as dependence
 library(ape)
