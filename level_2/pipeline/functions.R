@@ -238,9 +238,9 @@ ret_higher_level_detection <- function(network){
 
 
 
-is_not_single_ret(networks[[1]])
+#is_not_single_ret(networks[[1]])
 
-sibling_ret(networks[[1]])
+#sibling_ret(networks[[1]])
 
 
 

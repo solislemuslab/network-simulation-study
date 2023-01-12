@@ -3,27 +3,32 @@
 ### For each network, it simulates gene trees using ms
 ### GAB, CA, CSL (August 2022)
 
+## toy=true uses small number of networks and gene trees for debugging
+toy=FALSE
 
 ### Parameters ----------------------------------------------------------
-#numbsim <- 150             ## number of networks to simulate
-numbsim <- 5             ## number of networks to simulate
-#ntips <- c(15, 30, 50)     ## number of leaves in the network
-ntips <- c(15, 30)     ## number of leaves in the network
 lambda <- 0.9              ## speciation rate
 mu <- 0                    ## extinction rate
 nu <- c(0.02, 0.04)        ## hybridization rate
 hybprops <- c(1, 1, 1)     ## probabilities for each type of hybridization
-#ngt <- c(100, 1000, 10000) ## number of gene trees to simulate per network
-ngt <- c(5, 10, 15) ## number of gene trees to simulate per network
-#gt_replics <- 30           ## number of replicates per simulating scenario
-gt_replics <- 5           ## number of replicates per simulating scenario
 globalseed <- 2022         ## global seed
+
+if(toy){
+  numbsim <- 5             ## number of networks to simulate
+  ntips <- c(15, 30)       ## number of leaves in the network
+  ngt <- c(5, 10, 15)      ## number of gene trees to simulate per network
+  gt_replics <- 5          ## number of replicates per simulating scenario
+}else{
+  numbsim <- 150             ## number of networks to simulate
+  ntips <- c(15, 30, 50)     ## number of leaves in the network
+  ngt <- c(100, 1000, 10000) ## number of gene trees to simulate per network
+  gt_replics <- 30           ## number of replicates per simulating scenario
+}
 ### ---------------------------------------------------------------------
 
 set.seed(globalseed)  
 library(SiPhyNetwork) # library to simulate Networks, this use "ape" as dependence
 source("functions.R") # load functions that operate on networks
-
 
 # GAB: Create a directory for storing the networks and their subdirs.
 # The .. is necessary as it assumes that the script generate_datasets.R
@@ -81,7 +86,7 @@ for (i in ntips) {
         ## We do several replicates per network:
         for (ii in 1:gt_replics){
           # Folder name where all files corresponding to this network will be stored:
-          filename <- paste("network", net_counter,
+          filename <- paste("net", net_counter,
                           "_ntips_", i,
                           "_nu_", j,
                           "_ngt_", k, 
@@ -95,6 +100,9 @@ for (i in ntips) {
           # generate the seed for simulate_gts.jl which uses Random.seed!(gt_seed)
           gt_seed <- sample.int(n = 1e6, size = 1)
           writeLines(as.character(gt_seed), "gt_seed")
+          
+          # write number of gene trees to file for sim_gts_calc_cf_startingtree.jl
+          writeLines(as.character(k), "num_gt")
         
           # write parenthetical format to file
           extnewick_filename <- paste(filename, ".extnewick", sep = "")
@@ -119,7 +127,7 @@ for (i in ntips) {
             ", phylocoalsims seed=", gt_seed, "\n")
         
           writeLines(str, logfile)
-          #close(logfile)          
+          close(logfile)          
           net_counter <- net_counter + 1
           setwd("../")
         }
@@ -128,4 +136,4 @@ for (i in ntips) {
   }
 }
 setwd("../pipeline")
-system(paste("julia sim_gts_calc_cf_startingtree.jl ../data", ngt, sep = " "))
+system("julia sim_gts_calc_cf_startingtree.jl ../data")
