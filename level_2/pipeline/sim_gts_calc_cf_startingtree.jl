@@ -24,6 +24,7 @@ cd(directory)
 
 network_dirs = readdir()
 deleteat!(network_dirs, findall(x->x==".DS_Store",network_dirs))
+deleteat!(network_dirs, findall(x->x==".Rhistory",network_dirs))
 
 for i in network_dirs
     # visit each dir containing one network
@@ -74,7 +75,7 @@ for i in network_dirs
     ### Use QMC for estimating an initial tree using CFs
     # calculate the starting tree using part of the TICR pipeline
     # get-pop-tree.pl must be in the PATH
-    run(Cmd(["get-pop-tree.pl", "CFs_$output_file.csv"]))
+    run(Cmd(["../../pipeline/get-pop-tree.pl", "CFs_$output_file.csv"]))
 
     # go back to data to visit the next directory
     cd("..")
