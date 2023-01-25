@@ -4,7 +4,7 @@
 ### GAB, CA, CSL (August 2022)
 
 ## toy=true uses small number of networks and gene trees for debugging
-toy=FALSE
+toy=TRUE
 
 ### Parameters ----------------------------------------------------------
 lambda <- 0.9              ## speciation rate
@@ -16,7 +16,7 @@ globalseed <- 2022         ## global seed
 if(toy){
   numbsim <- 5             ## number of networks to simulate
   ntips <- c(15, 30)       ## number of leaves in the network
-  ngt <- c(5, 10, 15)      ## number of gene trees to simulate per network
+  ngt <- c(5, 10)      ## number of gene trees to simulate per network
   gt_replics <- 5          ## number of replicates per simulating scenario
 }else{
   numbsim <- 150             ## number of networks to simulate
