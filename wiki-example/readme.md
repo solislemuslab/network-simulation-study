@@ -1,13 +1,32 @@
+In general we must to have Julia program in tar.gz, and  Julia packages into a project directory in tar.gz. 
+
+Later we have to put this in each job files to run in CHTC with the option: “One job per directory”
+
 ## Installation of julia in CHTC
 
 Install Julia and Julia packages using the following instructions:
 [https://chtc.cs.wisc.edu/uw-research-computing/julia-jobs.html](https://chtc.cs.wisc.edu/uw-research-computing/julia-jobs.html)
 
-I did it for julia 1.6, so I will make the same for julia 1.8 and make a short description about that.
 
-In general we must to have julia program in tar.gz, and  julia packages into a project directory in tar.gz. 
+This are the steps for get julia and the project directory as tar.gz:
 
-Later we have to put this in each job files to run in CHTC with the option: “One job per directory”
+- Download Julia from web (https://julialang.org/downloads/platform/#linux_and_freebsd) and decompress
+  - wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.8.5-linux-x86_64.tar.gz
+  - tar zxvf julia-1.8.5-linux-x86_64.tar.gz
+
+- Install Julia packages in the project directory
+  - Create one directory to install Julia packages 
+    - mkdir my-project
+    - export JULIA_DEPOT_PATH=$PWD/my-project
+  - Open Julia inside the directory of Julia packages and install the packages with 
+    - julia-1.8.5/bin/julia --project=my-project
+      - using Pkg
+      - Pkg.add("PhyloNetworks")
+      - quit()
+  - SAVE INSTALLED PACKAGES FOR LATER JOBS
+    - tar -czf my-project.tar.gz my-project/
+  
+
 
 ## Data organization
 
