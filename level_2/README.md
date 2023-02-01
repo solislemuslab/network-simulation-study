@@ -27,7 +27,7 @@ Goal: This simulation study will investigate the performance of SNaQ when the tr
   + CSV (dependency of PhyloNetworks, so no need to install separately)
   + Distributed (dependency of PhyloNetworks, so no need to install separately)
   + DataFrames (dependency of PhyloNetworks, so no need to install separately)
-- [`get-pop-tree.pl`](https://github.com/nstenz/TICR/blob/master/scripts/get-pop-tree.pl) from the [TICR pipeline](https://github.com/nstenz/TICR). This file needs to be in the PATH.
+- [`get-pop-tree.pl`](https://github.com/nstenz/TICR/blob/master/scripts/get-pop-tree.pl) from the [TICR pipeline](https://github.com/nstenz/TICR).
 
 ## Pipeline
 
