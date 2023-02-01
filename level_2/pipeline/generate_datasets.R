@@ -4,7 +4,7 @@
 ### GAB, CA, CSL (August 2022)
 
 ## toy=true uses small number of networks and gene trees for debugging
-toy=TRUE
+toy=FALSE
 
 ### Parameters ----------------------------------------------------------
 lambda <- 0.9              ## speciation rate
