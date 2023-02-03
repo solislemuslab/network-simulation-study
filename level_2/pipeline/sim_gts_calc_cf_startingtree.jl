@@ -74,8 +74,8 @@ for i in network_dirs
 
     ### Use QMC for estimating an initial tree using CFs
     # calculate the starting tree using part of the TICR pipeline
-    # get-pop-tree.pl is now packed as part of the pipeline
-    run(Cmd(["../pipeline/TICR/scripts/./get-pop-tree.pl", "CFs_$output_file.csv"]))
+    # get-pop-tree.pl must be in the PATH
+    run(Cmd(["../../pipeline/get-pop-tree.pl", "CFs_$output_file.csv"]))
 
     # go back to data to visit the next directory
     cd("..")
