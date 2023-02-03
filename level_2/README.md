@@ -25,8 +25,8 @@ Goal: This simulation study will investigate the performance of SNaQ when the tr
   + [PhyloPlots](https://github.com/cecileane/PhyloPlots.jl) with `] add PhyloPlots`
   + [PhyloCoalSimulations](https://github.com/cecileane/PhyloCoalSimulations.jl) with `] add PhyloCoalSimulations`
   + `] add CSV` (dependency of PhyloNetworks, but we need to install separately)
-  + Distributed (dependency of PhyloNetworks, so no need to install separately)
-  + DataFrames (dependency of PhyloNetworks, so no need to install separately)
+  + `] add Distributed` (dependency of PhyloNetworks, but we need to install separately)
+  + `] add DataFrames` (dependency of PhyloNetworks, but we need to install separately)
 - [`get-pop-tree.pl`](https://github.com/nstenz/TICR/blob/master/scripts/get-pop-tree.pl) from the [TICR pipeline](https://github.com/nstenz/TICR).
 
 ## Pipeline
