@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
 In general we must to have Julia program in tar.gz, and  Julia packages into a project directory in tar.gz. 
 
 Later we have to put this in each job files to run in CHTC with the option: “One job per directory”
@@ -44,7 +49,15 @@ In each directories we must to put the inputs whit the same name, in this exampl
 
 ## Scripts
 
-- **julia_snaq.jl:** read the concordance factors and the gene tree to estimate hybridizations 
+- **julia_snaq.jl:** read the concordance factors and the gene tree to estimate hybridizations. This script use Distributed package to run in many Threads. First it no run, then Gustavo sugest to use: exeflags=“–project=$(Base.active_project())”: see following link [stackoverflow](https://stackoverflow.com/questions/70792051/package-set-up-not-propagating-to-workers-with-distributed).
+
+
+  - code sequence.
+    - using Distributed
+    - addprocs(4, exeflags="--project=$(Base.active_project())")
+    - @everywhere using PhyloNetworks
+    - @everywhere using Functors
+
 
 - **julia_snaq.sh:** load julia and julia pakages stored in tar.gz. Call  the concordance factors and the gene tree files and pass it to julia_snaq.jl to estimate hybridizations.
 

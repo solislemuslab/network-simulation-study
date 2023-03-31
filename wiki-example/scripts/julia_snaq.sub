@@ -1,23 +1,26 @@
 ###submit
+nano snaq_julia.sub
 universe = vanilla
 log =juliaread.log
 
-executable = julia_snaq.sh
+executable = snaq_julia.sh
 
-initialdir = julia_snaq$(ProcId)
+initialdir = snaq_julia$(ProcId)
 
 arguments = raxmltrees.tre tableCF.csv julread.out
 
 should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
-transfer_input_files = raxmltrees.tre, tableCF.csv, julia-1.6.3-linux-x86_64.tar.gz, julia_snaq.jl, my-julia-project.tar.gz
+
+transfer_input_files = raxmltrees.tre, tableCF.csv, julia-1.8.5-linux-x86_64.tar.gz, julia_snaq.jl, pro.tar.gz
+
 
 log =julread.log
 error = julread.err
 output = julread.out
 
-request_cpus = 2
-request_memory = 1GB
-request_disk = 1GB
+request_cpus = 8
+request_memory = 2GB
+request_disk = 2GB
 
 queue 2
