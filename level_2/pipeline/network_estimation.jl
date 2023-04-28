@@ -11,6 +11,8 @@ their respective order:
   an analysis using maximum likelihood, get-pop-tree.pl, 
   or a previous run of SNaQ, in whose .out file we have a tree.
 - h: The maximum h in the iteration
+- nthreads: The number of threads to use for the analysis. It will
+  reserve nthreads+1 for the main Julia process.
 - nruns: Number of parallel runs to be carried out
 - seed: the random seed
 
@@ -22,13 +24,14 @@ julia network_estimation.jl cf_table init_tree h nruns seed
 cf_table = ARGS[1]
 init_tree = ARGS[2]
 h = parse(Int, ARGS[3])
-nruns = parse(Int, ARGS[4])
-seed = parse(Int, ARGS[5])
+nthreads = parse(Int, ARGS[4])
+nruns = parse(Int, ARGS[5])
+seed = parse(Int, ARGS[6])
 
 using Distributed
 
 # set up the max number of threads to use based on nruns
-addprocs(nruns)
+addprocs(nthreads)
 
 # load packages to parallel threads
 @everywhere using PhyloNetworks
