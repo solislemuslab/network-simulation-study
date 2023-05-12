@@ -1,0 +1,24 @@
+universe = vanilla
+log =juliaread.log
+
+executable = toy2.sh
+
+initialdir = toy$(ProcId)
+
+arguments = Raxmltrees.tre TableCF.csv julread.out
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+transfer_input_files = Raxmltrees.tre, TableCF.csv, julia-1.8.5-linux-x86_64.tar.gz, network_estimation.jl, pro.tar.gz
+
+
+log =julread.log
+error = julread.err
+output = julread.out
+
+request_cpus = 8
+request_memory = 3GB
+request_disk = 3GB
+
+queue 2
