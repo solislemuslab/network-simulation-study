@@ -70,38 +70,38 @@ In each directories we must to put the inputs whit the same name, in this exampl
 
 
 ```bash
-# SEED=`cat gt_seed`
-SEED=1058
-julia --project=pro network_estimation.jl "$file_cf" "$file_tree" 0 4 4 12 > snaq_outgroup_h0.outerr 2>&1
-julia --project=pro network_estimation.jl "$file_cf" snaq_output_h0.out 1 4 4 13 > snaq_outgroup_h1.outerr 2>&1
-julia --project=pro network_estimation.jl "$file_cf" snaq_output_h1.out 2 4 4 14 > snaq_outgroup_h2.outerr 2>&1
-julia --project=pro network_estimation.jl "$file_cf" snaq_output_h2.out 3 4 4 15 > snaq_outgroup_h3.outerr 2>&1
+SEED=`cat gt_seed`
+
+julia --project=pro network_estimation.jl *.csv *.tre 0 4 4 `expr $SEED + 1` > snaq_outgroup_h0.outerr 2>&1
+julia --project=pro network_estimation.jl *.csv snaq_output_h0.out 1 4 4 `expr $SEED + 3` > snaq_outgroup_h1.outerr 2>&1
+julia --project=pro network_estimation.jl *.csv snaq_output_h1.out 2 4 4 `expr $SEED + 5` > snaq_outgroup_h2.outerr 2>&1
+julia --project=pro network_estimation.jl *.csv snaq_output_h2.out 3 4 4 `expr $SEED + 7` > snaq_outgroup_h3.outerr 2>&1
 ```
 
 Line by line:
 
 ```bash
-julia --project=pro network_estimation.jl "$file_cf" "$file_tree" 0 4 4 12 > snaq_outgroup_h0.outerr 2>&1
+julia --project=pro network_estimation.jl *.csv *.tre 0 4 4 `expr $SEED + 1` > snaq_outgroup_h0.outerr 2>&1
 ```
 parameters:
 
-  - `"$file_cf"`: Concordance factor file name.
-  - `"$file_tree"`: network file name.
+  - `*.csv`: Concordance factor file name.
+  - `*.tre`: network file name.
   - 0: subscript of the first output.
   - 4: nthreads.
   - 4: nruns.
-  - 12: seed.
+  - `expr $SEED + 1`: seed.
   
   
 ```bash
-julia --project=pro network_estimation.jl "$file_cf" snaq_output_h0.out 3 4 4 13 > snaq_outgroup_h1.outerr 2>&1
+julia --project=pro network_estimation.jl *.csv snaq_output_h0.out 1 4 4 `expr $SEED + 3` > snaq_outgroup_h1.outerr 2>&1
 ```
 
 parameters:
 
-  - `"$file_cf"`: Concordance factor file name.
+  - `*.csv`: Concordance factor file name.
   - snaq_output_h0.out: network file name from the first output.
   - 0: subscript of the first output.
   - 4: nthreads.
   - 4: nruns.
-  - 13: seed.
+  - `expr $SEED + 3`: seed.
