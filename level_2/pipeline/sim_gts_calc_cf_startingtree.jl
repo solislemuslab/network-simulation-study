@@ -48,7 +48,8 @@ for i in network_dirs
     input_net = readTopology(network_file[1])
     # simulate gene trees 
     output_gts = simulatecoalescent(input_net, nsims, 1)
-    # write to file
+    
+    # CA: this line write genetrees as .newick format
     writeMultiTopology(output_gts, output_file)
 
     ### Calculate concordance factors
