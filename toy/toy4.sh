@@ -12,6 +12,8 @@ export JULIA_DEPOT_PATH=$_CONDOR_SCRATCH_DIR/pro
 
 # run Julia script
 
+tar -xzvf files.tar.gz
+
 SEED=`cat gt_seed`
 
 julia --project=pro network_estimation.jl *.csv *.tre 0 4 4 `expr $SEED + 1` > snaq_outgroup_h0.outerr 2>&1

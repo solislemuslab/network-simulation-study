@@ -398,14 +398,26 @@ packages with
 we explore the option “One job per directory”, that allow to organize
 job files into separate directories where each job file directory must
 to have the same name plus a correlative subindex number that start in
-zero. In this example we name the directories as julia_snaq0,
-julia_snaq1, …</p>
-<p>In each directories we must to put the inputs whit the same name, in
-this example we have the following inputs per job:</p>
+zero. In this example we name the directories as chtc0, chtc1, …</p>
+<p>In each directory we must to put all the files needed to run the
+project (programs, libraries and data), and each file have to have the
+same name in each directory, so to facilitate data management, we put
+all the data into compress file namely files.tar.gz. To do that we have
+use <strong>level_2/pipeline/prepare_for_chtc_short.sh</strong> that use
+the results of <strong>level_2/pipeline/generate_datasets.R</strong>
+that save the results in <strong>level_2/data</strong>. Finaly to get
+the data, the script decompress files.tar.gz (toy4.sh). The structure of
+the file is the next one:</p>
 <ul>
-<li><strong>tableCF.csv:</strong> for the concordance factors.</li>
-<li><strong>raxmltrees.tre.txt:</strong> for the gene tree and consensus
-tree.</li>
+<li><strong>files.tar.gz:</strong> Compressed file with all the data
+needed:
+<ul>
+<li><strong>.csv:</strong> File with the concordance factors</li>
+<li><strong>.tre:</strong> File with the consensus tree.</li>
+<li><strong>.extnewick:</strong> Original network</li>
+<li><strong>gt_seed:</strong> Randod seed generated with
+generate_datasets.R</li>
+</ul></li>
 <li><strong>julia-1.6.3-linux-x86_64.tar.gz:</strong> julia
 porgram.</li>
 <li><strong>pro.tar.gz:</strong> julia packages project.</li>
@@ -415,11 +427,11 @@ porgram.</li>
 <div id="scripts" class="section level2">
 <h2>Scripts</h2>
 <ul>
-<li><p><strong>network_estimation.jl:</strong> read the concordance
-factors and the gene tree to estimate hybridizations. This script use
-Distributed package to run in many Threads. First it no run, then
-Gustavo sugest to use: exeflags=“–project=$(Base.active_project())”: see
-following link <a href="https://stackoverflow.com/questions/70792051/package-set-up-not-propagating-to-workers-with-distributed">stackoverflow</a>.</p>
+<li><p><strong>network_estimation.jl:</strong> Read the concordance
+factors, the gene tree and the random seed to estimate hybridizations.
+This script use Distributed package to run in many Threads. First it no
+run, then Gustavo sugest to use:
+exeflags=“–project=$(Base.active_project())”: see following link <a href="https://stackoverflow.com/questions/70792051/package-set-up-not-propagating-to-workers-with-distributed">stackoverflow</a>.</p>
 <ul>
 <li>code sequence.
 <ul>
@@ -430,10 +442,12 @@ exeflags=“–project=$(Base.active_project())”)</li>
 <li><span class="citation">@everywhere</span> using Functors</li>
 </ul></li>
 </ul></li>
-<li><p><strong>toy2.sh:</strong> load julia and julia pakages stored in
-tar.gz. Call the concordance factors and the gene tree files and pass it
-to julia_snaq.jl to estimate hybridizations.</p></li>
-<li><p><strong>toy2.sub:</strong> submit the job.</p></li>
+<li><p><strong>toy4.sh:</strong> load and decompress julia
+(julia-1.6.3-linux-x86_64.tar.gz), julia pakages (pro.tar.gz) and the
+data (files.tar.gz). Call the concordance factors, the gene tree files
+and the random seed and pass it to julia_snaq.jl to estimate
+hybridizations.</p></li>
+<li><p><strong>toy4.sub:</strong> submit the job.</p></li>
 </ul>
 </div>
 <div id="running" class="section level2">
@@ -455,8 +469,12 @@ julia --project=pro network_estimation.jl *.csv snaq_output_h2.out 3 4 4 `expr $
 <li>0: subscript of the first output.</li>
 <li>4: nthreads.</li>
 <li>4: nruns.</li>
-<li><code>expr $SEED + 1</code>: seed.</li>
+<li><code>expr $SEED + 1</code>: Random seed.</li>
 </ul>
+</div>
+</div>
+<div id="prepare_for_chtc_short.sh" class="section level1">
+<h1>prepare_for_chtc_short.sh</h1>
 <pre class="bash"><code>julia --project=pro network_estimation.jl *.csv snaq_output_h0.out 1 4 4 `expr $SEED + 3` &gt; snaq_outgroup_h1.outerr 2&gt;&amp;1</code></pre>
 <p>parameters:</p>
 <ul>
@@ -467,7 +485,6 @@ julia --project=pro network_estimation.jl *.csv snaq_output_h2.out 3 4 4 `expr $
 <li>4: nruns.</li>
 <li><code>expr $SEED + 3</code>: seed.</li>
 </ul>
-</div>
 </div>
 
 

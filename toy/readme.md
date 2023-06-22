@@ -35,12 +35,15 @@ This are the steps for get julia and the project directory as tar.gz:
 
 ## Data organization
 
-HCTC offer many alternatives to parallelize processes in this example we explore the option “One job per directory”, that allow to organize job files into separate directories where each job file directory must to have the same name plus a correlative subindex number that start in zero. In this example we name the directories as julia_snaq0, julia_snaq1, …
+HCTC offer many alternatives to parallelize processes in this example we explore the option “One job per directory”, that allow to organize job files into separate directories where each job file directory must to have the same name plus a correlative subindex number that start in zero. In this example we name the directories as chtc0, chtc1, …
 
-In each directories we must to put the inputs whit the same name, in this example we have the following inputs per job:
+In each directory we must to put all the files needed to run the project (programs, libraries and data), and each file have to have the same name in each directory, so to facilitate data management, we put all the data into compress file namely files.tar.gz. To do that we have use **level_2/pipeline/prepare_for_chtc_short.sh** that use the results of **level_2/pipeline/generate_datasets.R** that save the results in **level_2/data**. Finaly to get the data, the script decompress files.tar.gz (toy4.sh). The structure of the file is the next one:
 
-- **tableCF.csv:** for the concordance factors.
-- **raxmltrees.tre.txt:** for the gene tree and consensus tree.
+- **files.tar.gz:** Compressed file with all the data needed:
+  - **.csv:** File with the concordance factors
+  - **.tre:** File with the consensus tree.
+  - **.extnewick:** Original network
+  - **gt_seed:** Randod seed generated with generate_datasets.R
 - **julia-1.6.3-linux-x86_64.tar.gz:** julia porgram.
 - **pro.tar.gz:** julia packages project. 
 - **network_estimation.jl:** julia script.
@@ -49,7 +52,7 @@ In each directories we must to put the inputs whit the same name, in this exampl
 
 ## Scripts
 
-- **network_estimation.jl:** read the concordance factors and the gene tree to estimate hybridizations. This script use Distributed package to run in many Threads. First it no run, then Gustavo sugest to use: exeflags=“–project=$(Base.active_project())”: see following link [stackoverflow](https://stackoverflow.com/questions/70792051/package-set-up-not-propagating-to-workers-with-distributed).
+- **network_estimation.jl:** Read the concordance factors, the gene tree and the random seed to estimate hybridizations. This script use Distributed package to run in many Threads. First it no run, then Gustavo sugest to use: exeflags=“–project=$(Base.active_project())”: see following link [stackoverflow](https://stackoverflow.com/questions/70792051/package-set-up-not-propagating-to-workers-with-distributed).
 
 
   - code sequence.
@@ -59,9 +62,9 @@ In each directories we must to put the inputs whit the same name, in this exampl
     - @everywhere using Functors
 
 
-- **toy2.sh:** load julia and julia pakages stored in tar.gz. Call  the concordance factors and the gene tree files and pass it to julia_snaq.jl to estimate hybridizations.
+- **toy4.sh:** load and decompress julia (julia-1.6.3-linux-x86_64.tar.gz), julia pakages (pro.tar.gz) and the data (files.tar.gz). Call  the concordance factors, the gene tree files and the random seed and pass it to julia_snaq.jl to estimate hybridizations.
 
-- **toy2.sub:** submit the job.
+- **toy4.sub:** submit the job.
 
 ## Running
 
@@ -90,9 +93,14 @@ parameters:
   - 0: subscript of the first output.
   - 4: nthreads.
   - 4: nruns.
-  - `expr $SEED + 1`: seed.
+  - `expr $SEED + 1`: Random seed.
   
   
+  
+# prepare_for_chtc_short.sh
+
+
+
 ```bash
 julia --project=pro network_estimation.jl *.csv snaq_output_h0.out 1 4 4 `expr $SEED + 3` > snaq_outgroup_h1.outerr 2>&1
 ```
