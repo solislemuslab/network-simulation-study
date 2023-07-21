@@ -21,7 +21,6 @@ Usage:
 julia network_estimation.jl cf_table init_tree h nruns seed
 """
 
-
 # use arguments for feeding tree and cfs
 cf_table = ARGS[1]
 init_tree = ARGS[2]
@@ -31,7 +30,6 @@ nruns = parse(Int, ARGS[5])
 seed = parse(Int, ARGS[6])
 
 using Distributed
-
 
 # set up the max number of threads to use based on nruns
 addprocs(nthreads, exeflags="--project=$(Base.active_project())")
@@ -45,11 +43,20 @@ addprocs(nthreads, exeflags="--project=$(Base.active_project())")
 # read the concordance factor table
 cfs = readTableCF(cf_table)
 
+# check the size of cfs
+println(Base.format_bytes(Base.summarysize(cfs)))
+
 # read starting tree
 start_tree = readTopology(init_tree)
 
+# check the size of start_tree
+println(Base.format_bytes(Base.summarysize(start_tree)))
+
 # calculate a h=1 network
 net = snaq!(start_tree, cfs, hmax=h, filename="snaq_output_h$h", seed=seed, runs = nruns)
+
+# check the size of  net
+println(Base.format_bytes(Base.summarysize(net)))
 
 #exit julia
 #exit()
