@@ -50,7 +50,8 @@ for i in network_dirs
     output_gts = simulatecoalescent(input_net, nsims, 1)
     
     # CA: this line write genetrees as .newick format
-    writeMultiTopology(output_gts, output_file)
+    # GAB: We don't need to write down the gene trees
+    #writeMultiTopology(output_gts, output_file)
 
     ### Calculate concordance factors
     # calculate CFs
