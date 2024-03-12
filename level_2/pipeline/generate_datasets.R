@@ -1,139 +1,85 @@
 ### R script that simulates networks under the birth-death-hybridization
-### model implemented in SiPhyNetworks
-### For each network, it simulates gene trees using ms
-### GAB, CA, CSL (August 2022)
+### model implemented in SiPhyNetworks using maximum granularity
 
-## toy=true uses small number of networks and gene trees for debugging
-toy=TRUE
+### Original Parameters ----------------------------------------------------------
+#lambda <- 0.9              ## speciation rate
+#mu <- 0                    ## extinction rate
+#nu <- c(0.02, 0.04)        ## hybridization rate
+#hybprops <- c(1, 1, 1)     ## probabilities for each type of hybridization THIS NEEDS TO BE PROVIDED AS A STRING SEPARATED BY COMMAS
+#globalseed <- 2022         ## global seed
+#numbsim <- 150             ## number of networks to simulate
+#ntips <- c(15, 30, 50)     ## number of leaves in the network
+#ngt <- c(100, 1000, 10000) ## number of gene trees to simulate per network
+#gt_replics <- 30           ## number of replicates per simulating scenario
 
-### Parameters ----------------------------------------------------------
-lambda <- 0.9              ## speciation rate
-mu <- 0                    ## extinction rate
-nu <- c(0.02, 0.04)        ## hybridization rate
-hybprops <- c(1, 1, 1)     ## probabilities for each type of hybridization
-globalseed <- 2022         ## global seed
-
-if(toy){
-  numbsim <- 5             ## number of networks to simulate
-  ntips <- c(15, 30)       ## number of leaves in the network
-  ngt <- c(5, 10)      ## number of gene trees to simulate per network
-  gt_replics <- 5          ## number of replicates per simulating scenario
-}else{
-  numbsim <- 150             ## number of networks to simulate
-  ntips <- c(15, 30, 50)     ## number of leaves in the network
-  ngt <- c(100, 1000, 10000) ## number of gene trees to simulate per network
-  gt_replics <- 30           ## number of replicates per simulating scenario
-}
 ### ---------------------------------------------------------------------
+# ordered arguments for command line:
+#ntips
+#lambda
+#mu
+#nu
+#hybprops
+#seed
+#outpath
 
-set.seed(globalseed)  
+args <- commandArgs(TRUE)
+
+ntips <- as.numeric(args[1])
+lambda <- as.numeric(args[2])
+mu <- as.numeric(args[3])
+nu <- as.numeric(args[4])
+hybprops <- as.numeric(unlist(strsplit(args[5], split=",")))
+seed <- as.numeric(args[6])
+outpath = args[7]
+
 library(SiPhyNetwork) # library to simulate Networks, this use "ape" as dependence
+# starting execution in scripts
 source("functions.R") # load functions that operate on networks
 
-# GAB: Create a directory for storing the networks and their subdirs.
-# The .. is necessary as it assumes that the script generate_datasets.R
-# is run from the directory pipeline.
-if (!file.exists("../data")){
-  dir.create(path = "../data")
-}
-setwd("../data")
+# set output dir
+setwd(outpath)
 
-## for testing:
-#i = ntips[1]
-#j = nu[1]
-#k = ngt[1]
+# set the seed
+set.seed(seed)
 
-### Simulate networks with ntips leaves, nu hybridization rate and ngt gene trees
-for (i in ntips) {
-  for (j in nu) {
-    for (k in ngt) {
-      
-      ## Generating the specific seed for this run:
-      r_seed <- sample.int(n = 1e6, size = 1)
-      cat("r_seed = ", r_seed, "\n", sep = "")
-      set.seed(r_seed)
+# set the while conditional for starting the simulation
+continue <- TRUE
+maxiter <- 1000
+counter <- 1
 
-      ## Simulating networks with SiPhyNetwork
-      networks <- sim.bdh.taxa.ssa(n = i,
-                                   numbsim = numbsim,
-                                   lambda = lambda,
-                                   mu = mu ,
-                                   nu = j,
-                                   hybprops = hybprops,
-                                   hyb.inher.fxn = make.beta.draw(1, 1),
-                                   frac = 1,
-                                   mrca = TRUE,
-                                   complete = TRUE,
-                                   stochsampling = FALSE,
-                                   hyb.rate.fxn = NULL,
-                                   trait.model = NULL)
-      
-      # GAB: Code for removing bad networks before writing
-      # Get rid of null trees which go (extinct=0) and no extinct tips are sampled=1
-      networks <- networks[!sapply(X = networks, FUN = is.null)]
-      networks <- networks[sapply(X = networks, FUN = is.phylo)]
-
-      # Select only networks (omit trees)
-      file_networks <- vector(length = length(networks))
-      for(x in 1:length(networks)){
-        file_networks[x] <- as.logical(nrow(networks[[x]]$reticulation))
-      }
-      networks <- networks[file_networks]
-
-      ## For every network, we simulate gene trees using PhyloCoalSimulations
-      net_counter <- 1
-      for (y in networks) {
-        ## We do several replicates per network:
-        for (ii in 1:gt_replics){
-          # Folder name where all files corresponding to this network will be stored:
-          filename <- paste("net", net_counter,
-                          "_ntips_", i,
-                          "_nu_", j,
-                          "_ngt_", k, 
-                          "_rep_", ii, sep="")
-        
-          if (!file.exists(filename)){
-            dir.create(filename)
-          }
-          setwd(filename)
-                
-          # generate the seed for simulate_gts.jl which uses Random.seed!(gt_seed)
-          gt_seed <- sample.int(n = 1e6, size = 1)
-          writeLines(as.character(gt_seed), "gt_seed")
-          
-          # write number of gene trees to file for sim_gts_calc_cf_startingtree.jl
-          writeLines(as.character(k), "num_gt")
-        
-          # write parenthetical format to file
-          extnewick_filename <- paste(filename, ".extnewick", sep = "")
-          output_newick_filename <- paste(filename, ".newick", sep = "")
-          SiPhyNetwork::write.net(net = y, file = extnewick_filename)
-        
-          # store parenthetical format in string variable
-          network_i <- write.net(net = y)
-
-          ## writing everything in a logfile inside the folder
-          logfile<-file("logfile.txt")
-        
-          str <- paste("ntips=",i,
-            " ,lambda=",lambda,   
-            " ,mu=",mu,    
-            " ,nu=",j,
-            " ,hybprops=",hybprops[1],",",hybprops[2],",",hybprops[3],
-            " ,ngt=",k,
-            ", global seed=", globalseed, 
-            ", SiPhyNetwork seed=", r_seed,
-            ", this is network ", net_counter, 
-            ", phylocoalsims seed=", gt_seed, "\n")
-        
-          writeLines(str, logfile)
-          close(logfile)          
-          net_counter <- net_counter + 1
-          setwd("../")
-        }
-      }
+while (continue & (counter <= maxiter)) {
+    network <- sim.bdh.taxa.ssa(n = ntips,
+                                numbsim = 1,
+                                lambda = lambda,
+                                mu = mu ,
+                                nu = nu,
+                                hybprops = hybprops,
+                                hyb.inher.fxn = make.beta.draw(1, 1),
+                                frac = 1,
+                                twolineages = TRUE,
+                                complete = TRUE,
+                                stochsampling = FALSE,
+                                hyb.rate.fxn = NULL,
+                                trait.model = NULL)[[1]]
+    # check whether the network is phylo or restart if not
+    isphylo <- is.phylo(network)
+    if (!isphylo) {
+        counter <- counter + 1
+        next
     }
-  }
+    # now check whether it is network or restart if not
+    isnetwork <- as.logical(nrow(network$reticulation))
+    if (!isnetwork) {
+        counter <- counter + 1
+        next
+    }
+    # if it is, write to file and break the while
+    if (isnetwork) {
+        SiPhyNetwork::write.net(net = network, file = "network.extnewick")
+        cat("Attempted ", counter, " times until successfully picking a network\n", sep = "")
+        break
+    }
 }
-setwd("../pipeline")
-system("julia sim_gts_calc_cf_startingtree.jl ../data")
+if (counter > maxiter) {
+    stop("Simulation was unsuccessful with ", maxiter, " attepmts:\n  Try rising maxiter\n", sep="")
+}
