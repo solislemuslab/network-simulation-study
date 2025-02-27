@@ -18,17 +18,21 @@ their respective order:
 
 Usage: 
 
-julia network_estimation.jl cf_table init_tree h nruns seed
+julia network_estimation.jl input_dir output_dir
 """
 # use arguments for feeding tree and cfs
-cf_table = ARGS[1]
-init_tree = ARGS[2]
-h = parse(Int, ARGS[3])
-nthreads = parse(Int, ARGS[4])
-nruns = parse(Int, ARGS[5])
-seed = parse(Int, ARGS[6])
+input_loc = ARGS[1]
+output_loc = ARGS[2]
+nthreads = ARGS[3]
+
+using Pkg
+Pkg.activate("./")
 
 using Distributed
+
+nthreads = 4
+
+
 
 # set up the max number of threads to use based on nruns
 addprocs(nthreads)
@@ -39,14 +43,31 @@ addprocs(nthreads)
 @everywhere using DataFrames
 @everywhere using CSV
 
-# read the concordance factor table
-cfs = readTableCF(cf_table)
 
-# read starting tree
-start_tree = readTopology(init_tree)
 
-# calculate a h=1 network
-net = snaq!(start_tree, cfs, hmax=h, filename="h$h", seed=seed, runs = nruns)
+for phy in [150,149,148,147,146,145,144,143,142,141,140]
+  println(phy)
+  input_loc = "../data/pars_31/net_$phy/rep_1/"
+  output_loc = "../output/pars_31/net_$phy/rep_1/"
 
+  # read the concordance factor table
+  cfs = readTableCF(input_loc*"CFs.csv")
+
+  # read starting tree
+  net = readTopology(input_loc*"starting_tree.newick")
+
+  #read in parameters for inference
+  pars = CSV.read(input_loc*"est_pars.csv",DataFrame)
+
+  hmax = pars[1,2]
+  snaq_seed =pars[1,3]
+  nruns = pars[1,5]
+
+  for h in 1:hmax
+    net = snaq!(net, cfs, hmax=h, filename=output_loc*"h_$h", seed=snaq_seed, runs = 5)
+    GC.gc()
+  end
+
+end
 #exit julia
-exit()
+#exit()

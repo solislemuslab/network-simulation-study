@@ -2,52 +2,33 @@
 ### model implemented in SiPhyNetworks using maximum granularity
 
 ### Original Parameters ----------------------------------------------------------
-#lambda <- 0.9              ## speciation rate
-#mu <- 0                    ## extinction rate
-#nu <- c(0.02, 0.04)        ## hybridization rate
-#hybprops <- c(1, 1, 1)     ## probabilities for each type of hybridization THIS NEEDS TO BE PROVIDED AS A STRING SEPARATED BY COMMAS
-#globalseed <- 2022         ## global seed
-#numbsim <- 150             ## number of networks to simulate
-#ntips <- c(15, 30, 50)     ## number of leaves in the network
-#ngt <- c(100, 1000, 10000) ## number of gene trees to simulate per network
-#gt_replics <- 30           ## number of replicates per simulating scenario
-
-### ---------------------------------------------------------------------
-# ordered arguments for command line:
-#ntips
-#lambda
-#mu
-#nu
-#hybprops
-#seed
-#outpath
-
-args <- commandArgs(TRUE)
-
-ntips <- as.numeric(args[1])
-lambda <- as.numeric(args[2])
-mu <- as.numeric(args[3])
-nu <- as.numeric(args[4])
-hybprops <- as.numeric(unlist(strsplit(args[5], split=",")))
-seed <- as.numeric(args[6])
-outpath = args[7]
 
 library(SiPhyNetwork) # library to simulate Networks, this use "ape" as dependence
 # starting execution in scripts
+source("00.generate_seeds.R")
 source("functions.R") # load functions that operate on networks
 
-# set output dir
-setwd(outpath)
 
 # set the seed
-set.seed(seed)
+set.seed(global_seed)
 
-# set the while conditional for starting the simulation
-continue <- TRUE
-maxiter <- 1000
-counter <- 1
+##make a seed file for the seeds used to generate the phylogeny
+seed_file <- expand.grid(n_phy=1:n_phy,setting_no=setting_no, phy_seed= NA)
 
-while (continue & (counter <= maxiter)) {
+for(rw_no in setting_no){
+  print(paste('simulating parameter setting',rw_no))
+  par_setting <- pars[rw_no,]
+  nu<- as.numeric(par_setting[2])
+  ntips <- as.numeric(par_setting[3])
+  level1 <- as.logical(par_setting[5])
+  
+  setting_folder <- paste(data_folder,"pars_",rw_no,'/',sep='')
+  dir.create(setting_folder)
+  
+  n_success<- 1 #number of successful simulations for a given setting
+  while(n_success <= n_phy){   #Keep going until we get enough valid networks
+    seed<-sample(1e8,1)
+    set.seed(seed)
     network <- sim.bdh.taxa.ssa(n = ntips,
                                 numbsim = 1,
                                 lambda = lambda,
@@ -62,24 +43,97 @@ while (continue & (counter <= maxiter)) {
                                 hyb.rate.fxn = NULL,
                                 trait.model = NULL)[[1]]
     # check whether the network is phylo or restart if not
-    isphylo <- is.phylo(network)
-    if (!isphylo) {
-        counter <- counter + 1
-        next
+    if (!is.phylo(network)) {
+      next
     }
     # now check whether it is network or restart if not
-    isnetwork <- as.logical(nrow(network$reticulation))
-    if (!isnetwork) {
-        counter <- counter + 1
-        next
+    if (nrow(network$reticulation)==0) {
+      next
     }
-    # if it is, write to file and break the while
-    if (isnetwork) {
-        SiPhyNetwork::write.net(net = network, file = "network.extnewick")
-        cat("Attempted ", counter, " times until successfully picking a network\n", sep = "")
-        break
+    ##Make sure the network is level 1, if desired 
+    if(!level1 && getNetworkLevel(network)!=1){
+      next
     }
+    
+    # if it is, write to file and generate/save seeds for downstream steps
+    phy_folder <- paste(setting_folder,"net_",n_success,'/',sep='')
+    dir.create(phy_folder)
+    SiPhyNetwork::write.net(net = network, 
+                            file = paste(phy_folder,"network.extnewick",sep=''))
+    seed_file[((rw_no-1)*n_phy)+(n_success),3] <- seed
+    
+    ##create seeds for the downstream simulations/analyses
+    sim_seeds <- expand.grid(rep = 1:n_reps,gt_seed=NA, snaq_seed = NA)
+    sim_seeds$gt_seed   <- sample(1e8,size=nrow(sim_seeds))
+    sim_seeds$snaq_seed <- sample(1e8,size=nrow(sim_seeds))
+    write.csv(sim_seeds,file = paste(phy_folder,"seeds.csv",sep=''))
+    
+    n_success<- n_success+1
+  }
+  
 }
-if (counter > maxiter) {
-    stop("Simulation was unsuccessful with ", maxiter, " attepmts:\n  Try rising maxiter\n", sep="")
+
+##Generate CFs
+system(paste("julia ./02.sim_gts_calc_cf.jl",n_phy,n_reps))
+
+##Generate starting trees and create folders for inference
+job_no <- 1
+dir.create('../jobs')
+for(rw_no in setting_no){ #full compression
+#for(rw_no in 1:6){ ## 1/6 parameter settings
+  setting_folder <- paste(data_folder,"pars_",rw_no,'/',sep='')
+  for(phy_no in 1:n_phy){
+    print(paste('rw',rw_no,'phy',phy_no))
+    phy_folder <- paste(setting_folder,"net_",phy_no,'/',sep='')
+    seed_file <- read.csv(paste(phy_folder,'seeds.csv',sep=''))
+    for(rep_no in 1:n_reps){
+      rep_folder <- paste(phy_folder,"rep_",rep_no,'/',sep='')
+      
+      ##generate starting tree 
+      command <- paste("tree-qmc --fast -i ",rep_folder,'gene_trees.newick -o ',
+                       rep_folder, 'starting_tree.newick',sep='')
+      system(command,show.output.on.console = F)
+      
+      ##Generate data frame with the information for estimation
+      est_pars<-data.frame(hmax = hmax,
+                           snaq_seed = seed_file$snaq_seed[rep_no],
+                           nthreads = nthreads,
+                           nruns=nruns)
+      write.csv(est_pars,paste(rep_folder,'est_pars.csv',sep=''))
+      
+      
+      ##Create folders with data to be sent to clusters.
+      job_files <-paste(paste(rep_folder,
+                        c('starting_tree.newick','CFs.csv','est_pars.csv'),sep=''),collapse = ' ')
+      command <- paste("tar -czf ../jobs/job_",job_no,'.tar.gz ',job_files,sep='')
+      system(command)
+      job_no<- job_no+1
+    }
+  }
 }
+
+
+##Only if running analyses locally
+dir.create('../output')
+for(rw_no in setting_no){ #full compression
+#for(rw_no in 1:6){ ## 1/6 parameter settings
+  setting_folder <- paste("pars_",rw_no,'/',sep='')
+  for(phy_no in 1:n_phy){
+    phy_folder <- paste(setting_folder,"net_",phy_no,'/',sep='')
+    for(rep_no in 1:n_reps){
+      rep_folder <- paste(phy_folder,"rep_",rep_no,'/',sep='')
+
+      input_dir <- paste('../data',rep_folder,sep='')
+      output_dir <-paste('../output',rep_folder,sep='')
+      dir.create(output_dir,recursive = T)
+      
+      command <- paste("julia 04.network_estimation.jl ")
+      system(command)
+      job_no<- job_no+1
+    }
+  }
+}
+
+
+
+
