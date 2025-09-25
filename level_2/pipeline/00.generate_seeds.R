@@ -1,6 +1,13 @@
 data_folder<- "../data/"
 dir.create(data_folder)
 
+## GAB: original construction of the is.phylo function in geiger. 
+## Unnecessary to load the whole thing for just a function
+# used in generate_datasets
+is.phylo <- function(x) {
+  "phylo" %in% class(x)
+}
+
 ##Constant parameters
 lambda <- 0.9              ## speciation rate
 mu <- 0                    ## extinction rate

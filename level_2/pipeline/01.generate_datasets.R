@@ -50,8 +50,28 @@ for(rw_no in setting_no){
     if (nrow(network$reticulation)==0) {
       next
     }
+    
+    ##TODO delete things above the lsa 
+    
+    
+    ##check  2-cycles and 3-cycles
+    good_net<-T
+    for(hyb in network$reticulation[,2]){
+      good_net <- check_2cycle(net,hyb) || check_3cycle(net,hyb)
+      if(!good_net){ ##we found a  2 or 3 cycle
+        break
+      }
+    }
+    if(!good_net){
+      next
+    }
+    
+    
+    # Find rows with both matching starting and end nodes
+    is_match <- (from_match_indices == to_match_indices) & !is.na(from_match_indices)
+    
     ##Make sure the network is level 1, if desired 
-    if(!level1 && getNetworkLevel(network)!=1){
+    if(!level1 && getNetworkLevel(network)==1){
       next
     }
     
@@ -73,14 +93,13 @@ for(rw_no in setting_no){
   
 }
 
-##Generate CFs
+##Generate CFs and starting tree
 system(paste("julia ./02.sim_gts_calc_cf.jl",n_phy,n_reps))
 
-##Generate starting trees and create folders for inference
-job_no <- 1
+##create folders for inference
+job_no <- 0
 dir.create('../jobs')
 for(rw_no in setting_no){ #full compression
-#for(rw_no in 1:6){ ## 1/6 parameter settings
   setting_folder <- paste(data_folder,"pars_",rw_no,'/',sep='')
   for(phy_no in 1:n_phy){
     print(paste('rw',rw_no,'phy',phy_no))
@@ -89,10 +108,10 @@ for(rw_no in setting_no){ #full compression
     for(rep_no in 1:n_reps){
       rep_folder <- paste(phy_folder,"rep_",rep_no,'/',sep='')
       
-      ##generate starting tree 
-      command <- paste("tree-qmc --fast -i ",rep_folder,'gene_trees.newick -o ',
-                       rep_folder, 'starting_tree.newick',sep='')
-      system(command,show.output.on.console = F)
+      ##generate starting tree -- NOW done in 02
+      #command <- paste("tree-qmc --fast -i ",rep_folder,'gene_trees.newick -o ',
+      #                 rep_folder, 'starting_tree.newick',sep='')
+      #system(command,show.output.on.console = F)
       
       ##Generate data frame with the information for estimation
       est_pars<-data.frame(hmax = hmax,
@@ -100,39 +119,40 @@ for(rw_no in setting_no){ #full compression
                            nthreads = nthreads,
                            nruns=nruns)
       write.csv(est_pars,paste(rep_folder,'est_pars.csv',sep=''))
-      
+      output_dir <- paste("out",sep='')
+      dir.create(paste(rep_folder,output_dir,sep=''))
       
       ##Create folders with data to be sent to clusters.
-      job_files <-paste(paste(rep_folder,
-                        c('starting_tree.newick','CFs.csv','est_pars.csv'),sep=''),collapse = ' ')
-      command <- paste("tar -czf ../jobs/job_",job_no,'.tar.gz ',job_files,sep='')
+      dir.create(paste('../jobs/job_',job_no,sep=''))
+      job_files <-paste(paste(c('starting_tree.newick','CFs.csv','est_pars.csv'),sep=''),collapse = ' ')
+      command <- paste("tar -czf ../../jobs/job_",job_no,'/files.tar.gz '," -C ",rep_folder," ",job_files," ",output_dir,sep='')
       system(command)
+      unlink(paste(rep_folder,output_dir,sep='')) #don't keep this directory around
       job_no<- job_no+1
     }
   }
 }
 
 
-##Only if running analyses locally
-dir.create('../output')
-for(rw_no in setting_no){ #full compression
-#for(rw_no in 1:6){ ## 1/6 parameter settings
-  setting_folder <- paste("pars_",rw_no,'/',sep='')
-  for(phy_no in 1:n_phy){
-    phy_folder <- paste(setting_folder,"net_",phy_no,'/',sep='')
-    for(rep_no in 1:n_reps){
-      rep_folder <- paste(phy_folder,"rep_",rep_no,'/',sep='')
+##link the job number to the parameter combo, phy_no, and rep_no
+##Each row in job_map corresponds to the job numbers associated parameters
+df_expanded <- do.call(rbind, lapply(1:nrow(pars), function(i) {
+  cbind(pars[rep(i, n_phy), ], phy_no = 1:n_phy)
+}))
+df_expanded <- do.call(rbind, lapply(1:nrow(df_expanded), function(i) {
+  cbind(df_expanded[rep(i, n_reps), ], rep_no = 1:n_reps)
+}))
+df_expanded$job_no <- 0:nrow(df_expanded)
+write.csv(df_expanded,"../../data/job_map.csv",row.names = F)
 
-      input_dir <- paste('../data',rep_folder,sep='')
-      output_dir <-paste('../output',rep_folder,sep='')
-      dir.create(output_dir,recursive = T)
-      
-      command <- paste("julia 04.network_estimation.jl ")
-      system(command)
-      job_no<- job_no+1
-    }
-  }
-}
+
+
+
+
+
+
+
+
 
 
 
