@@ -23,6 +23,22 @@ for(i in 1:nrow(pars)){
 
   
   for(phy_no in 1:n_phy){
+  #   found_true_net <-FALSE
+  #   for(try_net in 1:30){
+  #     true_net_loc = paste("../output/pars/pars_",par_no,"/phy_",phy_no,"/rep_",try_net,"/network.extnewick",sep='')
+  #     if(!file.exists(true_net_loc)){ #move on if the file does not exist
+  #       next
+  #     }else{
+  #       found_true_net<-TRUE
+  #       break
+  #     }
+  #   }
+  #   if(!found_true_net){
+  #     next
+  #   }
+  #   net<-read.net(true_net_loc)
+    
+    
     net <- read.net(paste(par_dir,"net_",phy_no,"/network.extnewick",sep=''))
     
     ##Compute the biconnected components for the level and number of blobs

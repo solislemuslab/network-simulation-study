@@ -1,7 +1,9 @@
 
+
 using Pkg
 Pkg.activate(".")
 using Base.Threads
+
 
 using PhyloNetworks
 using SNaQ
@@ -42,6 +44,19 @@ for phy_no in 1:150
 
     println("we are at par $par_no and phy $phy_no" ) 
     true_net_loc = "../data/pars_$par_no/net_$phy_no/"
+
+    #=
+    found_true_net = false
+    true_net_loc = ""
+    for try_net in 1:30
+        trial_net_loc = "../output/pars/pars_$par_no/phy_$phy_no/rep_$try_net/"
+        if !isfile(trial_net_loc*"network.extnewick") #move on if the file does not exist
+            continue
+        else
+        true_net_loc = trial_net_loc
+        end
+    end
+    =#
     net = readnewick(true_net_loc*"network.extnewick")
     preorder!(net)
     output_net_dir = output_dir*"net_$phy_no/hybs/"
@@ -77,9 +92,11 @@ for phy_no in 1:150
             stacked = !(isempty(lower_stack)) | !(isempty(upper_stack))
 
             all_stack_names = (x-> hyb_number2nd[x].name).(desc_mat.nodenumbers_toporder[[upper_stack;lower_stack]]) ## all nodes that share the stack of hyb
-            CSV.write(output_net_dir*"$(hyb.name)/stacked.csv",DataFrame(stacked_nodes=all_stack_names,
-                                                                             islower=[fill(0,length(upper_stack));fill(1,length(lower_stack))])
-                     )
+            CSV.write(output_net_dir*"$(hyb.name)/stacked.csv",
+                DataFrame(stacked_nodes=all_stack_names,
+                        islower=[fill(0,length(upper_stack));
+                        fill(1,length(lower_stack))])
+            )
             
 
             ##Cycle info for node
@@ -123,13 +140,6 @@ for phy_no in 1:150
             hyb_blob_map[hyb.number]=(blob_size,blob_level,blob_no,external,stacked,cycle_size,cycle_diam)
         end
     end
-
-
-    ## TODO find the LSA node for each hybridization
-        # NOTE: This is not nessecarily the 'entry' node of the blob.
-        #Approach?: find the 'lowest'/'smallest' node in the blob that has all parents of the hybrid as descendents 
-            # lowest/smallest - node with the fewest number of descdencdents (leaves?)?
-    
 
     for hyb in hyb_nds
 
@@ -189,3 +199,23 @@ CSV.write(output_dir*"hyb_dat.csv",hyb_dat)
 end
 
 
+
+art_points = Float64[]
+for par_no in 1:18
+    output_dir = "../data/pars_$par_no/"
+    println("we are at par $par_no" ) 
+for phy_no in 1:150
+    
+    true_net_loc = "../data/pars_$par_no/net_$phy_no/"
+    net = readnewick(true_net_loc*"network.extnewick")
+    preorder!(net)
+    PhyloNetworks.process_biconnectedcomponents!(net)
+
+    for b in net.partition
+        if length(b.edges)>=2 #not a trivial bcc
+            push!(art_points,PhyloNetworks.number_exitnodes(b)) #number of articulation points
+        end        
+    end
+end
+end
+art_table = counter(art_points)

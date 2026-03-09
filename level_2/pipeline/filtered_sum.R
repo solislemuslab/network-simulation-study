@@ -96,7 +96,7 @@ in_phy_hyb <- hyb_dat %>% group_by(phy,name) %>%
 in_phy_hyb<- merge(in_phy_hyb,hyb_props, by=c('phy','name'),all.x = T)
 
 
-nboots<- 1000
+nboots<- 100
 coef_dat<-data.frame(matrix(NA,nrow=nboots,ncol=4))
 pval_dat<-data.frame(matrix(NA,nrow=nboots,ncol=4))
 

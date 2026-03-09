@@ -1,0 +1,6 @@
+
+[pip.deps]
+physquirrel = ""
+phylox = ""
+[deps]
+networkx = ""

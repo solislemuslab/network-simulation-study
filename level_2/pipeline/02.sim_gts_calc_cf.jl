@@ -40,7 +40,7 @@ for par_comb in pars[1:end,1] # go over all parameter combinations
             ((rep_no%5) == 0)  && println("rep $rep_no")
             rep_folder = phy_folder*"rep_$rep_no"
             mkpath(rep_folder)
-            isfile(rep_folder*"/starting_tree.newick") && continue ##we already have a starting tree, move on
+            #isfile(rep_folder*"/starting_tree.newick") && continue ##we already have a starting tree, move on
 
             Random.seed!(gt_seeds[rep_no,3])
             # simulate gene trees 

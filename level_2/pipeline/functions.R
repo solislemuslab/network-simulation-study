@@ -28,6 +28,36 @@ all_subsets <- function(n, hmax) {
   }), recursive = FALSE)
 }
 
+get_jobID <- function(setting_no, phy_no, rep_no) {
+  # 1. Convert the 1-based parameters to 0-based indices
+  s_idx <- setting_no - 1
+  p_idx <- phy_no - 1
+  r_idx <- rep_no - 1
+  
+  
+  
+  job_id <- r_idx +
+    (p_idx *30) +
+    (s_idx * 150 * 30)
+  return(job_id)
+}
+
+ID2pars <-function(ID){
+
+  r_idx <- ID %% 30
+  
+  temp_id <- (ID - r_idx) / 30
+
+  p_idx <- temp_id %% 150
+  
+  s_idx <- (temp_id - p_idx) / 150
+  
+
+  setting_no <- s_idx + 1
+  phy_no <- p_idx + 1
+  rep_no <- r_idx + 1
+  return(c(setting_no,phy_no,rep_no))
+}
 
 
 
@@ -116,25 +146,29 @@ summary.custom<-function(fit){
   }
 }
 
-check_3cycle <- function(net,hyb_nd){
+check_3cycle <- function(net){
 
   edges <- rbind(net$edge,net$reticulation)#and net$reticulation
-  edges$ret <- c(rep(F,nrow(net$edge),rep(T,nrow(net$reticulation))))
-  #get parents of hyb node
-  parent_edges <- edges[,2]==hyb_nd
-  parents <- edges[parent_edges,1]
+  hyb_nds <- net$reticulation[,2]
+  has_3cycle <- FALSE
+  for(hyb_nd in hyb_nds){
+    #get parents of hyb node
+    parent_edges <- edges[,2]==hyb_nd
+    parents <- edges[parent_edges,1]
 
-  ##look for a connection between the parent nodes
-  connected <- any(edges[,2] %in% parents & edges[,1] %in% parents) ##and edge that connects
-
-  return(connected)
+    ##look for a connection between the parent nodes
+    has_3cycle <- any((edges[,2] %in% parents) & (edges[,1] %in% parents)) ##and edge that connects
+    if(has_3cycle){
+      break
+    }
+  }
+  return(has_3cycle)
 }
 
-check_2cycle<- function(net,hyb_nd){
-  from_matches <- net$reticulation[,1] %in% net$edge[,1] 
-  to_matches <- net$reticulation[,2] %in% net$edge[,2]
-  rw_matches <- from_matches & to_matches # these are the rows in reticulation that should be shrunk.
-  return(any(rw_matches))
+check_2cycle<- function(net){
+  edges <-rbind(net$edge,net$reticulation)
+  
+  return(any(duplicated(edges)))
 }
 
 

@@ -4,6 +4,7 @@ library(ape)
 library(TreeDist)
 
 for(par_no in 1:36){
+
   tob_dat <- data.frame(phy = integer(),
                         rep = integer(),
                         hmax = integer(),
@@ -23,11 +24,49 @@ for(par_no in 1:36){
                               true_blob=integer(),
                               est_blob=integer())
   
-  dir.create(paste("../summarized_results/pars_",par_no,'/tob',sep = ''),showWarnings = F)
+  ##create directories as needed 
+  pars_dir <- paste("../summarized_results/pars_",par_no,"/",sep='')
+  dir.create(pars_dir,recursive = T,showWarnings = T)
+  dir.create(paste(pars_dir,'tob',sep = ''),showWarnings = T,recursive=TRUE)
   
+  tob_file <- paste(pars_dir,'tob.csv',sep='')
+  missing_file <- paste(pars_dir,'missing.csv',sep='')
+  tob_compat_file <- paste(pars_dir,'tob/compat.csv',sep='')
+  
+  #check if the summary files exist
+  if(!file.exists(tob_file)){ #create empty csv if they do not
+    write.csv(tob_dat,tob_file,row.names = F)
+    write.csv(missing_dat,missing_file,row.names = F)
+    write.csv(tob_compat_dat,tob_compat_file,row.names = F) 
+  }
+  
+  ID_df <- read.csv(tob_file)
+  done_keys <- paste(ID_df$phy, ID_df$rep, ID_df$hmax, sep = "_")
+
 for(phy_no in 1:150){
+  
+  list_ind<-1
+  tob_list <-list()
+  missing_list<-list()
+  compat_list <-list()
+  
+  print(paste("we are at par",par_no, "and phy",phy_no))
   #Compute things on the true network
-  true_net_loc = paste("../data/pars_",par_no,"/net_",phy_no,"/network.extnewick",sep='')
+  #true_net_loc = paste("../data/pars_",par_no,"/net_",phy_no,"/network.extnewick",sep='')
+  found_true_net <-FALSE
+  for(try_net in 1:30){
+    true_net_loc = paste("../output/pars/pars_",par_no,"/phy_",phy_no,"/rep_",try_net,"/network.extnewick",sep='')
+    if(!file.exists(true_net_loc)){ #move on if the file does not exist
+      next
+    }else{
+      found_true_net<-TRUE
+      break
+    }
+  }
+  if(!found_true_net){
+    next
+  }
+
   true_net <- read.net(true_net_loc)
   true_tob=treeOfBlobs(true_net,plot=F);
   d=degree(true_tob,details=T) # This function produces a table telling how many nodes of degree n  we want  the number of nodes that have degree greater than 3
@@ -38,14 +77,27 @@ for(phy_no in 1:150){
     true_blobs[[blob_nd]] <- nodeGroups(true_tob,blob_nd)
   }
   
-  print(paste("we are at par",par_no, "and phy",phy_no))
+
   for(rep_no in 1:30){
+    
   for(h_no in 1:5){
     
+    current_key <- paste(phy_no, rep_no, h_no, sep = "_")
+    
+    if(current_key %in% done_keys) {
+      next
+    }
+    
+    #create empty dfs for each row
+    rw_tob <- tob_dat
+    rw_missing <- missing_dat
+    rw_tob_compat <- tob_compat_dat
+    
+    #print(paste(rep_no,h_no))
     est_net_loc = paste("../output/pars/pars_",par_no,"/phy_",phy_no,"/rep_",rep_no,"/h_",h_no,".out",sep='')
     
     if(!file.exists(est_net_loc)){ #move on if the file does not exist
-      missing_dat<-rbind(missing_dat,c(phy_no=phy_no,rep_no=rep_no,h_no=h_no))
+      rw_missing<-rbind(rw_missing,c(phy_no=phy_no,rep_no=rep_no,h_no=h_no))
       next
     }
     
@@ -53,8 +105,25 @@ for(phy_no in 1:150){
     first_line <- readLines(con,n=1)
     close(con)
     est_net <- read.net(text=first_line)
-  
-    est_tob <- treeOfBlobs(est_net,plot=F)
+    if(!is.null(est_net$node.label)){
+      empty_labels<-est_net$node.label==''
+      est_net$node.label<-make.unique(est_net$node.label) #make node labels unique
+      est_net$node.label[empty_labels]='' #make empty labels empty again
+    }
+    is_tree <- nrow(est_net$reticulation)==0
+
+    if(!all(sort(est_net$tip.label) == sort(true_net$tip.label))){
+      print(paste("there was a tip mismatch at",rep_no,sep=''))
+      next
+    }
+    
+    if(is_tree){
+      est_net <- read.tree(text=first_line)
+      est_tob <- est_net ## the tree is already a tree of blobs 
+        
+    }else{
+      est_tob <-  treeOfBlobs(est_net,plot=F)
+    }
     d=degree(est_tob,details=T) # This function produces a table telling how many nodes of degree n  we want  the number of nodes that have degree greater than 3
     est_blob_nds  <- which(d>3)
     
@@ -122,30 +191,48 @@ for(phy_no in 1:150){
     
     
     
-    suppressMessages(tob_dat<-rbind(tob_dat,c(
+    suppressMessages(rw_tob<-rbind(rw_tob,c(
                    phy_no,rep_no,h_no,
                    RF.dist(true_tob,est_tob),
                    ClusteringInfoDist(true_tob,est_tob),
                    MatchingSplitDistance(true_tob,est_tob),
                    MatchingSplitInfoDistance(true_tob,est_tob)
                    )))
-    # write.csv(compat_frame,paste("../summarized_results/pars_",par_no,'/compat_blobs/phy_',phy_no,'_rep_',rep_no,'_h_',h_no,'.csv',sep=''),row.names = F)
-    tob_compat_dat <- rbind(tob_compat_dat,compat_frame)
+    
+    rw_tob_compat<-rbind(rw_tob_compat,compat_frame)
+    
+    colnames(rw_tob)<-c('phy','rep','hmax','rf_dist','clust_dist','split_dist','split_info_dist')
+    rw_tob$phy <- as.integer(rw_tob$phy)
+    rw_tob$rep <- as.integer(rw_tob$rep)
+    rw_tob$hmax <- as.integer(rw_tob$hmax)
+    colnames(rw_missing) <- c("phy",'rep','hmax')
+    colnames(rw_tob_compat) <-c("phy",'rep','hmax','true_blob','est_blob')
+
+    tob_list[[list_ind]]<-rw_tob
+    missing_list[[list_ind]]<-rw_missing
+    compat_list[[list_ind]]<-rw_tob_compat
+    list_ind<-list_ind+1
+    # write.table(rw_tob,tob_file,append = T, sep = ",",row.names = F,col.names = F)
+    # write.table(rw_missing,missing_file,append=T, sep = ",",row.names = F,col.names = F)
+    # write.table(rw_tob_compat,tob_compat_file,append=T, sep = ",",row.names = F,col.names=F) 
+    
   } #end hmax
 } #end rep_no
+  
+  phy_tob <- data.table::rbindlist(tob_list)
+  phy_missing <-data.table::rbindlist(missing_list)
+  phy_compat <- data.table::rbindlist(compat_list)
+  
+  write.table(phy_tob,tob_file,append = T, sep = ",",row.names = F,col.names = F)
+  write.table(phy_missing,missing_file,append=T, sep = ",",row.names = F,col.names = F)
+  write.table(phy_compat,tob_compat_file,append=T, sep = ",",row.names = F,col.names=F)
+  
+  
+  
 } #end phy_no
-  colnames(tob_dat)<-c('phy','rep','hmax','rf_dist','clust_dist','split_dist','split_info_dist')
-  tob_dat$phy <- as.integer(tob_dat$phy)
-  tob_dat$rep <- as.integer(tob_dat$rep)
-  tob_dat$hmax <- as.integer(tob_dat$hmax)
   
-  colnames(missing_dat) <- c("phy",'rep','hmax')
-  colnames(tob_compat_dat) <-c("phy",'rep','hmax','true_blob','est_blob')
-  
-  dir.create(paste("../summarized_results/pars_",par_no,sep = ''),showWarnings = F)
-  write.csv(tob_dat,paste("../summarized_results/pars_",par_no,'/tob.csv',sep=''),row.names = F)
-  write.csv(missing_dat,paste("../summarized_results/pars_",par_no,'/missing.csv',sep=''),row.names = F)
-  write.csv(tob_compat_dat,paste("../summarized_results/pars_",par_no,'/tob/compat.csv',sep=''),row.names = F) 
+
+
 } #end par_no
 
 

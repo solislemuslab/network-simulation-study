@@ -21,13 +21,13 @@ n_reps <- 30 #number of times we simulate gene trees for a given phylogeny and s
 
 ##Estimation parameters
 hmax <- 5
-nthreads <- 10
-nruns <- 10
+nprocs <- 10
+nruns <- 45
 
 
 ##Experiment Parameters
 nu <- c(0.02, 0.04)        ## hybridization rate
-ntips <- c(15,20, 30)     ## number of leaves in the network
+ntips <- c(15,20, 25)     ## number of leaves in the network
 ngt <- c(100, 1000, 10000) ## number of gene trees to simulate per network
 level1 <-c(0,1)
 
