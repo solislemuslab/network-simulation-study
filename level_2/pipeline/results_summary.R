@@ -188,7 +188,7 @@ in_phy_filt <- filter_df %>% group_by(setting_no,phy,filter) %>%
             across(where(is.numeric), ~mean(.x, na.rm = TRUE))
   )  %>% dplyr::select( ##remove field now meaningless
     -c(rep)
-  )
+  )a
 
 write.csv(in_phy_filt,'../summarized_results/rep_summed_filter_extended.csv')
 
