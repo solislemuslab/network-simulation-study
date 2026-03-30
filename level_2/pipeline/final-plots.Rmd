@@ -104,3 +104,5 @@ ggplot(blob_phy_filt, aes(x = level, group = ngt, linetype = ngt)) +
 
 ggsave(paste(save_dir,'quarnet_score.png',sep=''))
 ```
+
+## Evaluating the Accuracy of Inferred Reticulations
