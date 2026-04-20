@@ -37,7 +37,8 @@ library(patchwork)
 library(ggridges)
 library(vegan)
 
-in_phy_filt <- read.csv('data-plots/rep_summed_filter_extended.csv')
+#in_phy_filt <- read.csv('data-plots/rep_summed_filter_extended.csv')
+in_phy_filt <- read.csv('data-plots/rep_summed_filter_extended_2.csv')
 
 ## this is how we want to filter the results: by hmax=number of blobs, or hmax=1,2,3,4,5 or hmax=nrets
 all_filts<-unique(in_phy_filt$filter)
@@ -174,7 +175,7 @@ ggplot(plot_dat, aes(x = ngt, y = level, fill = mean_pct)) +
        x = "Gene Trees",
        y = "Network Level")
 
-ggsave('plots/hyb_clade_broad_cov_hm_updated.png',width=4, height=4, units="in")
+ggsave('plots/hyb_clade_broad_cov_hm_updated.png',width=6, height=4, units="in")
 ```
 
 ### Hybrid Cluster Broad Mapping
@@ -207,7 +208,7 @@ ggplot(plot_dat, aes(x = ngt, y = level, fill = mean_pct)) +
        x = "Gene Trees",
        y = "Network Level")
 
-ggsave('plots/hyb_clade_broad_map_hm_updated.png',width=4, height=4, units="in")
+ggsave('plots/hyb_clade_broad_map_hm_updated.png',width=6, height=4, units="in")
 ```
 
 ## Evaluating Blob-Level Topological Agreement
@@ -282,7 +283,7 @@ ggplot(plot_dat, aes(x = ngt, y = level, fill = mean_pct)) +
   labs(x = "Gene Trees",
        y = "Network Level")
 
-ggsave('plots/tob_found_hm_updated.png',width=4, height=4, units="in")
+ggsave('plots/tob_found_hm_updated.png',width=6, height=4, units="in")
 ```
 
 # Supplemental figures
@@ -301,7 +302,7 @@ ggplot(blob_phy_filt, aes(x = level, y = hwcd, fill = ngt)) +
   geom_boxplot(position = position_dodge(width = 0.8), 
                width = 0.15,        
                color = "grey20",    
-               fill = "white",      
+               #fill = "white",      
                alpha = 0.9,         
                outlier.shape = NA) +
   facet_wrap(~ ntips_label) +
@@ -355,7 +356,7 @@ ggplot(plot_dat, aes(x = ngt, y = level, fill = mean_pct)) +
   labs(x = "Gene Trees",
        y = "Network Level")
 
-ggsave('plots/hyb_clade_ex_cov_hm_updated.png',width=4, height=4, units="in")
+ggsave('plots/hyb_clade_ex_cov_hm_updated.png',width=6, height=4, units="in")
 ```
 
 ### Compatible blobs
@@ -385,7 +386,7 @@ ggplot(plot_dat, aes(x = ngt, y = level, fill = mean_pct)) +
   labs(x = "Gene Trees",
        y = "Network Level")
 
-ggsave('plots/tob_compat_hm_updated.png',width=4, height=4, units="in")
+ggsave('plots/tob_compat_hm_updated.png',width=6, height=4, units="in")
 ```
 
 ### Reduced distances
@@ -495,7 +496,7 @@ ggplot(blob_phy_filt, aes(x = level, y = hwcd, fill = ngt)) +
   geom_boxplot(position = position_dodge(width = 0.8), 
                width = 0.15,        
                color = "grey20",    
-               fill = "white",      
+               #fill = "white",      
                alpha = 0.9,         
                outlier.shape = NA) +
   facet_wrap(~ ntips_label) +
@@ -583,5 +584,5 @@ ggplot(plot_dat, aes(x = ngt, y = level, fill = mean_pct)) +
   labs(x = "Gene Trees",
        y = "Network Level")
 
-ggsave('plots/tob_found_hm_nrets_updated.png',width=4, height=4, units="in")
+ggsave('plots/tob_found_hm_nrets_updated.png',width=6, height=4, units="in")
 ```
