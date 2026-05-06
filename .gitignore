@@ -1,8 +1,12 @@
 # folders
 running-time/data/*
 level_2/data/*
-level_2/old-data/*
+level_2/data_toy/*
 level_2/pipeline/server-notes.md
+level_2/output/*
+level_2/data/*
+level_2/summarized_results/*
+level_2/ignore/*
 
 # don't track cache nor intermediate directories from Rmd compilation
 *_cache/
