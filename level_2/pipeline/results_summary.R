@@ -8,6 +8,7 @@ library(ggridges)
 library(vegan)
 
 
+
 source("00.generate_seeds.R")
 source("./functions.R")
 
@@ -115,6 +116,9 @@ ggplot(data = all_bls, aes(x = branch_len, fill =ntips)) +
 all_dat<-list()
 for(par_no in 1:36){
   res_file_loc <- paste("../summarized_results/pars_",par_no,"/",sep='')
+  if(!file.exists(paste(res_file_loc,'clusters.csv',sep=''))){
+    next
+  }
   cluster_res <- read.csv(paste(res_file_loc,'clusters.csv',sep=''))
   tob_res     <-read.csv(paste(res_file_loc,'tob.csv',sep=''))
   quar_res    <-read.csv(paste(res_file_loc,'squirrel.csv',sep=''))
@@ -804,6 +808,6 @@ dat_filters = list(
               prop_found = mean(n_found/n_true_clust),
               prop_exact_all = mean(n_exact/n_true_clust,na.rm=T),
               prop_exact_found = mean(n_exact/n_found,na.rm=T))
-}
+
 
 
