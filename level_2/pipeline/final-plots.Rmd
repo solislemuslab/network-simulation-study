@@ -1,0 +1,588 @@
+# Final Plots
+
+From Josh's message:
+I just pushed to the `granular_pipeline` branch! The main file is in the `pipeline` folder of `level_2`.
+Plots are mostly made out of `filtered_sum.R` which does the following:
+
+- summarize and plot simulation-only information (L18-101)
+  - with the exception of the branch length data, you should be able to replicate this with `sim_net_props.csv`
+
+- summarize analysis results (L115-195)
+  - This section produces the aggregated results data across simulation settings and hmax values (averaged across replicates). The CSV with this info is `rep_summed_filter_extended.csv`
+
+- Make the plots outlined in excalidraw, for each hmax setting (1-5, number of blobs and number of reticulations; L206-235) 
+  - The core plotting is actually done in the script `make_plots.R`
+
+- Make plots but filter by the number of genes and summarize across hmax settings (L269-806)
+
+New message by Josh:
+Ah sorry! Not `filtered_sum.R`, it should be `results_summary.R`.
+`blob_phy_filt` gets generated in the for loop of of L211 of this file.
+
+It uses the `rep_summed_filter_extended.csv` to generate the dataset for each different way we could filter the data and runs `make_plots.R` to make the same plots with the filter.
+
+I placed `sim_net_props.csv` and `rep_summed_filter_extended.csv` inside a `data-plots` folder (in `pipeline`), but git ignored.
+
+## Reading in data
+
+We are following (and copying) some of the lines from `results_summary.R`:
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(survival)
+library(xtable)
+library(grafify)
+library(patchwork)
+library(ggridges)
+library(vegan)
+
+#in_phy_filt <- read.csv('data-plots/rep_summed_filter_extended.csv')
+in_phy_filt <- read.csv('data-plots/rep_summed_filter_extended_2.csv')
+
+## this is how we want to filter the results: by hmax=number of blobs, or hmax=1,2,3,4,5 or hmax=nrets
+all_filts<-unique(in_phy_filt$filter)
+```
+
+We want first to do plots for hmax="blob"
+```{r}
+filter_type = "blob"
+
+blob_phy_filt <- in_phy_filt %>%
+    mutate(across(where(is.numeric), ~ if_else(.x < 0, NA, .x))) %>%
+    filter(filter == filter_type) %>%
+    mutate(
+      # Convert grouping variables to factors so ggplot treats them as categories
+      ntips_label = paste(ntips, "Tips"), # specific labels for the facets
+      ngt = as.factor(ngt),
+      level = if_else(level >= 5, "5≤", as.character(level)),
+      level = factor(level, levels = c("1", "2", "3", "4", "5≤")),# bin
+      # X-axis
+    ) %>%
+    ungroup()
+
+```
+
+# Main text figures
+
+We are copying code from `make_plots.R` and modifying.
+
+## Quantifying Topological Agreement to Ground Truth
+
+### Quarnet Consistency Score
+
+```{r}
+cols <- c("Found Quarnets" = "#1A5F7A", "Compatible Quarnets" = "#D86C4E")
+ggplot(blob_phy_filt, aes(x = level, group = ngt, linetype = ngt)) +
+  # --- LEFT AXIS DATA 
+  stat_summary(aes(y = quar_found, color = "Found Quarnets"), 
+               fun = mean, geom = "line", size = 1.2) +
+  stat_summary(aes(y = quar_found, color = "Found Quarnets"), 
+               fun = mean, geom = "point", size = 3) +
+  # --- RIGHT AXIS DATA 
+  stat_summary(aes(y = quar_compat, color = "Compatible Quarnets"), 
+               fun = mean, geom = "line", size = 1.2) +
+  stat_summary(aes(y = quar_compat, color = "Compatible Quarnets"), 
+               fun = mean, geom = "point", size = 3) +
+  # --- DUAL AXIS SETUP ---
+  scale_y_continuous(
+    name = "Found Quarnets",
+    sec.axis = sec_axis(~ ., name = "Compatible Quarnets")
+  ) +
+  facet_wrap(~ ntips_label) +
+  scale_color_manual(values = cols) +
+  guides(color = "none") + 
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    strip.text = element_text(size = 12, face = "bold"),
+    axis.title.y.left = element_text(color = cols["Found Quarnets"], face = "bold"),
+    axis.title.y.right = element_text(color = cols["Compatible Quarnets"], face = "bold")
+  ) +
+  labs( #title = 'Quarnet Compatability Score',
+        x = "Network Level",
+        #color = "Metric",
+        linetype = "Gene Trees")
+
+ggsave('plots/quarnet_score_updated.png', width=8, height=4, units="in")
+```
+
+## Assessing Exact and Partial Recovery of Reticulations
+
+### Recall and Precision
+
+```{r}
+cols <- c("Recall" = "#1A5F7A", "Precision" = "#D86C4E")
+ggplot(blob_phy_filt, aes(x = level, group = ngt, linetype = ngt)) +
+  
+  # --- LEFT AXIS DATA (RECALL / TPR) ---
+  stat_summary(aes(y = tpr, color = "Recall"), 
+               fun = mean, geom = "line", size = 1.2) +
+  stat_summary(aes(y = tpr, color = "Recall"), 
+               fun = mean, geom = "point", size = 3) +
+  # --- RIGHT AXIS DATA (PRECISION / PPV) ---
+  stat_summary(aes(y = ppv, color = "Precision"), 
+               fun = mean, geom = "line", size = 1.2) +
+  stat_summary(aes(y = ppv, color = "Precision"), 
+               fun = mean, geom = "point", size = 3) +
+  # --- DUAL AXIS SETUP ---
+  scale_y_continuous(
+    name = "Recall",
+    sec.axis = sec_axis(~ ., name = "Precision")
+  ) +
+  facet_wrap(~ ntips_label) +
+  scale_color_manual(values = cols) + ##manual color wrapping
+  guides(color = "none") +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    strip.text = element_text(size = 12, face = "bold"),
+    axis.title.y.left = element_text(color = cols["Recall"], face = "bold"),
+    axis.title.y.right = element_text(color = cols["Precision"], face = "bold")
+  ) +
+  labs(
+    x = "Network Level",
+    linetype = "Gene Trees")
+ggsave('plots/recall_precision_hm_updated.png',width=8, height=4, units="in")
+```
+
+### Hybrid cluster broad coverage
+
+```{r}
+plot_dat <- blob_phy_filt %>%  group_by(ntips, level, ngt) %>%
+  summarise(mean_pct = mean(broad_coverage, na.rm = TRUE) * 100, .groups = "drop") %>%
+  mutate(
+    ntips_label = paste(ntips, "Tips"),
+    ngt = as.factor(ngt),
+    level = as.factor(level)
+  )
+
+ggplot(plot_dat, aes(x = ngt, y = level, fill = mean_pct)) +
+  geom_tile(color = "white", lwd = 0.5) +
+  geom_text(aes(label = round(mean_pct, 1)), 
+            color = "white", size = 3, fontface = "bold") +
+  facet_wrap(~ ntips_label) +
+  scale_fill_gradientn(colors = c("#FDE725","#21908C", "#440154"), 
+                       name = "") +
+  theme_minimal() +
+  coord_fixed() +
+  theme(
+    panel.grid = element_blank(), # Heatmaps don't need gridlines
+    strip.text = element_text(size = 12, face = "bold"),
+    legend.position = "right"
+  ) +
+  labs(title = "Found True Hybrid",
+       x = "Gene Trees",
+       y = "Network Level")
+
+ggsave('plots/hyb_clade_broad_cov_hm_updated.png',width=6, height=4, units="in")
+```
+
+### Hybrid Cluster Broad Mapping
+
+```{r}
+
+plot_dat <- blob_phy_filt %>%  group_by(ntips, level, ngt) %>%
+  summarise(mean_pct = mean(broad_mapping, na.rm = TRUE) * 100, .groups = "drop") %>%
+  mutate(
+    ntips_label = paste(ntips, "Tips"),
+    ngt = as.factor(ngt),
+    level = as.factor(level)
+  )
+
+ggplot(plot_dat, aes(x = ngt, y = level, fill = mean_pct)) +
+  geom_tile(color = "white", lwd = 0.5) + # White borders make it look cleaner
+  geom_text(aes(label = round(mean_pct, 1)), 
+            color = "white", size = 3, fontface = "bold") +
+  facet_wrap(~ ntips_label) +
+  scale_fill_gradientn(colors = c("#FDE725","#21908C", "#440154"), 
+                       name = "") +
+  theme_minimal() +
+  coord_fixed() + # Keeps the tiles square
+  theme(
+    panel.grid = element_blank(), # Heatmaps don't need gridlines
+    strip.text = element_text(size = 12, face = "bold"),
+    legend.position = "right"
+  ) +
+  labs(title = "Compatible Estimated Hybrid",
+       x = "Gene Trees",
+       y = "Network Level")
+
+ggsave('plots/hyb_clade_broad_map_hm_updated.png',width=6, height=4, units="in")
+```
+
+## Evaluating Blob-Level Topological Agreement
+
+### ToB Distances
+
+```{r}
+
+scale_factor <- 1
+cols <- c("RF" = "#E69F00", "SplitInfo" = "#56B4E9")
+
+ggplot(blob_phy_filt, aes(x = level, group = ngt, linetype = ngt)) +
+  # --- LEFT AXIS: RF DISTANCE (Primary) ---
+  stat_summary(aes(y = rf_dist, color = "RF"), 
+               fun = mean, geom = "line", size = 1.2) +
+  stat_summary(aes(y = rf_dist, color = "RF"), 
+               fun = mean, geom = "point", size = 3) +
+  # --- RIGHT AXIS: SPLIT INFO (Secondary - Scaled Down) ---
+  # We DIVIDE by scale_factor here to bring the line down visually
+  stat_summary(aes(y = split_dist / scale_factor, color = "SplitInfo"), 
+               fun = mean, geom = "line", size = 1.2) +
+  stat_summary(aes(y = split_dist / scale_factor, color = "SplitInfo"), 
+               fun = mean, geom = "point", size = 3) +
+  # --- DUAL AXIS SETUP ---
+  scale_y_continuous(
+    name = "Robinson-Foulds Distance",
+    # We MULTIPLY by scale_factor here to make the labels show the comparable numbers
+    sec.axis = sec_axis(~ . * scale_factor, name = "Split Information Distance")
+  ) +
+  facet_wrap(~ ntips_label) +
+  scale_color_manual(values = cols) +
+  guides(color = "none") +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    strip.text = element_text(size = 12, face = "bold"),
+    axis.title.y.left = element_text(color = cols["RF"], face = "bold"),
+    axis.title.y.right = element_text(color = cols["SplitInfo"], face = "bold")
+  ) +
+  labs(x = "Network Level",
+       linetype = "Gene Trees")
+
+ggsave('plots/ToB_dists_updated.png',width=8, height=4, units="in")
+```
+
+### Blob Compatibility
+
+```{r}
+
+plot_dat <- blob_phy_filt %>%  group_by(ntips, level, ngt) %>%
+  summarise(mean_pct = mean(perc_blobs_found, na.rm = TRUE) * 100, .groups = "drop") %>%
+  mutate(
+    ntips_label = paste(ntips, "Tips"),
+    ngt = as.factor(ngt),
+  )
+
+
+ggplot(plot_dat, aes(x = ngt, y = level, fill = mean_pct)) +
+  geom_tile(color = "white", lwd = 0.5) + # White borders make it look cleaner
+  geom_text(aes(label = round(mean_pct, 1)), 
+            color = "white", size = 3, fontface = "bold") +
+  facet_wrap(~ ntips_label) +
+  scale_fill_gradientn(colors = c("#FDE725","#21908C", "#440154"), 
+                       name = "") +
+  theme_minimal() +
+  coord_fixed() + # Keeps the tiles square
+  theme(
+    panel.grid = element_blank(), # Heatmaps don't need gridlines
+    strip.text = element_text(size = 12, face = "bold"),
+    legend.position = "right"
+  ) +
+  labs(x = "Gene Trees",
+       y = "Network Level")
+
+ggsave('plots/tob_found_hm_updated.png',width=6, height=4, units="in")
+```
+
+# Supplemental figures
+
+## Filtered by 'blob'
+
+### Hardwired cluster distance
+```{r}
+ggplot(blob_phy_filt, aes(x = level, y = hwcd, fill = ngt)) +
+  geom_violin(position = position_dodge(width = 0.8), 
+              alpha = 0.6,          # Slightly more transparent to see gridlines
+              trim = FALSE, 
+              scale = "width",
+              color = "grey50",     
+              size = 0.3) +        
+  geom_boxplot(position = position_dodge(width = 0.8), 
+               width = 0.15,        
+               color = "grey20",    
+               #fill = "white",      
+               alpha = 0.9,         
+               outlier.shape = NA) +
+  facet_wrap(~ ntips_label) +
+  scale_fill_grafify(palette = "fishy") +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.y = element_blank(), # Cleaner background
+    strip.text = element_text(size = 12, face = "bold"),
+    axis.text = element_text(color = "grey30"),
+    plot.title = element_text(face = "bold", size = 14)
+  ) +
+  labs(
+    x = "Network Level",
+    y = 'Hardwired Cluster Distance',
+    fill = "Gene Trees"
+  )
+
+ggsave('plots/HWCD_updated.png',width=8, height=4, units="in")
+```
+
+### Exact coverage
+
+```{r}
+plot_dat <- blob_phy_filt %>%  group_by(ntips, level, ngt) %>%
+  summarise(mean_pct = mean(exact_coverage, na.rm = TRUE) * 100, .groups = "drop") %>%
+  mutate(
+    ntips_label = paste(ntips, "Tips"),
+    ngt = as.factor(ngt),
+    level = as.factor(level)
+  )
+
+
+ggplot(plot_dat, aes(x = ngt, y = level, fill = mean_pct)) +
+  geom_tile(color = "white", lwd = 0.5) + # White borders make it look cleaner
+  geom_text(aes(label = round(mean_pct, 1)), 
+            color = "white", size = 3, fontface = "bold") +
+
+  facet_wrap(~ ntips_label) +
+  scale_fill_gradientn(colors = c("#FDE725", "#21908C", "#440154"), 
+                       name = "") +
+  
+  theme_minimal() +
+  coord_fixed() + # Keeps the tiles square
+  theme(
+    panel.grid = element_blank(), # Heatmaps don't need gridlines
+    strip.text = element_text(size = 12, face = "bold"),
+    legend.position = "right"
+  ) +
+  labs(x = "Gene Trees",
+       y = "Network Level")
+
+ggsave('plots/hyb_clade_ex_cov_hm_updated.png',width=6, height=4, units="in")
+```
+
+### Compatible blobs
+
+```{r}
+plot_dat <- blob_phy_filt %>%  group_by(ntips, level, ngt) %>%
+  summarise(mean_pct = mean(perc_blob_compat, na.rm = TRUE) * 100, .groups = "drop") %>%
+  mutate(
+    ntips_label = paste(ntips, "Tips"),
+    ngt = as.factor(ngt),
+  )
+
+ggplot(plot_dat, aes(x = ngt, y = level, fill = mean_pct)) +
+  geom_tile(color = "white", lwd = 0.5) + # White borders make it look cleaner
+  geom_text(aes(label = round(mean_pct, 1)), 
+            color = "white", size = 3, fontface = "bold") +
+  facet_wrap(~ ntips_label) +
+  scale_fill_gradientn(colors = c("#FDE725", "#21908C", "#440154"), 
+                       name = "") +
+  theme_minimal() +
+  coord_fixed() + # Keeps the tiles square
+  theme(
+    panel.grid = element_blank(), # Heatmaps don't need gridlines
+    strip.text = element_text(size = 12, face = "bold"),
+    legend.position = "right"
+  ) +
+  labs(x = "Gene Trees",
+       y = "Network Level")
+
+ggsave('plots/tob_compat_hm_updated.png',width=6, height=4, units="in")
+```
+
+### Reduced distances
+
+```{r}
+cols <- c("Canonical HWCD" = "#1A5F7A", "FU-Stable HWCD" = "#D86C4E")
+ggplot(blob_phy_filt, aes(x = level, group = ngt, linetype = ngt)) +
+  # --- LEFT AXIS DATA 
+  stat_summary(aes(y = canon_hwcd, color = "Canonical HWCD"), 
+               fun = mean, geom = "line", size = 1.2) +
+  stat_summary(aes(y = canon_hwcd, color = "Canonical HWCD"), 
+               fun = mean, geom = "point", size = 3) +
+  # --- RIGHT AXIS DATA 
+  stat_summary(aes(y = fu_hwcd, color = "FU-Stable HWCD"), 
+               fun = mean, geom = "line", size = 1.2) +
+  stat_summary(aes(y = fu_hwcd, color = "FU-Stable HWCD"), 
+               fun = mean, geom = "point", size = 3) +
+  # --- DUAL AXIS SETUP ---
+  scale_y_continuous(
+    name = "Canonical HWCD",
+    sec.axis = sec_axis(~ ., name = "FU-Stable HWCD")
+  ) +
+  facet_wrap(~ ntips_label) +
+  scale_color_manual(values = cols) +
+  guides(color = "none") +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    strip.text = element_text(size = 12, face = "bold"),
+    axis.title.y.left = element_text(color = cols["Canonical HWCD"], face = "bold"),
+    axis.title.y.right = element_text(color = cols["FU-Stable HWCD"], face = "bold")
+  ) +
+  labs(
+    x = "Network Level",
+    linetype = "Gene Trees")
+
+ggsave('plots/reduced_dists_updated.png',width=8, height=4, units="in")
+```
+
+### Displayed HWCD
+
+```{r}
+scale_factor <- 0.1
+cols <- c("total" = "#E69F00", "average" = "#56B4E9")
+
+ggplot(blob_phy_filt, aes(x = level, group = ngt, linetype = ngt)) +
+  stat_summary(aes(y = total_disp_rf, color = "total"), 
+               fun = mean, geom = "line", size = 1.2) +
+  stat_summary(aes(y = total_disp_rf, color = "total"), 
+               fun = mean, geom = "point", size = 3) +
+  stat_summary(aes(y = ave_disp_rf / scale_factor, color = "average"), 
+               fun = mean, geom = "line", size = 1.2) +
+  stat_summary(aes(y = ave_disp_rf / scale_factor, color = "average"), 
+               fun = mean, geom = "point", size = 3) +
+  # --- DUAL AXIS SETUP ---
+  scale_y_continuous(
+    name = "Total paired RF distance",
+    # We MULTIPLY by scale_factor here to make the labels show the comparable numbers
+    sec.axis = sec_axis(~ . * scale_factor, name = "Average paired RF distance")
+  ) +
+  facet_wrap(~ ntips_label) +
+  scale_color_manual(values = cols) +
+  guides(color = "none") +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    strip.text = element_text(size = 12, face = "bold"),
+    # Match Axis Colors for Clarity
+    axis.title.y.left = element_text(color = cols["total"], face = "bold"),
+    axis.title.y.right = element_text(color = cols["average"], face = "bold")
+  ) +
+  labs(x = "Network Level",
+       linetype = "Gene Trees")
+
+ggsave('plots/displayed_hwcd_updated.png',width=8, height=4, units="in")
+```
+
+## Filtered by 'nrets'
+
+```{r}
+filter_type<-'nrets'
+
+blob_phy_filt <- in_phy_filt %>%
+    mutate(across(where(is.numeric), ~ if_else(.x < 0, NA, .x))) %>%
+    filter(filter == filter_type) %>%
+    mutate(
+      # Convert grouping variables to factors so ggplot treats them as categories
+      ntips_label = paste(ntips, "Tips"), # specific labels for the facets
+      ngt = as.factor(ngt),
+      level = if_else(level >= 5, "5≤", as.character(level)),
+      level = factor(level, levels = c("1", "2", "3", "4", "5≤")),# bin
+      # X-axis
+    ) %>%
+    ungroup()
+```
+
+### HWCD
+
+```{r}
+ggplot(blob_phy_filt, aes(x = level, y = hwcd, fill = ngt)) +
+  geom_violin(position = position_dodge(width = 0.8), 
+              alpha = 0.6,          # Slightly more transparent to see gridlines
+              trim = FALSE, 
+              scale = "width",
+              color = "grey50",     
+              size = 0.3) +        
+  geom_boxplot(position = position_dodge(width = 0.8), 
+               width = 0.15,        
+               color = "grey20",    
+               #fill = "white",      
+               alpha = 0.9,         
+               outlier.shape = NA) +
+  facet_wrap(~ ntips_label) +
+  scale_fill_grafify(palette = "fishy") +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.y = element_blank(), # Cleaner background
+    strip.text = element_text(size = 12, face = "bold"),
+    axis.text = element_text(color = "grey30"),
+    plot.title = element_text(face = "bold", size = 14)
+  ) +
+  labs(
+    x = "Network Level",
+    y = 'Hardwired Cluster Distance',
+    fill = "Gene Trees"
+  )
+
+ggsave('plots/HWCD_nrets_updated.png',width=8, height=4, units="in")
+```
+
+### Recall-precision
+
+```{r}
+cols <- c("Recall" = "#1A5F7A", "Precision" = "#D86C4E")
+ggplot(blob_phy_filt, aes(x = level, group = ngt, linetype = ngt)) +
+  # --- LEFT AXIS DATA (RECALL / TPR) ---
+  stat_summary(aes(y = tpr, color = "Recall"), 
+               fun = mean, geom = "line", size = 1.2) +
+  stat_summary(aes(y = tpr, color = "Recall"), 
+               fun = mean, geom = "point", size = 3) +
+  # --- RIGHT AXIS DATA (PRECISION / PPV) ---
+  stat_summary(aes(y = ppv, color = "Precision"), 
+               fun = mean, geom = "line", size = 1.2) +
+  stat_summary(aes(y = ppv, color = "Precision"), 
+               fun = mean, geom = "point", size = 3) +
+  # --- DUAL AXIS SETUP ---
+  scale_y_continuous(
+    name = "Recall",
+    sec.axis = sec_axis(~ ., name = "Precision")
+  ) +
+  facet_wrap(~ ntips_label) +
+  scale_color_manual(values = cols) + ##manual color wrapping
+  guides(color = "none") +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    strip.text = element_text(size = 12, face = "bold"),
+    axis.title.y.left = element_text(color = cols["Recall"], face = "bold"),
+    axis.title.y.right = element_text(color = cols["Precision"], face = "bold")
+  ) +
+  labs(
+    x = "Network Level",
+    linetype = "Gene Trees")
+
+ggsave('plots/recall_precision_hm_nrets_updated.png',width=8, height=4, units="in")
+```
+
+### Found blobs
+
+```{r}
+plot_dat <- blob_phy_filt %>%  group_by(ntips, level, ngt) %>%
+  summarise(mean_pct = mean(perc_blobs_found, na.rm = TRUE) * 100, .groups = "drop") %>%
+  mutate(
+    ntips_label = paste(ntips, "Tips"),
+    ngt = as.factor(ngt),
+  )
+
+
+ggplot(plot_dat, aes(x = ngt, y = level, fill = mean_pct)) +
+  geom_tile(color = "white", lwd = 0.5) + # White borders make it look cleaner
+  geom_text(aes(label = round(mean_pct, 1)), 
+            color = "white", size = 3, fontface = "bold") +
+  facet_wrap(~ ntips_label) +
+  scale_fill_gradientn(colors = c("#FDE725", "#21908C", "#440154"), 
+                       name = "") +
+  theme_minimal() +
+  coord_fixed() + # Keeps the tiles square
+  theme(
+    panel.grid = element_blank(), # Heatmaps don't need gridlines
+    strip.text = element_text(size = 12, face = "bold"),
+    legend.position = "right"
+  ) +
+  labs(x = "Gene Trees",
+       y = "Network Level")
+
+ggsave('plots/tob_found_hm_nrets_updated.png',width=6, height=4, units="in")
+```

@@ -2,7 +2,7 @@ This folder contains the scripts used to simulate data, estimate networks, and s
 
 
 
-##Data Generation
+## Data Generation
 
 There are two main simulation sets that are run:
 

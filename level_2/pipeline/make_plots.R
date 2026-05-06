@@ -1,3 +1,5 @@
+### Note: blob_phy_filt is created in results_summary.R
+
 
 #######################
 ##### CF distance #####

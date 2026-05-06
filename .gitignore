@@ -7,6 +7,8 @@ level_2/output/*
 level_2/data/*
 level_2/summarized_results/*
 level_2/ignore/*
+level_2/pipeline/data-folder/*
+level_2/pipeline/plots/*
 
 # don't track cache nor intermediate directories from Rmd compilation
 *_cache/
