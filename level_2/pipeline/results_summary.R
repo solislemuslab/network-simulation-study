@@ -119,10 +119,13 @@ for(par_no in 1:36){
   if(!file.exists(paste(res_file_loc,'clusters.csv',sep=''))){
     next
   }
+  if(!file.exists(paste(res_file_loc,'cf_dists.csv',sep=''))){
+    next
+  }
   cluster_res <- read.csv(paste(res_file_loc,'clusters.csv',sep=''))
   tob_res     <-read.csv(paste(res_file_loc,'tob.csv',sep=''))
   quar_res    <-read.csv(paste(res_file_loc,'squirrel.csv',sep=''))
-  
+  dist_res    <-read.csv(paste(res_file_loc,'cf_dists.csv',sep=''))
 
   
   tob_dat <- read.csv(paste(res_file_loc,'tob/compat.csv',sep=''))
@@ -134,6 +137,7 @@ for(par_no in 1:36){
   res<- merge(cluster_res,tob_res,by=c('phy','rep','hmax'),all=T)
   res<- merge(res,tob_dat,by=c('phy','rep','hmax'),all=T)
   res<- merge(res,quar_res,all=T)
+  res<- merge(res,dist_res,by=c('phy','rep','hmax'),all=T)
   
   par_dat <- net_dat %>% ##data from the true network
   filter(par==par_no) %>%
@@ -146,7 +150,11 @@ combined_df <- bind_rows(all_dat, .id = "setting_no")
 combined_df <- combined_df %>%
   mutate(CF_dist = if_else(CF_dist < 0, NA, CF_dist),
          quar_found = if_else(quar_found < 0, NA, quar_found),
-         quar_compat = if_else(quar_compat < 0, NA, quar_compat))
+         quar_compat = if_else(quar_compat < 0, NA, quar_compat),
+         CF_est_obs =  if_else(CF_est_obs < 0, NA, CF_est_obs),
+         CF_est_true =  if_else(CF_est_true < 0, NA, CF_est_true),
+         CF_obs_true =  if_else(CF_obs_true < 0, NA, CF_obs_true))
+         
 write.csv(combined_df,'../summarized_results/all_dat.csv')
 rm(all_dat)
 
@@ -178,7 +186,8 @@ filter_df <- filter_df %>% mutate(
   broad_mapping = broad_compat/est_rets,
   exact_mapping = exact_compat/est_rets,
   perc_blob_compat = n_compat/est_nblobs,
-  perc_blobs_found = n_blobs_found/blobs
+  perc_blobs_found = n_blobs_found/blobs,
+  found_sub = as.numeric(subnet_dist == 0)
 ) %>% dplyr::select( ##remove fields not needed
   -c(
      tp,tn,fp,fn,
@@ -192,7 +201,7 @@ in_phy_filt <- filter_df %>% group_by(setting_no,phy,filter) %>%
             across(where(is.numeric), ~mean(.x, na.rm = TRUE))
   )  %>% dplyr::select( ##remove field now meaningless
     -c(rep)
-  )a
+  )
 
 write.csv(in_phy_filt,'../summarized_results/rep_summed_filter_extended.csv')
 

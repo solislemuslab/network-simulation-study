@@ -31,10 +31,125 @@ ggplot(blob_phy_filt, aes(x = level, y = CF_dist, fill = ngt)) +
   ) +
   labs(
     x = "Network Level",
-    y = expression(group("|", CF[obs] - CF[exp], "|")),
+    y = expression(group("|", CF[obs] - CF[est], "|")),
     fill = "Number of Gene Trees"
   )
-ggsave(paste(save_dir,'CF_dist.png',sep=''))
+ggsave(paste(save_dir,'CF_obs_est.png',sep=''))
+
+
+ggplot(blob_phy_filt, aes(x = level, y = CF_obs_true, fill = ngt)) +
+  geom_violin(position = position_dodge(width = 0.8), 
+              alpha = 0.6,          # Slightly more transparent to see gridlines
+              trim = FALSE, 
+              scale = "width",
+              color = "grey50",     
+              size = 0.3) +        
+  geom_boxplot(position = position_dodge(width = 0.8), 
+               width = 0.15,        
+               color = "grey20",    
+               fill = "white",      
+               alpha = 0.9,         
+               outlier.shape = NA) +
+  facet_wrap(~ ntips_label) +
+  scale_fill_grafify(palette = "fishy") +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.y = element_blank(), # Cleaner background
+    strip.text = element_text(size = 12, face = "bold"),
+    axis.text = element_text(color = "grey30"),
+    plot.title = element_text(face = "bold", size = 14)
+  ) +
+  labs(
+    x = "Network Level",
+    y = expression(group("|", CF[obs] - CF[true], "|")),
+    fill = "Number of Gene Trees"
+  )
+ggsave(paste(save_dir,'CF_obs_true_dist.png',sep=''))
+
+
+ggplot(blob_phy_filt, aes(x = level, y = CF_est_true, fill = ngt)) +
+  geom_violin(position = position_dodge(width = 0.8), 
+              alpha = 0.6,          # Slightly more transparent to see gridlines
+              trim = FALSE, 
+              scale = "width",
+              color = "grey50",     
+              size = 0.3) +        
+  geom_boxplot(position = position_dodge(width = 0.8), 
+               width = 0.15,        
+               color = "grey20",    
+               fill = "white",      
+               alpha = 0.9,         
+               outlier.shape = NA) +
+  facet_wrap(~ ntips_label) +
+  scale_fill_grafify(palette = "fishy") +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.y = element_blank(), # Cleaner background
+    strip.text = element_text(size = 12, face = "bold"),
+    axis.text = element_text(color = "grey30"),
+    plot.title = element_text(face = "bold", size = 14)
+  ) +
+  labs(
+    x = "Network Level",
+    y = expression(group("|", CF[est] - CF[true], "|")),
+    fill = "Number of Gene Trees"
+  )+
+  ylim(0,0.6)
+ggsave(paste(save_dir,'CF_est_true_dist.png',sep=''))
+
+ggplot(blob_phy_filt, aes(y = CF_obs_true, x = CF_est_obs, color = ngt,shape=ntips_label)) +
+  geom_point(alpha = 0.4, size = 1.5) +
+  # Adds the 1:1 diagonal line
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "grey40", size = 0.8) +
+  scale_color_grafify(palette = "fishy") +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    panel.grid.minor = element_blank(),
+    axis.text = element_text(color = "grey30"),
+    plot.title = element_text(face = "bold", size = 14)
+  ) +
+  labs(
+    #title = "Estimation Error vs. Sampling Noise",
+    y = expression("Average"~group("|", CF[obs] - CF[true], "|") ),
+    x = expression("Average"~group("|", CF[est] - CF[obs], "|") ),
+    color = "Number of Gene Trees",
+    shape = "number of Tips"
+  ) +
+  # Optional: keep axes square to make the diagonal meaningful
+  ylim(0, 0.125) + 
+  xlim(0, 0.4)
+ggsave(paste(save_dir,'CF_scatter_noise_obs_fit.png',sep=''))
+
+ggplot(blob_phy_filt, aes(y = CF_obs_true, x = CF_est_true, color = ngt,shape=ntips_label)) +
+  geom_point(alpha = 0.4, size = 1.5) +
+  # Adds the 1:1 diagonal line
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "grey40", size = 0.8) +
+  scale_color_grafify(palette = "fishy") +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    panel.grid.minor = element_blank(),
+    axis.text = element_text(color = "grey30"),
+    plot.title = element_text(face = "bold", size = 14)
+  ) +
+  labs(
+    #title = "Estimation Error vs. Sampling Noise",
+    y = expression("Average"~group("|", CF[obs] - CF[true], "|") ),
+    x = expression("Average"~group("|", CF[est] - CF[true], "|") ),
+    color = "Number of Gene Trees",
+    shape = "Number of Tips"
+  ) +
+  # Optional: keep axes square to make the diagonal meaningful
+  ylim(0, 0.125) + 
+  xlim(0, 0.4)
+ggsave(paste(save_dir,'CF_scatter_noise_true_error.png',sep=''))
+
+
 
 #############
 ### GOF #####

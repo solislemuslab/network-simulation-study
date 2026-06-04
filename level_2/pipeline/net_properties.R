@@ -79,9 +79,9 @@ for(phy_no in 1:150){
   
 
   for(rep_no in 1:30){
-    
+    #print(paste("rep",rep_no))
   for(h_no in 1:5){
-    
+    #print(paste("h no",h_no))
     current_key <- paste(phy_no, rep_no, h_no, sep = "_")
     
     if(current_key %in% done_keys) {

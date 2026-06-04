@@ -176,8 +176,3 @@ end
 function only_trees(net::HybridNetwork)
     return net.numhybrids == 0 
 end
-
-function valid_subnetworks(net::HybridNetwork)
-    valid= (net.numhybrids==0) || ((net.numhybrids<6) && (getlevel(net,true,true)==1))
-    return valid
-end

@@ -19,17 +19,14 @@ There are three main levels to the data generation of this analysis:
 - phy_no - for each parameterization, 150 networks were generated, this is the network ID
 - rep_no - for each network, 30 replicate sets of CFs were generated, this corresponds to the CFs ID
 
-to simplify running analyses on HTC, these three different levels get flattened into a single job ID. `01.generate_datasets.R` creates a file called `job_map.csv` that maps job IDS to the respective par_no, phy_no, and rep_no values
+to simplify running analyses on HTC, these three different levels get flattened into a single job ID. `01.generate_datasets.R` creates a file called `job_map.csv` that maps job IDS to the respective par_no, phy_no, and rep_no values. The function `get_jobID` from `functions.R` will also achieve this goal.
 
 The following scripts in the `pipeline` folder are used to generate these data:
 - `00.generate_seeds.R` - This file contains the main simulation/inference settings, sets the global seed, creates seeds at varies points in the data simulation/inference, and creates the `pars.csv` file containing information that maps parameterizations to a specific parameter ID. 
 
-- `01.generate_datasets.R` - This is the main file for data simulation and prep. It first generates phylogenetic networks under a BDH process. It will run until generating the specified number of networks that meet the criteria: Are level-1 (or at least level-2 depending on the parameterization) and have no 2-cycles, 3-cycles, and the root is the last stable ancestor. This script will call `02.sim_gts_calc_cf.jl` (see below), save relevant data in the `data` folder and then compress all necessary data into the `jobs` folder to be sent to HTC. 
-
-- `02.sim_gts_calc_cf.jl` This file reads the individual networks, simulates gene trees under the NMSC, computes concordance factors and uses tree-QMC to estimate a starting tree for SNaQ. For this file to run the user must have tree-QMC available and it must be callable from the command line as `tree-qmc`
+- `01.generate_datasets.R` - This is the main file for data simulation and prep. It first generates phylogenetic networks under a BDH process. It will run until generating the specified number of networks that meet the criteria: Are level-1 (or at least level-2 depending on the parameterization) and have no 2-cycles, 3-cycles, and the root is the last stable ancestor. This script will then compress all necessary data into a tar.gz file called `job_ID` that contains all nessecary downstream material to be used in simulation, inference and analysis. 
 
 At the end of this process, the `jobs` folder will be populated with `job_i` directories. Each of these folders will contain a `files.tar.gz` tarball. In this compressed folder there are 3 files:
-- `CFs.csv`: the concordance factors
 - `starting_tree.newick`: the starting tree for SNaQ
 - `est_pars.csv`: a CSV containing the relevant parameter values and seeds for SNaQ.
 
@@ -37,18 +34,17 @@ Some information is also saved in the data folder. The directory structure uses 
 
 The `jobs` directory is sent to HTC to be analyzed (see below)
 
-### Toy Analysis
-This analysis uses some of the networks generated under the **Main Analysis** but sets their inheritance proportions to 0.5 before simulating data. It assumes phylogenetic networks were already generated with `01.generate_datasets.R` and uses modified scripts to generate the CFS and prep jobs for the HTC.
-- `generate_toy_datasets.R` This is similar to the `01.generate_datasets.R` file but doesn't actually simulate networks. It calls `02.sim_gts_toy.jl` and then packages all starting data into a `jobs_toy` folder for the HTC
-- `02.sim_gts_toy.jl` to generate CFS and starting trees. 
 
 
 ## HTC Network inference and Analysis 
 
-HTC resources were used for the main SNaQ inference and other computationally intense analyses. See the README in the `htc_files` folder for a description of the files for inference and analysis. 
+HTC resources were used for the main SNaQ inference and other computationally intense analyses. See the README in the `htc` folder for a description of the files for inference and analysis. 
 
 
 ## Network Inference and Comparison
+
+NOTE: most analyses of networks were relegated to htc resources. See the README in the `htc` folder for a description of this process. 
+These relegated analyses can still be performed locally using the `analysis.jl` script. Below we describe the analysis scripts that were not used on htc or were ad-hoc analyses.
 
 Here we analyze the properties of the simulated networks, estimated networks, and compare these results. The following files are used here summarize information on the simulated networks:
 
@@ -80,7 +76,7 @@ These files summarize the estimated networks to the true network:
 These files summarize process and summarize the information into figures and linear models
 `process_output.R`: this takes the data from the HPC and puts it in a more workable folder structure.
 
-`results_summary.R`: filters the data based on a few different criteria and then feeds the filtered datasets to `filtered_sum.R` to make figures and compute summary statistics
+`results_summary.R`: filters the data based on a few different criteria and then feeds the filtered datasets to `make_plots.R` to make figures and compute summary statistics.
 
 
 

@@ -1,0 +1,28 @@
+universe = vanilla
+
+executable = /home/justison/scripts/shells/htc_analysis.sh
+initialdir = /home/justison/jobs/job_$(job_id)
+
+arguments =  $(job_id) $(prefix)
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+
+transfer_input_files = CFs.csv, all_nets.tar.gz, files.tar.gz, /home/justison/scripts/julia_files/analysis_single.jl,/home/justison/scripts/julia_files/aux_functions.jl, /home/justison/scripts/containers/julia_analysis.sif
+transfer_output_files = emp_est_out$(job_id).tar.gz
+
+log = stats.log
+error = stats.err
+output = stats.txt
+
++SingularityImage = "julia_analysis.sif"
+
+request_cpus = 1
+request_memory = 8GB
+request_disk = 8GB
+
+want_campus_pools = true
+want_ospool = true
+
+queue 1

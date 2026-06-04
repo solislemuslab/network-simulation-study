@@ -1,0 +1,43 @@
+universe = vanilla
+
+# --- Variables ---
+N_CPUS = 1
+
+
+jul_file_one = emp_est_single.jl
+prefix = emp_est
+
+# --- Paths ---
+executable = /home/justison/scripts/shells/htc_snaq.sh
+initialdir = /home/justison/jobs/job_$(job_id)
+
+
+arguments =  $(N_CPUS) $(h_val) $(job_id) $(start_tree) $(prefix) $(Process)
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+
+transfer_input_files =  $(start_tree), CFs.csv, /home/justison/scripts/julia_files/$(jul_file_one), files.tar.gz, /home/justison/scripts/containers/julia_est.sif
+
+transfer_output_files = "h_$(h_val)_run_$(Process).out"
+
+
+
+log = julread.log
+error = julread.err
+output = julread.txt
+
+
++SingularityImage = "julia_est.sif"
+
+request_cpus = 1
+request_memory = 10GB
+retry_request_memory = 40GB
+request_disk = 10GB
+
+# --- Requirements ---
+want_campus_pools = true
+want_ospool = true
+
+queue 45

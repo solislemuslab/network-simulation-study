@@ -1,88 +1,88 @@
 ###########################################
 ## Map job numbers to parameter settings ##
 ###########################################
-source("functions.R")
-skipped<-c() ## 
-happy <- c()
-dir.create("../output")
-dir.create("../output/pars")
-dir.create("../output/all")
-shell("tar -xvzf ../output.tar.gz -C ../output/all")
+if (!requireNamespace("foreach", quietly = TRUE)) install.packages("foreach")
+if (!requireNamespace("doParallel", quietly = TRUE)) install.packages("doParallel")
 
-for(i in 0:(30*150*36)){
+library(foreach)
+library(doParallel)
+
+
+source("functions.R")
+
+
+
+dir.create("../output/pars", recursive = TRUE, showWarnings = FALSE)
+dir.create("../output/all", recursive = TRUE, showWarnings = FALSE)
+
+print("Extracting main output archive...")
+#system2("tar", args = c("-xzf", "../output.tar.gz", "-C", "../output/all"))
+
+
+num_cores <- max(1, parallel::detectCores() - 1) 
+cl <- makeCluster(num_cores,outfile='')
+registerDoParallel(cl)
+
+total_jobs <- 30 * 150 * 36
+
+results <- foreach(i = 0:total_jobs, .combine = rbind, .packages = c()) %dopar% {
+  
+  source("functions.R")
   pars <-ID2pars(i)
   setting_no <-pars[1]
   phy_no <- pars[2]
   rep_no <- pars[3]
-  if((i %% 100)==0) {
-    print(i)
-  }
-  job_dirs <- paste("../output/all/jobs/job_",i,"/*_out",i,".tar.gz",sep='')
-  emp_dir <-paste("../output/all/jobs/job_",i,"/emp_est_out",i,".tar.gz",sep='')
-  files_file <- paste("../output/all/jobs/job_",i,"/files",".tar.gz",sep='')
-  
-  pars_dir <- paste("../output/pars/pars_",setting_no,
-                    "/phy_",phy_no,
-                    sep='')
-  dir.create(pars_dir,recursive = T,showWarnings = F)
-  
-  #don't do things if we already pasted or
-  #if the output doesn't exist
-  rep_dir <- paste(pars_dir,
-                   "/rep_",rep_no,
-                   sep='')
-  if(dir.exists(rep_dir)){#we already moved things
-    happy <- c(happy,i)
-    #print(paste('job',i,'already was transferred'))
-    next
-  }
-  if(!file.exists(emp_dir)){ #output doesn't exit
-    #print(paste('job',i,'was skipped'))
-    skipped<-c(skipped,i) #record what we skipped
-    next
-  } 
-  
 
-  
-  # Extract the directory (dirname) and the pattern (basename)
-  target_dir <- dirname(job_dirs)
-  search_pattern <- basename(job_dirs)
-  
-  # Use list.files to find all matching files
-  all_tarfiles <- list.files(
-    path = target_dir,
-    pattern = glob2rx(search_pattern), # Use glob2rx to convert shell glob to regex
-    full.names = TRUE # Crucial: gives the full path to each file
-  )
-  
-  target_file <- grep("/CF_out", all_tarfiles, value = TRUE)
-  if(length(target_file)==0){
-    #next #move on, nothing to see here
-  }else {
-    print(paste('we destroy CF in ',i,sep=''))
-    #there are CF tar files. destroy them
-    for(target in target_file){
-      #destroy
-      file.remove(target)
-    }
+  # Print a progress heartbeat every 1000 jobs
+  if (i %% 1000 == 0) {
+    cat(sprintf("Worker processing job %d...\n", i))
   }
-  # Use list.files to find all matching files
-  all_tarfiles <- list.files(
-    path = target_dir,
-    pattern = glob2rx(search_pattern), # Use glob2rx to convert shell glob to regex
-    full.names = TRUE # Crucial: gives the full path to each file
-  )
   
-  #re-extract everything
-  dir.create(rep_dir)
-  for(tarfile in all_tarfiles){
-    shell(paste(
-      "tar -xvzf",tarfile,"-C",
-      rep_dir,sep= ' '),ignore.stdout=T)
+  job_dir <- file.path("../output/all/jobs", paste0("job_", i))
+  emp_dir <- file.path(job_dir, paste0("emp_est_out", i, ".tar.gz"))
+  files_file <- file.path(job_dir, "files.tar.gz")
+  
+  pars_dir <- file.path("../output/pars", paste0("pars_", setting_no), paste0("phy_", phy_no))
+  rep_dir <- file.path(pars_dir, paste0("rep_", rep_no))
+  
+  
+  
+  # Skip logic
+  if (dir.exists(rep_dir)) {
+    return(data.frame(id = i, status = "happy"))
   }
-  shell(paste(
-    "tar -xvzf",files_file,"-C",
-    rep_dir,sep= ' '),ignore.stdout=T)
-
+  
+  if (!file.exists(emp_dir)) {
+    return(data.frame(id = i, status = "skipped"))
+  }
+  
+  # Create directory
+  dir.create(rep_dir, recursive = TRUE, showWarnings = FALSE)
+  
+  # Use list.files ONCE
+  search_pattern <- paste0(".*", "\\.tar\\.gz$")
+  all_tarfiles <- list.files(path = job_dir, pattern = search_pattern, full.names = TRUE)
+  
+  # Find and remove CF_out files
+  cf_files <- grep("/CF_out", all_tarfiles, value = TRUE)
+  if (length(cf_files) > 0) {
+    file.remove(cf_files)
+    # Filter the list in RAM rather than calling list.files() again
+    all_tarfiles <- setdiff(all_tarfiles, cf_files) 
+  }
+  
+  
+  # Decompress using system2 (bypasses cmd.exe overhead) and NO verbose '-v' flag
+  for (tarfile in all_tarfiles) {
+    system2("tar", args = c("-xzf", tarfile, "-C", rep_dir), stdout = FALSE, stderr = FALSE)
+  }
+  
+  #if (file.exists(files_file)) {
+  #  system2("tar", args = c("-xzf", files_file, "-C", rep_dir), stdout = FALSE, stderr = FALSE)
+  #}
+  
+  return(data.frame(id = i, status = "processed"))
 }
-write.csv(data.frame(skipped),"missing_jobs.csv",row.names = F)
+# Stop the parallel cluster
+stopCluster(cl)
+

@@ -1,0 +1,33 @@
+universe = vanilla
+
+N_CPUS = 4
+jul_file_two = sim_CFs.jl
+
+executable = /home/justison/scripts/shells/htc_cfs.sh
+initialdir = /home/justison/jobs/job_$(job_id)
+
+# Pass N_CPUS and the script name to the shell script
+arguments = $(N_CPUS) $(jul_file_two)
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+# Transfer the raw data, the container, and ONLY the prep julia script
+transfer_input_files = files.tar.gz, /home/justison/scripts/julia_files/$(jul_file_two), /home/justison/scripts/containers/snaq_tcg.sif
+transfer_output_files = CFs.csv, qmc_tree.newick
+
+log = prep.log
+error = prep.err
+output = prep.txt
+
++SingularityImage = "snaq_tcg.sif"
+
+request_cpus = 5
+request_memory = 5GB
+request_disk = 5GB
+
+want_campus_pools = true
+want_ospool = true
+
+# Run exactly ONE time per dataset
+queue 1
