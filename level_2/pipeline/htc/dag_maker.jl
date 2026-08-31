@@ -1,8 +1,27 @@
 parent_dir = "../output/all/jobs"
 
-missing_job_nos = Vector{Int}()
 
-for subdir_no in 0:162000
+function get_original_job_id(setting_no, phy_no, rep_no)
+    s_idx = setting_no - 1
+    p_idx = phy_no - 1
+    r_idx = rep_no - 1
+    
+    return r_idx + (p_idx * 30) + (s_idx * 150 * 30)
+end
+
+ordered_job_ids = Int[]
+sizehint!(ordered_job_ids, 18 * 150 * 30)
+
+for r in 1:30          # Replicates change slowest
+    for p in 1:150     # Then phylogenies
+        for s in 1:18  # Settings change fastest
+            push!(ordered_job_ids, get_original_job_id(s, p, r))
+        end
+    end
+end
+
+missing_job_nos = Vector{Int}()
+for subdir_no in ordered_job_ids
     if !isfile("$parent_dir/job_$(subdir_no)/emp_est_out$(subdir_no).tar.gz")
         push!(missing_job_nos, subdir_no)
     end
@@ -72,4 +91,31 @@ open("./htc/master_workflow.dag", "w") do f
     end
 end
 
+
+
 println("DAG file created: master_workflow.dag for $(length(datasets)) missing jobs.")
+
+### create jobs tar to send to hpc
+# Assuming ordered_job_ids contains your integers (e.g., [0, 4500, 9000, ...])
+# Construct the relative paths: "jobs/job_0", "jobs/job_4500", etc.
+# 1. Get the existing paths
+file_paths = ["../jobs/job_$id" for id in datasets]
+existing_paths = filter(isdir, file_paths)
+
+# 2. Format the manifest paths to look like "jobs/job_XXXXX"
+# This tells tar to build a "jobs" folder inside the archive
+job_folders = ["jobs/$(basename(path))" for path in existing_paths]
+
+manifest_file = "tar_manifest.txt"
+open(manifest_file, "w") do io
+    for folder in job_folders
+        println(io, folder)
+    end
+end
+
+# 3. Change directory to ".." (the parent of jobs) before archiving
+# This keeps the paths relative to the parent and perfectly clean!
+run(`tar -czf subset_jobs.tar.gz -C .. -T $manifest_file`)
+
+# 4. Clean up the temporary manifest file
+rm(manifest_file)

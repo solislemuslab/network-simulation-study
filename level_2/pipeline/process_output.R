@@ -15,8 +15,18 @@ source("functions.R")
 dir.create("../output/pars", recursive = TRUE, showWarnings = FALSE)
 dir.create("../output/all", recursive = TRUE, showWarnings = FALSE)
 
-print("Extracting main output archive...")
-#system2("tar", args = c("-xzf", "../output.tar.gz", "-C", "../output/all"))
+
+if(file.exists("../output.tar.gz")){
+  print("Extracting main output archive...")
+  system2("tar", args = c("-xzf", "../output.tar.gz", "-C", "../output/all"))
+  dir.create("../processed_outputs", recursive = TRUE, showWarnings = FALSE)
+  
+  
+  timestamp <- format(Sys.time(), "%Y-%m-%d_%H%M%S")
+  new_filename <- paste0("../processed_outputs/output_", timestamp, ".tar.gz")
+  file.rename("../output.tar.gz", new_filename)
+  print(paste("Archive moved and renamed to:", new_filename))
+}
 
 
 num_cores <- max(1, parallel::detectCores() - 1) 

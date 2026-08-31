@@ -51,24 +51,25 @@ my_labels <- c(
   "20" = "20 taxa", 
   "25" = "25 taxa"
 )
+save_dir <-'../figs/sim_sum/'
 ggplot(filt_dat, aes(x = nrets, fill = as.factor(nu))) +
   geom_bar(position = "dodge",stat='count') +
   facet_wrap(~ ntips,labeller = labeller(ntips = my_labels)) + 
   theme_minimal() +
   labs(x='Number of reticulations', y='Frequency',fill='Hybridization rate')
-
+ggsave(paste(save_dir,'nrets.png'),height=3,width=3)
 ggplot(filt_dat, aes(x = level, fill = as.factor(nu))) +
   geom_bar(position = "dodge",stat='count') +
   facet_wrap(~ ntips,labeller = labeller(ntips = my_labels)) + 
   theme_minimal() +
   labs(x='Network level', y='Frequency',fill='Hybridization rate')
-
+ggsave(paste(save_dir,'level.png'),height=3,width=3)
 ggplot(filt_dat, aes(x = blobs, fill = as.factor(nu))) +
   geom_bar(position = "dodge",stat='count') +
   facet_wrap(~ ntips,labeller = labeller(ntips = my_labels)) + 
   theme_minimal() +
   labs(x='Number of blobs', y='Frequency',fill='Hybridization rate')
-
+ggsave(paste(save_dir,'nblobs.png'),height=3,width=3)
 
 
 
@@ -101,7 +102,7 @@ ggplot(data = all_bls, aes(x = branch_len, fill =ntips)) +
   coord_cartesian(xlim = c(0, quantile(all_bls$branch_len, 0.99)))+
   scale_fill_grafify(palette = "fishy",reverse=TRUE)
   
-  
+ggsave(paste(save_dir,'branch_lengths.png',sep=''),height=3,width=4)
  
   
   #########################################
@@ -114,18 +115,18 @@ ggplot(data = all_bls, aes(x = branch_len, fill =ntips)) +
   
 
 all_dat<-list()
-for(par_no in 1:36){
+for(par_no in 1:18){
+  print(par_no)
   res_file_loc <- paste("../summarized_results/pars_",par_no,"/",sep='')
   if(!file.exists(paste(res_file_loc,'clusters.csv',sep=''))){
+    print(paste0('skipping ',par_no))
     next
   }
-  if(!file.exists(paste(res_file_loc,'cf_dists.csv',sep=''))){
-    next
-  }
-  cluster_res <- read.csv(paste(res_file_loc,'clusters.csv',sep=''))
-  tob_res     <-read.csv(paste(res_file_loc,'tob.csv',sep=''))
-  quar_res    <-read.csv(paste(res_file_loc,'squirrel.csv',sep=''))
-  dist_res    <-read.csv(paste(res_file_loc,'cf_dists.csv',sep=''))
+
+  cluster_res <- unique(read.csv(paste(res_file_loc,'clusters.csv',sep='')))
+  tob_res     <-unique(read.csv(paste(res_file_loc,'tob.csv',sep='')))
+  quar_res    <-unique(read.csv(paste(res_file_loc,'squirrel.csv',sep='')))
+
 
   
   tob_dat <- read.csv(paste(res_file_loc,'tob/compat.csv',sep=''))
@@ -137,8 +138,20 @@ for(par_no in 1:36){
   res<- merge(cluster_res,tob_res,by=c('phy','rep','hmax'),all=T)
   res<- merge(res,tob_dat,by=c('phy','rep','hmax'),all=T)
   res<- merge(res,quar_res,all=T)
-  res<- merge(res,dist_res,by=c('phy','rep','hmax'),all=T)
   
+  
+  if(file.exists(paste(res_file_loc,'cf_dists.csv',sep=''))){
+    dist_res    <-unique(read.csv(paste(res_file_loc,'cf_dists.csv',sep='')))
+    dist_res_names <- c("phy","rep","hmax",
+                        "CF_est_obs",
+                        "CF_est_true",
+                        "CF_obs_true",
+                        "subnet_dist")
+    colnames(dist_res)<-dist_res_names
+    res<- merge(res,dist_res,by=c('phy','rep','hmax'),all=T)
+    
+  }
+
   par_dat <- net_dat %>% ##data from the true network
   filter(par==par_no) %>%
   dplyr::select(phy,nrets,level,nt_blobs,nu,level1,ntips,ngt) %>%

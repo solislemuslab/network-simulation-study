@@ -1,6 +1,3 @@
-
-
-
 using Pkg
 Pkg.activate(".")
 #using Revise
@@ -22,7 +19,8 @@ include("./aux_functions.jl")
 
 # there are 36 parameter settings (par_no), each with 150 true networks (phy_no), each with 30 replicates (rep_no), each with 5 hmax (h_no) settings
 # we loop thru all of these and summarize the results
-
+if ARGS[1] == "1"
+    println("doing main analysis")
 for par_no in 1:36
     
     
@@ -59,24 +57,14 @@ for par_no in 1:36
     #if false #rerun all
         # File exists: Load done IDs
         ids_df = CSV.read(clus_file, DataFrame; select=[:phy, :rep, :hmax])
-        processed_ids = Set([(r.phy, r.rep, r.hmax) for r in eachrow(ids_df)])
+        processed_ids  = Set([(r.phy, r.rep, r.hmax) for r in eachrow(ids_df)])
+        processed_reps = Set([(r.phy, r.rep) for r in eachrow(ids_df)])
     else
         #create empty files
         CSV.write(clus_file, res,writeheader=true)
         CSV.write(found_clades_file, found_clus,writeheader=true)
         processed_ids = Set{Tuple{Int,Int,Int}}()
     end
-
-
-  
-    #=
-    subnet_dat  = DataFrame(phy = Int[],rep=Int[], hmax=Int[],
-        subnet_ind  = Int[],
-        valid_lik= Bool[],
-        delta_ll= Float64[],
-        delta_ll_opt=Float64[],
-        hwcd=Int[])
-    =#
     
 
 df_lock = ReentrantLock()
@@ -106,16 +94,10 @@ Threads.@threads for phy_no in 1:150
     level_set, name_set = PhyloNetworks.getleveltraversal(fu_net)
 
     muledge_merge!(fu_net)
+    preorder!(fu_net)
 
     true_fold_m = hardwiredclusters(fu_net,true_taxa)
     
-
-    
-    #= NO SQUIRREL THINGS WHEN MULTITHREADING 
-    #quarnets 
-    sq_net = newick_to_squirrel_semi_network(true_net)
-    sq_qnets = sq_net.quarnets()
-    =#
 
     #only consider displayed trees if the number of hybrids is small enough
     do_displayed = false
@@ -125,7 +107,6 @@ Threads.@threads for phy_no in 1:150
         true_displayed_m = (x-> hardwiredclusters(x,true_taxa)).(true_displayed_trees)
     end
 
-    #parent_trees = PhyloNetworks.getweaklydisplayedtrees(true_net)
 
     
 
@@ -144,6 +125,11 @@ for rep_no in 1:30
     rep_clus = "../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/clusters.csv"
     rep_found_clades = "../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/found_clades.csv"
     if (isfile(rep_clus) && isfile(rep_found_clades))
+        if (phy_no,rep_no) ∈ processed_reps
+            #println("Skipping $rep_no hmax $h_no as already processed")
+            continue
+        end
+
         println("processing finished analysis for pars_$par_no/phy_$phy_no/rep_$rep_no")
         
         rep_clus_dat = CSV.read(rep_clus,DataFrame)
@@ -249,37 +235,6 @@ fu_est,
 true_taxa;
 M1=true_fold_m)
 
-#squirrel results can't be multithreaded safely - It's a Python thing
-#=
-sq_est = newick_to_squirrel_semi_network(est_net)
-sq_est_qnets = sq_est.quarnets()
-quars_found = consistency_score(sq_qnets,sq_est_qnets)
-quars_consistent = consistency_score(sq_est_qnets,sq_qnets)
-=#
-
-
-
-
-
-#=
-#get possible foldings of the unfolded network
-mtree = readnewick(writenewick(PhyloNetworks.unfold_network(est_net)))
-level_set, name_set = PhyloNetworks.getleveltraversal(mtree)
-
-index_map = PhyloNetworks.getinextendible_nodes(level_set,name_set)
-updown_links = PhyloNetworks.link_inextnodes(name_set,index_map)
-fo = PhyloNetworks.foldorders(index_map,updown_links)
-#the FU network is the fo with the fewest foldings
-fo_prime = fo[argmin(length.(fo))]
-
-fold_net = PhyloNetworks.fold_multree(mtree,
-        fo_prime,
-        updown_links,
-        index_map)
-est_fold_net = PhyloNetworks.canonicalnetwork!(readnewick(writenewick(fold_net)))##Hacky fix for badly confirmed network 
-FU_hwcd =hardwiredclusterdistance_firstrooted!(true_fold_net,est_fold_net,true_taxa;M1=true_fold_m)
-################
-=#
 
 if sort(tipLabels(true_net)) != sort(tipLabels(est_net))
     println("Taxa mismatch at rep $rep_no hmax $h_no, skipping")
@@ -357,53 +312,6 @@ narrow_vector[min_matching_clusts] .= 1
 exact_vector = zeros(nhyb)
 exact_vector[exact_clusts] .=1
 
-
-##Blob info and level
-#=
-blobs = PhyloNetworks.blobInfo(true_net)
-true_net_level = max((x->length(x)).(blobs[2])...)
-true_n_blobs = length(biconnectedComponents(true_net,true))
-=#
-
-#=
-#loglik and RF differences from subnetworks
-n_subnets = length(subnets)
-rfs =repeat([-1],n_subnets)
-delta_ll = repeat([-Inf],n_subnets)
-delta_ll_opt = repeat([-Inf],n_subnets)
-valids = repeat([false],n_subnets) 
-for (i,subnet) in enumerate(subnets)
-    rfs[i] = hardwiredclusterdistance(subnet,est_net,false)
-    valids[i] = subnet_liks.liks[i] >= 0  #check if a valid liklihood
-    if valids[i] 
-        delta_ll[i] = est_net.fscore - subnet_liks.liks[i]
-        delta_ll_opt[i] = est_net.fscore - subnet_liks.liks_opt[i]
-    else
-        delta_ll[i] = -Inf
-        delta_ll_opt[i] = -Inf
-    end
-end
-
-subnet_deltas  = DataFrame(phy   = fill(phy_no,n_subnets),
-                        rep   = fill(rep_no,n_subnets),
-                        hmax  = fill(h_no,  n_subnets),
-                        subnet_ind  = 1:n_subnets,
-                        valid_lik= valids,
-                        delta_ll=delta_ll,
-                        delta_ll_opt=delta_ll_opt,
-                        hwcd=rfs
-                        )
-append!(subnet_dat,subnet_deltas)
-
-
-best_ind = argmax(delta_ll_opt)
-best_ll = delta_ll_opt[best_ind]
-best_rf = rfs[best_ind]
-num_better = sum(delta_ll_opt[valids] .< 0.0 )
-valid_subs = sum(valids)
-
-=#
-
     push!(phy_res, (phy_no,rep_no,h_no,
                 rf_dist,
                 tp,tn,fp,fn,
@@ -458,11 +366,13 @@ end # end phy_no
 end
 
 exit()
-
+end
 #########################
 ####Squirrel analyses####
 #########################
 
+if ARGS[1] =="2"
+    println("doing squirrel analysis")
 
 for par_no in 1:36
     
@@ -493,6 +403,7 @@ for phy_no in 1:150
     true_net_loc = "../data/pars_$par_no/net_$phy_no/"
  
     read_true_net = false
+    valid_quars = true     
 
 for rep_no in 1:30
     !isfile("../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/CFs.csv") && continue
@@ -575,15 +486,18 @@ end # end phy_no
 
 end
 
-
+end
 ##########################################
 ##########################################
 ############ CFS Comparison ##############
 ##########################################
 ##########################################
 
+if ARGS[1] =="3"
 
-for par_no in 4:36
+    println("doing CFs Analysis")
+
+for par_no in 1:36
     
     output_dir = "../summarized_results/pars_$par_no/"
 
@@ -613,7 +527,7 @@ df_lock = ReentrantLock()
 Threads.@threads for phy_no in 1:150
 #for phy_no in 1:150
 
-    phy_res = deepcopy(res)
+    #phy_res = deepcopy(res)
 
 
     println("we are at par $par_no and phy $phy_no" ) 
@@ -632,7 +546,7 @@ Threads.@threads for phy_no in 1:150
 
     #only consider subnetworks if the number of hybrids is small enough
     do_displayed = false
-    if true_net.numhybrids <= 10
+    if true_net.numhybrids <= 7
         do_displayed = true
         true_subnets = PhyloNetworks.getdisplayednetworks(true_net;restriction=valid_subnetworks)[1]
         true_subnets = (x->readnewick(writenewick(x))).(true_subnets)
@@ -664,10 +578,13 @@ Threads.@threads for phy_no in 1:150
 
 
 for rep_no in 1:30
-    
+
+
     !isfile("../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/CFs.csv") && continue
+    println("rep $rep_no")
     cfs = CSV.read("../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/CFs.csv", DataFrame)
 
+    rep_res=deepcopy(res)
 
     true_obs_cf = -3.0 #this should never happen
     try
@@ -677,10 +594,6 @@ for rep_no in 1:30
         end
         true_obs_cf=mean(quar_dists)
 
-        #CF_dist= 
-        #mean(abs.(df_wide[:,5] .- df_wide[:,8]).+ ##obs12 - exp12 
-        #    abs.(df_wide[:,6] .- df_wide[:,9]).+ ##obs13 - exp13
-        #    abs.(df_wide[:,7] .- df_wide[:,10])) ##obs14 - exp14
     catch e
         #println(e)
         true_obs_cf = -1.0 #this should never happen
@@ -717,6 +630,7 @@ for h_no in 1:5
 
             for (true_sub,true_sub_m) in zip(filt_nets,filt_nets_m)
                 d = hardwiredclusterdistance_firstrooted!(true_sub,est_net,true_taxa;M1=true_sub_m)
+                println(d)
                 small_d = min(small_d,d)
                 if small_d == 0
                     break #no sense continuing if we fonud it all
@@ -736,7 +650,7 @@ for h_no in 1:5
         est_true_dists=Vector{Float64}(undef,nrow(cfs))
         for rw in 1:nrow(cfs)
             quar_dists[rw] = sum(abs.(collect(est_exp_cfs[1][rw].data) .- collect(cfs[rw,[6,7,8]])))
-            est_true_dists = sum(abs.(collect(est_exp_cfs[1][rw].data) .- collect(true_exp_cfs[1][rw].data)))
+            est_true_dists[rw] = sum(abs.(collect(est_exp_cfs[1][rw].data) .- collect(true_exp_cfs[1][rw].data)))
         end
         est_obs_cf=mean(quar_dists)
         est_true_cf=mean(est_true_dists)
@@ -753,17 +667,22 @@ for h_no in 1:5
     end
 
 
-    push!(phy_res, (phy_no,rep_no,h_no,
+    push!(rep_res, (phy_no,rep_no,h_no,
     est_obs_cf,
     est_true_cf,
     true_obs_cf,
     small_d)
     )
 end #end h_no
-end #end rep_no
 
- lock(df_lock) do
-        CSV.write(dist_file, phy_res; append=true, writeheader=false)
-    end 
+if nrow(rep_res) > 0
+        lock(df_lock) do
+            CSV.write(dist_file, rep_res; append=true, writeheader=false)
+        end 
+    end
+
+end #end rep_no
 end # end phy_no
 end #par_no
+
+end
