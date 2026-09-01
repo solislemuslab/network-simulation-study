@@ -1,7 +1,5 @@
 using Pkg
 Pkg.activate(".")
-#using Revise
-#Pkg.activate("./data_analysis")
 using PhyloNetworks
 using SNaQ
 using DataFrames

@@ -134,24 +134,6 @@ for(rw_no in setting_no[1:36]){
   }
 }
 
-# ##link the job number to the parameter combo, phy_no, and rep_no
-# ##Each row in job_map corresponds to the job numbers associated parameters
-# df_expanded <- do.call(rbind, lapply(1:nrow(pars), function(i) {
-#   cbind(pars[rep(i, n_phy), ], phy_no = 1:n_phy)
-# }))
-# df_expanded <- do.call(rbind, lapply(1:nrow(df_expanded), function(i) {
-#   cbind(df_expanded[rep(i, n_reps), ], rep_no = 1:n_reps)
-# }))
-# df_expanded$job_no <- 0:nrow(df_expanded)
-# write.csv(df_expanded,"../../data/job_map.csv",row.names = F)
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-
 
 
 
