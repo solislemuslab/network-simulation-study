@@ -1,8 +1,14 @@
 # folders
 running-time/data/*
 level_2/data/*
-level_2/old-data/*
+level_2/data_toy/*
 level_2/pipeline/server-notes.md
+level_2/output/*
+level_2/data/*
+level_2/summarized_results/*
+level_2/ignore/*
+level_2/pipeline/data-folder/*
+level_2/pipeline/plots/*
 
 # don't track cache nor intermediate directories from Rmd compilation
 *_cache/
@@ -164,3 +170,4 @@ initial_tasks_gab/**
 
 ### do not include get-pop-tree.pl as it is from TICR and we only need it as inspiration
 get-pop-tree/get-pop-tree.pl
+*.sif

@@ -2,12 +2,178 @@
 ### GAB, CA, CSL (August 2022)
 
 
-## GAB: original construction of the is.phylo function in geiger. 
-## Unnecessary to load the whole thing for just a function
-# used in generate_datasets
-is.phylo <- function(x) {
-  "phylo" %in% class(x)
+
+
+
+
+#########################################
+#### Functions for custom likelihood ####
+#########################################
+library(MASS)
+
+subset_utility <- function(indices, eta, blob_ids, lambda) {
+  if (length(indices) == 0){
+    return(0)
+  } 
+  suppress_term <- sapply(indices, function(i) {
+    sum(blob_ids[indices] == blob_ids[i]) - 1  # number of others in same blob
+  })
+  sum(eta[indices] - lambda * suppress_term)
 }
+
+
+all_subsets <- function(n, hmax) {
+  unlist(lapply(0:hmax, function(k) {
+    combn(n, k, simplify = FALSE)
+  }), recursive = FALSE)
+}
+
+get_jobID <- function(setting_no, phy_no, rep_no) {
+  # 1. Convert the 1-based parameters to 0-based indices
+  s_idx <- setting_no - 1
+  p_idx <- phy_no - 1
+  r_idx <- rep_no - 1
+  
+  
+  
+  job_id <- r_idx +
+    (p_idx *30) +
+    (s_idx * 150 * 30)
+  return(job_id)
+}
+
+ID2pars <-function(ID){
+
+  r_idx <- ID %% 30
+  
+  temp_id <- (ID - r_idx) / 30
+
+  p_idx <- temp_id %% 150
+  
+  s_idx <- (temp_id - p_idx) / 150
+  
+
+  setting_no <- s_idx + 1
+  phy_no <- p_idx + 1
+  rep_no <- r_idx + 1
+  return(c(setting_no,phy_no,rep_no))
+}
+
+
+
+network_loglik <- function(X,observed,blob_nos,formula, beta, lambda, hmax) {
+  
+  eta <- as.vector(X %*% beta)
+  n <- nrow(X)
+  if(n<hmax){
+    hmax <- n #only look for subsets up to #hybs if it is less than hmax
+  }
+  subsets <- all_subsets(n, hmax)
+  util_vec <- sapply(subsets, function(S) subset_utility(S, eta, blob_nos, lambda))
+  
+
+  #For numerical stability
+  #because:
+    #log(exp(a)/sum(exp(b_i))) = a - log(sum(exp(b_i)))
+  
+  max_util <- max(util_vec)
+  
+  # Subtract max before exp to prevent overflow
+  denom <- sum(exp(util_vec - max_util))
+  numer <- exp(subset_utility(observed, eta, blob_nos, lambda) - max_util)
+  if (!is.finite(numer) || !is.finite(denom) || denom == 0 || numer == 0) {
+    return(-Inf)
+  }
+  loglik <- log(numer) - log(denom)
+}
+
+
+full_negloglik <- function(par, df,formula) {
+  beta<- par[1:(length(par))]
+  #beta <- par[1:(length(par)-1)]
+  #lambda <- par[length(par)]
+  lambda<-0
+  
+  X_full <- model.matrix(my_form,data=boot_dat)
+  
+  sum_loglik <- 0
+  for (net in unique(df$phy)) {
+    phy_rows <-df$phy == net
+    df_net <- df[phy_rows, ]
+    hmax <-df_net$hmax[1]
+    observed <- which(df_net$exact == 1)
+    blob_nos <-df_net$blob_no
+    X_net <- X_full[phy_rows, ,drop=FALSE]
+    loglik_net <- network_loglik(X_net,observed,blob_nos,formula, beta, lambda, hmax)
+    if (!is.finite(loglik_net)) {
+      return(1e6)  # Penalize invalid evaluations
+    }
+    sum_loglik <- sum_loglik + loglik_net
+  }
+  
+  return(-sum_loglik)
+}
+
+
+summary.custom<-function(fit){
+  vcov_mat <- tryCatch(ginv(fit$hessian),
+                       error = function(e) {
+                         warning("Hessian is not invertible"); return(NA)
+                       })
+  
+  # If inversion worked:
+  if (!anyNA(vcov_mat)) {
+    # Standard errors
+    se <- sqrt(diag(vcov_mat))
+    
+    # z-values (like t-values in lm for large n)
+    z <- fit$par / se
+    
+    # Two-sided p-values
+    p <- 2 * pnorm(-abs(z))
+    
+    # Summary table
+    coef_table <- data.frame(
+      Estimate = fit$par,
+      StdError = se,
+      Zvalue = z,
+      Pvalue = p,
+      row.names = names(fit$par)
+    )
+    
+  } else {
+    message("Could not compute standard errors or p-values.")
+  }
+}
+
+check_3cycle <- function(net){
+
+  edges <- rbind(net$edge,net$reticulation)#and net$reticulation
+  hyb_nds <- net$reticulation[,2]
+  has_3cycle <- FALSE
+  for(hyb_nd in hyb_nds){
+    #get parents of hyb node
+    parent_edges <- edges[,2]==hyb_nd
+    parents <- edges[parent_edges,1]
+
+    ##look for a connection between the parent nodes
+    has_3cycle <- any((edges[,2] %in% parents) & (edges[,1] %in% parents)) ##and edge that connects
+    if(has_3cycle){
+      break
+    }
+  }
+  return(has_3cycle)
+}
+
+check_2cycle<- function(net){
+  edges <-rbind(net$edge,net$reticulation)
+  
+  return(any(duplicated(edges)))
+}
+
+
+
+
 
 # none of the functions below is being called by generate_datasets
 ### GAB:: a version of is.rooted that works on networks

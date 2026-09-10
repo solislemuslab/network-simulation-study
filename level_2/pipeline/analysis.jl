@@ -1,0 +1,686 @@
+using Pkg
+Pkg.activate(".")
+using PhyloNetworks
+using SNaQ
+using DataFrames
+using CSV
+using Statistics
+using DataStructures
+using QuartetNetworkGoodnessFit
+
+include("./aux_functions.jl")
+
+
+####################
+### Cluster info ###
+####################
+
+# there are 36 parameter settings (par_no), each with 150 true networks (phy_no), each with 30 replicates (rep_no), each with 5 hmax (h_no) settings
+# we loop thru all of these and summarize the results
+if ARGS[1] == "1"
+    println("doing main analysis")
+for par_no in 1:36
+    
+    
+    output_dir = "../summarized_results/pars_$par_no/"
+
+    clus_file = output_dir*"clusters.csv"
+    found_clades_file = output_dir*"found_clades.csv"
+
+        # File doesn't exist: Write the HEADER now to avoid race conditions later
+        # Create an empty DataFrame with your expected schema
+        res=DataFrame(phy = Int[],rep=Int[], hmax=Int[],
+            hwcd=Int[],
+            tp=Int[],tn=Int[],fp=Int[],fn=Int[], ##hybrid detetction true pos/neg and false pos/neg
+            est_rets=Int[], #number of reticulations in the estimated network 
+            n_broad=Int[],n_narrow=Int[],n_exact=Int[], #number of (estimated) clusters that map to the true network
+            broad_compat=Int[],exact_compat=Int[],
+            ave_disp_rf=Float64[],total_disp_rf=Int[], #RF distances for displayed trees 
+            gof_pval=Float64[],zscore=Float64[],sigma = Float64[],
+            CF_dist=Float64[],
+            canon_hwcd=Int[],fu_hwcd=Int[],
+            #quar_found = Float64[], ##proportion of true quarnets found in est net
+            #quar_compat = Float64[] ##proportion of est quarnets compatible with the true net
+            #num_better=Int[], valid_subs=Int[], ##comparing subnetworks to est
+            #best_hwcd=Int[],best_ll=Float64[]
+        )
+        found_clus = DataFrame(phy = Int[],rep=Int[], hmax=Int[], 
+        name=String[], #name of the hybrid node in the true network
+        broad=Int[], #number of clusters compatible with this hybrid was found. Compatible in that an est cluster has a subset of the true cluster
+        narrow=Int[], #the number of clusters that map to this true cluster with minimum distance. Distance being the difference in the number of taxa between the two clusters 
+        exact=Int[]) #the number of clusters that map exactly to this true cluster
+
+
+    if isfile(clus_file)
+    #if false #rerun all
+        # File exists: Load done IDs
+        ids_df = CSV.read(clus_file, DataFrame; select=[:phy, :rep, :hmax])
+        processed_ids  = Set([(r.phy, r.rep, r.hmax) for r in eachrow(ids_df)])
+        processed_reps = Set([(r.phy, r.rep) for r in eachrow(ids_df)])
+    else
+        #create empty files
+        CSV.write(clus_file, res,writeheader=true)
+        CSV.write(found_clades_file, found_clus,writeheader=true)
+        processed_ids = Set{Tuple{Int,Int,Int}}()
+    end
+    
+
+df_lock = ReentrantLock()
+Threads.@threads for phy_no in 1:150
+#for phy_no in 1:150
+
+    phy_res = deepcopy(res)
+    phy_found_clus = deepcopy(found_clus)
+
+
+    println("we are at par $par_no and phy $phy_no" ) 
+    true_net_loc = "../data/pars_$par_no/net_$phy_no/"
+    true_net = readnewick(true_net_loc*"network.extnewick")
+    true_taxa = sort!(tiplabels(true_net))
+    true_m = hardwiredclusters(true_net,true_taxa)
+    #subnets = readmultinewick(true_net_loc*"subnets/subnets.newick")
+
+    
+    #canonical network
+    canon_net = PhyloNetworks.canonicalnetwork(true_net)
+    canon_m = hardwiredclusters(canon_net,true_taxa)
+    
+    
+    #get FU stable network
+    true_mtree = PhyloNetworks.unfold_network(true_net)
+    fu_net = PhyloNetworks.stablefold_multree(true_mtree)
+    level_set, name_set = PhyloNetworks.getleveltraversal(fu_net)
+
+    muledge_merge!(fu_net)
+    preorder!(fu_net)
+
+    true_fold_m = hardwiredclusters(fu_net,true_taxa)
+    
+
+    #only consider displayed trees if the number of hybrids is small enough
+    do_displayed = false
+    if true_net.numhybrids <= 10
+        do_displayed = true
+        true_displayed_trees = PhyloNetworks.getdisplayednetworks(true_net;restriction=only_trees)[1]
+        true_displayed_m = (x-> hardwiredclusters(x,true_taxa)).(true_displayed_trees)
+    end
+
+
+    
+
+
+for rep_no in 1:30
+    #subnet_liks = CSV.read(true_net_loc*"rep_$rep_no/liks.csv",DataFrame)
+    !isfile("../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/CFs.csv") && continue
+
+    # Redirect to devnull
+    #cfs = redirect_stdout(devnull) do
+    #    readtableCF("../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/CFs.csv")
+    #end
+    #cfs = readtableCF("../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/CFs.csv")
+    cfs = CSV.read("../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/CFs.csv", DataFrame)
+
+    rep_clus = "../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/clusters.csv"
+    rep_found_clades = "../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/found_clades.csv"
+    if (isfile(rep_clus) && isfile(rep_found_clades))
+        if (phy_no,rep_no) ∈ processed_reps
+            #println("Skipping $rep_no hmax $h_no as already processed")
+            continue
+        end
+
+        println("processing finished analysis for pars_$par_no/phy_$phy_no/rep_$rep_no")
+        
+        rep_clus_dat = CSV.read(rep_clus,DataFrame)
+        rep_clade_dat = CSV.read(rep_found_clades,DataFrame)
+
+        lock(df_lock) do
+            CSV.write(clus_file, rep_clus_dat; append=true, writeheader=false)
+            CSV.write(found_clades_file,  rep_clade_dat; append=true, writeheader=false)
+        end 
+
+        continue #move on since processed
+
+    end
+
+for h_no in 1:5
+
+##skip if already processed
+if (phy_no,rep_no,h_no) ∈ processed_ids
+    #println("Skipping $rep_no hmax $h_no as already processed")
+    continue
+end
+#println("rep $rep_no hmax $h_no")
+##create empty dataframes to store results
+
+
+est_net_loc = "../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/h_$h_no.out"
+
+!isfile(est_net_loc) && continue
+
+#true_net_loc = "../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/"
+#true_net = readnewick(true_net_loc*"network.extnewick")
+
+gof_file = "../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/GoF_$h_no"
+!isfile(gof_file) && continue
+gof_dat = CSV.read(gof_file,DataFrame)
+isempty(gof_dat) && continue
+
+est_net = readsnaqnetwork(est_net_loc)
+CF_dist = -3.0 #this should never happen
+try
+    exp_cfs= network_expectedCF(est_net;showprogressbar=false)
+    quar_dists=Vector{Float64}(undef,nrow(cfs))
+    for rw in 1:nrow(cfs)
+        quar_dists[rw] = sum(abs.(collect(exp_cfs[1][rw].data) .- collect(cfs[rw,[6,7,8]])))
+    end
+    CF_dist=mean(quar_dists)
+
+    #CF_dist= 
+    #mean(abs.(df_wide[:,5] .- df_wide[:,8]).+ ##obs12 - exp12 
+    #    abs.(df_wide[:,6] .- df_wide[:,9]).+ ##obs13 - exp13
+    #    abs.(df_wide[:,7] .- df_wide[:,10])) ##obs14 - exp14
+catch e
+    println("Error computing expected CFs for par $par_no phy $phy_no rep $rep_no hmax $h_no")
+    #println(e)
+    CF_dist = -1.0
+end
+
+
+    ######compute RF distance between true and estimated displayed only_trees
+    if do_displayed
+        if est_net.numhybrids == 0
+            est_displayed_trees = [est_net]
+        else
+            est_displayed_trees = PhyloNetworks.getdisplayednetworks(est_net;restriction = only_trees)[1]
+        end
+        min_dists = Int[]
+        for (true_disp,true_disp_m) in zip(true_displayed_trees,true_displayed_m)
+            dist_min = Inf
+            for est_disp in est_displayed_trees
+                d = hardwiredclusterdistance_firstrooted!(true_disp,est_disp,true_taxa;M1=true_disp_m)
+                if d < dist_min
+                    dist_min = d
+                end
+            end
+            push!(min_dists,dist_min)
+        end
+        ave_disp_rf = mean(min_dists)
+        total_disp_rf = sum(min_dists)
+
+    else
+        ave_disp_rf = -1.0
+        total_disp_rf = -1.0
+    end
+
+
+
+###compute RF distance between reduced versions of the networks
+canon_est = PhyloNetworks.canonicalnetwork(est_net)
+canon_hwcd = hardwiredclusterdistance_firstrooted!(canon_net,
+canon_est,
+true_taxa;
+M1=canon_m)
+
+if est_net.numhybrids==0
+    fu_est = est_net
+else
+    est_mtree = PhyloNetworks.unfold_network(est_net)
+    fu_est = PhyloNetworks.stablefold_multree(est_mtree)
+    muledge_merge!(fu_est)
+end
+fu_hwcd = hardwiredclusterdistance_firstrooted!(fu_net,
+fu_est,
+true_taxa;
+M1=true_fold_m)
+
+
+if sort(tipLabels(true_net)) != sort(tipLabels(est_net))
+    println("Taxa mismatch at rep $rep_no hmax $h_no, skipping")
+    continue
+end
+
+rf_dist = hardwiredclusterdistance_firstrooted!(true_net,est_net,true_taxa;M1=true_m)
+
+taxa = (x -> x.name).(true_net.leaf)
+
+##Compute clusters for hybrid nodes (child edge of hybrid nodes) on true and estimated networks
+
+directedges!(est_net) 
+est_clusters = Vector{Vector{Bool}}() # the first vector iterates over hybrid nodes, the second denotes taxa that are present in the cluster
+est_hyb_descs = repeat([false],outer=length(taxa))
+for hyb_nd in est_net.hybrid
+    h_e = getchildedge(hyb_nd) ## get the child edge of the hybrid node 
+    clus = hardwiredcluster(h_e,taxa)
+    est_hyb_descs = est_hyb_descs .|| clus
+    push!(est_clusters,clus)
+end
+
+true_clusters = Vector{Vector{Bool}}() # the first vector iterates over hybrid nodes, the second denotes taxa that are present in the cluster
+true_hyb_descs = repeat([false],outer=length(taxa))
+true_hyb_names = String[]
+for hyb_nd in true_net.hybrid
+    h_e = getchildedge(hyb_nd)
+    clus = hardwiredcluster(h_e,taxa)
+    true_hyb_descs = true_hyb_descs .|| clus
+    push!(true_clusters, clus)
+    push!(true_hyb_names,hyb_nd.name)
+end
+nhyb = length(true_net.hybrid)
+
+##Find rates of (mis)identification of hybrid descent
+tp = sum(true_hyb_descs .&& est_hyb_descs)
+fp = sum(.!true_hyb_descs .&& est_hyb_descs)
+tn = sum(.!true_hyb_descs .&& .!est_hyb_descs)
+fn =  sum(true_hyb_descs .&& .!est_hyb_descs)
+
+##find compatible true clusters for each estimated cluster
+compat_clusts = Vector{Vector{Int}}()
+dist_clusts = Vector{Vector{Int}}() #'distance' from the true cluster to the estimated one 
+for est_cluster in est_clusters
+    compat_with_est = Vector{Int}() #Index 
+    dist_with_est = Vector{Int}()
+    for true_ind in 1:length(true_clusters)
+        true_cluster = true_clusters[true_ind]
+        if all(true_cluster .|| (.!true_cluster .&& .!est_cluster)) ## The estimated cluster doesn't have any tips that the true doesn't
+            push!(compat_with_est,true_ind)
+            clust_dist = sum(true_cluster .&& .!est_cluster) ## how many tips do they not have in common
+            push!(dist_with_est,clust_dist)
+        end
+    end
+    push!(compat_clusts,compat_with_est)
+    push!(dist_clusts,dist_with_est)
+end
+
+found_clusts = unique(vcat(compat_clusts...)) ## gracious estimate of found clusters
+min_matching_clusts = filter(x -> !isempty(x[2]), collect(zip(compat_clusts,dist_clusts)))
+min_matching_clusts = (x -> x[1][findmin(x[2])[2]]).(min_matching_clusts) #conservative but not nessecarily accurate mapped found clusters.  
+exact_found_clusts = ((x,y) -> x[y.==0]).(compat_clusts,dist_clusts)
+exact_clusts = unique(vcat(exact_found_clusts...))
+
+#Number of hybs in est_net that map (in the broad/exact sense) to a true hyb_nd
+broad_compat_hybs = sum(.!isempty.(compat_clusts))
+exact_compat_hybs = sum(.!isempty.(exact_found_clusts)) 
+
+broad_vector = zeros(nhyb)
+broad_vector[found_clusts] .= 1
+
+narrow_vector = zeros(nhyb)
+narrow_vector[min_matching_clusts] .= 1
+
+exact_vector = zeros(nhyb)
+exact_vector[exact_clusts] .=1
+
+    push!(phy_res, (phy_no,rep_no,h_no,
+                rf_dist,
+                tp,tn,fp,fn,
+                length(est_clusters), 
+                length(found_clusts), #n_broad
+                length(min_matching_clusts),#n_narrow
+                length(exact_clusts),#n_exact
+                broad_compat_hybs,
+                exact_compat_hybs,
+                ave_disp_rf,
+                total_disp_rf,
+                gof_dat[1,1], #pval
+                gof_dat[1,2], #zscore
+                gof_dat[1,3], #sigma
+                CF_dist,
+                canon_hwcd,
+                fu_hwcd,
+                #quars_found,
+                #quars_consistent,
+                # num_better,
+                # valid_subs,
+                # best_rf,
+                # best_ll
+                )
+    )
+
+    found_dat  = DataFrame(phy   = fill(phy_no,nhyb),
+                        rep   = fill(rep_no,nhyb),
+                        hmax  = fill(h_no,  nhyb),
+                        name  = (x->x.name).(true_net.hybrid),
+                        broad = Int.(broad_vector),
+                        narrow = Int.(narrow_vector),
+                        exact = Int.(exact_vector)
+                        )
+    append!(phy_found_clus,found_dat)
+
+
+end # end h_no
+end # end rep_no
+
+    lock(df_lock) do
+        CSV.write(clus_file, phy_res; append=true, writeheader=false)
+        CSV.write(found_clades_file, phy_found_clus; append=true, writeheader=false)
+    end 
+end # end phy_no
+#CSV.write("../summarized_results/pars_$par_no/clusters.csv",res)
+#CSV.write("../summarized_results/pars_$par_no/found_clades.csv",found_clus)
+#CSV.write("../summarized_results/pars_$par_no/subnet_dat.csv",subnet_dat)
+
+
+
+end
+
+exit()
+end
+#########################
+####Squirrel analyses####
+#########################
+
+if ARGS[1] =="2"
+    println("doing squirrel analysis")
+
+for par_no in 1:36
+    
+    output_dir = "../summarized_results/pars_$par_no/"
+
+    sq_file = output_dir*"squirrel.csv"
+    
+    sq_res=DataFrame(phy = Int[],rep=Int[], hmax=Int[],
+        quar_found = Float64[], ##proportion of true quarnets found in est net
+        quar_compat = Float64[] ##proportion of est quarnets compatible with the true net
+    )
+    
+    if isfile(sq_file)
+        # File exists: Load done IDs
+        ids_df = CSV.read(sq_file, DataFrame; select=[:phy, :rep, :hmax])
+        processed_ids = Set([(r.phy, r.rep, r.hmax) for r in eachrow(ids_df)])
+    else
+        #create empty files
+        CSV.write(sq_file, sq_res,writeheader=true)
+        processed_ids = Set{Tuple{Int,Int,Int}}()
+    end
+
+for phy_no in 1:150
+
+    phy_sq_res = deepcopy(sq_res)
+
+    println("squirrel we are at par $par_no and phy $phy_no" ) 
+    true_net_loc = "../data/pars_$par_no/net_$phy_no/"
+ 
+    read_true_net = false
+    valid_quars = true     
+
+for rep_no in 1:30
+    !isfile("../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/CFs.csv") && continue
+
+
+    rep_sqrl_file = "../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/squirrel.csv"
+
+    if (isfile(rep_sqrl_file))
+        println("processing finished analysis for pars_$par_no/phy_$phy_no/rep_$rep_no")
+        
+        rep_sqrl = CSV.read(rep_sqrl_file,DataFrame)
+
+
+        CSV.write(sq_file, rep_sqrl; append=true, writeheader=false)
+        continue
+    end
+
+
+for h_no in 1:5
+
+
+##skip if already processed
+if (phy_no,rep_no,h_no) ∈ processed_ids
+    #println("Skipping $rep_no hmax $h_no as already processed")
+    continue
+end
+
+est_net_loc = "../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/h_$h_no.out"
+
+!isfile(est_net_loc) && continue
+
+#read the true network if we haven't done so yet
+if !read_true_net
+    true_net = readnewick(true_net_loc*"network.extnewick")
+
+
+    #quarnets
+    valid_quars = true 
+    sq_net = nothing
+    sq_qnets = nothing
+    try
+        sq_net = newick_to_squirrel_semi_network(true_net)
+        sq_qnets = sq_net.quarnets()
+    catch e
+        println("Error computing quarnets for par $par_no phy $phy_no")
+        valid_quars = false
+    end
+    read_true_net= true
+end
+
+
+est_net = readsnaqnetwork(est_net_loc)
+
+##populate results if we can't compute quarnets
+if !valid_quars
+    push!(phy_sq_res, (phy_no,rep_no,h_no,
+            -1.0,
+            -1.0
+            )
+    )
+    continue
+end
+
+sq_est = newick_to_squirrel_semi_network(est_net)
+sq_est_qnets = sq_est.quarnets()
+quars_found = consistency_score(sq_qnets,sq_est_qnets)
+quars_consistent = consistency_score(sq_est_qnets,sq_qnets)
+
+push!(phy_sq_res, (phy_no,rep_no,h_no,
+            quars_found,
+            quars_consistent
+            )
+)
+
+end # end h_no
+end # end rep_no
+    CSV.write(sq_file, phy_sq_res; append=true, writeheader=false)
+end # end phy_no
+
+
+end
+
+end
+##########################################
+##########################################
+############ CFS Comparison ##############
+##########################################
+##########################################
+
+if ARGS[1] =="3"
+
+    println("doing CFs Analysis")
+
+for par_no in 1:36
+    
+    output_dir = "../summarized_results/pars_$par_no/"
+
+    dist_file = output_dir*"cf_dists.csv"
+
+        # File doesn't exist: Write the HEADER now to avoid race conditions later
+        # Create an empty DataFrame with your expected schema
+        res=DataFrame(phy = Int[],rep=Int[], hmax=Int[],
+            CF_est_obs = Float64[],
+            CF_est_true= Float64[],
+            CF_obs_true= Float64[],
+            subnet_dist = Float64[]
+        )
+
+    if isfile(dist_file)
+    #if false #rerun all
+        # File exists: Load done IDs
+        ids_df = CSV.read(dist_file, DataFrame; select=[:phy, :rep, :hmax])
+        processed_ids = Set([(r.phy, r.rep, r.hmax) for r in eachrow(ids_df)])
+    else
+        #create empty files
+        CSV.write(dist_file, res,writeheader=true)
+        processed_ids = Set{Tuple{Int,Int,Int}}()
+    end   
+
+df_lock = ReentrantLock()
+Threads.@threads for phy_no in 1:150
+#for phy_no in 1:150
+
+    #phy_res = deepcopy(res)
+
+
+    println("we are at par $par_no and phy $phy_no" ) 
+    true_net_loc = "../data/pars_$par_no/net_$phy_no/"
+    true_net = readnewick(true_net_loc*"network.extnewick")
+    true_taxa = sort!(tiplabels(true_net))
+    true_m = hardwiredclusters(true_net,true_taxa)
+
+    true_exp_cfs = -1
+    try
+        true_exp_cfs= network_expectedCF(true_net;showprogressbar=false)
+    catch
+        println("error computing true epected cfs")
+    end
+
+
+    #only consider subnetworks if the number of hybrids is small enough
+    do_displayed = false
+    if true_net.numhybrids <= 7
+        do_displayed = true
+        true_subnets = PhyloNetworks.getdisplayednetworks(true_net;restriction=valid_subnetworks)[1]
+        true_subnets = (x->readnewick(writenewick(x))).(true_subnets)
+        subnet_nhybs = (x->x.numhybrids).(true_subnets)
+        
+        hyb_cats = min(5,true_net.numhybrids)
+        filter_subnet_m = Vector{Vector{Matrix{Int}}}(undef,hyb_cats)
+        filter_subnet = Vector{Vector{HybridNetwork}}(undef,hyb_cats)
+        for hyb_num in 0:(hyb_cats-1)
+
+            filtered_subnets = true_subnets[subnet_nhybs.==hyb_num]
+            filter_subnet[hyb_num+1] = filtered_subnets
+            filtered_m = Vector{Matrix{Int}}(undef,length(filtered_subnets))
+            for (i,subnet) in enumerate(filtered_subnets)
+                try
+                    sub_m= hardwiredclusters(subnet,true_taxa)
+                    filtered_m[i]=sub_m
+                catch
+                    #bad subnet
+                end
+            end
+            filtered_m = [filtered_m[i] for i in eachindex(filtered_m) if isassigned(filtered_m, i)]
+            filter_subnet_m[hyb_num+1]=filtered_m
+            #filter_subnet_m[hyb_num+1]= (x-> hardwiredclusters(x,true_taxa)).(filtered_subnets)
+        end 
+        true_subnets = nothing 
+
+    end
+
+
+for rep_no in 1:30
+
+
+    !isfile("../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/CFs.csv") && continue
+    println("rep $rep_no")
+    cfs = CSV.read("../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/CFs.csv", DataFrame)
+
+    rep_res=deepcopy(res)
+
+    true_obs_cf = -3.0 #this should never happen
+    try
+        quar_dists=Vector{Float64}(undef,nrow(cfs))
+        for rw in 1:nrow(cfs)
+            quar_dists[rw] = sum(abs.(collect(true_exp_cfs[1][rw].data) .- collect(cfs[rw,[6,7,8]])))
+        end
+        true_obs_cf=mean(quar_dists)
+
+    catch e
+        #println(e)
+        true_obs_cf = -1.0 #this should never happen
+    end
+
+for h_no in 1:5
+
+##skip if already processed
+    if (phy_no,rep_no,h_no) ∈ processed_ids
+        #println("Skipping $rep_no hmax $h_no as already processed")
+        continue
+    end
+    #println("rep $rep_no hmax $h_no")
+    ##create empty dataframes to store results
+
+
+    est_net_loc = "../output/pars/pars_$par_no/phy_$phy_no/rep_$rep_no/h_$h_no.out"
+
+    !isfile(est_net_loc) && continue
+
+    est_net = readnewick(est_net_loc)
+    est_nhybs = est_net.numhybrids
+        
+    do_disp = do_displayed
+    if do_disp && (est_nhybs >= hyb_cats)
+        do_disp=false
+    end
+
+        ######find if the est net is a subnetwork of the truth
+        if do_disp
+            small_d = Inf
+            filt_nets_m = filter_subnet_m[est_nhybs+1]
+            filt_nets= filter_subnet[est_nhybs+1]
+
+            for (true_sub,true_sub_m) in zip(filt_nets,filt_nets_m)
+                d = hardwiredclusterdistance_firstrooted!(true_sub,est_net,true_taxa;M1=true_sub_m)
+                println(d)
+                small_d = min(small_d,d)
+                if small_d == 0
+                    break #no sense continuing if we fonud it all
+                end
+            end
+        else
+            small_d=-1
+        end
+
+
+    ##Do CF calculations
+    est_obs_cf = -3.0 #this should never happen
+    est_true_cf = -3.0 #this should never happen
+    try
+        est_exp_cfs= network_expectedCF(est_net;showprogressbar=false)
+        quar_dists=Vector{Float64}(undef,nrow(cfs))
+        est_true_dists=Vector{Float64}(undef,nrow(cfs))
+        for rw in 1:nrow(cfs)
+            quar_dists[rw] = sum(abs.(collect(est_exp_cfs[1][rw].data) .- collect(cfs[rw,[6,7,8]])))
+            est_true_dists[rw] = sum(abs.(collect(est_exp_cfs[1][rw].data) .- collect(true_exp_cfs[1][rw].data)))
+        end
+        est_obs_cf=mean(quar_dists)
+        est_true_cf=mean(est_true_dists)
+
+        #CF_dist= 
+        #mean(abs.(df_wide[:,5] .- df_wide[:,8]).+ ##obs12 - exp12 
+        #    abs.(df_wide[:,6] .- df_wide[:,9]).+ ##obs13 - exp13
+        #    abs.(df_wide[:,7] .- df_wide[:,10])) ##obs14 - exp14
+    catch e
+        println("Error computing expected CFs for par $par_no phy $phy_no rep $rep_no hmax $h_no")
+        #println(e)
+        est_obs_cf = -1.0 #this should never happen
+        est_true_cf = -1.0 #this should never happen
+    end
+
+
+    push!(rep_res, (phy_no,rep_no,h_no,
+    est_obs_cf,
+    est_true_cf,
+    true_obs_cf,
+    small_d)
+    )
+end #end h_no
+
+if nrow(rep_res) > 0
+        lock(df_lock) do
+            CSV.write(dist_file, rep_res; append=true, writeheader=false)
+        end 
+    end
+
+end #end rep_no
+end # end phy_no
+end #par_no
+
+end
